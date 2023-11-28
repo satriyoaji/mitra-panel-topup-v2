@@ -31,7 +31,7 @@ export default function RootLayout({
             >
                 <main className="max-w-xl bg-white mx-auto min-h-screen">
                     <Header />
-                    <div className="p-4 pt-6">{children}</div>
+                    <div className="p-4 pt-4">{children}</div>
                     <BottomNav />
                 </main>
             </body>

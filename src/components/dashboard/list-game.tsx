@@ -1,17 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
 import { Card, CardContent } from "../ui/card";
+import Link from "next/link";
 
 const chips: string[] = ["All", "VCG", "Games", "Voucher", "Pulsa", "PLN"];
-
+type productType = "VCG" | "Games" | "Voucher" | "Pulsa" | "PLN";
 type game = {
     name: string;
     icon: string;
-    type: "VCG" | "Games" | "Voucher" | "Pulsa" | "PLN" | null | undefined;
+    type: productType | null | undefined;
 };
 
 const myGames: game[] = [
@@ -68,17 +69,16 @@ const myGames: game[] = [
 ];
 
 export default function ListGame() {
-    const router = useRouter();
     const [lastIdxGames, setLastIdxGames] = React.useState<number>(8);
     const [filter, setfilter] = useState<null | string>(null);
     const [games, _] = useState<Array<game>>(myGames);
     const [searchGames, setSearchGames] = useState<Array<game>>(games);
 
-    const showMore = React.useCallback(() => {
+    const showMore = () => {
         setLastIdxGames((last) => last + 8);
-    }, []);
+    };
 
-    const search = (e: ChangeEvent<HTMLInputElement>) => {
+    const search = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const name = e.target.value;
         if (name.length === 0) {
             setSearchGames(games);
@@ -89,7 +89,7 @@ export default function ListGame() {
             item.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())
         );
         setSearchGames(res);
-    };
+    }, []);
 
     return (
         <React.Fragment>
@@ -109,7 +109,13 @@ export default function ListGame() {
                             className="mx-1 cursor-pointer"
                             key={idx.toString()}
                             color="primary"
-                            variant={val == filter ? "destructive" : "outline"}
+                            variant={
+                                filter === null && val === "All"
+                                    ? "destructive"
+                                    : val == filter
+                                    ? "destructive"
+                                    : "outline"
+                            }
                             onClick={() => setfilter(val == "All" ? null : val)}
                         >
                             {val}
@@ -134,16 +140,20 @@ export default function ListGame() {
                     (val: game, idx) =>
                         (filter == null ||
                             (filter != null && filter == val.type)) && (
-                            <Card className="w-full h-full min-w-fit rounded-sm">
-                                <CardContent className="p-1 flex flex-col items-center">
-                                    <img
-                                        alt="Remy Sharp"
-                                        className="rounded"
-                                        src={val.icon}
-                                    />
-                                    <p className="text-xs my-2">{val.name}</p>
-                                </CardContent>
-                            </Card>
+                            <Link href={`/games/${val.name}`}>
+                                <Card className="w-full h-full min-w-fit rounded-sm">
+                                    <CardContent className="p-1 flex flex-col items-center">
+                                        <img
+                                            alt="Remy Sharp"
+                                            className="rounded"
+                                            src={val.icon}
+                                        />
+                                        <p className="text-xs my-2">
+                                            {val.name}
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         )
                 )}
             </div>
