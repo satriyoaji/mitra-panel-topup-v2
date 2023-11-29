@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { DateRange } from "react-day-picker";
 
@@ -34,7 +34,7 @@ export function DatePickerWithRange(props: prop) {
                         id="date"
                         variant={"outline"}
                         className={cn(
-                            "w-[300px] justify-start text-left font-normal",
+                            "w-full justify-start text-left font-normal",
                             !date && "text-muted-foreground"
                         )}
                     >
@@ -44,9 +44,19 @@ export function DatePickerWithRange(props: prop) {
                                 <>
                                     {format(date.from, "LLL dd, y")} -{" "}
                                     {format(date.to, "LLL dd, y")}
+                                    <Cross1Icon
+                                        className="ml-2"
+                                        onClick={() => setDate(undefined)}
+                                    />
                                 </>
                             ) : (
-                                format(date.from, "LLL dd, y")
+                                <>
+                                    {format(date.from, "LLL dd, y")}
+                                    <Cross1Icon
+                                        className="ml-2"
+                                        onClick={() => setDate(undefined)}
+                                    />
+                                </>
                             )
                         ) : (
                             <span>Pick a date</span>

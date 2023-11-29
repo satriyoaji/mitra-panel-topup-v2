@@ -5,6 +5,9 @@ import React from "react";
 type prop = {
     selected?: boolean;
     onClick: () => void;
+    name: string;
+    price: string;
+    discountPrice?: string | undefined;
 };
 
 function ProductCard(props: prop) {
@@ -20,10 +23,19 @@ function ProductCard(props: prop) {
                 height={30}
                 className="text-center my-3"
             />
-            <p className="text-sm">20.000</p>
-            <p className="text-xs mb-2">Diamonds</p>
-            <p className="line-through text-sm font-semibold">Rp 15.000</p>
-            <p className="text-red-500 text-sm font-semibold">Rp 10.000</p>
+            <p className="text-sm">{props.name}</p>
+            {props.discountPrice ? (
+                <>
+                    <p className="line-through text-sm font-semibold">
+                        {props.price}
+                    </p>
+                    <p className="text-red-500 text-sm font-semibold">
+                        {props.discountPrice}
+                    </p>
+                </>
+            ) : (
+                <p className="text-sm font-semibold">{props.price}</p>
+            )}
         </Card>
     );
 }

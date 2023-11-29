@@ -43,14 +43,14 @@ const Carousel = () => {
             <div
                 {...swipeHandlers}
                 className="overflow-hidden relative w-full rounded-lg"
-                style={{ aspectRatio: 21 / 9 }}
+                style={{ aspectRatio: 27 / 9 }}
             >
                 {items.map((item, index) => (
                     <img
                         key={index}
                         src={item}
                         alt={item}
-                        style={{ aspectRatio: 21 / 9 }}
+                        style={{ aspectRatio: 27 / 9 }}
                         className={`absolute object-cover w-full transition-opacity duration-500 ease-in-out ${
                             index === activeIndex ? "opacity-100" : "opacity-0"
                         }`}

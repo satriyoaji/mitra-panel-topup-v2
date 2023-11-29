@@ -4,18 +4,50 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import ProductCard from "./product-card";
+import { priceMask } from "@/Helpers";
 
-// export async function generateStaticParams() {
-//     const posts = await fetch('https://.../posts').then((res) => res.json())
-//     return posts.map((post) => ({
-//       slug: post.slug,
-//     }))
-//   }
+type Product = {
+    id: string;
+    name: string;
+    price: number;
+    discountPrice?: number;
+};
+
+const product: Product[] = [
+    {
+        id: "1",
+        name: "2000 Diamonds",
+        price: 20_000,
+        discountPrice: 15_000,
+    },
+    {
+        id: "2",
+        name: "1000 Diamonds",
+        price: 10_000,
+        discountPrice: 5_000,
+    },
+    {
+        id: "3",
+        name: "2000 Coins",
+        price: 5_000,
+    },
+    {
+        id: "4",
+        name: "1000 Coins",
+        price: 2_500,
+        discountPrice: 2_000,
+    },
+    {
+        id: "5",
+        name: "500 Coins",
+        price: 2_000,
+    },
+];
 
 function Page({ params }: { params: { slug: string } }) {
-    const [productSelected, setProductSelected] = useState<number | undefined>(
+    const [productSelected, setProductSelected] = useState<Product | undefined>(
         undefined
     );
 
@@ -23,11 +55,15 @@ function Page({ params }: { params: { slug: string } }) {
         <Fragment>
             <Card className="w-full mt-2 h-full min-w-fit">
                 <CardContent className="p-0 pb-4">
-                    <img
+                    {/* <img
                         alt="Remy Sharp"
                         src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt674314efe488e9a4/64b13f0acc7487ee6e3bea1c/fc24.jpg?auto=webp&format=pjpg&width=3840&quality=60"
-                        style={{ aspectRatio: 42 / 9 }}
+                        style={{ aspectRatio: 64 / 9 }}
                         className={`relative object-cover rounded-t-xl`}
+                    /> */}
+                    <div
+                        className="relative object-cover rounded-t-xl bg-zinc-400"
+                        style={{ aspectRatio: 64 / 9 }}
                     />
                     <div className="px-6">
                         <div className="flex -mt-4 ml-4 z-40 absolute items-end">
@@ -87,10 +123,19 @@ function Page({ params }: { params: { slug: string } }) {
                     </div>
                     <Separator className="my-3" />
                     <div className="grid sm:grid-cols-3 grid-cols-2  gap-2">
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((val, idx) => (
+                        {product.map((val) => (
                             <ProductCard
-                                selected={val === productSelected}
+                                key={val.id}
+                                selected={val.id === productSelected?.id}
                                 onClick={() => setProductSelected(val)}
+                                name={val.name}
+                                price={priceMask(val.price, undefined)}
+                                discountPrice={priceMask(
+                                    val.discountPrice
+                                        ? val.discountPrice
+                                        : undefined,
+                                    undefined
+                                )}
                             />
                         ))}
                     </div>
@@ -153,7 +198,10 @@ function Page({ params }: { params: { slug: string } }) {
                             Transfer + 10.000 Point
                         </h4>
                         <h4 className="text-white text-xl font-bold">
-                            Rp 20.000
+                            {priceMask(
+                                productSelected.discountPrice,
+                                undefined
+                            )}
                         </h4>
                     </div>
                     <div className="">
