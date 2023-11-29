@@ -22,8 +22,8 @@ function ProductCard(props: prop) {
             />
             <p className="text-sm">20.000</p>
             <p className="text-xs mb-2">Diamonds</p>
-            <p className="line-through">Rp 15.000</p>
-            <p className="text-red-500">Rp 10.000</p>
+            <p className="line-through text-sm font-semibold">Rp 15.000</p>
+            <p className="text-red-500 text-sm font-semibold">Rp 10.000</p>
         </Card>
     );
 }

@@ -128,14 +128,7 @@ export default function ListGame() {
                 placeholder="Cari Game..."
                 className="my-3"
             />
-            <div className="grid xs:grid-cols-3 grid-cols-4 justify-center items-center gap-3 mt-4">
-                {/* <Grid
-                    container
-                    spacing={2}
-                    alignItems="center"
-                    justifyContent="center"
-                >
-            </Grid> */}
+            <div className="grid xs:grid-cols-3 grid-cols-4 gap-3 mt-4 place-items-center justify-center">
                 {searchGames.slice(0, lastIdxGames).map(
                     (val: game, idx) =>
                         (filter == null ||

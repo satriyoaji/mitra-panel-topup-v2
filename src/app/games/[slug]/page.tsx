@@ -1,22 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Fragment, useState } from "react";
 import ProductCard from "./product-card";
@@ -34,8 +20,8 @@ function Page({ params }: { params: { slug: string } }) {
     );
 
     return (
-        <div className="mb-12">
-            <Card className="w-full h-full min-w-fit">
+        <Fragment>
+            <Card className="w-full mt-2 h-full min-w-fit">
                 <CardContent className="p-0 pb-4">
                     <img
                         alt="Remy Sharp"
@@ -44,10 +30,10 @@ function Page({ params }: { params: { slug: string } }) {
                         className={`relative object-cover rounded-t-xl`}
                     />
                     <div className="px-6">
-                        <div className="flex -mt-6 z-40 absolute items-end">
+                        <div className="flex -mt-4 ml-4 z-40 absolute items-end">
                             <img
                                 alt="Remy Sharp"
-                                className="rounded  border bg-card text-card-foreground shadow w-20"
+                                className="rounded  border bg-card text-card-foreground shadow w-16"
                                 src="https://assets-prd.ignimgs.com/2022/07/19/fifa-23-button-02-1658265594101.jpg"
                             />
                             <div className="flex flex-col ml-3">
@@ -55,10 +41,13 @@ function Page({ params }: { params: { slug: string } }) {
                                 <h6 className="text-xs">Games</h6>
                             </div>
                         </div>
-                        <p className="text-sm pt-[72px]">
+                        <p className="text-xs pt-[64px] text-muted-foreground leading-5">
                             Here are all the available border color logical
                             property utilities and their physical property
-                            equivalents in both LTR and RTL modes.
+                            equivalents in both LTR and RTL modes. Here are all
+                            the available border color logical property
+                            utilities and their physical property equivalents in
+                            both LTR and RTL modes.
                         </p>
                     </div>
                 </CardContent>
@@ -97,7 +86,7 @@ function Page({ params }: { params: { slug: string } }) {
                         </h4>
                     </div>
                     <Separator className="my-3" />
-                    <div className="grid sm:grid-cols-3 xs:grid-cols-4 gap-2">
+                    <div className="grid sm:grid-cols-3 grid-cols-2  gap-2">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((val, idx) => (
                             <ProductCard
                                 selected={val === productSelected}
@@ -119,7 +108,7 @@ function Page({ params }: { params: { slug: string } }) {
                     <div className="grid xs:grid-cols-4 sm:grid-cols-3 items-center space-x-4 text-sm justify-center">
                         <Card className="w-full border-4 border-black">
                             <div className="flex justify-center items-center h-full p-3">
-                                <p>Transfer VA</p>
+                                <p className="font-semibold">Transfer VA</p>
                             </div>
                         </Card>
                     </div>
@@ -158,23 +147,23 @@ function Page({ params }: { params: { slug: string } }) {
                 </CardContent>
             </Card>
             {productSelected && (
-                <div className="sticky bottom-12 w-full h-16 rounded-xl bg-black flex items-center justify-between px-4">
+                <div className="sticky bottom-0 w-full h-16 rounded-xl bg-black flex items-center justify-between px-4">
                     <div>
                         <h4 className="text-white text-sm">
                             Transfer + 10.000 Point
                         </h4>
-                    </div>
-                    <div className="flex items-center">
                         <h4 className="text-white text-xl font-bold">
-                            Rp. 20.000
+                            Rp 20.000
                         </h4>
+                    </div>
+                    <div className="">
                         <Button className="ml-3" variant="secondary">
                             Purchase
                         </Button>
                     </div>
                 </div>
             )}
-        </div>
+        </Fragment>
     );
 }
 
