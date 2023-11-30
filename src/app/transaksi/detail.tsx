@@ -1,3 +1,4 @@
+import { priceMask } from "@/Helpers";
 import { Badge } from "@/components/ui/badge";
 import {
     DialogContent,
@@ -44,20 +45,22 @@ function Detail(props: TDetail) {
                     </p>
                     <p className="text-xl mt-2">{props.name}</p>
                     <p className="font-bold">{props.product}</p>
-                    <p className="text-sm mt-3">{props.price}</p>
+                    <p className="text-sm mt-3">
+                        {priceMask(props.price, undefined)}
+                    </p>
                 </div>
             </div>
             <div className="grid gap-3 pt-2 pb-4">
                 <div className="grid grid-cols-4 items-center gap-2">
-                    <p className="text-xs">Pembayaran</p>
-                    <div className="col-span-3">
-                        <Badge variant="success">Success</Badge>
-                    </div>
-                </div>
-                <div className="grid grid-cols-4 items-center gap-2">
                     <p className="text-xs">Transaksi</p>
                     <div className="col-span-3">
                         <Badge variant="destructive">Failed</Badge>
+                    </div>
+                </div>
+                <div className="grid grid-cols-4 items-center gap-2">
+                    <p className="text-xs">Pembayaran</p>
+                    <div className="col-span-3">
+                        <Badge variant="success">Success</Badge>
                     </div>
                 </div>
                 <div className="grid grid-cols-4 items-center gap-2">

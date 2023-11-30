@@ -198,10 +198,12 @@ function Page({ params }: { params: { slug: string } }) {
                             Transfer + 10.000 Point
                         </h4>
                         <h4 className="text-white text-xl font-bold">
-                            {priceMask(
-                                productSelected.discountPrice,
-                                undefined
-                            )}
+                            {productSelected.discountPrice
+                                ? priceMask(
+                                      productSelected.discountPrice,
+                                      undefined
+                                  )
+                                : priceMask(productSelected.price, undefined)}
                         </h4>
                     </div>
                     <div className="">

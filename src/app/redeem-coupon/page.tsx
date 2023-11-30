@@ -13,10 +13,8 @@ function Page() {
         <div className="mx-6 mt-4">
             <h4 className="text-2xl font-semibold">Claim Coupon</h4>
             <p className="text-muted-foreground text-sm mt-2">
-                I personally don't see the need for a library for this. Looking
-                at http://caniuse.com/#feat=clipboard it's pretty widely
-                supported now, however you can still do things like checking to
-                see.
+                Kupon saldo point ini mempunyai tujuan untuk menggantikan nilai
+                transaksi yang statusnya “gagal” namun pembayarannya "berhasil".
             </p>
             <Separator className="my-6" />
             <div className="grid w-full items-center gap-4">
@@ -29,6 +27,7 @@ function Page() {
                     <Input
                         id="file"
                         type="file"
+                        accept="image/*"
                         placeholder="Pilih bukti transaksi"
                     />
                 </div>
