@@ -1,5 +1,8 @@
+'use client'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { signOut } from "next-auth/react";
 import React from "react";
 
 function page() {
@@ -29,6 +32,7 @@ function page() {
                     </div>
                 </CardContent>
             </Card>
+            <Button className="w-full my-4" onClick={() => signOut()}>Sign Out</Button>
         </div>
     );
 }

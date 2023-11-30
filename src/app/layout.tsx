@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/page-header";
 import BottomNav from "@/components/bottom-nav";
 import { Toaster } from "@/components/ui/toaster";
+import { NextAuthProvider } from "./_app";
 
 export const fontSans = FontSans({
     subsets: ["latin"],
@@ -30,11 +31,13 @@ export default function RootLayout({
                     fontSans.variable
                 )}
             >
-                <main className="max-w-xl bg-white mx-auto min-h-screen">
-                    <Header />
-                    <div className="p-4 pt-4">{children}</div>
-                    <BottomNav />
-                </main>
+                <NextAuthProvider>
+                    <main className="max-w-xl bg-white mx-auto min-h-screen">
+                        <Header />
+                        <div className="p-4 pt-4">{children}</div>
+                        <BottomNav />
+                    </main>
+                </NextAuthProvider>
                 <Toaster />
             </body>
         </html>
