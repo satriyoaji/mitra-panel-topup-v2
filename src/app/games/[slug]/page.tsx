@@ -51,9 +51,7 @@ function Page({ params }: { params: { slug: string } }) {
     const [productSelected, setProductSelected] = useState<Product | undefined>(
         undefined
     );
-    const { data: session } = useSession()
-    console.log(session);
-
+    const { data: session } = useSession();
 
     return (
         <Fragment>
@@ -163,13 +161,13 @@ function Page({ params }: { params: { slug: string } }) {
                     </div>
                 </CardContent>
             </Card>
-            {!session &&
+            {!session && (
                 <Card className="w-full my-4">
                     <CardContent>
                         <div className="flex mt-3">
                             <h4>
-                                <span className="text-xl font-bold">4.</span> Data
-                                Konfirmasi
+                                <span className="text-xl font-bold">4.</span>{" "}
+                                Data Konfirmasi
                             </h4>
                         </div>
                         <Separator className="my-3" />
@@ -184,7 +182,9 @@ function Page({ params }: { params: { slug: string } }) {
                                     />
                                 </div>
                                 <div className="flex flex-col space-y-1.5">
-                                    <Label htmlFor="whatsapp">No. Whatsapp</Label>
+                                    <Label htmlFor="whatsapp">
+                                        No. Whatsapp
+                                    </Label>
                                     <Input
                                         id="whatsapp"
                                         type="tel"
@@ -196,7 +196,7 @@ function Page({ params }: { params: { slug: string } }) {
                         </form>
                     </CardContent>
                 </Card>
-            }
+            )}
             {productSelected && (
                 <div className="sticky bottom-0 w-full h-16 rounded-xl bg-black flex items-center justify-between px-4">
                     <div>
@@ -206,9 +206,9 @@ function Page({ params }: { params: { slug: string } }) {
                         <h4 className="text-white text-xl font-bold">
                             {productSelected.discountPrice
                                 ? priceMask(
-                                    productSelected.discountPrice,
-                                    undefined
-                                )
+                                      productSelected.discountPrice,
+                                      undefined
+                                  )
                                 : priceMask(productSelected.price, undefined)}
                         </h4>
                     </div>

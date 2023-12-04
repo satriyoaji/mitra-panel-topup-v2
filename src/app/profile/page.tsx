@@ -1,39 +1,88 @@
-'use client'
+"use client";
+import Tier from "@/components/tier";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { signOut } from "next-auth/react";
-import React from "react";
+import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { ExitIcon, Pencil1Icon, ReaderIcon } from "@radix-ui/react-icons";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import React, { useState } from "react";
+import DetailProfile from "./detail-profile";
+import DetailSaldoPoint from "./detail-saldo-point";
 
 function page() {
+    const { data: session } = useSession();
+    const [profileOpen, setProfileOpen] = useState<boolean>(false);
+    const [saldoPointOpen, setSaldoPointOpen] = useState<boolean>(false);
+
     return (
-        <div className="xs:m-4 sm:m-8">
-            <Card
-                style={{ aspectRatio: 16 / 9 }}
-                className="w-full min-w-fit card-profile text-white"
-            >
-                <CardContent className="flex p-8 flex-col justify-between h-full">
-                    <div className="flex flex-row justify-between">
-                        <div>
-                            <h5 className="font-bold text-2xl">Fulan</h5>
-                            <h6 className="">fulan@gmail.com</h6>
-                        </div>
-                        <Avatar>
+        <>
+            <div className="xs:m-4 sm:m-6">
+                <div className="flex justify-between items-start">
+                    <div className="flex flex-row space-x-4">
+                        <Avatar className="my-1">
                             <AvatarImage
-                                src="https://assets-prd.ignimgs.com/2022/07/19/fifa-23-button-02-1658265594101.jpg"
-                                alt="dawwa"
+                                src={session?.user?.image as string}
+                                alt={session?.user?.name as string}
                             />
-                            <AvatarFallback>Fulan</AvatarFallback>
+                            <AvatarFallback>
+                                {session?.user?.name}
+                            </AvatarFallback>
                         </Avatar>
+                        <div>
+                            <h5 className="font-bold text-xl">
+                                {session?.user?.name}
+                            </h5>
+                            <h6 className="text-xs">{session?.user?.email}</h6>
+                        </div>
                     </div>
-                    <div>
-                        <p className="text-xs">Saldo Points</p>
-                        <p className="text-xl font-bold">20.000 Points</p>
+                    <Pencil1Icon
+                        onClick={() => setProfileOpen(true)}
+                        className="cursor-pointer"
+                    />
+                </div>
+                <Card className="my-4">
+                    <div className="p-2 flex items-center justify-between">
+                        <div
+                            onClick={() => setSaldoPointOpen(true)}
+                            className="cursor-pointer hover:bg-zinc-100 w-full p-2 rounded-xl"
+                        >
+                            <p className="font-bold text-muted-foreground text-xs">
+                                Saldo Points
+                            </p>
+                            <p className="font-bold">20.000 Points</p>
+                        </div>
+                        <Tier className="place-self-center m-3" type="Gold" />
                     </div>
-                </CardContent>
-            </Card>
-            <Button className="w-full my-4" onClick={() => signOut()}>Sign Out</Button>
-        </div>
+                </Card>
+                <Separator className="mb-6" />
+                <div className="space-y-3 px-3">
+                    <Link
+                        href="/transaksi"
+                        className="flex space-x-3 items-center"
+                    >
+                        <ReaderIcon className="mr-3" /> Daftar Transaksi
+                    </Link>
+                    <p
+                        onClick={() => signOut()}
+                        className="flex space-x-3 items-center cursor-pointer"
+                    >
+                        <ExitIcon className="mr-3" /> Logout
+                    </p>
+                </div>
+            </div>
+            <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
+                <DialogContent className="sm:max-w-xl">
+                    <DetailProfile />
+                </DialogContent>
+            </Dialog>
+            <Dialog onOpenChange={setSaldoPointOpen} open={saldoPointOpen}>
+                <DialogContent className="sm:max-w-xl">
+                    <DetailSaldoPoint />
+                </DialogContent>
+            </Dialog>
+        </>
     );
 }
 

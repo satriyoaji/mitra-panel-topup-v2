@@ -9,6 +9,7 @@ import StatusSelect from "./status-select";
 import Detail from "./detail";
 import { DateRange } from "react-day-picker";
 import { isWithinInterval } from "date-fns";
+import { useSession } from "next-auth/react";
 
 type TData = {
     date: Date;
@@ -118,18 +119,21 @@ function Page() {
     const [date, setDate] = useState<DateRange | undefined>();
     const [filter, setFilter] = useState<string>("*");
     const [selectedData, setSelectedData] = useState<TData | undefined>();
+    const { data: session } = useSession();
 
     return (
-        <div className="md:mx-4 sm:mx-2 mb-12">
-            <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="invoice">Invoice</Label>
-                <Input id="invoice" placeholder="Masukan No. Invoice" />
+        <div className="md:mx-4 sm:mx-2 mb-24 mt-4">
+            <div>
+                <div className="flex flex-col space-y-1.5 mb-3">
+                    <Label htmlFor="invoice">Invoice</Label>
+                    <Input id="invoice" placeholder="Masukan No. Invoice" />
+                </div>
+                <div className="flex space-x-2">
+                    <StatusSelect onChange={setFilter} />
+                    <DatePickerWithRange onChange={setDate} />
+                </div>
             </div>
-            <div className="mb-1 mt-6 flex space-x-2">
-                <StatusSelect onChange={setFilter} />
-                <DatePickerWithRange onChange={setDate} />
-            </div>
-            <div className="flex flex-col space-y-5 mt-3 h-[72vh] no-scrollbar overflow-y-auto">
+            <div className="flex flex-col space-y-5 my-3 no-scrollbar overflow-y-auto h-[72vh]">
                 {list.map(
                     (val) =>
                         (filter === "*" || filter === val.status) && (

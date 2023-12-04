@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 function Page() {
     const { toast } = useToast();
+    const { data: session } = useSession();
 
     return (
         <div className="mx-6 mt-4">
@@ -31,18 +33,22 @@ function Page() {
                         placeholder="Pilih bukti transaksi"
                     />
                 </div>
-                <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" placeholder="Masukan Email" />
-                </div>
-                <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="whatsapp">No. Whatsapp</Label>
-                    <Input
-                        id="whatsapp"
-                        type="tel"
-                        placeholder="Masukan No. Whatsapp"
-                    />
-                </div>
+                {!session && (
+                    <>
+                        <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="email">Email</Label>
+                            <Input id="email" placeholder="Masukan Email" />
+                        </div>
+                        <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="whatsapp">No. Whatsapp</Label>
+                            <Input
+                                id="whatsapp"
+                                type="tel"
+                                placeholder="Masukan No. Whatsapp"
+                            />
+                        </div>
+                    </>
+                )}
                 <Button
                     className="mt-4"
                     onClick={() => {

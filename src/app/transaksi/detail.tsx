@@ -1,12 +1,15 @@
 import { priceMask } from "@/Helpers";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
 import { CopyIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import React from "react";
 
 interface TDetail {
@@ -70,6 +73,11 @@ function Detail(props: TDetail) {
                     </div>
                 </div>
             </div>
+            <DialogFooter>
+                <Button>
+                    <Link href="/redeem-coupon">Claim Refund</Link>
+                </Button>
+            </DialogFooter>
         </DialogContent>
     );
 }
