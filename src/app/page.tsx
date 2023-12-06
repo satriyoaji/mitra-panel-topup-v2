@@ -2,10 +2,10 @@ import Carousel from "@/components/dashboard/carousel";
 import FlashSale from "@/components/dashboard/flash-sale";
 import ListGame from "@/components/dashboard/list-game";
 import Tier from "@/components/tier";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
-export default function Home() {
+export default async function Home() {
+
     return (
         <div className="mb-14">
             <div className="flex space-x-4 mx-2 justify-between items-center">
