@@ -7,77 +7,77 @@ export const options: NextAuthOptions = {
             clientId: process.env.GOOGLE_ID as string,
             clientSecret: process.env.GOOGLE_SECRET as string,
             async profile(profile: GoogleProfile) {
-                console.log(profile)
+                // console.log("PROFILE", profile);
 
                 return {
                     ...profile,
-                    role: profile.role ?? 'public',
+                    role: profile.role ?? "public",
                     id: profile.sub,
                     image: profile.picture,
-                    accessToken: 'token mantap'
-                }
-            }
+                    accessToken: "token mantap",
+                };
+            },
         }),
     ],
     callbacks: {
         async signIn({ profile, user }) {
             const response = await fetch(`${process.env.API}/auth-member`, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     name: profile?.name,
                     email: profile?.email,
-                    mitra_id: 1
-                })
-            })
+                    mitra_id: 1,
+                }),
+            });
 
-            if (!response.ok)
-                return false;
+            if (!response.ok) return false;
 
-            var res = await response.json()
-            user.accessToken = res.data.token
-            user.role = 'public'
-            return true
+            var res = await response.json();
+            user.accessToken = res.data.token;
+            user.role = "public";
+            return true;
         },
-        async session({ session, token, user }) {
-            // session.user. = token.id;
+        async session({ session, token }) {
+            const response = await fetch(
+                `${process.env.API}/private/get-profile`,
+                {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token.accessToken}`,
+                    },
+                }
+            );
+
+            if (response.ok) {
+                var res = await response.json();
+                session.tier = {
+                    id: res.data.tier.id,
+                    name: res.data.tier.name,
+                };
+            }
+
             session.accessToken = token.accessToken;
-            console.log('SESSION', user)
+            session.role = token.role;
+            // console.log("SESSION", token, session);
             return session;
         },
-        async jwt({ token, user, account, profile, isNewUser }) {
+        async jwt({ token, user, account }) {
             if (user) {
                 token.id = user.id;
             }
-            if (account?.access_token) {
-                token.accessToken = account.access_token;
+            if (account) {
+                token.accessToken = user.accessToken;
+                token.role = user.role;
             }
 
-            console.log('TOKEN', user, profile)
             return token;
         },
-        // async jwt({ token, profile, user }) {
-        //     // Persist the OAuth access_token and or the user id to the token right after signin
-        //     console.log('TOKEN', token, profile, user);
-
-        //     if (user)
-        //         token.role = user.role
-
-        //     return token
-        // },
-        // async session({ session, token, user }) {
-        //     // Send properties to the client, like an access_token and user id from a provider.
-        //     console.log('SESSION', session, token, user);
-        //     if (token && session?.user) {
-        //         session.role = token.role
-        //         session.accessToken = token.accessToken
-        //     }
-
-        //     return session
-        // },
     },
     pages: {
         signIn: "/auth/login",

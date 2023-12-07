@@ -1,5 +1,5 @@
 "use client";
-import Tier from "@/components/tier";
+import Tier, { TierType } from "@/components/tier";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -27,7 +27,7 @@ function page() {
                                 alt={session?.user?.name as string}
                             />
                             <AvatarFallback>
-                                {session?.user?.name}
+                                {session?.user?.name?.at(0) ?? ""}
                             </AvatarFallback>
                         </Avatar>
                         <div>
@@ -53,7 +53,10 @@ function page() {
                             </p>
                             <p className="font-bold">20.000 Points</p>
                         </div>
-                        <Tier className="place-self-center m-3" type="Gold" />
+                        <Tier
+                            className="place-self-center m-3"
+                            type={(session?.tier.name as TierType) ?? "Public"}
+                        />
                     </div>
                 </Card>
                 <Separator className="mb-6" />

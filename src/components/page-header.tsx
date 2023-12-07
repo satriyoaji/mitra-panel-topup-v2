@@ -10,8 +10,6 @@ function Header() {
     const path = usePathname();
     const router = useRouter();
 
-    console.log(session)
-
     return (
         <header className="w-full grid grid-cols-3 z-50 max-w-xl sticky top-0 bg-red-500 rounded-b-2xl">
             <div></div>
@@ -28,6 +26,9 @@ function Header() {
                             src={session?.user?.image as string}
                             alt={session?.user?.name as string}
                         />
+                        <AvatarFallback>
+                            {session?.user?.name?.at(0) ?? ""}
+                        </AvatarFallback>
                     </Avatar>
                 )}
             </div>

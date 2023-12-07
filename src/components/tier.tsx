@@ -1,9 +1,9 @@
 import React from "react";
 import { Badge } from "./ui/badge";
 
-type Type = "Gold" | "Silver" | "Public";
+export type TierType = "Gold" | "Silver" | "Public";
 interface ITier extends React.HTMLAttributes<HTMLDivElement> {
-    type?: Type;
+    type?: TierType;
 }
 
 function Tier(prop: ITier) {
