@@ -29,12 +29,12 @@ function FlashSale() {
                             alignItems: "center",
                             background: "#f44336",
                             borderRadius: 5,
+                            opacity,
                         }}
                         className="w-[18rem] pb-4 pt-2 pl-4"
                     >
                         <Image
                             className="mt-2"
-                            style={{ opacity }}
                             src="/flash-sale.png"
                             alt=""
                             width={100}
@@ -46,8 +46,8 @@ function FlashSale() {
                         style={{
                             display: "flex",
                             flexDirection: "row",
-                            marginLeft: "-9.3rem",
-                            paddingLeft: "8.5rem",
+                            marginLeft: "-7.9rem",
+                            paddingLeft: "8rem",
                             overflowX: "auto",
                             scrollbarWidth: "none",
                         }}
@@ -57,7 +57,7 @@ function FlashSale() {
                                     (e.currentTarget.scrollLeft /
                                         (e.currentTarget.scrollWidth -
                                             e.currentTarget.clientWidth)) *
-                                        2.5
+                                        3
                             )
                         }
                     >

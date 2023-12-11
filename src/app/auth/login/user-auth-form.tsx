@@ -3,23 +3,32 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callback") ?? "/";
 
     return (
         <div className={cn("grid gap-6", className)} {...props}>
             <Button
                 variant="outline"
                 type="button"
-                onClick={() => signIn("google")}
+                onClick={async () => {
+                    setIsLoading(true);
+                    await signIn("google", {
+                        redirect: false,
+                        callbackUrl,
+                    });
+                    setIsLoading(false);
+                }}
                 disabled={isLoading}
             >
                 {isLoading ? (

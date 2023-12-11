@@ -55,7 +55,7 @@ function page() {
                         </div>
                         <Tier
                             className="place-self-center m-3"
-                            type={(session?.tier.name as TierType) ?? "Public"}
+                            type={(session?.tier?.name as TierType) ?? "Public"}
                         />
                     </div>
                 </Card>
@@ -63,25 +63,25 @@ function page() {
                 <div className="space-y-3 px-3">
                     <Link
                         href="/transaksi"
-                        className="flex space-x-3 items-center"
+                        className="flex space-x-3 items-center hover:text-red-500"
                     >
                         <ReaderIcon className="mr-3" /> Daftar Transaksi
                     </Link>
                     <p
                         onClick={() => signOut()}
-                        className="flex space-x-3 items-center cursor-pointer"
+                        className="flex space-x-3 items-center cursor-pointer hover:text-red-500"
                     >
                         <ExitIcon className="mr-3" /> Logout
                     </p>
                 </div>
             </div>
             <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
-                <DialogContent className="sm:max-w-xl">
+                <DialogContent className="sm:max-w-md">
                     <DetailProfile />
                 </DialogContent>
             </Dialog>
             <Dialog onOpenChange={setSaldoPointOpen} open={saldoPointOpen}>
-                <DialogContent className="sm:max-w-xl">
+                <DialogContent className="sm:max-w-lg">
                     <DetailSaldoPoint />
                 </DialogContent>
             </Dialog>

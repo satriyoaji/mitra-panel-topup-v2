@@ -18,15 +18,14 @@ export type TItemsCard = {
 function ItemsCard(props: TItemsCard) {
     return (
         <Card className="flex">
-            <img
-                alt="Remy Sharp"
-                className="rounded-s-xl border bg-card text-card-foreground shadow w-24 object-cover"
-                src={props.icon}
-            />
-            <div className="flex justify-between w-full my-2 mx-4">
+            <div className="flex justify-between w-full my-3 mx-3">
                 <div className="w-full">
                     <div className="flex justify-between items-center">
-                        <p className="text-xs">{props.date.toDateString()}</p>
+                        <div className="flex items-center space-x-3">
+                            <p className="text-muted-foreground text-xs">
+                                NDJKAS89DSA
+                            </p>
+                        </div>
                         {props.status === "success" ? (
                             <Badge variant="success">Success</Badge>
                         ) : props.status === "failed" ? (
@@ -37,21 +36,42 @@ function ItemsCard(props: TItemsCard) {
                     </div>
                     <Separator className="my-2" />
                     <div className="flex justify-between items-end">
-                        <div>
-                            <div className="flex items-center">
-                                <p className="text-sm">{props.name}</p>
-                                <p className="mx-2">{"-"}</p>
-                                <p className="text-xs font-semibold">
-                                    {props.product}
+                        <div className="flex space-x-4 items-center">
+                            <img
+                                alt="Remy Sharp"
+                                className="rounded-sm border bg-card text-card-foreground shadow w-12 object-cover"
+                                src={props.icon}
+                            />
+                            <div>
+                                <p className="text-xs mb-1">
+                                    {props.date.toDateString()}
+                                </p>
+                                <div className="flex items-center">
+                                    <p className="text-sm">{props.name}</p>
+                                    <p className="mx-2">{"-"}</p>
+                                    <p className="text-xs font-semibold">
+                                        {props.product}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                            <div>
+                                <p className="text-xs text-muted-foreground mb-1">
+                                    Total
+                                </p>
+                                <p className="text-sm font-semibold mb-2">
+                                    {priceMask(props.price, undefined)}
                                 </p>
                             </div>
-                            <p className="text-sm font-semibold">
-                                {priceMask(props.price, undefined)}
-                            </p>
+                            <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={props.onEditClick}
+                            >
+                                Detail
+                            </Button>
                         </div>
-                        <Button variant="outline" onClick={props.onEditClick}>
-                            Detail
-                        </Button>
                     </div>
                 </div>
             </div>

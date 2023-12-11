@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
-export const config = { matcher: ["/profile"] };
+export const config = { matcher: ["/profile", "/redeem-coupon/:path*"] };
 
 export default async function middleware(
     req: NextRequest,
@@ -12,7 +12,10 @@ export default async function middleware(
     const isAuthenticated = !!token;
 
     if (!isAuthenticated) {
-        return NextResponse.redirect(new URL("/auth/login", req.url));
+        const callbackUrl = `?callback=${req.nextUrl.pathname}` ?? "";
+        return NextResponse.redirect(
+            new URL(`/auth/login${callbackUrl}`, req.url)
+        );
     }
 
     if (req.nextUrl.pathname.startsWith("/auth") && isAuthenticated) {

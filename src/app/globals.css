@@ -86,8 +86,3 @@
         scrollbar-width: none; /* Firefox */
     }
 }
-
-.card-profile {
-    background: linear-gradient(to top left, white, #ef4444, #b91c1c),
-        linear-gradient(to top right, white, #262626, #78716c);
-}

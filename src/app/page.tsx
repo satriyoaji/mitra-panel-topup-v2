@@ -8,7 +8,6 @@ export default async function Home() {
     return (
         <div className="mb-14">
             <SaldoTier />
-            <Separator className="mb-3 mt-2" />
             <Carousel />
             <FlashSale />
             <ListGame />
