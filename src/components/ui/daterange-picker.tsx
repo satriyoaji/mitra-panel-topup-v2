@@ -16,10 +16,11 @@ import {
 
 type prop = {
     onChange: (date: DateRange | undefined) => void;
+    date?: DateRange;
 };
 
 export function DatePickerWithRange(props: prop) {
-    const [date, setDate] = React.useState<DateRange | undefined>();
+    const [date, setDate] = React.useState<DateRange | undefined>(props.date);
 
     const onSelect = React.useCallback((val: DateRange | undefined) => {
         setDate(val);
@@ -34,7 +35,7 @@ export function DatePickerWithRange(props: prop) {
                         id="date"
                         variant={"outline"}
                         className={cn(
-                            "w-full justify-start text-left font-normal",
+                            "w-full justify-start space-x-2 text-left font-normal",
                             !date && "text-muted-foreground"
                         )}
                     >
@@ -42,19 +43,21 @@ export function DatePickerWithRange(props: prop) {
                         {date?.from ? (
                             date.to ? (
                                 <>
-                                    {format(date.from, "LLL dd, y")} -{" "}
-                                    {format(date.to, "LLL dd, y")}
+                                    <p>
+                                        {format(date.from, "LLL dd, y")} -{" "}
+                                        {format(date.to, "LLL dd, y")}
+                                    </p>
                                     <Cross1Icon
                                         className="ml-2"
-                                        onClick={() => setDate(undefined)}
+                                        onClick={() => onSelect(undefined)}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    {format(date.from, "LLL dd, y")}
+                                    <p>{format(date.from, "LLL dd, y")}</p>
                                     <Cross1Icon
                                         className="ml-2"
-                                        onClick={() => setDate(undefined)}
+                                        onClick={() => onSelect(undefined)}
                                     />
                                 </>
                             )

@@ -8,12 +8,25 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
-function StatusSelect({ onChange }: { onChange: (val: string) => void }) {
+function StatusSelect({
+    onChange,
+    value,
+}: {
+    onChange: (val: string | undefined) => void;
+    value?: string;
+}) {
+    const [val, setVal] = useState<string | undefined>(value ?? "*");
+
+    const onSelect = useCallback((v: string | undefined) => {
+        setVal(v);
+        onChange(v);
+    }, []);
+
     return (
-        <Select onValueChange={onChange}>
-            <SelectTrigger className="w-40">
+        <Select onValueChange={onSelect} defaultValue={val}>
+            <SelectTrigger className="w-full">
                 <SelectValue placeholder="Status Transaksi" />
             </SelectTrigger>
             <SelectContent>

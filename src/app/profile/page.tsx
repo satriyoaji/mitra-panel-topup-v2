@@ -77,7 +77,7 @@ function page() {
             </div>
             <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
                 <DialogContent className="sm:max-w-md">
-                    <DetailProfile />
+                    <DetailProfile onSuccess={() => setProfileOpen(false)} />
                 </DialogContent>
             </Dialog>
             <Dialog onOpenChange={setSaldoPointOpen} open={saldoPointOpen}>

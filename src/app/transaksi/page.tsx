@@ -2,14 +2,13 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import ItemsCard, { TItemsCard } from "./items-card";
-import { Dialog } from "@/components/ui/dialog";
-import { DatePickerWithRange } from "@/components/ui/daterange-picker";
-import StatusSelect from "./status-select";
+import ItemsCard from "./items-card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Detail from "./detail";
-import { DateRange } from "react-day-picker";
-import { isWithinInterval } from "date-fns";
 import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { MixerHorizontalIcon } from "@radix-ui/react-icons";
+import FilterTransaksi, { TFilter } from "./filter-transaksi";
 
 type TData = {
     date: Date;
@@ -116,27 +115,63 @@ const list: TData[] = [
 
 function Page() {
     const [open, setopen] = useState<boolean>(false);
-    const [date, setDate] = useState<DateRange | undefined>();
-    const [filter, setFilter] = useState<string>("*");
+    const [filterOpen, setfilterOpen] = useState<boolean>(false);
+    const [filter, setFilter] = useState<TFilter>({
+        date: undefined,
+        filter: "*",
+    });
     const [selectedData, setSelectedData] = useState<TData | undefined>();
     const { data: session } = useSession();
 
     return (
-        <div className="md:mx-4 sm:mx-2 mb-24 mt-4">
+        <div className="md:mx-4 sm:mx-2 mt-4">
             <div>
                 <div className="flex flex-col space-y-1.5 mb-3">
                     <Label htmlFor="invoice">Invoice</Label>
-                    <Input id="invoice" placeholder="Masukan No. Invoice" />
+                    <div className="flex space-x-1">
+                        <Input id="invoice" placeholder="Masukan No. Invoice" />
+                        {session && (
+                            <Dialog
+                                open={filterOpen}
+                                onOpenChange={setfilterOpen}
+                            >
+                                <DialogTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        className={`${
+                                            (filter.filter != "*" ||
+                                                filter.date) &&
+                                            "text-red-400"
+                                        }`}
+                                        size="sm"
+                                    >
+                                        <MixerHorizontalIcon />
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className="max-w-[25rem]">
+                                    <FilterTransaksi
+                                        state={filter}
+                                        onChange={(date, filter) => {
+                                            setFilter((prev) => ({
+                                                ...prev,
+                                                date,
+                                                filter,
+                                            }));
+                                            setfilterOpen(false);
+                                        }}
+                                    />
+                                </DialogContent>
+                            </Dialog>
+                        )}
+                    </div>
                 </div>
-                <div className="flex space-x-2">
-                    <StatusSelect onChange={setFilter} />
-                    <DatePickerWithRange onChange={setDate} />
-                </div>
+                <div className="flex space-x-2"></div>
             </div>
-            <div className="flex flex-col space-y-5 my-3 no-scrollbar overflow-y-auto h-[72vh]">
+            <div className="flex flex-col space-y-3 no-scrollbar overflow-y-auto h-[74vh]">
                 {list.map(
                     (val) =>
-                        (filter === "*" || filter === val.status) && (
+                        (filter.filter === "*" ||
+                            filter.filter === val.status) && (
                             <ItemsCard
                                 icon={val.icon}
                                 name={val.name}
@@ -152,6 +187,11 @@ function Page() {
                             />
                         )
                 )}
+                <div className="flex justify-center">
+                    <Button className="my-2" size="sm">
+                        Show More
+                    </Button>
+                </div>
             </div>
             <Dialog open={open} onOpenChange={setopen}>
                 {selectedData && (

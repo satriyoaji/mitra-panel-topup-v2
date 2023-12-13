@@ -21,18 +21,21 @@ export const options: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ profile, user }) {
-            const response = await fetch(`${process.env.API}/auth-member`, {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name: profile?.name,
-                    email: profile?.email,
-                    mitra_id: 1,
-                }),
-            });
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API}/web/auth-member`,
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: profile?.name,
+                        email: profile?.email,
+                        mitra_id: 1,
+                    }),
+                }
+            );
 
             if (!response.ok) return false;
 
@@ -43,7 +46,7 @@ export const options: NextAuthOptions = {
         },
         async session({ session, token }) {
             const response = await fetch(
-                `${process.env.API}/private/get-profile`,
+                `${process.env.NEXT_PUBLIC_API}/web/get-profile`,
                 {
                     method: "GET",
                     headers: {
@@ -60,6 +63,7 @@ export const options: NextAuthOptions = {
                     id: res.data.tier.id,
                     name: res.data.tier.name,
                 };
+                session.phone = res.data.phone;
             }
 
             session.accessToken = token.accessToken;

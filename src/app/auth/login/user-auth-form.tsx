@@ -34,15 +34,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 {isLoading ? (
                     "Loading..."
                 ) : (
-                    <Image
-                        src="/google.svg"
-                        alt="google"
-                        width={20}
-                        height={20}
-                        className="mr-2"
-                    />
-                )}{" "}
-                Google
+                    <>
+                        <Image
+                            src="/google.svg"
+                            alt="google"
+                            width={20}
+                            height={20}
+                            className="mr-2"
+                        />
+                        Google
+                    </>
+                )}
             </Button>
         </div>
     );

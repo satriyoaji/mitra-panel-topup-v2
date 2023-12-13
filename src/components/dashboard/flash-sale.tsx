@@ -2,15 +2,17 @@
 import Image from "next/image";
 import { Fragment, useState } from "react";
 import CardProduct from "./card-product";
+import { useCountdown } from "@/Helpers";
 
 function FlashSale() {
     const [opacity, setopacity] = useState<number>(1);
+    const [hours, minutes, seconds] = useCountdown(new Date("2023-12-16"));
 
     return (
         <Fragment>
             <div className="my-4">
-                <div className="w-[5.5rem] pb-1 bg- z-50 rounded-t-xl  text-center text-xs flex items-center justify-center bg-red-500/95 backdrop-blur supports-[backdrop-filter]:bg-red-500/60 text-white pt-1 font-bold">
-                    5 : 34 : 2
+                <div className="w-[7.9rem] pb-1 bg- z-50 rounded-t-xl  text-center text-xs flex items-center justify-center bg-red-500/95 backdrop-blur supports-[backdrop-filter]:bg-red-500/60 text-white pt-1 font-bold">
+                    {`${hours}h : ${minutes}m : ${seconds}s`}
                 </div>
                 <div
                     style={{

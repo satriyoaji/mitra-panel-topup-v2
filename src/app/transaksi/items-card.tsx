@@ -25,6 +25,10 @@ function ItemsCard(props: TItemsCard) {
                             <p className="text-muted-foreground text-xs">
                                 NDJKAS89DSA
                             </p>
+                            <Separator className="h-4" orientation="vertical" />
+                            <p className="text-xs text-muted-foreground">
+                                {props.date.toDateString()}
+                            </p>
                         </div>
                         {props.status === "success" ? (
                             <Badge variant="success">Success</Badge>
@@ -43,12 +47,8 @@ function ItemsCard(props: TItemsCard) {
                                 src={props.icon}
                             />
                             <div>
-                                <p className="text-xs mb-1">
-                                    {props.date.toDateString()}
-                                </p>
-                                <div className="flex items-center">
+                                <div className="flex flex-col">
                                     <p className="text-sm">{props.name}</p>
-                                    <p className="mx-2">{"-"}</p>
                                     <p className="text-xs font-semibold">
                                         {props.product}
                                     </p>

@@ -14,12 +14,13 @@ import {
 } from "@/components/ui/popover";
 import { useCallback } from "react";
 
-type prop = {
+interface prop {
     onChange: (date: Date | undefined) => void;
-};
+    date?: Date;
+}
 
-export function DatePickerDemo(props: prop) {
-    const [date, setDate] = React.useState<Date>();
+export function DatePicker(props: prop) {
+    const [date, setDate] = React.useState<Date | undefined>(props.date);
 
     const onSelect = useCallback((val: Date | undefined) => {
         setDate(val);
@@ -32,7 +33,7 @@ export function DatePickerDemo(props: prop) {
                 <Button
                     variant={"outline"}
                     className={cn(
-                        "w-[240px] justify-start text-left font-normal",
+                        "w-full justify-start text-left font-normal",
                         !date && "text-muted-foreground"
                     )}
                 >
