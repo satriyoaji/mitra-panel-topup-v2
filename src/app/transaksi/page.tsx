@@ -124,50 +124,47 @@ function Page() {
     const { data: session } = useSession();
 
     return (
-        <div className="md:mx-4 sm:mx-2 mt-4">
-            <div>
-                <div className="flex flex-col space-y-1.5 mb-3">
-                    <Label htmlFor="invoice">Invoice</Label>
-                    <div className="flex space-x-1">
-                        <Input id="invoice" placeholder="Masukan No. Invoice" />
-                        {session && (
-                            <Dialog
-                                open={filterOpen}
-                                onOpenChange={setfilterOpen}
-                            >
-                                <DialogTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        className={`${
-                                            (filter.filter != "*" ||
-                                                filter.date) &&
-                                            "text-red-400"
-                                        }`}
-                                        size="sm"
-                                    >
-                                        <MixerHorizontalIcon />
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="max-w-[25rem]">
-                                    <FilterTransaksi
-                                        state={filter}
-                                        onChange={(date, filter) => {
-                                            setFilter((prev) => ({
-                                                ...prev,
-                                                date,
-                                                filter,
-                                            }));
-                                            setfilterOpen(false);
-                                        }}
-                                    />
-                                </DialogContent>
-                            </Dialog>
-                        )}
-                    </div>
+        <div className="md:mx-2">
+            <div className="flex px-2 sticky top-10 py-4 bg-zinc-50 flex-col space-y-1.5 mb-3">
+                <Label htmlFor="invoice">Invoice</Label>
+                <div className="flex space-x-1">
+                    <Input
+                        id="invoice"
+                        placeholder="Masukan No. Invoice"
+                        className="bg-white"
+                    />
+                    {session && (
+                        <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
+                            <DialogTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    className={`${
+                                        (filter.filter != "*" || filter.date) &&
+                                        "text-red-400"
+                                    }`}
+                                    size="sm"
+                                >
+                                    <MixerHorizontalIcon />
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-[25rem]">
+                                <FilterTransaksi
+                                    state={filter}
+                                    onChange={(date, filter) => {
+                                        setFilter((prev) => ({
+                                            ...prev,
+                                            date,
+                                            filter,
+                                        }));
+                                        setfilterOpen(false);
+                                    }}
+                                />
+                            </DialogContent>
+                        </Dialog>
+                    )}
                 </div>
-                <div className="flex space-x-2"></div>
             </div>
-            <div className="flex flex-col space-y-3 no-scrollbar overflow-y-auto h-[74vh]">
+            <div className="flex px-2 flex-col space-y-3">
                 {list.map(
                     (val) =>
                         (filter.filter === "*" ||

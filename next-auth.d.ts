@@ -5,7 +5,7 @@ declare module "next-auth" {
     interface Session extends DefaultSession {
         accessToken: sring;
         role: string;
-        phone: string;
+        phone?: string;
         tier: {
             name: string;
             id: number;

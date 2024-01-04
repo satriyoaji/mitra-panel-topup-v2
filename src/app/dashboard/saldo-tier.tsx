@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Tier, { TierType } from "../tier";
+import Tier, { TierType } from "../../components/tier";
 import { useSession } from "next-auth/react";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../components/ui/separator";
 
 function SaldoTier() {
     const { data: session } = useSession();

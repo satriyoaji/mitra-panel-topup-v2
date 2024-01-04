@@ -1,16 +1,17 @@
-import Carousel from "@/components/dashboard/carousel";
-import FlashSale from "@/components/dashboard/flash-sale";
-import ListGame from "@/components/dashboard/list-game";
-import SaldoTier from "@/components/dashboard/saldo-tier";
-import { Separator } from "@/components/ui/separator";
+"use client";
+
+import Carousel from "@/app/dashboard/carousel";
+import FlashSale from "@/app/dashboard/flash-sale";
+import ListGame from "@/app/dashboard/list-game";
+import SaldoTier from "@/app/dashboard/saldo-tier";
 
 export default async function Home() {
     return (
-        <div className="mb-14">
+        <>
             <SaldoTier />
             <Carousel />
             <FlashSale />
             <ListGame />
-        </div>
+        </>
     );
 }

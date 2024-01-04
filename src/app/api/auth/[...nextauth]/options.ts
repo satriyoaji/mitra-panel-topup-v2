@@ -1,28 +1,17 @@
 import type { NextAuthOptions } from "next-auth";
-import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
+import GoogleProvider from "next-auth/providers/google";
 
 export const options: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID as string,
             clientSecret: process.env.GOOGLE_SECRET as string,
-            async profile(profile: GoogleProfile) {
-                // console.log("PROFILE", profile);
-
-                return {
-                    ...profile,
-                    role: profile.role ?? "public",
-                    id: profile.sub,
-                    image: profile.picture,
-                    accessToken: "token mantap",
-                };
-            },
         }),
     ],
     callbacks: {
         async signIn({ profile, user }) {
             const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/web/auth-member`,
+                `${process.env.NEXT_PUBLIC_API}/auth-member`,
                 {
                     method: "POST",
                     headers: {
@@ -41,7 +30,7 @@ export const options: NextAuthOptions = {
 
             var res = await response.json();
             user.accessToken = res.data.token;
-            user.role = "public";
+            user.role = "customer";
             return true;
         },
         async session({ session, token }) {
@@ -68,7 +57,7 @@ export const options: NextAuthOptions = {
 
             session.accessToken = token.accessToken;
             session.role = token.role;
-            // console.log("SESSION", token, session);
+
             return session;
         },
         async jwt({ token, user, account }) {

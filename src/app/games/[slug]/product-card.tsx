@@ -13,7 +13,7 @@ type prop = {
 function ProductCard(props: prop) {
     return (
         <Card
-            className={`p-2 flex flex-col justify-center items-center cursor-pointer ${
+            className={`p-2 flex flex-col justify-center items-center cursor-pointer hover:bg-slate-50 ${
                 props.selected && "border-4 border-black"
             }`}
             onClick={props.onClick}
@@ -23,10 +23,10 @@ function ProductCard(props: prop) {
                 height={30}
                 className="text-center my-3"
             />
-            <p className="text-sm">{props.name}</p>
+            <p className="text-sm text-center my-1">{props.name}</p>
             {props.discountPrice ? (
                 <>
-                    <p className="line-through text-sm font-semibold">
+                    <p className="line-through text-sm font-semibold mt-2">
                         {props.price}
                     </p>
                     <p className="text-red-500 text-sm font-semibold">
@@ -34,7 +34,7 @@ function ProductCard(props: prop) {
                     </p>
                 </>
             ) : (
-                <p className="text-sm font-semibold">{props.price}</p>
+                <p className="text-sm font-semibold mt-2">{props.price}</p>
             )}
         </Card>
     );

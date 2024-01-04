@@ -34,10 +34,11 @@ function BottomNav() {
     const path = usePathname();
     if (path === "/" || path === "/transaksi" || path === "/profile")
         return (
-            <div className="fixed bottom-0 h-12 z-50 w-full max-w-xl border-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+            <div className="fixed bottom-0 h-12 z-50 w-full max-w-xl border-t-2 shadow-md bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">
                 <div className="flex justify-between items-center h-full">
                     {paths.map((val) => (
                         <Link
+                            key={val.path}
                             href={val.path}
                             className={`flex flex-col h-fit items-center w-full hover:text-red-500 cursor-pointer ${
                                 path == val.path && "text-red-700"

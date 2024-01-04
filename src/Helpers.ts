@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { IProductCategory, TProduct } from "./Type";
 
 const useCountdown = (targetDate: string | number | Date) => {
-    const countDownDate = new Date(targetDate).getTime();
+    const [countDownDate, _] = useState(new Date(targetDate).getTime());
 
     const [countDown, setCountDown] = useState(
         countDownDate - new Date().getTime()
@@ -24,18 +25,23 @@ const getReturnValues = (countDown: number) => {
     const hours = Math.floor(
         (countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
-    const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60))
-        .toString()
-        .padStart(2, "0");
-    const seconds = Math.floor((countDown % (1000 * 60)) / 1000)
-        .toString()
-        .padStart(2, "0");
+    const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
-    return [hours + days * 24, minutes, seconds];
+    let isExpired = false;
+    if (days == 0 && hours == 0 && minutes == 0 && seconds == 0)
+        isExpired = true;
+
+    return [
+        hours + days * 24,
+        minutes.toString().padStart(2, "0"),
+        seconds.toString().padStart(2, "0"),
+        isExpired,
+    ];
 };
 
 const priceMask = (val: number | undefined, prefix: string | undefined) => {
-    if (!val) return "";
+    if (!val) val = 0;
     var number_string = val
             .toString()
             .replace(/[^,\d]/g, "")
@@ -59,4 +65,23 @@ const priceMask = (val: number | undefined, prefix: string | undefined) => {
         : "";
 };
 
-export { useCountdown, priceMask };
+const uniqeProduct = (arr: TProduct[], track = new Set()) =>
+    arr.filter(({ uuid }) => (track.has(uuid) ? false : track.add(uuid)));
+
+const uniqeCategory = (arr: IProductCategory[], track = new Set()) =>
+    arr.filter(({ uuid }) => (track.has(uuid) ? false : track.add(uuid)));
+
+function debounce<Params extends any[]>(
+    func: (...args: Params) => any,
+    timeout: number
+): (...args: Params) => void {
+    let timer: NodeJS.Timeout;
+    return (...args: Params) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func(...args);
+        }, timeout);
+    };
+}
+
+export { useCountdown, priceMask, uniqeProduct, uniqeCategory, debounce };

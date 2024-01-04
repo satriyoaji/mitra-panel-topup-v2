@@ -2,28 +2,25 @@
 import Image from "next/image";
 import { Fragment, useState } from "react";
 import CardProduct from "./card-product";
-import { useCountdown } from "@/Helpers";
+import dynamic from "next/dynamic";
+
+// const CountdownCard = dynamic(() => import("./countdown-card"), { ssr: false });
 
 function FlashSale() {
     const [opacity, setopacity] = useState<number>(1);
-    const [hours, minutes, seconds] = useCountdown(new Date("2023-12-16"));
 
     return (
         <Fragment>
-            <div className="my-4">
-                <div className="w-[7.9rem] pb-1 bg- z-50 rounded-t-xl  text-center text-xs flex items-center justify-center bg-red-500/95 backdrop-blur supports-[backdrop-filter]:bg-red-500/60 text-white pt-1 font-bold">
-                    {`${hours}h : ${minutes}m : ${seconds}s`}
-                </div>
+            <div className="my-8">
                 <div
                     style={{
-                        padding: ".5rem 0",
                         display: "flex",
                         flexDirection: "row",
                         backgroundImage:
                             "linear-gradient(180deg, #f44336, #fff)",
                         borderRadius: 5,
                     }}
-                    className="mt-[-.2rem]"
+                    className="py-1"
                 >
                     <div
                         style={{
@@ -44,7 +41,7 @@ function FlashSale() {
                         />
                     </div>
                     <div
-                        className="no-scrollbar z-10 mb-2"
+                        className="no-scrollbar z-10 mb-2 pt-2"
                         style={{
                             display: "flex",
                             flexDirection: "row",

@@ -57,7 +57,7 @@ const Carousel = () => {
                     />
                 ))}
             </div>
-            <div className="flex bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-md mt-[-1.5rem] ml-1 absolute cursor-pointer">
+            <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-md mt-[-1.5rem] absolute cursor-pointer">
                 <ChevronLeftIcon
                     width={12}
                     height={12}
