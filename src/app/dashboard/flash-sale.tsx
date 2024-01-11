@@ -1,17 +1,47 @@
 "use client";
-import Image from "next/image";
-import { Fragment, useState } from "react";
-import CardProduct from "./card-product";
-import dynamic from "next/dynamic";
+import CardProduct from "../flash-sale/flash-sale-card";
+import { Button } from "@/components/ui/button";
+import { IFlashSaleProduct } from "@/Type";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 // const CountdownCard = dynamic(() => import("./countdown-card"), { ssr: false });
 
-function FlashSale() {
-    const [opacity, setopacity] = useState<number>(1);
+async function FlashSale() {
+    const [data, setData] = useState<IFlashSaleProduct[]>([]);
 
-    return (
-        <Fragment>
-            <div className="my-8">
+    async function getFlashSale() {
+        var res = await fetch(
+            `/api/flash-sales?` +
+                new URLSearchParams({
+                    page_num: "1",
+                    page_size: "8",
+                })
+        );
+
+        if (res.ok) {
+            const dataJson = await res.json();
+            setData(dataJson.data);
+        }
+    }
+
+    useEffect(() => {
+        (async () => {
+            await getFlashSale();
+        })();
+    }, []);
+
+    if (data.length > 0)
+        return (
+            <div className="mt-6">
+                <div className="flex justify-between">
+                    <p className="px-2 font-bold">Flash Sale⚡</p>
+                    <Link href="/flash-sale">
+                        <Button size="sm" variant="link">
+                            See More
+                        </Button>
+                    </Link>
+                </div>
                 <div
                     style={{
                         display: "flex",
@@ -23,56 +53,23 @@ function FlashSale() {
                     className="py-1"
                 >
                     <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            background: "#f44336",
-                            borderRadius: 5,
-                            opacity,
-                        }}
-                        className="w-[18rem] pb-4 pt-2 pl-4"
-                    >
-                        <Image
-                            className="mt-2"
-                            src="/flash-sale.png"
-                            alt=""
-                            width={100}
-                            height={70}
-                        />
-                    </div>
-                    <div
-                        className="no-scrollbar z-10 mb-2 pt-2"
+                        className="no-scrollbar z-10 mb-2 pt-2 space-x-2 px-2"
                         style={{
                             display: "flex",
                             flexDirection: "row",
-                            marginLeft: "-7.9rem",
-                            paddingLeft: "8rem",
+                            // marginLeft: "-.9rem",
+                            // paddingLeft: "5rem",
                             overflowX: "auto",
                             scrollbarWidth: "none",
                         }}
-                        onScroll={(e) =>
-                            setopacity(
-                                1 -
-                                    (e.currentTarget.scrollLeft /
-                                        (e.currentTarget.scrollWidth -
-                                            e.currentTarget.clientWidth)) *
-                                        3
-                            )
-                        }
                     >
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((_, idx) => (
-                            <CardProduct
-                                key={idx.toString()}
-                                avatar="https://assets-prd.ignimgs.com/2022/07/19/fifa-23-button-02-1658265594101.jpg"
-                                title="FIFA 23"
-                                link="fea"
-                            />
+                        {data.map((item, idx) => (
+                            <CardProduct key={`${idx}`} data={item} />
                         ))}
                     </div>
                 </div>
             </div>
-        </Fragment>
-    );
+        );
 }
 
 export default FlashSale;

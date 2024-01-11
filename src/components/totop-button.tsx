@@ -23,7 +23,7 @@ function ToTopButton() {
             <Button
                 variant="destructive"
                 className={`${
-                    scrolling ? "opacity-100" : "opacity-0"
+                    scrolling ? "visible" : "hidden"
                 } transition-all duration-500 ease-in-out`}
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >

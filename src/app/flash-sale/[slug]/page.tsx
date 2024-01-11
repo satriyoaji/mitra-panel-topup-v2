@@ -7,16 +7,17 @@ import { Separator } from "@/components/ui/separator";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { priceMask, uniqeProduct } from "@/Helpers";
 import { useSession } from "next-auth/react";
-import { IProductCategory, TProduct } from "@/Type";
+import { IFlashSaleProduct, IProductCategory, TProduct } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
 import ProductList from "./product-list";
+import FlashSaleCard from "../flash-sale-card";
 
 function Page({ params }: { params: { slug: string } }) {
     const [productSelected, setProductSelected] = useState<
         TProduct | undefined
     >(undefined);
-    const [product, setProduct] = useState<TProduct[]>([]);
+    const [product, setProduct] = useState<IFlashSaleProduct>();
     const [category, setCategory] = useState<
         IProductCategory | undefined | null
     >(undefined);
@@ -28,16 +29,28 @@ function Page({ params }: { params: { slug: string } }) {
     const couponRef = useRef<HTMLDivElement>(null);
     const profileRef = useRef<HTMLDivElement>(null);
 
-    const getData = async () => {
-        setLoading(true);
-        var res = await fetch(`/api/products/categories/${params.slug}?`);
+    const getCategory = async (id: string) => {
+        var res = await fetch(`/api/products/categories/${id}?`);
 
         if (res.ok) {
             var result = await res.json();
 
             if (result.data) {
                 setCategory(result.data);
-                setProduct(uniqeProduct(result.data.products));
+            }
+        } else setCategory(null);
+    };
+
+    const getData = async () => {
+        setLoading(true);
+        var res = await fetch(`/api/flash-sales/${params.slug}?`);
+
+        if (res.ok) {
+            var result = await res.json();
+
+            if (result.data) {
+                setProduct(result.data);
+                await getCategory(result.data.product.category_uuid);
             }
         } else setCategory(null);
 
@@ -90,13 +103,24 @@ function Page({ params }: { params: { slug: string } }) {
                     </CardContent>
                 </Card>
                 <div ref={productListRef}>
-                    <ProductList
-                        category={category.alias}
-                        nextRef={methodRef}
-                        onProductSelect={(val) => setProductSelected(val)}
-                        products={product}
-                        productSelected={productSelected}
-                    />
+                    <Card className="w-full my-4">
+                        <CardContent>
+                            <div className="flex mt-3">
+                                <h4>
+                                    <span className="text-xl font-bold">
+                                        2.
+                                    </span>{" "}
+                                    Produk
+                                </h4>
+                            </div>
+                            <Separator className="my-3" />
+                            <div className="grid sm:grid-cols-3 grid-cols-2  gap-2">
+                                {product && (
+                                    <FlashSaleCard selected data={product} />
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
 
                 <Card className="w-full my-4" ref={methodRef}>
@@ -177,14 +201,17 @@ function Page({ params }: { params: { slug: string } }) {
                         </CardContent>
                     </Card>
                 )}
-                {productSelected && (
+                {product && (
                     <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-sm bg-black flex items-center justify-between px-4">
                         <div>
                             <h4 className="text-white text-xs">
                                 Transfer + 10.000 Point
                             </h4>
                             <h4 className="text-white text-lg font-bold">
-                                {priceMask(productSelected.sale_price)}
+                                {priceMask(
+                                    product?.product.sale_price -
+                                        product?.discount_price
+                                )}
                             </h4>
                         </div>
                         <div className="">

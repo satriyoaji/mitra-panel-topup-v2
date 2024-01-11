@@ -1,5 +1,5 @@
 "use client";
-import { useCountdown } from "@/Helpers";
+import { useCountdown } from "@/Hooks";
 import { ClockIcon } from "@radix-ui/react-icons";
 import React, { useEffect } from "react";
 

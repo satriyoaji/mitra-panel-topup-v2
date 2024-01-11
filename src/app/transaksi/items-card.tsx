@@ -61,7 +61,7 @@ function ItemsCard(props: TItemsCard) {
                                     Total
                                 </p>
                                 <p className="text-sm font-semibold mb-2">
-                                    {priceMask(props.price, undefined)}
+                                    {priceMask(props.price)}
                                 </p>
                             </div>
                             <Button

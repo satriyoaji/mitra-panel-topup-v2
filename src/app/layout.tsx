@@ -38,7 +38,7 @@ export default function RootLayout({
                 <NextAuthProvider>
                     <main className="max-w-xl bg-white mx-auto min-h-screen">
                         <Header />
-                        <div className="px-4 pt-4 pb-16 min-h-screen bg-slate-50">
+                        <div className="px-4 pt-2 pb-16 min-h-screen bg-slate-50">
                             {children}
                         </div>
                         <ToTopButton />

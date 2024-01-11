@@ -126,7 +126,7 @@ function Page() {
     return (
         <div className="md:mx-2">
             <div className="flex px-2 sticky top-10 py-4 bg-zinc-50 flex-col space-y-1.5 mb-3">
-                <Label htmlFor="invoice">Invoice</Label>
+                <p className="font-semibold text-lg">Invoice🧾</p>
                 <div className="flex space-x-1">
                     <Input
                         id="invoice"
@@ -166,10 +166,11 @@ function Page() {
             </div>
             <div className="flex px-2 flex-col space-y-3">
                 {list.map(
-                    (val) =>
+                    (val, idx) =>
                         (filter.filter === "*" ||
                             filter.filter === val.status) && (
                             <ItemsCard
+                                key={`${idx}`}
                                 icon={val.icon}
                                 name={val.name}
                                 price={val.price}

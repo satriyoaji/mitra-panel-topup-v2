@@ -73,8 +73,8 @@ async function Footer() {
         <div className="pb-[4.5rem] bg-black px-4 pt-4 flex flex-col items-center">
             <p className="font-bold text-white">Follow Us On</p>
             <div className="flex justify-center space-x-2 mt-2">
-                {data.map((item) => (
-                    <div className="w-6 h-6">
+                {data.map((item, idx) => (
+                    <div key={`${idx}`} className="w-6 h-6">
                         <Link href={item.link}>{getIcon(item.name)}</Link>
                     </div>
                 ))}

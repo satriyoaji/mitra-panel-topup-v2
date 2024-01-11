@@ -36,3 +36,26 @@ export type TProduct = {
     active: boolean;
     group_name: string;
 };
+
+export type TMarkup = "percentage" | "fix";
+
+export interface IFlashSaleProductDetail {
+    uuid: string;
+    product_sku: string;
+    product_name: string;
+    sale_price: number;
+    category_uuid: string;
+    category_alias: string;
+    category_code: string;
+    active: boolean;
+    group_name: string;
+}
+
+export interface IFlashSaleProduct {
+    id: number;
+    discount_price: number;
+    active: boolean;
+    product: IFlashSaleProductDetail;
+    start_at: string;
+    finish_at: string;
+}

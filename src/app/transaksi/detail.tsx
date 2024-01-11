@@ -48,9 +48,7 @@ function Detail(props: TDetail) {
                     </p>
                     <p className="text-xl mt-2">{props.name}</p>
                     <p className="font-bold">{props.product}</p>
-                    <p className="text-sm mt-3">
-                        {priceMask(props.price, undefined)}
-                    </p>
+                    <p className="text-sm mt-3">{priceMask(props.price)}</p>
                 </div>
             </div>
             <div className="grid gap-3 pt-2 pb-4">

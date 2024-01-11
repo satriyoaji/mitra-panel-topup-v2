@@ -5,20 +5,21 @@ import { Input } from "../../components/ui/input";
 import { Badge } from "../../components/ui/badge";
 import { Card, CardContent } from "../../components/ui/card";
 import Link from "next/link";
-import { IProductCategory } from "@/Type";
+import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { debounce, uniqeCategory } from "@/Helpers";
 
-const chips: string[] = ["All", "VCG", "Games", "Voucher", "Pulsa", "PLN"];
-type productType = "VCG" | "Games" | "Voucher" | "Pulsa" | "PLN";
-
 export default function ListGame() {
-    const [filter, setfilter] = useState<null | string>(null);
+    const [group, setGroup] = useState<TProductGroup>({
+        id: "",
+        name: "All",
+    });
     const [data, setData] = useState<Array<IProductCategory>>([]);
     const [search, setSearch] = useState<string>("");
     const [pageIndex, setPageIndex] = useState(1);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [groups, setGroups] = useState<TProductGroup[]>([]);
 
     const totalPage = useMemo(() => Math.ceil(total / 8), [total]);
 
@@ -30,6 +31,7 @@ export default function ListGame() {
                     page_num: `${pageIndex}`,
                     page_size: "8",
                     code: search,
+                    group_id: `${group?.id ?? ""}`,
                 })
         );
 
@@ -49,12 +51,30 @@ export default function ListGame() {
         }
     };
 
-    const getGroup = async () => {};
+    const getGroup = async () => {
+        var res = await fetch(`/api/products/groups/?`);
+
+        if (res.ok) {
+            let data: TProductGroup[] = [
+                {
+                    id: "",
+                    name: "All",
+                },
+            ];
+            var result = await res.json();
+            data = data.concat(result.data);
+            setGroups(data);
+        }
+    };
+
+    useEffect(() => {
+        getGroup();
+    }, []);
 
     useEffect(() => {
         setPageIndex(1);
         getData(false);
-    }, [search]);
+    }, [search, group]);
 
     useEffect(() => {
         getData(true);
@@ -68,14 +88,10 @@ export default function ListGame() {
         setSearch(e.target.value);
     }, 500);
 
-    const filterList = (val: string) => {
-        setfilter(val == "All" ? null : val);
-    };
-
     return (
         <React.Fragment>
-            <div className="flex items-end justify-between mt-4">
-                <h5 className="mr-8 text-xl">Games</h5>
+            <div className="flex items-end justify-between mt-8">
+                <h5 className="mr-8 text-xl">Categories</h5>
                 <div
                     className="no-scrollbar z-10"
                     style={{
@@ -85,21 +101,17 @@ export default function ListGame() {
                         scrollbarWidth: "none",
                     }}
                 >
-                    {chips.map((val, idx) => (
+                    {groups.map((val, idx) => (
                         <Badge
                             className="mx-1 cursor-pointer"
-                            key={idx.toString()}
+                            key={`${idx}`}
                             color="primary"
                             variant={
-                                filter === null && val === "All"
-                                    ? "destructive"
-                                    : val == filter
-                                    ? "destructive"
-                                    : "outline"
+                                val.id == group.id ? "destructive" : "outline"
                             }
-                            onClick={() => filterList(val)}
+                            onClick={() => setGroup(val)}
                         >
-                            {val}
+                            {val.name}
                         </Badge>
                     ))}
                 </div>
@@ -110,38 +122,34 @@ export default function ListGame() {
                 className="my-3 bg-white"
             />
             <div className="grid xs:grid-cols-3 grid-cols-4 gap-3 mt-4 place-items-center justify-center">
-                {data.map(
-                    (val: IProductCategory, idx) =>
-                        (filter == null ||
-                            (filter != null && filter == val.alias)) && (
-                            <Link
-                                href={`/games/${val.uuid}`}
-                                key={val.uuid}
-                                className="w-full h-full"
-                            >
-                                <Card className="w-full h-full min-w-fit rounded-sm hover:bg-slate-50">
-                                    <CardContent className="p-1 flex flex-col items-center">
-                                        <div className="overflow-clip rounded w-full bg-slate-200">
-                                            {val.logo_image !== "" ? (
-                                                <img
-                                                    alt="Remy Sharp"
-                                                    className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                                                    src={val.logo_image}
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full hover:scale-125 transition duration-300 hover:rotate-12">
-                                                    <CubeIcon className="text-white w-20 m-auto h-28" />
-                                                </div>
-                                            )}
+                {data.map((val: IProductCategory, idx) => (
+                    <Link
+                        href={`/games/${val.uuid}`}
+                        key={val.uuid}
+                        className="w-full h-full"
+                    >
+                        <Card className="w-full h-full min-w-fit rounded-sm hover:bg-slate-50">
+                            <CardContent className="p-1 flex flex-col items-center">
+                                <div className="overflow-clip rounded w-full bg-slate-200">
+                                    {val.logo_image !== "" ? (
+                                        <img
+                                            alt="Remy Sharp"
+                                            className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
+                                            src={val.logo_image}
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full hover:scale-125 transition duration-300 hover:rotate-12">
+                                            <CubeIcon className="text-white sm:w-20 w-16 m-auto sm:h-28 h-20" />
                                         </div>
-                                        <p className="text-xs text-center my-2">
-                                            {val.alias}
-                                        </p>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        )
-                )}
+                                    )}
+                                </div>
+                                <p className="text-xs text-center my-2">
+                                    {val.alias}
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                ))}
             </div>
             {loading && (
                 <div className="flex w-full justify-center items-center py-16">
