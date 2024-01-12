@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gamification-fe-config
+  name: mitra-panel-topup-config
   namespace: default
 data:
   GOOGLE_ID: "600726960200-dcbq6h2pbeg5u7ji4idtmol1imvfak5g.apps.googleusercontent.com"
