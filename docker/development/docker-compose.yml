@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+    topup-development:
+        build:
+            context: ../../
+            dockerfile: docker/development/Dockerfile
+        image: topup-development
+        ports:
+            - "3333:3000"
