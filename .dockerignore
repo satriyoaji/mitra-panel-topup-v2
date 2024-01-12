@@ -1,0 +1,9 @@
+Jenkinsfile
+*.yaml
+sonar-project.properties
+helm*
+*.tgz
+docker*
+Dockerfile
+README.MD
+readme*

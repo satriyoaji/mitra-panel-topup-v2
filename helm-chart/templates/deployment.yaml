@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mitra-panel-topup
+  namespace: default
+  labels:
+    app: mitra-panel-topup
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: mitra-panel-topup
+  template:
+    metadata:
+      labels:
+        app: mitra-panel-topup
+      annotations:
+        co.elastic.logs/enabled: "true"
+        co.elastic.logs/json.keys_under_root: "true"
+        co.elastic.logs/json.add_error_key: "true"
+        co.elastic.logs/json.message_key: "log"
+        # vault.hashicorp.com/agent-inject: "true"
+        # vault.hashicorp.com/role: "vcgamersapi-app"
+        # vault.hashicorp.com/agent-inject-secret-app: "secret/data/mitra-panel-topup-stg"
+        # vault.hashicorp.com/agent-inject-template-app: |
+        #   {{`{{ with secret "secret/data/mitra-panel-topup-stg" }}
+        #   {{ range $k, $v := .Data.data }}
+        #     export {{ $k }}={{ $v }}
+        #   {{ end }}
+        #   {{ end }}`}}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-container
+          image: "{{ .Values.image.repository }}/{{ .Values.image.tag }}"
+          # command: ['sh', '-c', '. /vault/secrets/app && /app/mitra-panel-topup']
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: mitra-panel-topup-config
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1000Mi
+            limits:
+              cpu: 600m
+              memory: 1500Mi
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 6969
+          #   initialDelaySeconds: 20
+          #   periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 6969
+          #   initialDelaySeconds: 20
+          #   periodSeconds: 10        
