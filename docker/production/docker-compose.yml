@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+    topup-production:
+        build:
+            context: ../../
+            dockerfile: docker/production/Dockerfile
+        image: topup-production
+        ports:
+            - "3333:3000"
