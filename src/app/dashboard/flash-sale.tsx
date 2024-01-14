@@ -64,7 +64,9 @@ async function FlashSale() {
                         }}
                     >
                         {data.map((item, idx) => (
-                            <CardProduct key={`${idx}`} data={item} />
+                            <div className="h-full min-w-[8rem]">
+                                <CardProduct key={`${idx}`} data={item} />
+                            </div>
                         ))}
                     </div>
                 </div>
