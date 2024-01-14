@@ -3,6 +3,7 @@ import {
     InstagramLogoIcon,
     TwitterLogoIcon,
 } from "@radix-ui/react-icons";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
@@ -12,13 +13,15 @@ interface Sosmed {
 }
 
 const getSocmed = async () => {
+    const cookieStore = cookies();
+
     var res = await fetch(
         `${process.env.NEXT_PUBLIC_API}/admin/profile/socmed`,
         {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+                Authorization: `Bearer ${cookieStore.get("mantapu")?.value}`,
             },
         }
     );

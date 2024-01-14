@@ -2,11 +2,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import Filter, { TFilter } from "./filter";
 import { Label } from "@/components/ui/label";
 import FlashSaleCard from "./flash-sale-card";
 import { IFlashSaleProduct } from "@/Type";
+import { debounce } from "@/Helpers";
 
 function Page() {
     const [filterOpen, setFilterOpen] = useState(false);
@@ -14,24 +15,18 @@ function Page() {
     const [total, setTotal] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [data, setData] = useState<IFlashSaleProduct[]>([]);
+    const [search, setSearch] = useState("");
 
     const totalPage = useMemo(() => Math.ceil(total / 12), [total]);
 
     const getFlashSale = async () => {
-        var res = await fetch(
-            `/api/flash-sales?` +
-                new URLSearchParams({
-                    page_num: "1",
-                    page_size: "12",
-                }),
-            {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    // Authorization: `Bearer ${cookieStore.get("mantapu")?.value}`,
-                },
-            }
-        );
+        let searchParams = new URLSearchParams({
+            page_num: "1",
+            page_size: "12",
+            product_search: search,
+        });
+
+        var res = await fetch(`/api/flash-sales?` + searchParams);
 
         if (res.ok) {
             const dataJson = await res.json();
@@ -44,7 +39,11 @@ function Page() {
         (async () => {
             await getFlashSale();
         })();
-    }, [filter]);
+    }, [filter, search]);
+
+    const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    }, 500);
 
     return (
         <div className="md:mx-2">
@@ -55,14 +54,17 @@ function Page() {
                         id="invoice"
                         placeholder="Search..."
                         className="bg-white"
+                        onChange={doSearch}
                     />
-                    <Filter onChange={setFilter} />
+                    {/* <Filter onChange={setFilter} /> */}
                 </div>
             </div>
-            <div className="grid sm:grid-cols-4 grid-cols-2 gap-4 mx-2 min-h-[72vh]">
-                {data.map((item, idx) => (
-                    <FlashSaleCard key={`${idx}`} data={item} />
-                ))}
+            <div className="min-h-[72vh]">
+                <div className="grid sm:grid-cols-4 grid-cols-2 gap-2 mx-2">
+                    {data.map((item, idx) => (
+                        <FlashSaleCard key={`${idx}`} data={item} />
+                    ))}
+                </div>
             </div>
             <div className="flex items-center justify-between space-x-2 py-4 mt-2">
                 <p className="text-xs text-muted-foreground mx-2">
