@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HomeIcon, PersonIcon, ReaderIcon } from "@radix-ui/react-icons";
 import { usePathname } from "next/navigation";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
+import ToTopButton from "./totop-button";
 
 type path = {
     icon: React.ForwardRefExoticComponent<
@@ -35,6 +36,7 @@ function BottomNav() {
     if (path === "/" || path === "/transaksi" || path === "/profile")
         return (
             <div className="fixed bottom-0 h-12 z-50 w-full max-w-xl border-t-2 shadow-md bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">
+                <ToTopButton />
                 <div className="flex justify-between items-center h-full">
                     {paths.map((val) => (
                         <Link

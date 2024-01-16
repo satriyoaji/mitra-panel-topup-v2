@@ -109,7 +109,10 @@ export default function ListGame() {
                             variant={
                                 val.id == group.id ? "destructive" : "outline"
                             }
-                            onClick={() => setGroup(val)}
+                            onClick={() => {
+                                setData([]);
+                                setGroup(val);
+                            }}
                         >
                             {val.name}
                         </Badge>
@@ -121,7 +124,7 @@ export default function ListGame() {
                 placeholder="Search..."
                 className="my-3 bg-white"
             />
-            <div className="grid xs:grid-cols-3 grid-cols-4 gap-3 mt-4 place-items-center justify-center">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4 place-items-center justify-center">
                 {data.map((val: IProductCategory, idx) => (
                     <Link
                         href={`/games/${val.uuid}`}

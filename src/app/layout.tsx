@@ -41,7 +41,6 @@ export default function RootLayout({
                         <div className="px-4 pt-2 pb-16 min-h-screen bg-slate-50">
                             {children}
                         </div>
-                        <ToTopButton />
                         <BottomNav />
                         <Footer />
                     </main>

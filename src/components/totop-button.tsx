@@ -19,17 +19,18 @@ function ToTopButton() {
     }, [scrollTop]);
 
     return (
-        <div className="fixed max-w-xl px-8 w-full z-50 flex justify-end bottom-16">
-            <Button
-                variant="destructive"
-                className={`${
-                    scrolling ? "visible" : "hidden"
-                } transition-all duration-500 ease-in-out`}
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-                <ArrowUpIcon />
-            </Button>
-        </div>
+        <Button
+            variant="destructive"
+            size="icon"
+            className={`${
+                scrolling
+                    ? "opacity-100 flex justify-center items-center"
+                    : "opacity-0"
+            } fixed z-90 bottom-16 right-4 bg-red-600 rounded-full drop-shadow-lg text-white text-4xl transition-all hover:bg-red-700 hover:drop-shadow-2xl hover:animate-bounce duration-300`}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+            <ArrowUpIcon />
+        </Button>
     );
 }
 

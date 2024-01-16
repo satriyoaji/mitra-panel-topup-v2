@@ -30,8 +30,13 @@ function Page() {
 
         if (res.ok) {
             const dataJson = await res.json();
-            setData(dataJson.data);
-            setTotal(dataJson.pagination.total_data);
+            if (dataJson.data) {
+                setData(dataJson.data);
+                setTotal(dataJson.pagination.total_data);
+                return;
+            }
+            setData([]);
+            setTotal(0);
         }
     };
 
@@ -60,9 +65,11 @@ function Page() {
                 </div>
             </div>
             <div className="min-h-[72vh]">
-                <div className="grid sm:grid-cols-4 grid-cols-2 gap-2 mx-2">
-                    {data.map((item, idx) => (
-                        <FlashSaleCard key={`${idx}`} data={item} />
+                <div className="grid sm:grid-cols-4 grid-cols-3 gap-2 mx-2">
+                    {data?.map((item, idx) => (
+                        <div className="w-full h-full" key={`${idx}`}>
+                            <FlashSaleCard data={item} />
+                        </div>
                     ))}
                 </div>
             </div>
