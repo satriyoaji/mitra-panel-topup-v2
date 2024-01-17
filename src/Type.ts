@@ -26,6 +26,14 @@ export type TTiersPrice = {
     markup_base: number;
 };
 
+export interface IFlashSaleInProduct {
+    id: number;
+    discount_price: number;
+    active: boolean;
+    start_at: string;
+    finish_at: string;
+}
+
 export type TProduct = {
     uuid: string;
     product_sku: string;
@@ -35,6 +43,7 @@ export type TProduct = {
     category_code: string;
     active: boolean;
     group_name: string;
+    flash_sales?: IFlashSaleInProduct[];
 };
 
 export type TMarkup = "percentage" | "fix";
@@ -51,11 +60,6 @@ export interface IFlashSaleProductDetail {
     group_name: string;
 }
 
-export interface IFlashSaleProduct {
-    id: number;
-    discount_price: number;
-    active: boolean;
+export interface IFlashSaleProduct extends IFlashSaleInProduct {
     product: IFlashSaleProductDetail;
-    start_at: string;
-    finish_at: string;
 }

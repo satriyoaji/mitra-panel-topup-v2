@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 // const CountdownCard = dynamic(() => import("./countdown-card"), { ssr: false });
 
-async function FlashSale() {
+function FlashSale() {
     const [data, setData] = useState<IFlashSaleProduct[]>([]);
 
     async function getFlashSale() {
@@ -57,15 +57,16 @@ async function FlashSale() {
                         style={{
                             display: "flex",
                             flexDirection: "row",
-                            // marginLeft: "-.9rem",
-                            // paddingLeft: "5rem",
                             overflowX: "auto",
                             scrollbarWidth: "none",
                         }}
                     >
                         {data.map((item, idx) => (
-                            <div className="h-full min-w-[8rem]">
-                                <CardProduct key={`${idx}`} data={item} />
+                            <div
+                                className="h-full w-full min-w-[7.5rem] max-w-[8rem]"
+                                key={`${idx}`}
+                            >
+                                <CardProduct data={item} />
                             </div>
                         ))}
                     </div>
