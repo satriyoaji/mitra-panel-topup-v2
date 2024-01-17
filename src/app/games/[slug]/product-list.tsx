@@ -18,6 +18,8 @@ function ProductList(prop: IProductList) {
     const [search, setSearch] = useState("");
     const [productSearch, setProductSearch] = useState<TProduct[]>([]);
 
+    console.log(prop.products);
+
     const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     }, 500);
@@ -57,6 +59,14 @@ function ProductList(prop: IProductList) {
                                     });
                                 }, 1200);
                             }}
+                            discountPrice={
+                                val.flash_sales
+                                    ? priceMask(
+                                          val.sale_price -
+                                              val.flash_sales[0].discount_price
+                                      )
+                                    : undefined
+                            }
                             name={val.product_name}
                             price={priceMask(val.sale_price)}
                         />

@@ -63,13 +63,13 @@ function page() {
                 <div className="space-y-3 px-3">
                     <Link
                         href="/transaksi"
-                        className="flex space-x-3 items-center hover:text-red-500"
+                        className="flex space-x-3 items-center text-sm hover:text-red-500"
                     >
                         <ReaderIcon className="mr-3" /> Daftar Transaksi
                     </Link>
                     <p
                         onClick={() => signOut()}
-                        className="flex space-x-3 items-center cursor-pointer hover:text-red-500"
+                        className="flex space-x-3 items-center text-sm cursor-pointer hover:text-red-500"
                     >
                         <ExitIcon className="mr-3" /> Logout
                     </p>

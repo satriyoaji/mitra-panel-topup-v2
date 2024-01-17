@@ -13,67 +13,57 @@ type prop = {
 
 function ProductCard(props: prop) {
     return (
-        <>
-            <Card
-                className={`h-full hover:bg-slate-50 rounded-sm cursor-pointer ${
-                    props.selected && "border-4 border-black"
-                }`}
-                onClick={props.onClick}
-            >
-                <CardContent className="p-2 space-y-2 flex flex-col">
-                    <div className="overflow-clip rounded w-full bg-slate-200">
-                        {/* {val.logo_image !== "" ? (
+        <Card
+            className={`h-full hover:bg-slate-50 rounded-sm cursor-pointer ${
+                props.selected && "border-4 border-black"
+            }`}
+            onClick={props.onClick}
+        >
+            <CardContent className="p-2 space-y-2 flex flex-col">
+                <div className="overflow-clip rounded w-full bg-slate-200">
+                    {/* {val.logo_image !== "" ? (
                                         <img
                                             alt="Remy Sharp"
                                             className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                                             src={val.logo_image}
                                         />
                                     ) : ( */}
-                        <div className="w-full h-full p-2 hover:scale-125 transition duration-300 hover:rotate-12">
-                            <SketchLogoIcon className="text-white w-[5rem] m-auto h-[5rem]" />
-                        </div>
-                        {/* )} */}
+                    <div className="w-full h-full p-2 hover:scale-125 transition duration-300 hover:rotate-12">
+                        <SketchLogoIcon className="text-white w-[5rem] m-auto h-[5rem]" />
                     </div>
-                    <div>
-                        <p className="text-xs">{props.category}</p>
-                        <p className="text-xs font-semibold">{props.name}</p>
-                    </div>
-                    <div>
+                    {/* )} */}
+                </div>
+                <div>
+                    <p className="text-xs">{props.category}</p>
+                    <p className="text-xs font-semibold">{props.name}</p>
+                </div>
+                <div>
+                    {props.discountPrice ? (
+                        <>
+                            <p
+                                className="line-through text-xs mt-0.5"
+                                style={{ fontSize: "60%" }}
+                            >
+                                {props.price}
+                            </p>
+                            <p
+                                className="text-red-500 text-xs font-semibold"
+                                style={{ fontSize: "80%" }}
+                            >
+                                {props.discountPrice}
+                            </p>
+                        </>
+                    ) : (
                         <p
-                            className="text-xs font-semibold"
-                            style={{ fontSize: "70%" }}
+                            className="text-xs font-semibold mt-0.5"
+                            style={{ fontSize: "80%" }}
                         >
                             {props.price}
                         </p>
-                    </div>
-                </CardContent>
-            </Card>
-            {/* <Card
-                className={`p-2 flex flex-col justify-center items-center cursor-pointer hover:bg-slate-50 ${
-                    props.selected && "border-4 border-black"
-                }`}
-                onClick={props.onClick}
-            >
-                <SketchLogoIcon
-                    width={30}
-                    height={30}
-                    className="text-center my-3"
-                />
-                <p className="text-sm text-center my-1">{props.name}</p>
-                {props.discountPrice ? (
-                    <>
-                        <p className="line-through text-sm font-semibold mt-2">
-                            {props.price}
-                        </p>
-                        <p className="text-red-500 text-sm font-semibold">
-                            {props.discountPrice}
-                        </p>
-                    </>
-                ) : (
-                    <p className="text-sm font-semibold mt-2">{props.price}</p>
-                )}
-            </Card> */}
-        </>
+                    )}
+                </div>
+            </CardContent>
+        </Card>
     );
 }
 
