@@ -4,8 +4,8 @@ metadata:
   name: mitra-panel-topup-config
   namespace: default
 data:
-  GOOGLE_ID: "892134501600-ujo298arf7i46aspmmkuc2lm9ovbrrnc.apps.googleusercontent.com"
-  GOOGLE_SECRET: "1_zE5SG0JYOnSS6pK7n_Col8"
+  GOOGLE_ID: "600726960200-rbblsk867rbgk8huh0vtti7qqggbivfe.apps.googleusercontent.com"
+  GOOGLE_SECRET: "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"
   NEXTAUTH_SECRET: "H+DdXpWktVOoowkWkaU1KQ=="
   NEXT_MITRA_ID: "1"
   NEXT_PUBLIC_API: "https://panel-api.vcg.my.id"
