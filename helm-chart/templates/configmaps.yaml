@@ -9,3 +9,4 @@ data:
   NEXTAUTH_SECRET: "H+DdXpWktVOoowkWkaU1KQ=="
   NEXT_MITRA_ID: "1"
   NEXT_PUBLIC_API: "https://panel-api.vcg.my.id"
+  NEXTAUTH_URL: "https://panel.vcg.my.id"
