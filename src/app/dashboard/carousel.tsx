@@ -2,7 +2,7 @@
 
 import { IBanner } from "@/Type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 const Carousel = () => {
