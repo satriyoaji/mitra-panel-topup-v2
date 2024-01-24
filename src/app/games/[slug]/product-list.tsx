@@ -5,6 +5,9 @@ import { Separator } from "@/components/ui/separator";
 import React, { ChangeEvent, RefObject, useEffect, useState } from "react";
 import ProductCard from "./product-card";
 import { debounce, priceMask } from "@/Helpers";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { IdCardIcon, LightningBoltIcon } from "@radix-ui/react-icons";
+import { Badge } from "@/components/ui/badge";
 
 interface IProductList {
     products: TProduct[];
@@ -14,11 +17,36 @@ interface IProductList {
     category: string;
 }
 
+interface productType {
+    title: React.JSX.Element;
+    type: "flash-sale" | "promo";
+}
+
+const typeList: productType[] = [
+    {
+        title: (
+            <>
+                <LightningBoltIcon />
+                <p>Flash Sale</p>
+            </>
+        ),
+        type: "flash-sale",
+    },
+    {
+        title: (
+            <>
+                <IdCardIcon />
+                <p>Promo</p>
+            </>
+        ),
+        type: "promo",
+    },
+];
+
 function ProductList(prop: IProductList) {
     const [search, setSearch] = useState("");
     const [productSearch, setProductSearch] = useState<TProduct[]>([]);
-
-    console.log(prop.products);
+    const [filter, setFilter] = useState<productType>();
 
     const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -40,37 +68,77 @@ function ProductList(prop: IProductList) {
                     </h4>
                 </div>
                 <Separator className="my-3" />
+                <div className="flex w-full overflow-x-auto">
+                    {typeList.map((val, idx) => (
+                        <Badge
+                            className="mx-1 cursor-pointer space-x-2"
+                            key={`${idx}`}
+                            color="primary"
+                            variant={
+                                val.type == filter?.type
+                                    ? "destructive"
+                                    : "outline"
+                            }
+                            onClick={() => {
+                                if (filter == val) setFilter(undefined);
+                                else setFilter(val);
+                            }}
+                        >
+                            {val.title}
+                        </Badge>
+                    ))}
+                </div>
                 <Input
                     placeholder="Search Product..."
                     onChange={doSearch}
-                    className="my-4"
+                    className="mb-4 mt-2"
                 />
                 <div className="grid sm:grid-cols-3 grid-cols-2  gap-2">
-                    {(search ? productSearch : prop.products).map((val) => (
-                        <ProductCard
-                            key={val.uuid}
-                            category={prop.category}
-                            selected={val.uuid === prop.productSelected?.uuid}
-                            onClick={() => {
-                                prop.onProductSelect(val);
-                                setTimeout(() => {
-                                    prop.nextRef.current?.scrollIntoView({
-                                        behavior: "smooth",
-                                    });
-                                }, 1200);
-                            }}
-                            discountPrice={
-                                val.flash_sales
-                                    ? priceMask(
-                                          val.sale_price -
+                    {(search ? productSearch : prop.products).map((val) => {
+                        const item = (
+                            <ProductCard
+                                key={val.uuid}
+                                category={prop.category}
+                                selected={
+                                    val.uuid === prop.productSelected?.uuid
+                                }
+                                discount={
+                                    val.flash_sales
+                                        ? priceMask(
                                               val.flash_sales[0].discount_price
-                                      )
-                                    : undefined
-                            }
-                            name={val.product_name}
-                            price={priceMask(val.sale_price)}
-                        />
-                    ))}
+                                          )
+                                        : undefined
+                                }
+                                onClick={() => {
+                                    prop.onProductSelect(val);
+                                    setTimeout(() => {
+                                        prop.nextRef.current?.scrollIntoView({
+                                            behavior: "smooth",
+                                        });
+                                    }, 1200);
+                                }}
+                                discountPrice={
+                                    val.flash_sales
+                                        ? priceMask(
+                                              val.sale_price -
+                                                  val.flash_sales[0]
+                                                      .discount_price
+                                          )
+                                        : undefined
+                                }
+                                name={val.product_name}
+                                price={priceMask(val.sale_price)}
+                            />
+                        );
+
+                        if (filter) {
+                            if (filter.type === "flash-sale" && val.flash_sales)
+                                return item;
+                            return;
+                        }
+
+                        return item;
+                    })}
                 </div>
             </CardContent>
         </Card>

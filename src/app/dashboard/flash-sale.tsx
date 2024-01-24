@@ -47,7 +47,7 @@ function FlashSale() {
                         display: "flex",
                         flexDirection: "row",
                         backgroundImage:
-                            "linear-gradient(180deg, #f44336, #fff)",
+                            "linear-gradient(180deg, #f44336, #fef3c7)",
                         borderRadius: 5,
                     }}
                     className="py-1"

@@ -63,3 +63,9 @@ export interface IFlashSaleProductDetail {
 export interface IFlashSaleProduct extends IFlashSaleInProduct {
     product: IFlashSaleProductDetail;
 }
+
+export interface IBanner {
+    id: number;
+    title: string;
+    path: string;
+}

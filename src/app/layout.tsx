@@ -43,6 +43,7 @@ export default function RootLayout({
                         </div>
                         <BottomNav />
                         <Footer />
+                        <ToTopButton />
                     </main>
                 </NextAuthProvider>
                 <Toaster />
