@@ -11,6 +11,7 @@ import { IProductCategory, TProduct } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
 import ProductList from "./product-list";
+import Promo from "./promo";
 
 function Page({ params }: { params: { slug: string } }) {
     const [productSelected, setProductSelected] = useState<
@@ -122,21 +123,14 @@ function Page({ params }: { params: { slug: string } }) {
                         <div className="flex mt-3">
                             <h4>
                                 <span className="text-xl font-bold">4.</span>{" "}
-                                Coupon
+                                Promo
                             </h4>
                         </div>
                         <Separator className="my-3" />
-                        <form>
-                            <div className="grid w-full items-center gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    {/* <Label htmlFor="id">ID Game</Label> */}
-                                    <Input
-                                        id="id"
-                                        placeholder="Input Coupon Code"
-                                    />
-                                </div>
-                            </div>
-                        </form>
+                        <Promo
+                            category_uuid={params.slug}
+                            product_id={productSelected?.uuid}
+                        />
                     </CardContent>
                 </Card>
                 {!session && (

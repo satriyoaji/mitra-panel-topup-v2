@@ -2,25 +2,12 @@
 
 import { IBanner } from "@/Type";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
-const Carousel = () => {
+const Carousel = ({ data }: { data: IBanner[] }) => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [data, setData] = useState<IBanner[]>([]);
-
-    const getData = async () => {
-        var res = await fetch("api/banners");
-        if (res.ok) {
-            var data = await res.json();
-
-            if (data.data) setData(data.data);
-        }
-    };
-
-    useEffect(() => {
-        getData();
-    }, []);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -58,10 +45,11 @@ const Carousel = () => {
                 style={{ aspectRatio: 27 / 9 }}
             >
                 {data.map((item, index) => (
-                    <img
+                    <Image
                         key={index}
                         src={item.path}
                         alt={item.title}
+                        fill
                         style={{ aspectRatio: 27 / 9 }}
                         className={`absolute object-cover w-full transition-opacity duration-500 ease-in-out ${
                             index === activeIndex ? "opacity-100" : "opacity-0"

@@ -69,3 +69,15 @@ export interface IBanner {
     title: string;
     path: string;
 }
+
+export interface IPromo {
+    id: string;
+    code: string;
+    promo_type: "fix" | "percentage";
+    promo_value: number;
+    showable: boolean;
+    finish_at: string;
+    limit_count?: number;
+    ref_product?: TProduct;
+    ref_category?: IProductCategory;
+}

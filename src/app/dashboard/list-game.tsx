@@ -8,6 +8,7 @@ import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { debounce, uniqeCategory } from "@/Helpers";
+import Image from "next/image";
 
 export default function ListGame() {
     const [group, setGroup] = useState<TProductGroup>({
@@ -135,8 +136,9 @@ export default function ListGame() {
                             <CardContent className="p-1 flex flex-col items-center">
                                 <div className="overflow-clip rounded w-full bg-slate-200">
                                     {val.logo_image !== "" ? (
-                                        <img
-                                            alt="Remy Sharp"
+                                        <Image
+                                            fill
+                                            alt={val.alias}
                                             className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                                             src={val.logo_image}
                                         />

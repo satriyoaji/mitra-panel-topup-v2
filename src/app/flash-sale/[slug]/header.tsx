@@ -1,6 +1,7 @@
 import { IProductCategory } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
 import { CubeIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import React from "react";
 
 function Header({ category }: { category: IProductCategory }) {
@@ -8,8 +9,9 @@ function Header({ category }: { category: IProductCategory }) {
         <Card className="w-full mt-2 h-full min-w-fit">
             <CardContent className="p-0 pb-4">
                 {category?.banner_image ? (
-                    <img
-                        alt="Remy Sharp"
+                    <Image
+                        fill
+                        alt={category.alias}
                         src={category?.banner_image}
                         style={{ aspectRatio: 64 / 9 }}
                         className={`relative object-cover rounded-t-xl`}
@@ -23,8 +25,9 @@ function Header({ category }: { category: IProductCategory }) {
                 <div className="px-6">
                     <div className="flex -mt-4 ml-4 z-40 absolute items-end">
                         {category?.logo_image ? (
-                            <img
-                                alt="Remy Sharp"
+                            <Image
+                                fill
+                                alt={category.alias}
                                 className="rounded  border bg-card text-card-foreground shadow w-16"
                                 src={category?.logo_image}
                             />

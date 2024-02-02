@@ -41,26 +41,23 @@ function ProductCard(props: prop) {
                 </div>
             )}
             <CardContent className="p-2 space-y-2 flex flex-col justify-center h-full">
-                <div className="overflow-clip rounded w-full">
-                    {/* {val.logo_image !== "" ? (
+                <div className="flex space-x-0.5 items-center">
+                    <div className="overflow-clip rounded w-fit min-w-[2rem]">
+                        {/* {val.logo_image !== "" ? (
                                         <img
                                             alt="Remy Sharp"
                                             className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                                             src={val.logo_image}
                                         />
                                     ) : ( */}
-                    <div className="w-full h-full p-2 hover:scale-125 transition duration-300 hover:rotate-12">
-                        <SketchLogoIcon className="text-zinc-400 w-[2rem] m-auto h-[2rem]" />
+                        <div className="p-1 hover:scale-125 transition duration-300 hover:rotate-12">
+                            <SketchLogoIcon className="m-auto" />
+                        </div>
+                        {/* )} */}
                     </div>
-                    {/* )} */}
+                    <p className="text-xs">{props.name}</p>
                 </div>
-                <div>
-                    <p className="text-xs text-secondary-foreground">
-                        {props.category}
-                    </p>
-                    <p className="text-xs font-semibold">{props.name}</p>
-                </div>
-                <div>
+                <div className="mx-2">
                     {props.discountPrice ? (
                         <div className="mb-3">
                             <p

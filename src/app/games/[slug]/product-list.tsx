@@ -19,7 +19,7 @@ interface IProductList {
 
 interface productType {
     title: React.JSX.Element;
-    type: "flash-sale" | "promo";
+    type: "flash-sale";
 }
 
 const typeList: productType[] = [
@@ -31,15 +31,6 @@ const typeList: productType[] = [
             </>
         ),
         type: "flash-sale",
-    },
-    {
-        title: (
-            <>
-                <IdCardIcon />
-                <p>Promo</p>
-            </>
-        ),
-        type: "promo",
     },
 ];
 
@@ -93,7 +84,7 @@ function ProductList(prop: IProductList) {
                     onChange={doSearch}
                     className="mb-4 mt-2"
                 />
-                <div className="grid sm:grid-cols-3 grid-cols-2  gap-2">
+                <div className="grid sm:grid-cols-3 grid-cols-2 no-scrollbar gap-2">
                     {(search ? productSearch : prop.products).map((val) => {
                         const item = (
                             <ProductCard
