@@ -1,14 +1,16 @@
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
-    const url = new URL(req.url as string);
-
-    let qParams = url.searchParams;
-    qParams.append("mitra_id", process.env.NEXT_MITRA_ID as string);
-    qParams.append("showable", "true");
+export async function GET(
+    req: Request,
+    { params }: { params: { slug: string } }
+) {
+    const { slug } = params;
 
     var re = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/product-promos?` + qParams,
+        `${process.env.NEXT_PUBLIC_API}/product-promos/${slug}?` +
+            new URLSearchParams({
+                mitra_id: process.env.NEXT_MITRA_ID as string,
+            }),
         {
             headers: {
                 Accept: "application/json",

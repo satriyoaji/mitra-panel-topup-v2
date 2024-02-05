@@ -22,7 +22,7 @@ type prop = {
 function ProductCard(props: prop) {
     return (
         <Card
-            className={`h-full hover:bg-slate-50 rounded-sm cursor-pointer ${
+            className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${
                 props.selected && "border-4 border-black"
             }`}
             onClick={props.onClick}
@@ -32,7 +32,7 @@ function ProductCard(props: prop) {
                     <div>
                         <div
                             style={{ fontSize: "65%" }}
-                            className="text-xs bg-red-500 w-fit flex text-white font-semibold space-x-1 px-2 py-0.5 rounded-bl-lg rounded-tr"
+                            className="text-xs bg-red-500 w-fit flex text-white font-semibold space-x-1 px-2 py-0.5 rounded-bl-lg rounded-tr-md"
                         >
                             <p>Hemat {props?.discount}</p>
                             <LightningBoltIcon />

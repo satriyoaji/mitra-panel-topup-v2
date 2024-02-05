@@ -84,7 +84,7 @@ function ProductList(prop: IProductList) {
                     onChange={doSearch}
                     className="mb-4 mt-2"
                 />
-                <div className="grid sm:grid-cols-3 grid-cols-2 no-scrollbar gap-2">
+                <div className="grid grid-cols-3 no-scrollbar gap-2">
                     {(search ? productSearch : prop.products).map((val) => {
                         const item = (
                             <ProductCard

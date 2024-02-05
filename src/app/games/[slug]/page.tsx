@@ -5,24 +5,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { priceMask, uniqeProduct } from "@/Helpers";
+import { nPlainFormatter, priceMask, uniqeProduct } from "@/Helpers";
 import { useSession } from "next-auth/react";
 import { IProductCategory, TProduct } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
 import ProductList from "./product-list";
 import Promo from "./promo";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { useSearchParams } from "next/navigation";
+import NotFound from "@/app/not-found";
 
 function Page({ params }: { params: { slug: string } }) {
-    const [productSelected, setProductSelected] = useState<
-        TProduct | undefined
-    >(undefined);
+    const [productSelected, setProductSelected] = useState<TProduct>();
     const [product, setProduct] = useState<TProduct[]>([]);
-    const [category, setCategory] = useState<
-        IProductCategory | undefined | null
-    >(undefined);
+    const [category, setCategory] = useState<IProductCategory | null>();
     const [loading, setLoading] = useState(false);
     const { data: session } = useSession();
+    const searchParams = useSearchParams();
 
     const productListRef = useRef<HTMLDivElement>(null);
     const methodRef = useRef<HTMLDivElement>(null);
@@ -39,6 +39,13 @@ function Page({ params }: { params: { slug: string } }) {
             if (result.data) {
                 setCategory(result.data);
                 setProduct(uniqeProduct(result.data.products));
+
+                var flashSaleItem = searchParams.get("fs");
+                setProductSelected(
+                    result.data.products.find(
+                        (i: TProduct) => i.uuid == flashSaleItem
+                    )
+                );
             }
         } else setCategory(null);
 
@@ -51,12 +58,7 @@ function Page({ params }: { params: { slug: string } }) {
 
     if (loading) return <Loading />;
 
-    if (category === null)
-        return (
-            <div className="h-[88vh] max-w-xl flex items-center justify-center">
-                <p>Not Found</p>
-            </div>
-        );
+    if (category === null) return <NotFound />;
     else if (category !== null && category !== undefined)
         return (
             <Fragment>
@@ -70,24 +72,19 @@ function Page({ params }: { params: { slug: string } }) {
                             </h4>
                         </div>
                         <Separator className="my-3" />
-                        <form>
-                            <div className="grid w-full items-center gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <Label htmlFor="id">ID Game *</Label>
-                                    <Input
-                                        id="id"
-                                        placeholder="Masukan ID Game"
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <Label htmlFor="server">ID Server *</Label>
-                                    <Input
-                                        id="server"
-                                        placeholder="Masukan ID Server"
-                                    />
-                                </div>
+                        <div className="grid w-full items-center gap-4">
+                            <div className="flex flex-col space-y-1.5">
+                                <Label htmlFor="id">ID Game *</Label>
+                                <Input id="id" placeholder="Masukan ID Game" />
                             </div>
-                        </form>
+                            <div className="flex flex-col space-y-1.5">
+                                <Label htmlFor="server">ID Server *</Label>
+                                <Input
+                                    id="server"
+                                    placeholder="Masukan ID Server"
+                                />
+                            </div>
+                        </div>
                     </CardContent>
                 </Card>
                 <div ref={productListRef}>
@@ -109,12 +106,20 @@ function Page({ params }: { params: { slug: string } }) {
                             </h4>
                         </div>
                         <Separator className="my-3" />
-                        <div className="grid xs:grid-cols-4 sm:grid-cols-3 items-center space-x-4 text-sm justify-center">
-                            <Card className="w-full border-4 border-black">
+                        <div className="flex items-center space-x-4 text-sm justify-center">
+                            <div className="w-full border-4 border-black rounded-lg">
                                 <div className="flex justify-center items-center h-full p-3">
                                     <p className="font-semibold">Transfer VA</p>
                                 </div>
-                            </Card>
+                            </div>
+                            <PlusIcon className="h-8 w-8" />
+                            <div className="w-full border-4 border-black rounded-lg">
+                                <div className="flex justify-center items-center h-full p-3">
+                                    <p className="font-semibold">
+                                        {nPlainFormatter(10_000)} Points
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </CardContent>
                 </Card>
@@ -128,6 +133,7 @@ function Page({ params }: { params: { slug: string } }) {
                         </div>
                         <Separator className="my-3" />
                         <Promo
+                            listProductId={product.map((i) => i.uuid)}
                             category_uuid={params.slug}
                             product_id={productSelected?.uuid}
                         />

@@ -13,7 +13,10 @@ function FlashSaleCard({
     selected?: boolean;
 }) {
     return (
-        <Link href={`/flash-sale/${data.id}`} className="w-full h-fit">
+        <Link
+            href={`/games/${data.product.category_uuid}?fs=${data.product.uuid}`}
+            className="w-full h-fit"
+        >
             <Card
                 className={`h-full rounded-sm border-t-0 border-r-0 ${
                     selected && "border-4 border-black"
