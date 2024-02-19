@@ -1,20 +1,24 @@
 import { IPromo } from "@/Type";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PromoCard from "./promo-card";
 import { useToast } from "@/components/ui/use-toast";
 
+type GetType = "category" | "product";
+
 function Promo({
-    category_uuid,
-    product_id,
+    categoryUuid,
+    productUuid,
     listProductId,
+    onPromoSelected,
 }: {
-    category_uuid: string;
-    product_id?: string;
+    categoryUuid: string;
+    productUuid?: string;
     listProductId: string[];
+    onPromoSelected: (promo?: IPromo) => void;
 }) {
-    const [selectedPromo, setSelectedPromo] = useState<string>();
+    const [selectedPromo, setSelectedPromo] = useState<IPromo>();
     const [promos, setPromos] = useState<IPromo[]>([]);
     const [productPromos, setProductPromos] = useState<IPromo[]>([]);
     const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
@@ -26,12 +30,12 @@ function Promo({
         await getHiddenPromo();
     };
 
-    const getData = async () => {
+    const getData = async (id?: string) => {
         setLoading(true);
         let qParams = new URLSearchParams();
 
-        if (product_id) qParams.append("product_uuid", product_id);
-        else qParams.append("category_uuid", category_uuid);
+        if (id) qParams.append("product_uuid", id);
+        else qParams.append("category_uuid", categoryUuid);
 
         var res = await fetch(`/api/products/promo?` + qParams);
 
@@ -39,7 +43,7 @@ function Promo({
             var result = await res.json();
 
             if (result.data) {
-                if (product_id) {
+                if (id) {
                     setProductPromos(result.data);
                     setLoading(false);
                     return;
@@ -50,7 +54,7 @@ function Promo({
                 return;
             }
 
-            if (product_id) {
+            if (id) {
                 setProductPromos([]);
                 setLoading(false);
                 return;
@@ -71,7 +75,7 @@ function Promo({
             if (result.data) {
                 if (
                     (result.data.ref_category &&
-                        result.data.ref_category?.uuid == category_uuid) ||
+                        result.data.ref_category?.uuid == categoryUuid) ||
                     (result.data.ref_product &&
                         listProductId.some(
                             (i) => i === result.data.ref_product?.uuid
@@ -96,7 +100,38 @@ function Promo({
 
     useEffect(() => {
         getData();
-    }, [product_id]);
+    }, []);
+
+    useEffect(() => {
+        getData(productUuid);
+        if (selectedPromo?.ref_product?.uuid != productUuid) {
+            setSelectedPromo(undefined);
+            onPromoSelected();
+        }
+    }, [productUuid]);
+
+    const selectPromo = (isSecret: boolean, promo?: IPromo) => {
+        if (promo) {
+            if (
+                !isSecret ||
+                (isSecret && promo?.ref_product?.uuid == productUuid)
+            ) {
+                setSelectedPromo(promo);
+                onPromoSelected(promo);
+                return;
+            }
+
+            toast({
+                title: "Failed",
+                description:
+                    "Promo tidak dapat digunakan untuk product yang dipilih",
+                variant: "destructive",
+            });
+            return;
+        }
+        setSelectedPromo(undefined);
+        onPromoSelected(undefined);
+    };
 
     return (
         <div className="space-y-3">
@@ -114,7 +149,7 @@ function Promo({
                 <PromoCard
                     promo={hiddenPromo}
                     selected={selectedPromo}
-                    setSelected={setSelectedPromo}
+                    setSelected={(e) => selectPromo(true, e)}
                     isSecret
                 />
             )}
@@ -122,14 +157,14 @@ function Promo({
                 <PromoCard
                     promo={i}
                     selected={selectedPromo}
-                    setSelected={setSelectedPromo}
+                    setSelected={(e) => selectPromo(false, e)}
                 />
             ))}
             {promos.map((i) => (
                 <PromoCard
                     promo={i}
                     selected={selectedPromo}
-                    setSelected={setSelectedPromo}
+                    setSelected={(e) => selectPromo(false, e)}
                 />
             ))}
         </div>

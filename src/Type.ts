@@ -10,6 +10,33 @@ export interface TProductGroup {
     name: string;
 }
 
+export interface IProductFormBase {
+    alias: string;
+    key: string;
+}
+
+export interface IProductFormDetail {
+    id: number;
+    value: string;
+    value_alias: string;
+}
+
+export interface IProductFormOption extends IProductFormBase {
+    type: "option";
+    form_details: IProductFormDetail[];
+}
+export interface IProductFormText extends IProductFormBase {
+    type: "text";
+}
+export interface IProductFormNumeric extends IProductFormBase {
+    type: "numeric";
+}
+
+export type TProductForm =
+    | IProductFormNumeric
+    | IProductFormText
+    | IProductFormOption;
+
 export interface IProductCategory {
     uuid: number;
     code: string;
@@ -18,6 +45,7 @@ export interface IProductCategory {
     banner_image: string;
     logo_image: string;
     description: string;
+    forms?: TProductForm[];
 }
 
 export type TTiersPrice = {
@@ -76,8 +104,22 @@ export interface IPromo {
     promo_type: "fix" | "percentage";
     promo_value: number;
     showable: boolean;
+    start_at: string;
     finish_at: string;
     limit_count?: number;
     ref_product?: TProduct;
     ref_category?: IProductCategory;
 }
+
+export interface ITransaction {
+    product: TProduct;
+    category: string;
+    promo?: IPromo;
+}
+
+export interface IAccount {
+    noWhatsapp: string;
+    email: string;
+}
+
+export interface ITransactionItem {}

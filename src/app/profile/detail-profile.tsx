@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { PhoneInput } from "@/components/ui/custom-input";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -65,9 +66,11 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
                 <h6 className="text-xs">{session?.user?.email}</h6>
                 <div className="w-full my-3 px-12">
                     <Label htmlFor="invoice">No. Whatsapp</Label>
-                    <Input
-                        id="invoice"
-                        onChange={(e) => setPhone(e.target.value)}
+                    <PhoneInput
+                        onChange={(e) => {
+                            console.log(e.target.value);
+                            setPhone(e.target.value);
+                        }}
                         value={phone}
                         placeholder="Masukan No. Whatsapp"
                     />

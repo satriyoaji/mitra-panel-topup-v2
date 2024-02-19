@@ -10,18 +10,21 @@ function PromoCard({
     isSecret,
 }: {
     promo: IPromo;
-    selected?: string;
-    setSelected: (promoId: string) => void;
+    selected?: IPromo;
+    setSelected: (promo?: IPromo) => void;
     isSecret?: boolean;
 }) {
     return (
         <div
             className={`rounded-lg shadow-sm flex cursor-pointer hover:bg-slate-50 ${
-                promo.id == selected
+                promo.id == selected?.id
                     ? "border-4 divide-black border-black divide-x-4 divide-dashed "
                     : "border-2"
             }`}
-            onClick={() => setSelected(promo.id)}
+            onClick={() => {
+                if (promo.id != selected?.id) setSelected(promo);
+                else setSelected();
+            }}
         >
             <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-red-100 rounded-s-md">
                 <p></p>
