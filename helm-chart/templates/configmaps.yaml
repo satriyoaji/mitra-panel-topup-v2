@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mitra-panel-topup-config
-  namespace: default
+    name: mitra-panel-topup-config
+    namespace: default
 data:
-  GOOGLE_ID: "600726960200-rbblsk867rbgk8huh0vtti7qqggbivfe.apps.googleusercontent.com"
-  GOOGLE_SECRET: "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"
-  NEXTAUTH_SECRET: "H+DdXpWktVOoowkWkaU1KQ=="
-  NEXT_MITRA_ID: "1"
-  NEXT_PUBLIC_API: "https://panel-api.vcg.my.id"
-  NEXTAUTH_URL: "https://panel.vcg.my.id"
+    GOOGLE_ID: "600726960200-rbblsk867rbgk8huh0vtti7qqggbivfe.apps.googleusercontent.com"
+    GOOGLE_SECRET: "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"
+    NEXTAUTH_SECRET: "H+DdXpWktVOoowkWkaU1KQ=="
+    NEXT_MITRA_ID: "1"
+    NEXT_PUBLIC_API: "https://panel-api.vcg.my.id"
+    NEXTAUTH_URL: "https://panel.vcg.my.id"
+    XENDIT_BASIC: "eG5kX2RldmVsb3BtZW50X080NkpmT3R5Z2VmOWtNTnNLK1pQR1QrWlo5YjNvb0Y0dzNEbitSMWsrMmZULzdHbENBTjNqZz09Og=="

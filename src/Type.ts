@@ -113,7 +113,7 @@ export interface IPromo {
 
 export interface ITransaction {
     product: TProduct;
-    category: string;
+    category: IProductCategory;
     promo?: IPromo;
 }
 

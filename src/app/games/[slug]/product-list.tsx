@@ -2,11 +2,16 @@ import { TProduct } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import React, { ChangeEvent, RefObject, useEffect, useState } from "react";
+import React, {
+    ChangeEvent,
+    RefObject,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import ProductCard from "./product-card";
 import { debounce, priceMask } from "@/Helpers";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { IdCardIcon, LightningBoltIcon } from "@radix-ui/react-icons";
+import { LightningBoltIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
 
 interface IProductList {
@@ -38,6 +43,11 @@ function ProductList(prop: IProductList) {
     const [search, setSearch] = useState("");
     const [productSearch, setProductSearch] = useState<TProduct[]>([]);
     const [filter, setFilter] = useState<productType>();
+    const [oldScrollY, setOldScrollY] = useState<number>(0);
+    const [isScroll, setIsScroll] = useState<boolean>(false);
+    const [direction, setDirection] = useState<"up" | "down">("down");
+
+    const ref = useRef<HTMLDivElement>(null);
 
     const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -49,6 +59,18 @@ function ProductList(prop: IProductList) {
         );
         setProductSearch(data);
     }, [search]);
+
+    const onScroll = (e: any) => {
+        setIsScroll(true);
+        const window = e.target;
+
+        if (oldScrollY > window.scrollTop) {
+            setDirection("up");
+        } else if (oldScrollY < window.scrollTop) {
+            setDirection("down");
+        }
+        setOldScrollY(window.scrollTop);
+    };
 
     return (
         <Card className="w-full my-4">
@@ -82,52 +104,74 @@ function ProductList(prop: IProductList) {
                     onChange={doSearch}
                     className="mb-4 mt-2"
                 />
-                <div className="grid grid-cols-3 no-scrollbar gap-2">
-                    {(search ? productSearch : prop.products).map((val) => {
-                        const item = (
-                            <ProductCard
-                                key={val.uuid}
-                                category={prop.category}
-                                selected={
-                                    val.uuid === prop.productSelected?.uuid
-                                }
-                                discount={
-                                    val.flash_sales
-                                        ? priceMask(
-                                              val.flash_sales[0].discount_price
-                                          )
-                                        : undefined
-                                }
-                                onClick={() => {
-                                    prop.onProductSelect(val);
-                                    setTimeout(() => {
+                <div
+                    className="relative max-h-[30rem] overflow-y-auto no-scrollbar"
+                    onScroll={onScroll}
+                    ref={ref}
+                >
+                    <div
+                        className={`sticky top-0 h-4 bg-gradient-to-b from-slate-100 to-transparent w-full z-10 transition-opacity duration-200 ${
+                            isScroll && direction === "up"
+                                ? "opacity-100"
+                                : "opacity-0"
+                        }`}
+                    />
+                    <div className="grid grid-cols-3 no-scrollbar gap-2 -mt-2">
+                        {(search ? productSearch : prop.products).map((val) => {
+                            const item = (
+                                <ProductCard
+                                    key={val.uuid}
+                                    category={prop.category}
+                                    selected={
+                                        val.uuid === prop.productSelected?.uuid
+                                    }
+                                    discount={
+                                        val.flash_sales
+                                            ? priceMask(
+                                                  val.flash_sales[0]
+                                                      .discount_price
+                                              )
+                                            : undefined
+                                    }
+                                    onClick={() => {
+                                        prop.onProductSelect(val);
                                         prop.nextRef.current?.scrollIntoView({
                                             behavior: "smooth",
                                         });
-                                    }, 1200);
-                                }}
-                                discountPrice={
+                                    }}
+                                    discountPrice={
+                                        val.flash_sales
+                                            ? priceMask(
+                                                  val.sale_price -
+                                                      val.flash_sales[0]
+                                                          .discount_price
+                                              )
+                                            : undefined
+                                    }
+                                    name={val.product_name}
+                                    price={priceMask(val.sale_price)}
+                                />
+                            );
+
+                            if (filter) {
+                                if (
+                                    filter.type === "flash-sale" &&
                                     val.flash_sales
-                                        ? priceMask(
-                                              val.sale_price -
-                                                  val.flash_sales[0]
-                                                      .discount_price
-                                          )
-                                        : undefined
-                                }
-                                name={val.product_name}
-                                price={priceMask(val.sale_price)}
-                            />
-                        );
+                                )
+                                    return item;
+                                return;
+                            }
 
-                        if (filter) {
-                            if (filter.type === "flash-sale" && val.flash_sales)
-                                return item;
-                            return;
-                        }
-
-                        return item;
-                    })}
+                            return item;
+                        })}
+                    </div>
+                    <div
+                        className={`sticky bottom-0 h-4 bg-gradient-to-t from-slate-100 to-transparent w-full z-10 transition-opacity duration-200 ${
+                            isScroll && direction === "down"
+                                ? "opacity-100"
+                                : "opacity-0"
+                        }`}
+                    />
                 </div>
             </CardContent>
         </Card>

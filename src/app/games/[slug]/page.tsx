@@ -17,8 +17,9 @@ import NotFound from "@/app/not-found";
 import { Purchase } from "./detail";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import FormAccount from "./form-account";
+import FormAccount, { LooseObject } from "./form-account";
 import { PhoneInput } from "@/components/ui/custom-input";
+import { ToastAction } from "@/components/ui/toast";
 
 function Page({ params }: { params: { slug: string } }) {
     const [productSelected, setProductSelected] = useState<TProduct>();
@@ -33,8 +34,10 @@ function Page({ params }: { params: { slug: string } }) {
         email: session?.user?.email ?? "",
         noWhatsapp: session?.phone ?? "",
     });
+    const [formAccount, setFormAccount] = useState<LooseObject>({});
     const { toast } = useToast();
 
+    const formRef = useRef<HTMLDivElement>(null);
     const productListRef = useRef<HTMLDivElement>(null);
     const methodRef = useRef<HTMLDivElement>(null);
     const couponRef = useRef<HTMLDivElement>(null);
@@ -64,15 +67,50 @@ function Page({ params }: { params: { slug: string } }) {
     };
 
     const checkout = () => {
+        if (
+            category?.forms &&
+            Object.keys(formAccount).length == category.forms.length &&
+            !Object.values(formAccount).every((x) => !!x)
+        )
+            return toast({
+                title: "Failed",
+                description: "Data akun tidak lengkap",
+                variant: "destructive",
+                action: (
+                    <ToastAction
+                        onClick={() =>
+                            formRef.current?.scrollIntoView({
+                                behavior: "smooth",
+                            })
+                        }
+                        altText="Go To Form"
+                    >
+                        Lengkapi Data
+                    </ToastAction>
+                ),
+            });
+
         if (!session) {
-            if (account && account.email && account.email)
+            if (account && account.email !== "" && account.email !== "")
                 return setIsCheckoutOpen(true);
 
             setIsCheckoutOpen(false);
             return toast({
                 title: "Failed",
-                description: "Email dan whatsapp harus terisi",
+                description: "Data Konfirmasi Belum Lengkap",
                 variant: "destructive",
+                action: (
+                    <ToastAction
+                        onClick={() =>
+                            profileRef.current?.scrollIntoView({
+                                behavior: "smooth",
+                            })
+                        }
+                        altText="Go To Profile"
+                    >
+                        Lengkapi Data
+                    </ToastAction>
+                ),
             });
         }
 
@@ -109,9 +147,15 @@ function Page({ params }: { params: { slug: string } }) {
             <Fragment>
                 <Header category={category} />
                 {category.forms && (
-                    <Card className="w-full my-4">
+                    <Card ref={formRef} className="w-full my-4">
                         <CardContent className="mt-3">
-                            <FormAccount forms={category.forms} />
+                            <FormAccount
+                                forms={category.forms}
+                                onChange={(e) => {
+                                    setFormAccount(e);
+                                    console.log(e);
+                                }}
+                            />
                         </CardContent>
                     </Card>
                 )}
@@ -235,9 +279,10 @@ function Page({ params }: { params: { slug: string } }) {
                         <Purchase
                             onOpenChange={setIsCheckoutOpen}
                             isOpen={isCheckoutOpen}
-                            category={category.alias}
+                            category={category}
                             product={productSelected}
                             promo={promo}
+                            form={formAccount}
                         />
                     </>
                 )}

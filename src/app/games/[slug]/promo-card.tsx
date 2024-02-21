@@ -34,7 +34,7 @@ function PromoCard({
                         : priceMask(promo.promo_value)}
                 </p>
                 <p className="text-xs text-center font-bold">
-                    {promo.limit_count
+                    {promo.limit_count && promo.limit_count > 0
                         ? `Max ${promo.limit_count}x`
                         : "No Limit"}
                 </p>

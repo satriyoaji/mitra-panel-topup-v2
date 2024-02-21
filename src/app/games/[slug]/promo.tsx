@@ -5,8 +5,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import PromoCard from "./promo-card";
 import { useToast } from "@/components/ui/use-toast";
 
-type GetType = "category" | "product";
-
 function Promo({
     categoryUuid,
     productUuid,
@@ -25,10 +23,6 @@ function Promo({
     const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
     const [loading, setLoading] = useState<boolean>(false);
     const { toast } = useToast();
-
-    const useOtherPromo = async () => {
-        await getHiddenPromo();
-    };
 
     const getData = async (id?: string) => {
         setLoading(true);
@@ -65,6 +59,13 @@ function Promo({
         setLoading(false);
     };
 
+    const isDuplicatePromo = (p: IPromo) => {
+        const arr: IPromo[] = promos.concat(productPromos);
+        if (hiddenPromo) arr.push(hiddenPromo);
+
+        return arr.some((i) => i.id === p.id);
+    };
+
     const getHiddenPromo = async () => {
         setLoading(true);
         var res = await fetch(`/api/products/promo/${hiddenPromoCode}?`);
@@ -81,9 +82,16 @@ function Promo({
                             (i) => i === result.data.ref_product?.uuid
                         ))
                 ) {
-                    setHiddenPromo(result.data);
+                    if (!isDuplicatePromo(result.data)) {
+                        setHiddenPromo(result.data);
+                        setSelectedPromo(result.data.id);
+                    } else
+                        toast({
+                            title: "Failed",
+                            description: "Promo Tidak Ditemukan",
+                            variant: "destructive",
+                        });
                     setLoading(false);
-                    setSelectedPromo(result.data.id);
                     return;
                 }
             }
@@ -141,7 +149,7 @@ function Promo({
                     value={hiddenPromoCode}
                     onChange={(e) => setHiddenPromoCode(e.target.value)}
                 />
-                <Button disabled={loading} size="sm" onClick={useOtherPromo}>
+                <Button disabled={loading} size="sm" onClick={getHiddenPromo}>
                     {loading ? "Loading..." : "Get Promo"}
                 </Button>
             </div>

@@ -16,6 +16,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import {
     Table,
     TableBody,
@@ -25,6 +26,7 @@ import {
 } from "@/components/ui/table";
 import { SketchLogoIcon } from "@radix-ui/react-icons";
 import { isWithinInterval, parseISO } from "date-fns";
+import { LooseObject } from "./form-account";
 
 const getTotalPrice = (
     product: TProduct,
@@ -46,6 +48,7 @@ const getTotalPrice = (
 interface IDetailProp extends ITransaction {
     isOpen: boolean;
     onOpenChange: (e: boolean) => void;
+    form?: LooseObject;
 }
 
 export function Purchase({
@@ -54,6 +57,7 @@ export function Purchase({
     promo,
     isOpen,
     onOpenChange,
+    form,
 }: IDetailProp) {
     if (promo) {
         if (
@@ -82,24 +86,44 @@ export function Purchase({
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
-                    <Card className="bg-slate-50 text-xs p-4 flex items-center space-x-4">
-                        {/* {val.logo_image !== "" ? (
+                    <Card className="bg-slate-50  p-4">
+                        <div className="text-xs mb-4 flex items-center space-x-4">
+                            {/* {val.logo_image !== "" ? (
                                         <img
                                             alt="Remy Sharp"
                                             className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                                             src={val.logo_image}
                                         />
                                     ) : ( */}
-                        <div className="h-fit w-fit p-2">
-                            <SketchLogoIcon className="m-auto" />
+                            <div className="h-fit w-fit p-2">
+                                <SketchLogoIcon className="m-auto" />
+                            </div>
+                            {/* )} */}
+                            <div>
+                                <p>{category.alias}</p>
+                                <p className="font-semibold">
+                                    {product.product_name}
+                                </p>
+                            </div>
                         </div>
-                        {/* )} */}
-                        <div>
-                            <p>{category}</p>
-                            <p className="font-semibold">
-                                {product.product_name}
-                            </p>
-                        </div>
+                        {form && category.forms && (
+                            <Table>
+                                <TableBody className="text-xs">
+                                    {Object.keys(form).map((key) => (
+                                        <TableRow>
+                                            <TableCell>
+                                                {category.forms
+                                                    ?.find((i) => i.key == key)
+                                                    ?.alias.replace(/_/g, " ")}
+                                            </TableCell>
+                                            <TableCell className="text-right space-y-1">
+                                                {form[key]}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        )}
                     </Card>
                     <Table>
                         <TableBody className="text-xs">

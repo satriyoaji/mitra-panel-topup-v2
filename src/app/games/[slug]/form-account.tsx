@@ -23,11 +23,11 @@ interface Prop {
 function FormAccount({ forms, onChange }: Prop) {
     const [data, setData] = useState<LooseObject>({});
 
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, valueAsNumber } = e.target;
         setData((prevState) => ({
             ...prevState,
-            [name]: value,
+            [name]: e.target.type == "number" ? valueAsNumber : value,
         }));
     };
 
@@ -50,7 +50,7 @@ function FormAccount({ forms, onChange }: Prop) {
                                 onValueChange={(e) =>
                                     setData((prev) => ({
                                         ...prev,
-                                        status: e,
+                                        [item.key]: e,
                                     }))
                                 }
                                 name={item.key}
