@@ -163,6 +163,7 @@ function Promo({
             )}
             {productPromos.map((i) => (
                 <PromoCard
+                    key={i.code}
                     promo={i}
                     selected={selectedPromo}
                     setSelected={(e) => selectPromo(false, e)}
@@ -170,6 +171,7 @@ function Promo({
             ))}
             {promos.map((i) => (
                 <PromoCard
+                    key={i.code}
                     promo={i}
                     selected={selectedPromo}
                     setSelected={(e) => selectPromo(false, e)}

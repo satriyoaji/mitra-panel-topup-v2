@@ -1,47 +1,36 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { nPlainFormatter, priceMask, uniqeProduct } from "@/Helpers";
-import { useSession } from "next-auth/react";
-import { IAccount, IProductCategory, IPromo, TProduct } from "@/Type";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { nPlainFormatter, uniqeProduct } from "@/Helpers";
+import { TProduct } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
-import ProductList from "./product-list";
-import Promo from "./promo";
+import ProductList from "./(product)/product-list";
+import Promo from "./(promo)/promo-list";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
 import NotFound from "@/app/not-found";
-import { Purchase } from "./detail";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import FormAccount, { LooseObject } from "./form-account";
-import { PhoneInput } from "@/components/ui/custom-input";
-import { ToastAction } from "@/components/ui/toast";
+import FormAccount from "./(form-id)/form-account";
+import TransactionContext, {
+    ITransactionContext,
+} from "@/infrastructures/context/transaction/transaction.context";
+import FormConfirmation from "./(account-confirmation)/form-confirmation";
+import CheckoutAction from "./(checkout)/checkout-action";
 
 function Page({ params }: { params: { slug: string } }) {
-    const [productSelected, setProductSelected] = useState<TProduct>();
+    const { data, dispatch } = useContext(
+        TransactionContext
+    ) as ITransactionContext;
     const [product, setProduct] = useState<TProduct[]>([]);
-    const [category, setCategory] = useState<IProductCategory | null>();
-    const [promo, setPromo] = useState<IPromo>();
     const [loading, setLoading] = useState(false);
-    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-    const { data: session } = useSession();
     const searchParams = useSearchParams();
-    const [account, setAccount] = useState<IAccount>({
-        email: session?.user?.email ?? "",
-        noWhatsapp: session?.phone ?? "",
-    });
-    const [formAccount, setFormAccount] = useState<LooseObject>({});
-    const { toast } = useToast();
 
     const formRef = useRef<HTMLDivElement>(null);
     const productListRef = useRef<HTMLDivElement>(null);
     const methodRef = useRef<HTMLDivElement>(null);
     const couponRef = useRef<HTMLDivElement>(null);
-    const profileRef = useRef<HTMLDivElement>(null);
+    const confirmationRef = useRef<HTMLDivElement>(null);
 
     const getData = async () => {
         setLoading(true);
@@ -51,89 +40,28 @@ function Page({ params }: { params: { slug: string } }) {
             var result = await res.json();
 
             if (result.data) {
-                setCategory(result.data);
+                dispatch({
+                    action: "SET_CATEGORY",
+                    payload: result.data,
+                });
                 setProduct(uniqeProduct(result.data.products));
 
                 var flashSaleItem = searchParams.get("fs");
-                setProductSelected(
-                    result.data.products.find(
+                dispatch({
+                    action: "SET_PRODUCT",
+                    payload: result.data.products.find(
                         (i: TProduct) => i.uuid == flashSaleItem
-                    )
-                );
+                    ),
+                });
             }
-        } else setCategory(null);
+        } else
+            dispatch({
+                action: "SET_CATEGORY",
+                payload: null,
+            });
 
         setLoading(false);
     };
-
-    const checkout = () => {
-        if (
-            category?.forms &&
-            Object.keys(formAccount).length == category.forms.length &&
-            !Object.values(formAccount).every((x) => !!x)
-        )
-            return toast({
-                title: "Failed",
-                description: "Data akun tidak lengkap",
-                variant: "destructive",
-                action: (
-                    <ToastAction
-                        onClick={() =>
-                            formRef.current?.scrollIntoView({
-                                behavior: "smooth",
-                            })
-                        }
-                        altText="Go To Form"
-                    >
-                        Lengkapi Data
-                    </ToastAction>
-                ),
-            });
-
-        if (!session) {
-            if (account && account.email !== "" && account.email !== "")
-                return setIsCheckoutOpen(true);
-
-            setIsCheckoutOpen(false);
-            return toast({
-                title: "Failed",
-                description: "Data Konfirmasi Belum Lengkap",
-                variant: "destructive",
-                action: (
-                    <ToastAction
-                        onClick={() =>
-                            profileRef.current?.scrollIntoView({
-                                behavior: "smooth",
-                            })
-                        }
-                        altText="Go To Profile"
-                    >
-                        Lengkapi Data
-                    </ToastAction>
-                ),
-            });
-        }
-
-        return setIsCheckoutOpen(true);
-    };
-
-    const getTotalPrice: string = useMemo(() => {
-        let num = 0;
-
-        if (productSelected) {
-            num += productSelected.sale_price;
-            if (productSelected.flash_sales)
-                num -= productSelected.flash_sales[0].discount_price;
-            if (promo) {
-                if (promo.promo_type == "fix") num -= promo.promo_value;
-                else
-                    num -=
-                        (promo.promo_value * productSelected.sale_price) / 100;
-            }
-        }
-
-        return priceMask(num);
-    }, [productSelected, promo]);
 
     useEffect(() => {
         getData();
@@ -141,31 +69,38 @@ function Page({ params }: { params: { slug: string } }) {
 
     if (loading) return <Loading />;
 
-    if (category === null) return <NotFound />;
-    else if (category !== null && category !== undefined)
+    if (data.category === null) return <NotFound />;
+    else if (data.category !== null && data.category !== undefined)
         return (
             <Fragment>
-                <Header category={category} />
-                {category.forms && (
+                <Header category={data.category} />
+                {data.category.forms && (
                     <Card ref={formRef} className="w-full my-4">
                         <CardContent className="mt-3">
                             <FormAccount
-                                forms={category.forms}
-                                onChange={(e) => {
-                                    setFormAccount(e);
-                                    console.log(e);
-                                }}
+                                forms={data.category.forms}
+                                onChange={(e) =>
+                                    dispatch({
+                                        action: "SET_FORM",
+                                        payload: e,
+                                    })
+                                }
                             />
                         </CardContent>
                     </Card>
                 )}
                 <div ref={productListRef}>
                     <ProductList
-                        category={category.alias}
+                        category={data.category.alias}
                         nextRef={methodRef}
-                        onProductSelect={(val) => setProductSelected(val)}
+                        onProductSelect={(val) =>
+                            dispatch({
+                                action: "SET_PRODUCT",
+                                payload: val,
+                            })
+                        }
                         products={product}
-                        productSelected={productSelected}
+                        productSelected={data.product}
                     />
                 </div>
                 <Card className="w-full my-4" ref={methodRef}>
@@ -200,91 +135,26 @@ function Page({ params }: { params: { slug: string } }) {
                         </div>
                         <Separator className="my-3" />
                         <Promo
-                            onPromoSelected={setPromo}
+                            onPromoSelected={(e) =>
+                                dispatch({
+                                    action: "SET_PROMO",
+                                    payload: e,
+                                })
+                            }
                             listProductId={product.map((i) => i.uuid)}
                             categoryUuid={params.slug}
-                            productUuid={productSelected?.uuid}
+                            productUuid={data.product?.uuid}
                         />
                     </CardContent>
                 </Card>
-                {!session && (
-                    <Card className="w-full my-4" ref={profileRef}>
-                        <CardContent>
-                            <div className="flex mt-3">
-                                <h4 className="font-semibold ml-1">
-                                    Data Konfirmasi
-                                </h4>
-                            </div>
-                            <Separator className="my-3" />
-                            <form>
-                                <div className="grid w-full items-center gap-4">
-                                    <div className="flex flex-col space-y-1.5">
-                                        <Label htmlFor="email">Email *</Label>
-                                        <Input
-                                            id="email"
-                                            type="email"
-                                            placeholder="Masukan alamat Email"
-                                            value={account?.email}
-                                            onChange={(e) =>
-                                                setAccount((prev) => ({
-                                                    ...prev,
-                                                    email: e.target.value,
-                                                }))
-                                            }
-                                        />
-                                    </div>
-                                    <div className="flex flex-col space-y-1.5">
-                                        <Label htmlFor="whatsapp">
-                                            No. Whatsapp *
-                                        </Label>
-                                        <PhoneInput
-                                            id="whatsapp"
-                                            placeholder="Masukan No. Whatasapp"
-                                            maxLength={13}
-                                            value={account?.noWhatsapp}
-                                            onChange={(e) =>
-                                                setAccount((prev) => ({
-                                                    ...prev,
-                                                    noWhatsapp: e.target.value,
-                                                }))
-                                            }
-                                        />
-                                    </div>
-                                </div>
-                            </form>
-                        </CardContent>
-                    </Card>
-                )}
-                {productSelected && (
-                    <>
-                        <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-sm bg-black flex items-center justify-between px-4">
-                            <div>
-                                <h4 className="text-white text-xs">
-                                    Transfer + 10.000 Point
-                                </h4>
-                                <h4 className="text-white text-lg font-bold">
-                                    {getTotalPrice}
-                                </h4>
-                            </div>
-                            <div className="">
-                                <Button
-                                    variant="secondary"
-                                    size="sm"
-                                    onClick={checkout}
-                                >
-                                    Checkout
-                                </Button>
-                            </div>
-                        </div>
-                        <Purchase
-                            onOpenChange={setIsCheckoutOpen}
-                            isOpen={isCheckoutOpen}
-                            category={category}
-                            product={productSelected}
-                            promo={promo}
-                            form={formAccount}
-                        />
-                    </>
+                <div ref={confirmationRef}>
+                    <FormConfirmation />
+                </div>
+                {data.product && (
+                    <CheckoutAction
+                        confirmationRef={confirmationRef}
+                        formRef={formRef}
+                    />
                 )}
             </Fragment>
         );

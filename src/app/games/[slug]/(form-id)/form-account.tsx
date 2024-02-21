@@ -1,4 +1,4 @@
-import { TProductForm } from "@/Type";
+import { LooseObject, TProductForm } from "@/Type";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,10 +10,6 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import React, { useEffect, useState } from "react";
-
-export interface LooseObject {
-    [key: string]: any;
-}
 
 interface Prop {
     forms: TProductForm[];
@@ -41,7 +37,7 @@ function FormAccount({ forms, onChange }: Prop) {
             <Separator className="my-3" />
             <div className="grid w-full items-center gap-4">
                 {forms.map((item) => (
-                    <div className="flex flex-col space-y-1.5">
+                    <div key={item.key} className="flex flex-col space-y-1.5">
                         <Label htmlFor="id" className="ml-1">
                             {item.alias.replace(/_/g, " ")} *
                         </Label>

@@ -67,9 +67,8 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
                 <div className="w-full my-3 px-12">
                     <Label htmlFor="invoice">No. Whatsapp</Label>
                     <PhoneInput
-                        onChange={(e) => {
-                            console.log(e.target.value);
-                            setPhone(e.target.value);
+                        onValueChange={(e) => {
+                            setPhone(`${e}`);
                         }}
                         value={phone}
                         placeholder="Masukan No. Whatsapp"

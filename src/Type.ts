@@ -1,3 +1,7 @@
+export interface LooseObject {
+    [key: string]: any;
+}
+
 export interface TTier {
     id: string;
     name: string;
@@ -111,15 +115,28 @@ export interface IPromo {
     ref_category?: IProductCategory;
 }
 
-export interface ITransaction {
-    product: TProduct;
-    category: IProductCategory;
-    promo?: IPromo;
-}
-
 export interface IAccount {
     noWhatsapp: string;
     email: string;
+}
+
+export type IPaymentMethod = "transfer" | "transfer & points" | "points";
+
+export interface ITransaction {
+    product?: TProduct;
+    category?: IProductCategory | null;
+    promo?: IPromo;
+    payment?: IPaymentMethod;
+    form?: LooseObject;
+    account?: IAccount;
+}
+
+export interface IXenditBank {
+    name: string;
+    code: string;
+    country: string;
+    currency: string;
+    is_activated: boolean;
 }
 
 export interface ITransactionItem {}
