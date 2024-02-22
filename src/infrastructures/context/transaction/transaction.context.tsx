@@ -35,6 +35,10 @@ export type TransactionSetAccount = {
     action: "SET_ACCOUNT";
     payload: IAccount;
 };
+export type TransactionSetXenditBank = {
+    action: "SET_BANK";
+    payload: string;
+};
 
 export type TransactionDispatch =
     | TransactionSetCategory
@@ -42,6 +46,7 @@ export type TransactionDispatch =
     | TransactionSetProduct
     | TransactionSetPromo
     | TransactionSetAccount
+    | TransactionSetXenditBank
     | TransactionSetPayment;
 
 export interface ITransactionContext {
@@ -54,6 +59,7 @@ export interface ITransactionContext {
             | TransactionSetPromo
             | TransactionSetPayment
             | TransactionSetAccount
+            | TransactionSetXenditBank
     ) => void;
 }
 

@@ -17,6 +17,7 @@ import TransactionContext, {
 } from "@/infrastructures/context/transaction/transaction.context";
 import FormConfirmation from "./(account-confirmation)/form-confirmation";
 import CheckoutAction from "./(checkout)/checkout-action";
+import Payment from "./(payment-method)/payment";
 
 function Page({ params }: { params: { slug: string } }) {
     const { data, dispatch } = useContext(
@@ -77,15 +78,7 @@ function Page({ params }: { params: { slug: string } }) {
                 {data.category.forms && (
                     <Card ref={formRef} className="w-full my-4">
                         <CardContent className="mt-3">
-                            <FormAccount
-                                forms={data.category.forms}
-                                onChange={(e) =>
-                                    dispatch({
-                                        action: "SET_FORM",
-                                        payload: e,
-                                    })
-                                }
-                            />
+                            <FormAccount forms={data.category.forms} />
                         </CardContent>
                     </Card>
                 )}
@@ -93,41 +86,13 @@ function Page({ params }: { params: { slug: string } }) {
                     <ProductList
                         category={data.category.alias}
                         nextRef={methodRef}
-                        onProductSelect={(val) =>
-                            dispatch({
-                                action: "SET_PRODUCT",
-                                payload: val,
-                            })
-                        }
                         products={product}
                         productSelected={data.product}
                     />
                 </div>
-                <Card className="w-full my-4" ref={methodRef}>
-                    <CardContent>
-                        <div className="flex mt-3">
-                            <h4 className="font-semibold ml-1">
-                                Metode Pembayaran
-                            </h4>
-                        </div>
-                        <Separator className="my-3" />
-                        <div className="flex items-center space-x-4 text-sm justify-center">
-                            <div className="w-full border-4 border-black rounded-lg">
-                                <div className="flex justify-center items-center h-full p-3">
-                                    <p className="font-semibold">Transfer VA</p>
-                                </div>
-                            </div>
-                            <PlusIcon className="h-8 w-8" />
-                            <div className="w-full border-4 border-black rounded-lg">
-                                <div className="flex justify-center items-center h-full p-3">
-                                    <p className="font-semibold">
-                                        {nPlainFormatter(10_000)} Points
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+                <div className="my-4" ref={methodRef}>
+                    <Payment />
+                </div>
                 <Card className="w-full my-4" ref={couponRef}>
                     <CardContent>
                         <div className="flex mt-3">

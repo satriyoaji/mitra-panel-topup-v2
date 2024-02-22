@@ -35,7 +35,7 @@ export function Combobox({
     className?: string;
 }) {
     const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState("");
+    const [value, setValue] = React.useState<TValue>();
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -47,7 +47,7 @@ export function Combobox({
                     className="w-full justify-between"
                 >
                     {value ? (
-                        data.find((item) => item.value === value)?.label
+                        value.label
                     ) : (
                         <span className="font-normal text-muted-foreground">
                             Select item...
@@ -69,18 +69,18 @@ export function Combobox({
                                 value={item.value}
                                 onSelect={(currentValue) => {
                                     var selected =
-                                        currentValue === value
+                                        currentValue === value?.value
                                             ? ""
                                             : currentValue;
                                     onChange(selected);
-                                    setValue(selected);
+                                    setValue(item);
                                     setOpen(false);
                                 }}
                             >
                                 <CheckIcon
                                     className={cn(
                                         "mr-2 h-4 w-4",
-                                        value === item.value
+                                        value?.value === item.value
                                             ? "opacity-100"
                                             : "opacity-0"
                                     )}

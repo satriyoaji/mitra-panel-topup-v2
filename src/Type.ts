@@ -129,6 +129,7 @@ export interface ITransaction {
     payment?: IPaymentMethod;
     form?: LooseObject;
     account?: IAccount;
+    bank?: string;
 }
 
 export interface IXenditBank {

@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import React, {
     ChangeEvent,
     RefObject,
+    useContext,
     useEffect,
     useRef,
     useState,
@@ -13,10 +14,12 @@ import ProductCard from "./product-card";
 import { debounce, priceMask } from "@/Helpers";
 import { LightningBoltIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
+import TransactionContext, {
+    ITransactionContext,
+} from "@/infrastructures/context/transaction/transaction.context";
 
 interface IProductList {
     products: TProduct[];
-    onProductSelect: (val: TProduct) => void;
     productSelected?: TProduct;
     nextRef: RefObject<HTMLDivElement>;
     category: string;
@@ -40,6 +43,9 @@ const typeList: productType[] = [
 ];
 
 function ProductList(prop: IProductList) {
+    const { data, dispatch } = useContext(
+        TransactionContext
+    ) as ITransactionContext;
     const [search, setSearch] = useState("");
     const [productSearch, setProductSearch] = useState<TProduct[]>([]);
     const [filter, setFilter] = useState<productType>();
@@ -134,7 +140,10 @@ function ProductList(prop: IProductList) {
                                             : undefined
                                     }
                                     onClick={() => {
-                                        prop.onProductSelect(val);
+                                        dispatch({
+                                            action: "SET_PRODUCT",
+                                            payload: val,
+                                        });
                                         prop.nextRef.current?.scrollIntoView({
                                             behavior: "smooth",
                                         });

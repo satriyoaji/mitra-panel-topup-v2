@@ -52,6 +52,9 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
             case "SET_ACCOUNT":
                 setTransaction((prev) => ({ ...prev, account: data.payload }));
                 return;
+            case "SET_BANK":
+                setTransaction((prev) => ({ ...prev, bank: data.payload }));
+                return;
             default:
                 return;
         }

@@ -9,14 +9,19 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import React, { useEffect, useState } from "react";
+import TransactionContext, {
+    ITransactionContext,
+} from "@/infrastructures/context/transaction/transaction.context";
+import React, { useContext, useEffect, useState } from "react";
 
 interface Prop {
     forms: TProductForm[];
-    onChange?: (e: LooseObject) => void;
 }
 
-function FormAccount({ forms, onChange }: Prop) {
+function FormAccount({ forms }: Prop) {
+    const { data: state, dispatch } = useContext(
+        TransactionContext
+    ) as ITransactionContext;
     const [data, setData] = useState<LooseObject>({});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +33,10 @@ function FormAccount({ forms, onChange }: Prop) {
     };
 
     useEffect(() => {
-        if (onChange) onChange(data);
+        dispatch({
+            action: "SET_FORM",
+            payload: data,
+        });
     }, [data]);
 
     return (
