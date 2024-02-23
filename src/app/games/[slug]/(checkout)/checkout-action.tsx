@@ -25,15 +25,6 @@ function CheckoutAction({
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
     const checkout = () => {
-        console.log(data);
-        console.log(data.category?.forms);
-        console.log(data.form);
-        console.log(Object.keys(data.form as TProductForm[]).length);
-        console.log(
-            data.form &&
-                Object.values(data.form).every((x) => x === null || x === "")
-        );
-
         if (
             data.category?.forms &&
             data.form &&
@@ -114,7 +105,7 @@ function CheckoutAction({
             <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-sm bg-black flex items-center justify-between px-4">
                 <div>
                     <h4 className="text-white text-xs">
-                        Transfer + 10.000 Point
+                        {session ? "Transfer + 10.000 Point" : "Transfer"}
                     </h4>
                     <h4 className="text-white text-lg font-bold">
                         {getTotalPrice}
