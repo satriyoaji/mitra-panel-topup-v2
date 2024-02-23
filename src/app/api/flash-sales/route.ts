@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 export async function GET(req: NextRequest) {
     const url = new URL(req.url as string);
-    const cookieStore = cookies();
 
     let qParams = url.searchParams;
     qParams.append("mitra_id", process.env.NEXT_MITRA_ID as string);
@@ -14,7 +13,6 @@ export async function GET(req: NextRequest) {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${cookieStore.get("mantapu")?.value}`,
             },
         }
     );

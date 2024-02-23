@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "../../components/ui/card";
 import Link from "next/link";
-import { SketchLogoIcon } from "@radix-ui/react-icons";
+import { LightningBoltIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { IFlashSaleProduct } from "@/Type";
 import { priceMask } from "@/Helpers";
 
@@ -13,14 +13,28 @@ function FlashSaleCard({
     selected?: boolean;
 }) {
     return (
-        <Link href={`/flash-sale/${data.id}`} className="w-full h-fit">
+        <Link
+            href={`/games/${data.product.category_uuid}?fs=${data.product.uuid}`}
+            className="w-full h-fit"
+        >
             <Card
-                className={`h-full rounded-sm ${
+                className={`h-full rounded-sm border-t-0 border-r-0 ${
                     selected && "border-4 border-black"
                 }`}
             >
+                <div className="flex flex-row-reverse">
+                    <div>
+                        <div
+                            style={{ fontSize: "65%" }}
+                            className="text-xs bg-red-500 w-fit flex text-white font-semibold space-x-1 px-2 py-0.5 rounded-bl-lg rounded-tr"
+                        >
+                            <p>Hemat {priceMask(data?.discount_price)}</p>
+                            <LightningBoltIcon />
+                        </div>
+                    </div>
+                </div>
                 <CardContent className="p-2 space-y-2 flex flex-col hover:bg-slate-50">
-                    <div className="overflow-clip rounded w-full bg-slate-200">
+                    <div className="overflow-clip rounded w-full">
                         {/* {val.logo_image !== "" ? (
                                         <img
                                             alt="Remy Sharp"
@@ -29,7 +43,7 @@ function FlashSaleCard({
                                         />
                                     ) : ( */}
                         <div className="w-full h-full p-2 hover:scale-125 transition duration-300 hover:rotate-12">
-                            <SketchLogoIcon className="text-white w-[4rem] m-auto h-[5.5rem]" />
+                            <SketchLogoIcon className="text-zinc-400 w-[2rem] m-auto h-[2rem]" />
                         </div>
                         {/* )} */}
                     </div>

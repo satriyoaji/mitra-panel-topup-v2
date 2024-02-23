@@ -1,7 +1,5 @@
 import React from "react";
 import { UserAuthForm } from "./user-auth-form";
-import Link from "next/link";
-import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
