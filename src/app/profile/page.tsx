@@ -9,12 +9,10 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 import DetailProfile from "./detail-profile";
-import DetailSaldoPoint from "./detail-saldo-point";
 
 function page() {
     const { data: session } = useSession();
     const [profileOpen, setProfileOpen] = useState<boolean>(false);
-    const [saldoPointOpen, setSaldoPointOpen] = useState<boolean>(false);
 
     return (
         <>
@@ -44,10 +42,7 @@ function page() {
                 </div>
                 <Card className="my-4">
                     <div className="p-2 flex items-center justify-between">
-                        <div
-                            onClick={() => setSaldoPointOpen(true)}
-                            className="cursor-pointer hover:bg-zinc-100 w-full p-2 rounded-xl"
-                        >
+                        <div className=" w-full p-2">
                             <p className="font-bold text-muted-foreground text-xs">
                                 Saldo Points
                             </p>
@@ -78,11 +73,6 @@ function page() {
             <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
                 <DialogContent className="sm:max-w-md">
                     <DetailProfile onSuccess={() => setProfileOpen(false)} />
-                </DialogContent>
-            </Dialog>
-            <Dialog onOpenChange={setSaldoPointOpen} open={saldoPointOpen}>
-                <DialogContent className="sm:max-w-lg">
-                    <DetailSaldoPoint />
                 </DialogContent>
             </Dialog>
         </>

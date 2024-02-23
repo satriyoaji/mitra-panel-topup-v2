@@ -27,4 +27,32 @@ function debounce<Params extends any[]>(
     };
 }
 
-export { priceMask, uniqeProduct, uniqeCategory, debounce };
+function nFormatter(num: number) {
+    const lookup = [
+        { value: 1, symbol: "" },
+        { value: 1e3, symbol: "rb" },
+        { value: 1e6, symbol: "jt" },
+        { value: 1e9, symbol: "M" },
+        { value: 1e12, symbol: "T" },
+        { value: 1e15, symbol: "P" },
+        { value: 1e18, symbol: "E" },
+    ];
+    const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+    const item = lookup.findLast((item) => num >= item.value);
+    return item
+        ? (num / item.value).toFixed(2).replace(regexp, "").concat(item.symbol)
+        : "0";
+}
+
+function nPlainFormatter(val: number) {
+    return val.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1.");
+}
+
+export {
+    priceMask,
+    uniqeProduct,
+    uniqeCategory,
+    debounce,
+    nFormatter,
+    nPlainFormatter,
+};

@@ -125,7 +125,7 @@ function Page() {
 
     return (
         <div className="md:mx-2">
-            <div className="flex px-2 sticky top-10 py-4 bg-zinc-50 flex-col space-y-1.5 mb-3">
+            <div className="flex -mx-2 px-2 sticky top-0 py-4 bg-zinc-50 flex-col space-y-1.5 mb-3">
                 <p className="font-semibold text-lg">Invoice🧾</p>
                 <div className="flex space-x-1">
                     <Input
@@ -164,7 +164,7 @@ function Page() {
                     )}
                 </div>
             </div>
-            <div className="flex px-2 flex-col space-y-3">
+            <div className="flex flex-col space-y-3">
                 {list.map(
                     (val, idx) =>
                         (filter.filter === "*" ||
