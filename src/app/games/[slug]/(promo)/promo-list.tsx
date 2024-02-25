@@ -1,4 +1,4 @@
-import { IPromo } from "@/Type";
+import { IPromo, TProduct } from "@/Type";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useCallback, useEffect, useState } from "react";
@@ -7,12 +7,12 @@ import { useToast } from "@/components/ui/use-toast";
 
 function Promo({
     categoryUuid,
-    productUuid,
+    product,
     listProductId,
     onPromoSelected,
 }: {
     categoryUuid: string;
-    productUuid?: string;
+    product?: TProduct;
     listProductId: string[];
     onPromoSelected: (promo?: IPromo) => void;
 }) {
@@ -111,18 +111,31 @@ function Promo({
     }, []);
 
     useEffect(() => {
-        getData(productUuid);
-        if (selectedPromo?.ref_product?.uuid != productUuid) {
+        getData(product?.uuid);
+        if (selectedPromo?.ref_product?.uuid != product?.uuid) {
             setSelectedPromo(undefined);
             onPromoSelected();
         }
-    }, [productUuid]);
+    }, [product]);
 
     const selectPromo = (isSecret: boolean, promo?: IPromo) => {
         if (promo) {
             if (
+                promo.ref_product &&
+                product?.uuid !== promo.ref_product.product_sku
+            ) {
+                toast({
+                    title: "Failed",
+                    description:
+                        "Promo tidak dapat digunakan untuk product yang dipilih",
+                    variant: "destructive",
+                });
+                return;
+            }
+
+            if (
                 !isSecret ||
-                (isSecret && promo?.ref_product?.uuid == productUuid)
+                (isSecret && promo?.ref_product?.uuid == product?.uuid)
             ) {
                 setSelectedPromo(promo);
                 onPromoSelected(promo);

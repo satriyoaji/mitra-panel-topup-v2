@@ -15,15 +15,20 @@ export async function GET(req: Request) {
 
     if (group_id) params.append("group_id", group_id);
 
-    var re = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/product-categories?` + params,
-        {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-        }
-    );
+    var re: Response = new Response();
+    try {
+        re = await fetch(
+            `${process.env.NEXT_PUBLIC_API}/product-categories?` + params,
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+    } catch (ex) {
+        console.log(ex);
+    }
 
     var result = await re.json();
     return NextResponse.json(result, { status: re.status });

@@ -10,6 +10,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import {
     Table,
     TableBody,
@@ -73,7 +74,7 @@ export function Purchase({
                 defaultOpen={false}
                 onOpenChange={onOpenChange}
             >
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="max-w-xl w-full">
                     <DialogHeader>
                         <DialogTitle>Detail Pesanan</DialogTitle>
                         <DialogDescription>
@@ -82,6 +83,7 @@ export function Purchase({
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
+                        <p>Detail</p>
                         <Card className="bg-slate-50  p-4">
                             <div className="text-xs mb-4 flex items-center space-x-4">
                                 {/* {val.logo_image !== "" ? (
@@ -178,9 +180,18 @@ export function Purchase({
                             </TableFooter>
                         </Table>
                     </div>
-                    <DialogFooter>
-                        <Button type="submit">Bayar</Button>
-                    </DialogFooter>
+                    <div>
+                        <Separator className="mb-2" />
+                        <div className="flex justify-between items-center">
+                            <div className="text-xs space-y-0.5">
+                                <p className="font-medium">Total Harga</p>
+                                <p className="font-bold text-sm">{total}</p>
+                            </div>
+                            <Button type="submit" size="sm">
+                                Bayar
+                            </Button>
+                        </div>
+                    </div>
                 </DialogContent>
             </Dialog>
         );
