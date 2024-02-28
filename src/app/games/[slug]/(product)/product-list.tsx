@@ -111,17 +111,9 @@ function ProductList(prop: IProductList) {
                     className="mb-4 mt-2"
                 />
                 <div
-                    className="relative max-h-[30rem] overflow-y-auto no-scrollbar"
-                    onScroll={onScroll}
+                    className="relative max-h-[30rem] overflow-y-auto no-scrollbar py-4 bg-slate-50 -mx-2 px-2"
                     ref={ref}
                 >
-                    <div
-                        className={`sticky top-0 h-4 rounded-b-full bg-gradient-to-b from-slate-100 to-transparent w-full z-10 transition-opacity duration-200 ${
-                            isScroll && direction === "up"
-                                ? "opacity-100"
-                                : "opacity-0"
-                        }`}
-                    />
                     <div className="grid grid-cols-3 no-scrollbar gap-2 -mt-2">
                         {(search ? productSearch : prop.products).map((val) => {
                             const item = (
@@ -174,13 +166,6 @@ function ProductList(prop: IProductList) {
                             return item;
                         })}
                     </div>
-                    <div
-                        className={`sticky bottom-0 rounded-t-full h-4 bg-gradient-to-t from-slate-100 to-transparent w-full z-10 transition-opacity duration-200 ${
-                            isScroll && direction === "down"
-                                ? "opacity-100"
-                                : "opacity-0"
-                        }`}
-                    />
                 </div>
             </CardContent>
         </Card>
