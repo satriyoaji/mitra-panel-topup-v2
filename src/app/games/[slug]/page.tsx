@@ -45,15 +45,18 @@ function Page({ params }: { params: { slug: string } }) {
                     action: "SET_CATEGORY",
                     payload: result.data,
                 });
-                setProduct(uniqeProduct(result.data.products));
 
-                var flashSaleItem = searchParams.get("fs");
-                dispatch({
-                    action: "SET_PRODUCT",
-                    payload: result.data.products.find(
-                        (i: TProduct) => i.uuid == flashSaleItem
-                    ),
-                });
+                if (result.data.products) {
+                    setProduct(uniqeProduct(result.data.products));
+
+                    var flashSaleItem = searchParams.get("fs");
+                    dispatch({
+                        action: "SET_PRODUCT",
+                        payload: result.data.products.find(
+                            (i: TProduct) => i.uuid == flashSaleItem
+                        ),
+                    });
+                }
             }
         } else
             dispatch({
@@ -108,7 +111,7 @@ function Page({ params }: { params: { slug: string } }) {
                             }
                             listProductId={product.map((i) => i.uuid)}
                             categoryUuid={params.slug}
-                            productUuid={data.product?.uuid}
+                            product={data.product}
                         />
                     </CardContent>
                 </Card>
