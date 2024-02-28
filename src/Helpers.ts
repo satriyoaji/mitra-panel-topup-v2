@@ -8,11 +8,21 @@ const priceMask = (val: number | undefined) => {
     );
 };
 
-const uniqeProduct = (arr: TProduct[], track = new Set()) =>
-    arr.filter(({ uuid }) => (track.has(uuid) ? false : track.add(uuid)));
+const uniqeProduct = (arr: TProduct[], track = new Set()) => {
+    if (!arr) return [];
 
-const uniqeCategory = (arr: IProductCategory[], track = new Set()) =>
-    arr.filter(({ uuid }) => (track.has(uuid) ? false : track.add(uuid)));
+    return arr.filter(({ uuid }) =>
+        track.has(uuid) ? false : track.add(uuid)
+    );
+};
+
+const uniqeCategory = (arr: IProductCategory[], track = new Set()) => {
+    if (!arr) return [];
+
+    return arr.filter(({ uuid }) =>
+        track.has(uuid) ? false : track.add(uuid)
+    );
+};
 
 function debounce<Params extends any[]>(
     func: (...args: Params) => any,
