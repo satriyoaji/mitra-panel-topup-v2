@@ -5,6 +5,7 @@ import {
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import React from "react";
+import { Separator } from "./ui/separator";
 
 interface Sosmed {
     name: string;
@@ -69,14 +70,26 @@ async function Footer() {
     };
 
     return (
-        <div className="pb-[4.5rem] bg-black px-4 pt-4 flex flex-col items-center">
-            <p className="font-bold text-white">Follow Us On</p>
-            <div className="flex justify-center space-x-2 mt-2">
-                {data?.map((item, idx) => (
-                    <Link key={`${idx}`} className="w-6 h-6" href={item.link}>
-                        {getIcon(item.name)}
-                    </Link>
-                ))}
+        <div className="bg-black h-full pb-3 rounded-t-2xl">
+            <div className="bg-red-500 pt-4 px-4 pb-12 flex flex-col items-center rounded-t-2xl border-t-8 border-black">
+                <p className="font-bold text-white">Follow Us On</p>
+                <div className="flex justify-center space-x-2 mt-2">
+                    {data?.map((item, idx) => (
+                        <Link
+                            key={`${idx}`}
+                            className="w-6 h-6"
+                            href={item.link}
+                        >
+                            {getIcon(item.name)}
+                        </Link>
+                    ))}
+                </div>
+                <Separator className="mb-3 mt-6" />
+                <p className="text-white text-xs">
+                    {`Copyright © ${new Date().getFullYear()}`}{" "}
+                    <span className="font-semibold">Panel VC Gamers</span>
+                    {` - All Right Reserved`}
+                </p>
             </div>
         </div>
     );

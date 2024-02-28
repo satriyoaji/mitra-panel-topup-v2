@@ -21,7 +21,7 @@ const getData = async () => {
 const CarouselWrapper = async () => {
     const data: IBanner[] = await getData();
 
-    return <Carousel data={data} />;
+    if (data && data.length > 0) return <Carousel data={data} />;
 };
 
 export default CarouselWrapper;

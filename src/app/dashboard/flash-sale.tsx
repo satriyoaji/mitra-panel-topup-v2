@@ -15,7 +15,7 @@ async function getFlashSale() {
 
     if (res.ok) {
         const dataJson = await res.json();
-        return dataJson.data;
+        if (dataJson.data) return dataJson.data;
     }
     return [];
 }
