@@ -49,6 +49,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                         key={index}
                         src={item.path}
                         alt={item.title}
+                        sizes="100%"
                         fill
                         style={{ aspectRatio: 27 / 9 }}
                         className={`absolute object-cover w-full transition-opacity duration-500 ease-in-out ${

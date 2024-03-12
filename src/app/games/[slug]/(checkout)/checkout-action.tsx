@@ -13,9 +13,11 @@ import { TProductForm } from "@/Type";
 function CheckoutAction({
     formRef,
     confirmationRef,
+    paymentRef,
 }: {
     formRef: RefObject<HTMLDivElement>;
     confirmationRef: RefObject<HTMLDivElement>;
+    paymentRef: RefObject<HTMLDivElement>;
 }) {
     const { data, dispatch } = useContext(
         TransactionContext
@@ -39,6 +41,29 @@ function CheckoutAction({
                     <ToastAction
                         onClick={() =>
                             formRef.current?.scrollIntoView({
+                                behavior: "smooth",
+                            })
+                        }
+                        altText="Go To Form"
+                    >
+                        Lengkapi Data
+                    </ToastAction>
+                ),
+            });
+
+        if (
+            (data.payment == "transfer" ||
+                data.payment == "transfer & points") &&
+            !data.bank
+        )
+            return toast({
+                title: "Failed",
+                description: "VA Bank belum dipilih",
+                variant: "destructive",
+                action: (
+                    <ToastAction
+                        onClick={() =>
+                            paymentRef.current?.scrollIntoView({
                                 behavior: "smooth",
                             })
                         }

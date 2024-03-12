@@ -2,13 +2,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
-import { nPlainFormatter, uniqeProduct } from "@/Helpers";
+import { uniqeProduct } from "@/Helpers";
 import { TProduct } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
 import ProductList from "./(product)/product-list";
 import Promo from "./(promo)/promo-list";
-import { PlusIcon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
 import NotFound from "@/app/not-found";
 import FormAccount from "./(form-id)/form-account";
@@ -122,6 +121,7 @@ function Page({ params }: { params: { slug: string } }) {
                     <CheckoutAction
                         confirmationRef={confirmationRef}
                         formRef={formRef}
+                        paymentRef={methodRef}
                     />
                 )}
             </Fragment>

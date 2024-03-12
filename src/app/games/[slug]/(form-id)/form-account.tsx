@@ -19,10 +19,8 @@ interface Prop {
 }
 
 function FormAccount({ forms }: Prop) {
-    const { data: state, dispatch } = useContext(
-        TransactionContext
-    ) as ITransactionContext;
-    const [data, setData] = useState<LooseObject>({});
+    const { dispatch } = useContext(TransactionContext) as ITransactionContext;
+    const [data, setData] = useState<LooseObject>();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, valueAsNumber } = e.target;
@@ -33,10 +31,11 @@ function FormAccount({ forms }: Prop) {
     };
 
     useEffect(() => {
-        dispatch({
-            action: "SET_FORM",
-            payload: data,
-        });
+        if (data)
+            dispatch({
+                action: "SET_FORM",
+                payload: data,
+            });
     }, [data]);
 
     return (

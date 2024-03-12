@@ -74,7 +74,7 @@ export function Purchase({
                 defaultOpen={false}
                 onOpenChange={onOpenChange}
             >
-                <DialogContent className="max-w-xl w-full">
+                <DialogContent className="max-w-sm w-full">
                     <DialogHeader>
                         <DialogTitle>Detail Pesanan</DialogTitle>
                         <DialogDescription>
@@ -83,7 +83,6 @@ export function Purchase({
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
-                        <p>Detail</p>
                         <Card className="bg-slate-50  p-4">
                             <div className="text-xs mb-4 flex items-center space-x-4">
                                 {/* {val.logo_image !== "" ? (

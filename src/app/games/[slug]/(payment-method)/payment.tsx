@@ -70,7 +70,14 @@ function Payment() {
                                 value: item.code,
                                 label: item.name,
                             }))}
-                            onChange={(e) => {}}
+                            onChange={(e) => {
+                                dispatch({
+                                    action: "SET_BANK",
+                                    payload: banks.find(
+                                        (i) => i.code == e.toUpperCase()
+                                    ),
+                                });
+                            }}
                         />
                     </div>
                 )}

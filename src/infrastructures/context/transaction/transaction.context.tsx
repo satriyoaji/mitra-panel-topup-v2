@@ -6,6 +6,7 @@ import {
     IProductCategory,
     IPromo,
     ITransaction,
+    IXenditBank,
     LooseObject,
     TProduct,
 } from "@/Type";
@@ -37,7 +38,7 @@ export type TransactionSetAccount = {
 };
 export type TransactionSetXenditBank = {
     action: "SET_BANK";
-    payload: string;
+    payload?: IXenditBank;
 };
 
 export type TransactionDispatch =
@@ -51,16 +52,7 @@ export type TransactionDispatch =
 
 export interface ITransactionContext {
     data: ITransaction;
-    dispatch: (
-        data:
-            | TransactionSetCategory
-            | TransactionSetForm
-            | TransactionSetProduct
-            | TransactionSetPromo
-            | TransactionSetPayment
-            | TransactionSetAccount
-            | TransactionSetXenditBank
-    ) => void;
+    dispatch: (data: TransactionDispatch) => void;
 }
 
 const TransactionContext = React.createContext<ITransactionContext | null>(

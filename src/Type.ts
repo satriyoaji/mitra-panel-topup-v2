@@ -122,6 +122,14 @@ export interface IAccount {
 
 export type IPaymentMethod = "transfer" | "transfer & points" | "points";
 
+export interface IXenditBank {
+    name: string;
+    code: string;
+    country: string;
+    currency: string;
+    is_activated: boolean;
+}
+
 export interface ITransaction {
     product?: TProduct;
     category?: IProductCategory | null;
@@ -129,15 +137,7 @@ export interface ITransaction {
     payment?: IPaymentMethod;
     form?: LooseObject;
     account?: IAccount;
-    bank?: string;
-}
-
-export interface IXenditBank {
-    name: string;
-    code: string;
-    country: string;
-    currency: string;
-    is_activated: boolean;
+    bank?: IXenditBank;
 }
 
 export interface ITransactionItem {}
