@@ -18,7 +18,7 @@ function PromoCard({
         <div
             className={`rounded-lg shadow-sm flex cursor-pointer hover:bg-slate-50 ${
                 promo.id == selected?.id
-                    ? "border-4 divide-black border-black divide-x-4 divide-dashed "
+                    ? "border-4 divide-black border-theme-secondary divide-x-4 divide-dashed "
                     : "border-2"
             }`}
             onClick={() => {
@@ -26,7 +26,7 @@ function PromoCard({
                 else setSelected();
             }}
         >
-            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-red-100 rounded-s-md">
+            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-theme-primary-200 rounded-s-md">
                 <p></p>
                 <p className="font-bold">
                     {promo.promo_type == "percentage"
@@ -52,7 +52,7 @@ function PromoCard({
                     </p>
                 </div>
                 {isSecret ? (
-                    <div className="bg-red-400 text-white mt-4 rounded-br">
+                    <div className="bg-theme-primary-400 text-white mt-4 rounded-br">
                         <p className="text-center text-xs font-semibold">
                             Secret Promo
                         </p>

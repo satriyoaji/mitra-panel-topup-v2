@@ -140,7 +140,7 @@ function Page() {
                                     variant="ghost"
                                     className={`${
                                         (filter.filter != "*" || filter.date) &&
-                                        "text-red-400"
+                                        "text-theme-primary-400"
                                     }`}
                                     size="sm"
                                 >

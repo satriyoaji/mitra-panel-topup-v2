@@ -27,7 +27,7 @@ function ToTopButton() {
                     scrolling
                         ? "opacity-100 flex justify-center items-center"
                         : "opacity-0"
-                } fixed z-90 bottom-16 right-4 bg-slate-800 rounded-full drop-shadow-lg text-white text-4xl transition-all hover:bg-slate-900 hover:drop-shadow-2xl hover:animate-bounce duration-300`}
+                } fixed z-90 bottom-16 right-4 bg-theme-primary-600 rounded-full drop-shadow-lg text-theme-primary-foreground text-4xl transition-all hover:bg-theme-primary-700 hover:drop-shadow-2xl hover:animate-bounce duration-300`}
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
                 <ArrowUpIcon />

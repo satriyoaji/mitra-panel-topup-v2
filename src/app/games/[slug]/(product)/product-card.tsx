@@ -23,7 +23,7 @@ function ProductCard(props: prop) {
     return (
         <Card
             className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${
-                props.selected && "border-4 border-black"
+                props.selected && "border-4 border-theme-secondary"
             }`}
             onClick={props.onClick}
         >

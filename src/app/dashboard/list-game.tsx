@@ -92,7 +92,7 @@ export default function ListGame() {
     return (
         <React.Fragment>
             <div className="flex items-end justify-between mt-8">
-                <h5 className="mr-8 text-xl">Categories</h5>
+                <h5 className="mr-8 font-semibold px-2">Categories</h5>
                 <div
                     className="no-scrollbar z-10"
                     style={{
@@ -104,12 +104,13 @@ export default function ListGame() {
                 >
                     {groups.map((val, idx) => (
                         <Badge
-                            className="mx-1 cursor-pointer"
+                            className={`mx-1 cursor-pointer ${
+                                val.id == group.id
+                                    ? "bg-theme-primary-500 hover:bg-theme-primary-600"
+                                    : ""
+                            }`}
                             key={`${idx}`}
                             color="primary"
-                            variant={
-                                val.id == group.id ? "destructive" : "outline"
-                            }
                             onClick={() => {
                                 setData([]);
                                 setGroup(val);
@@ -125,7 +126,7 @@ export default function ListGame() {
                 placeholder="Search..."
                 className="my-3 bg-white"
             />
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4 place-items-center justify-center">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-4 place-items-center justify-center px-2">
                 {data.map((val: IProductCategory, idx) => (
                     <Link
                         href={`/games/${val.uuid}`}

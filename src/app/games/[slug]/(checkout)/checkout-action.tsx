@@ -127,7 +127,7 @@ function CheckoutAction({
 
     return (
         <>
-            <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-sm bg-black flex items-center justify-between px-4">
+            <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-sm bg-theme-secondary flex items-center justify-between px-4">
                 <div>
                     <h4 className="text-white text-xs">
                         {session ? "Transfer + 10.000 Point" : "Transfer"}

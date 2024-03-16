@@ -43,7 +43,7 @@ function Payment() {
                 </div>
                 <Separator className="my-3" />
                 <div className="flex items-center space-x-4 text-sm justify-center">
-                    <div className="w-full border-4 border-black rounded-lg">
+                    <div className="w-full border-4 border-theme-secondary rounded-lg">
                         <div className="flex justify-center items-center h-full p-3">
                             <p className="font-semibold">Transfer VA</p>
                         </div>
@@ -51,7 +51,7 @@ function Payment() {
                     {session && (
                         <>
                             <PlusIcon className="h-8 w-8" />
-                            <div className="w-full border-4 border-black rounded-lg">
+                            <div className="w-full border-4 border-theme-secondary rounded-lg">
                                 <div className="flex justify-center items-center h-full p-3">
                                     <p className="font-semibold">
                                         {nPlainFormatter(10_000)} Points
