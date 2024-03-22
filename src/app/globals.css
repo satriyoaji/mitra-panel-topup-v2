@@ -36,7 +36,7 @@ html {
         --theme-primary-950: #450a0a;
         --theme-primary-foreground: #fafafa;
 
-        --theme-secondary: black;
+        --theme-secondary: #334155;
         --theme-secondary-accent: #64748b;
         --theme-secondary-foreground: #fafafa;
 
@@ -116,7 +116,7 @@ html {
         --theme-primary-foreground: #fafafa;
     }
 
-    .theme-primary-purple {
+    .theme-primary-violet {
         --theme-primary-50: #f5f3ff;
         --theme-primary-100: #ede9fe;
         --theme-primary-200: #ddd6fe;

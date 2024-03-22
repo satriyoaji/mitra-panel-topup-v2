@@ -1,5 +1,4 @@
 "use client";
-
 import TransactionProvider from "@/infrastructures/context/transaction/transaction.provider";
 import { SessionProvider } from "next-auth/react";
 

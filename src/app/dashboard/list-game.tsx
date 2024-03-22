@@ -104,13 +104,9 @@ export default function ListGame() {
                 >
                     {groups.map((val, idx) => (
                         <Badge
-                            className={`mx-1 cursor-pointer ${
-                                val.id == group.id
-                                    ? "bg-theme-primary-500 hover:bg-theme-primary-600"
-                                    : ""
-                            }`}
+                            className={`mx-1 cursor-pointer `}
+                            variant={val.id == group.id ? "default" : "outline"}
                             key={`${idx}`}
-                            color="primary"
                             onClick={() => {
                                 setData([]);
                                 setGroup(val);

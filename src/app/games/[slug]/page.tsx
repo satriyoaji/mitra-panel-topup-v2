@@ -17,6 +17,7 @@ import TransactionContext, {
 import FormConfirmation from "./(account-confirmation)/form-confirmation";
 import CheckoutAction from "./(checkout)/checkout-action";
 import Payment from "./(payment-method)/payment";
+import TransactionProvider from "@/infrastructures/context/transaction/transaction.provider";
 
 function Page({ params }: { params: { slug: string } }) {
     const { data, dispatch } = useContext(
@@ -75,7 +76,7 @@ function Page({ params }: { params: { slug: string } }) {
     if (data.category === null) return <NotFound />;
     else if (data.category !== null && data.category !== undefined)
         return (
-            <Fragment>
+            <>
                 <Header category={data.category} />
                 {data.category.forms && (
                     <Card ref={formRef} className="w-full my-4">
@@ -124,7 +125,7 @@ function Page({ params }: { params: { slug: string } }) {
                         paymentRef={methodRef}
                     />
                 )}
-            </Fragment>
+            </>
         );
 }
 
