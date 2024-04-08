@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
+            cache: "no-store",
         }
     );
 

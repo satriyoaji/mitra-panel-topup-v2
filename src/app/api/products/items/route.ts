@@ -19,6 +19,7 @@ export async function GET(req: Request) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
+            cache: "no-store",
         }
     );
 

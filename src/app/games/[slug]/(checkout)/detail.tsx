@@ -16,6 +16,8 @@ import {
     TableBody,
     TableCell,
     TableFooter,
+    TableHead,
+    TableHeader,
     TableRow,
 } from "@/components/ui/table";
 import { SketchLogoIcon } from "@radix-ui/react-icons";
@@ -104,27 +106,33 @@ export function Purchase({
                                 </div>
                             </div>
                             {form && category.forms && (
-                                <Table>
-                                    <TableBody className="text-xs">
-                                        {Object.keys(form).map((key) => (
-                                            <TableRow>
-                                                <TableCell>
-                                                    {category.forms
-                                                        ?.find(
-                                                            (i) => i.key == key
-                                                        )
-                                                        ?.alias.replace(
-                                                            /_/g,
-                                                            " "
-                                                        )}
-                                                </TableCell>
-                                                <TableCell className="text-right space-y-1">
-                                                    {form[key]}
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                <div className="mt-6">
+                                    <p className="text-xs font-semibold">
+                                        Data Tambahan
+                                    </p>
+                                    <Table className="border-y bg-white rounded mt-1">
+                                        <TableBody className="text-xs">
+                                            {Object.keys(form).map((key) => (
+                                                <TableRow>
+                                                    <TableCell>
+                                                        {category.forms
+                                                            ?.find(
+                                                                (i) =>
+                                                                    i.key == key
+                                                            )
+                                                            ?.alias.replace(
+                                                                /_/g,
+                                                                " "
+                                                            )}
+                                                    </TableCell>
+                                                    <TableCell className="text-right space-y-1">
+                                                        {form[key]}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </div>
                             )}
                         </Card>
                         <Table>
