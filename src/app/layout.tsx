@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import Header from "@/components/page-header";
 import BottomNav from "@/components/bottom-nav";
 import { Toaster } from "@/components/ui/toaster";
 import { NextAuthProvider } from "./_app";
 import Footer from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
 import ToTopButton from "@/components/totop-button";
-
-export const fontSans = FontSans({
-    subsets: ["latin"],
-    variable: "--font-sans",
-});
+import ThemeWrapper from "./theme-wrapper";
 
 export const metadata: Metadata = {
     title: "Topup User",
@@ -29,11 +21,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <head />
-            <body
-                className={cn(
-                    "min-h-screen bg-background antialiased bg-slate-200"
-                )}
-            >
+            <ThemeWrapper>
                 <NextAuthProvider>
                     <main className="max-w-xl bg-white mx-auto min-h-screen">
                         <Header />
@@ -46,7 +34,7 @@ export default function RootLayout({
                     </main>
                 </NextAuthProvider>
                 <Toaster />
-            </body>
+            </ThemeWrapper>
         </html>
     );
 }

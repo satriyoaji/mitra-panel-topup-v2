@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export type TItemsCard = {
     onEditClick: () => void;
@@ -64,13 +65,11 @@ function ItemsCard(props: TItemsCard) {
                                     {priceMask(props.price)}
                                 </p>
                             </div>
-                            <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={props.onEditClick}
-                            >
-                                Detail
-                            </Button>
+                            <Link href="/transaksi/JIODAW31231NKJ">
+                                <Button size="sm" variant="outline">
+                                    Detail
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

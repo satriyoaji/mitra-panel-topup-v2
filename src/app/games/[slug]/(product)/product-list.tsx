@@ -92,9 +92,7 @@ function ProductList(prop: IProductList) {
                             key={`${idx}`}
                             color="primary"
                             variant={
-                                val.type == filter?.type
-                                    ? "destructive"
-                                    : "outline"
+                                val.type == filter?.type ? "default" : "outline"
                             }
                             onClick={() => {
                                 if (filter == val) setFilter(undefined);

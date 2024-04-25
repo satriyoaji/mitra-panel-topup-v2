@@ -41,8 +41,8 @@ function BottomNav() {
                         <Link
                             key={val.path}
                             href={val.path}
-                            className={`flex flex-col h-fit items-center w-full hover:text-red-500 cursor-pointer ${
-                                path == val.path && "text-red-700"
+                            className={`flex flex-col h-fit items-center w-full hover:text-theme-primary-500 cursor-pointer ${
+                                path == val.path && "text-theme-primary-700"
                             }`}
                         >
                             <val.icon className="w-4 h-4" />

@@ -16,6 +16,8 @@ import {
     TableBody,
     TableCell,
     TableFooter,
+    TableHead,
+    TableHeader,
     TableRow,
 } from "@/components/ui/table";
 import { SketchLogoIcon } from "@radix-ui/react-icons";
@@ -74,7 +76,7 @@ export function Purchase({
                 defaultOpen={false}
                 onOpenChange={onOpenChange}
             >
-                <DialogContent className="max-w-xl w-full">
+                <DialogContent className="max-w-sm w-full">
                     <DialogHeader>
                         <DialogTitle>Detail Pesanan</DialogTitle>
                         <DialogDescription>
@@ -83,7 +85,6 @@ export function Purchase({
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
-                        <p>Detail</p>
                         <Card className="bg-slate-50  p-4">
                             <div className="text-xs mb-4 flex items-center space-x-4">
                                 {/* {val.logo_image !== "" ? (
@@ -105,27 +106,33 @@ export function Purchase({
                                 </div>
                             </div>
                             {form && category.forms && (
-                                <Table>
-                                    <TableBody className="text-xs">
-                                        {Object.keys(form).map((key) => (
-                                            <TableRow>
-                                                <TableCell>
-                                                    {category.forms
-                                                        ?.find(
-                                                            (i) => i.key == key
-                                                        )
-                                                        ?.alias.replace(
-                                                            /_/g,
-                                                            " "
-                                                        )}
-                                                </TableCell>
-                                                <TableCell className="text-right space-y-1">
-                                                    {form[key]}
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
+                                <div className="mt-6">
+                                    <p className="text-xs font-semibold">
+                                        Data Tambahan
+                                    </p>
+                                    <Table className="border-y bg-white rounded mt-1">
+                                        <TableBody className="text-xs">
+                                            {Object.keys(form).map((key) => (
+                                                <TableRow>
+                                                    <TableCell>
+                                                        {category.forms
+                                                            ?.find(
+                                                                (i) =>
+                                                                    i.key == key
+                                                            )
+                                                            ?.alias.replace(
+                                                                /_/g,
+                                                                " "
+                                                            )}
+                                                    </TableCell>
+                                                    <TableCell className="text-right space-y-1">
+                                                        {form[key]}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </div>
                             )}
                         </Card>
                         <Table>

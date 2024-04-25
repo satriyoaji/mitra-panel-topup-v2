@@ -16,58 +16,60 @@ function FormConfirmation() {
     ) as ITransactionContext;
     const { data: session } = useSession();
 
-    if (session) <></>;
-    return (
-        <Card className="w-full my-4">
-            <CardContent>
-                <div className="flex mt-3">
-                    <h4 className="font-semibold ml-1">Data Konfirmasi</h4>
-                </div>
-                <Separator className="my-3" />
-                <form>
-                    <div className="grid w-full items-center gap-4">
-                        <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="email">Email *</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="Masukan alamat Email"
-                                value={data.account?.email}
-                                onChange={(e) =>
-                                    dispatch({
-                                        action: "SET_ACCOUNT",
-                                        payload: {
-                                            noWhatsapp:
-                                                data.account?.noWhatsapp ?? "",
-                                            email: e.target.value,
-                                        },
-                                    })
-                                }
-                            />
-                        </div>
-                        <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="whatsapp">No. Whatsapp *</Label>
-                            <PhoneInput
-                                id="whatsapp"
-                                placeholder="Masukan No. Whatasapp"
-                                maxLength={13}
-                                value={data.account?.noWhatsapp}
-                                onValueChange={(e) => {
-                                    dispatch({
-                                        action: "SET_ACCOUNT",
-                                        payload: {
-                                            email: data.account?.email ?? "",
-                                            noWhatsapp: `${e}`,
-                                        },
-                                    });
-                                }}
-                            />
-                        </div>
+    if (!session)
+        return (
+            <Card className="w-full my-4">
+                <CardContent>
+                    <div className="flex mt-3">
+                        <h4 className="font-semibold ml-1">Data Konfirmasi</h4>
                     </div>
-                </form>
-            </CardContent>
-        </Card>
-    );
+                    <Separator className="my-3" />
+                    <form>
+                        <div className="grid w-full items-center gap-4">
+                            <div className="flex flex-col space-y-1.5">
+                                <Label htmlFor="email">Email *</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="Masukan alamat Email"
+                                    value={data.account?.email}
+                                    onChange={(e) =>
+                                        dispatch({
+                                            action: "SET_ACCOUNT",
+                                            payload: {
+                                                noWhatsapp:
+                                                    data.account?.noWhatsapp ??
+                                                    "",
+                                                email: e.target.value,
+                                            },
+                                        })
+                                    }
+                                />
+                            </div>
+                            <div className="flex flex-col space-y-1.5">
+                                <Label htmlFor="whatsapp">No. Whatsapp *</Label>
+                                <PhoneInput
+                                    id="whatsapp"
+                                    placeholder="Masukan No. Whatasapp"
+                                    maxLength={13}
+                                    value={data.account?.noWhatsapp}
+                                    onValueChange={(e) => {
+                                        dispatch({
+                                            action: "SET_ACCOUNT",
+                                            payload: {
+                                                email:
+                                                    data.account?.email ?? "",
+                                                noWhatsapp: `${e}`,
+                                            },
+                                        });
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+        );
 }
 
 export default FormConfirmation;

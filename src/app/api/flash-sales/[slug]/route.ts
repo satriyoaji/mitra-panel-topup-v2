@@ -20,6 +20,7 @@ export async function GET(
                 "Content-Type": "application/json",
                 // Authorization: `Bearer ${cookieStore.get("mantapu")?.value}`,
             },
+            cache: "no-store",
         }
     );
 

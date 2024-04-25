@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TransactionContext, { TransactionDispatch } from "./transaction.context";
-import { ITransaction } from "@/Type";
+import { ITransaction, LooseObject } from "@/Type";
 import { useSession } from "next-auth/react";
 
 function TransactionProvider({ children }: { children: React.ReactNode }) {
@@ -30,10 +30,15 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
     const dispatch = (data: TransactionDispatch) => {
         switch (data.action) {
             case "SET_CATEGORY":
+                let form: LooseObject = {};
+                data.payload?.forms?.forEach((i) => {
+                    form[i.key] = null;
+                });
+
                 setTransaction((prev) => ({
                     ...prev,
                     category: data.payload,
-                    form: data.payload?.forms,
+                    form,
                 }));
 
                 return;

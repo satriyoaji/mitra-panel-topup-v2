@@ -19,7 +19,7 @@ function FlashSaleCard({
         >
             <Card
                 className={`h-full rounded-sm border-t-0 border-r-0 ${
-                    selected && "border-4 border-black"
+                    selected && "border-4 border-theme-secondary"
                 }`}
             >
                 <div className="flex flex-row-reverse">

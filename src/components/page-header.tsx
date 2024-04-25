@@ -11,7 +11,7 @@ function Header() {
     const router = useRouter();
 
     return (
-        <header className="w-full grid grid-cols-3 z-50 max-w-xl bg-red-500 rounded-b-2xl border-b-8 border-black">
+        <header className="w-full grid grid-cols-3 z-50 max-w-xl bg-theme-primary rounded-b-2xl border-b-8 border-theme-secondary">
             <div></div>
             <Link href="/" className="justify-self-center">
                 <div className="font-extrabold text-xl p-2">⚡🎮⚡</div>

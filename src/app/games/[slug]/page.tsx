@@ -2,13 +2,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
-import { nPlainFormatter, uniqeProduct } from "@/Helpers";
+import { uniqeProduct } from "@/Helpers";
 import { TProduct } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
 import ProductList from "./(product)/product-list";
 import Promo from "./(promo)/promo-list";
-import { PlusIcon } from "@radix-ui/react-icons";
 import { useSearchParams } from "next/navigation";
 import NotFound from "@/app/not-found";
 import FormAccount from "./(form-id)/form-account";
@@ -18,6 +17,7 @@ import TransactionContext, {
 import FormConfirmation from "./(account-confirmation)/form-confirmation";
 import CheckoutAction from "./(checkout)/checkout-action";
 import Payment from "./(payment-method)/payment";
+import TransactionProvider from "@/infrastructures/context/transaction/transaction.provider";
 
 function Page({ params }: { params: { slug: string } }) {
     const { data, dispatch } = useContext(
@@ -76,7 +76,7 @@ function Page({ params }: { params: { slug: string } }) {
     if (data.category === null) return <NotFound />;
     else if (data.category !== null && data.category !== undefined)
         return (
-            <Fragment>
+            <>
                 <Header category={data.category} />
                 {data.category.forms && (
                     <Card ref={formRef} className="w-full my-4">
@@ -122,9 +122,10 @@ function Page({ params }: { params: { slug: string } }) {
                     <CheckoutAction
                         confirmationRef={confirmationRef}
                         formRef={formRef}
+                        paymentRef={methodRef}
                     />
                 )}
-            </Fragment>
+            </>
         );
 }
 

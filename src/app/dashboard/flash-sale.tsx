@@ -27,14 +27,14 @@ async function FlashSale() {
         return (
             <div className="mt-6">
                 <div className="flex justify-between">
-                    <p className="px-2 font-bold">Flash Sale⚡</p>
+                    <p className="px-2 font-semibold">Flash Sale⚡</p>
                     <Link href="/flash-sale">
                         <Button size="sm" variant="link">
                             See More
                         </Button>
                     </Link>
                 </div>
-                <div className="py-1 flex rounded-lg bg-gradient-to-r from-orange-500 to-amber-300">
+                <div className="py-1 flex rounded-lg bg-gradient-to-r from-theme-primary-900 to-theme-primary-200">
                     <div
                         className="no-scrollbar z-10 mb-2 pt-2 space-x-2 px-3"
                         style={{

@@ -122,7 +122,8 @@ function Promo({
         if (promo) {
             if (
                 promo.ref_product &&
-                product?.uuid !== promo.ref_product.product_sku
+                product &&
+                product.uuid !== promo.ref_product.uuid
             ) {
                 toast({
                     title: "Failed",

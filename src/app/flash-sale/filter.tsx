@@ -22,7 +22,9 @@ function Filter(props: Prop) {
             <DialogTrigger asChild>
                 <Button
                     variant="ghost"
-                    className={`${filter.filter != "*" && "text-red-400"}`}
+                    className={`${
+                        filter.filter != "*" && "text-theme-primary-400"
+                    }`}
                     size="sm"
                 >
                     <MixerHorizontalIcon />
