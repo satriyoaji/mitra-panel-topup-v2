@@ -76,56 +76,62 @@ function Page({ params }: { params: { slug: string } }) {
     if (data.category === null) return <NotFound />;
     else if (data.category !== null && data.category !== undefined)
         return (
-            <>
-                <Header category={data.category} />
-                {data.category.forms && (
-                    <Card ref={formRef} className="w-full my-4">
-                        <CardContent className="mt-3">
-                            <FormAccount forms={data.category.forms} />
+            <div className="md:grid md:grid-cols-5 md:gap-4">
+                <div className="col-span-2">
+                    <div>
+                        <Header category={data.category} />
+                    </div>
+                </div>
+                <div className="col-span-3">
+                    {data.category.forms && (
+                        <Card ref={formRef} className="w-full my-4 md:mt-2">
+                            <CardContent className="mt-3">
+                                <FormAccount forms={data.category.forms} />
+                            </CardContent>
+                        </Card>
+                    )}
+                    <div ref={productListRef}>
+                        <ProductList
+                            category={data.category.alias}
+                            nextRef={methodRef}
+                            products={product}
+                            productSelected={data.product}
+                        />
+                    </div>
+                    <div className="my-4" ref={methodRef}>
+                        <Payment />
+                    </div>
+                    <Card className="w-full my-4" ref={couponRef}>
+                        <CardContent>
+                            <div className="flex mt-3">
+                                <h4 className="font-semibold ml-1">Promo</h4>
+                            </div>
+                            <Separator className="my-3" />
+                            <Promo
+                                onPromoSelected={(e) =>
+                                    dispatch({
+                                        action: "SET_PROMO",
+                                        payload: e,
+                                    })
+                                }
+                                listProductId={product.map((i) => i.uuid)}
+                                categoryUuid={params.slug}
+                                product={data.product}
+                            />
                         </CardContent>
                     </Card>
-                )}
-                <div ref={productListRef}>
-                    <ProductList
-                        category={data.category.alias}
-                        nextRef={methodRef}
-                        products={product}
-                        productSelected={data.product}
-                    />
-                </div>
-                <div className="my-4" ref={methodRef}>
-                    <Payment />
-                </div>
-                <Card className="w-full my-4" ref={couponRef}>
-                    <CardContent>
-                        <div className="flex mt-3">
-                            <h4 className="font-semibold ml-1">Promo</h4>
-                        </div>
-                        <Separator className="my-3" />
-                        <Promo
-                            onPromoSelected={(e) =>
-                                dispatch({
-                                    action: "SET_PROMO",
-                                    payload: e,
-                                })
-                            }
-                            listProductId={product.map((i) => i.uuid)}
-                            categoryUuid={params.slug}
-                            product={data.product}
+                    <div ref={confirmationRef}>
+                        <FormConfirmation />
+                    </div>
+                    {data.product && (
+                        <CheckoutAction
+                            confirmationRef={confirmationRef}
+                            formRef={formRef}
+                            paymentRef={methodRef}
                         />
-                    </CardContent>
-                </Card>
-                <div ref={confirmationRef}>
-                    <FormConfirmation />
+                    )}
                 </div>
-                {data.product && (
-                    <CheckoutAction
-                        confirmationRef={confirmationRef}
-                        formRef={formRef}
-                        paymentRef={methodRef}
-                    />
-                )}
-            </>
+            </div>
         );
 }
 

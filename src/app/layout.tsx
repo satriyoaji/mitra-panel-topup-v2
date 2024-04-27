@@ -7,6 +7,7 @@ import { NextAuthProvider } from "./_app";
 import Footer from "@/components/footer";
 import ToTopButton from "@/components/totop-button";
 import ThemeWrapper from "./theme-wrapper";
+import LayoutWrapper from "./layout-wrapper";
 
 export const metadata: Metadata = {
     title: "Topup User",
@@ -23,15 +24,14 @@ export default function RootLayout({
             <head />
             <ThemeWrapper>
                 <NextAuthProvider>
-                    <main className="max-w-xl bg-white mx-auto min-h-screen">
-                        <Header />
-                        <div className="px-4 pt-2 pb-16 min-h-screen bg-slate-50">
+                    <Header />
+                    <LayoutWrapper>
+                        <div className="px-4 pt-2 pb-16 min-h-screen bg-slate-50 md:bg-white md:container">
                             {children}
                         </div>
-                        <BottomNav />
-                        <Footer />
-                        <ToTopButton />
-                    </main>
+                    </LayoutWrapper>
+                    <Footer />
+                    <ToTopButton />
                 </NextAuthProvider>
                 <Toaster />
             </ThemeWrapper>
