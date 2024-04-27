@@ -9,7 +9,7 @@ export default async function Home() {
             <CarouselWrapper />
             <FlashSale />
             <ListGame />
-            <div className="mt-8">
+            <div className="mt-8 flex justify-center items-center">
                 <Stats />
             </div>
         </div>

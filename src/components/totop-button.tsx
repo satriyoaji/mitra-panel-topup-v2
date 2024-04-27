@@ -19,7 +19,7 @@ function ToTopButton() {
     }, [scrollTop]);
 
     return (
-        <div className="fixed bottom-0 h-0 z-10 w-full max-w-xl border-t-2 shadow-md bg-background/0 backdrop-blur supports-[backdrop-filter]:bg-background/0">
+        <div className="fixed bottom-0 h-0 z-10 w-full border-t-2 shadow-md bg-background/0 backdrop-blur supports-[backdrop-filter]:bg-background/0">
             <Button
                 variant="destructive"
                 size="icon"

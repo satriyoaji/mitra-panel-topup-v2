@@ -47,7 +47,7 @@ function Page() {
 
     return (
         <div className="md:mx-2">
-            <div className="flex px-2 sticky top-0 py-4 bg-zinc-50 flex-col space-y-1.5 mb-3">
+            <div className="flex px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3">
                 <p className="font-semibold text-lg">Flash Sale⚡</p>
                 <div className="flex space-x-1">
                     <Input
@@ -59,7 +59,7 @@ function Page() {
                 </div>
             </div>
             <div className="min-h-[72vh]">
-                <div className="grid sm:grid-cols-4 grid-cols-3 gap-2 mx-2">
+                <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-3 gap-2 mx-2">
                     {data?.map((item, idx) => (
                         <div className="w-full h-full" key={`${idx}`}>
                             <FlashSaleCard data={item} />
