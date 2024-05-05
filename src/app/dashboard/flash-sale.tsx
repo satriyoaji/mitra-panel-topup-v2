@@ -10,7 +10,10 @@ async function getFlashSale() {
                 page_num: "1",
                 page_size: "8",
                 mitra_id: process.env.NEXT_MITRA_ID as string,
-            })
+            }),
+        {
+            cache: "no-store",
+        }
     );
 
     if (res.ok) {
