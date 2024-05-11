@@ -23,23 +23,6 @@ html {
         --secondary: 240 4.8% 95.9%;
         --secondary-foreground: 240 5.9% 10%;
 
-        --theme-primary-50: #fef2f2;
-        --theme-primary-100: #fee2e2;
-        --theme-primary-200: #fecaca;
-        --theme-primary-300: #fca5a5;
-        --theme-primary-400: #f87171;
-        --theme-primary-500: #ef4444;
-        --theme-primary-600: #dc2626;
-        --theme-primary-700: #b91c1c;
-        --theme-primary-800: #991b1b;
-        --theme-primary-900: #7f1d1d;
-        --theme-primary-950: #450a0a;
-        --theme-primary-foreground: #fafafa;
-
-        --theme-secondary: #334155;
-        --theme-secondary-accent: #64748b;
-        --theme-secondary-foreground: #fafafa;
-
         --muted: 240 4.8% 95.9%;
         --muted-foreground: 240 3.8% 46.1%;
 
@@ -86,6 +69,21 @@ html {
         --ring: 240 4.9% 83.9%;
     }
 
+    .theme-primary-red {
+        --theme-primary-50: #fef2f2;
+        --theme-primary-100: #fee2e2;
+        --theme-primary-200: #fecaca;
+        --theme-primary-300: #fca5a5;
+        --theme-primary-400: #f87171;
+        --theme-primary-500: #ef4444;
+        --theme-primary-600: #dc2626;
+        --theme-primary-700: #b91c1c;
+        --theme-primary-800: #991b1b;
+        --theme-primary-900: #7f1d1d;
+        --theme-primary-950: #450a0a;
+        --theme-primary-foreground: #fafafa;
+    }
+
     .theme-primary-green {
         --theme-primary-50: #f0fdf4;
         --theme-primary-100: #dcfce7;
@@ -129,6 +127,81 @@ html {
         --theme-primary-900: #4c1d95;
         --theme-primary-950: #2e1065;
         --theme-primary-foreground: #fafafa;
+    }
+
+    .theme-secondary-rose {
+        --theme-secondary-50: #fff1f2;
+        --theme-secondary-100: #ffe4e6;
+        --theme-secondary-200: #fecdd3;
+        --theme-secondary-300: #fda4af;
+        --theme-secondary-400: #fb7185;
+        --theme-secondary-500: #f43f5e;
+        --theme-secondary-600: #e11d48;
+        --theme-secondary-700: #be123c;
+        --theme-secondary-800: #9f1239;
+        --theme-secondary-900: #881337;
+        --theme-secondary-950: #4c0519;
+        --theme-secondary-foreground: #fafafa;
+    }
+
+    .theme-secondary-orange {
+        --theme-secondary-50: #fff7ed;
+        --theme-secondary-100: #ffedd5;
+        --theme-secondary-200: #fed7aa;
+        --theme-secondary-300: #fdba74;
+        --theme-secondary-400: #fb923c;
+        --theme-secondary-500: #f97316;
+        --theme-secondary-600: #ea580c;
+        --theme-secondary-700: #c2410c;
+        --theme-secondary-800: #9a3412;
+        --theme-secondary-900: #7c2d12;
+        --theme-secondary-950: #431407;
+        --theme-secondary-foreground: #fafafa;
+    }
+
+    .theme-secondary-lime {
+        --theme-secondary-50: #f7fee7;
+        --theme-secondary-100: #ecfccb;
+        --theme-secondary-200: #d9f99d;
+        --theme-secondary-300: #bef264;
+        --theme-secondary-400: #a3e635;
+        --theme-secondary-500: #84cc16;
+        --theme-secondary-600: #65a30d;
+        --theme-secondary-700: #4d7c0f;
+        --theme-secondary-800: #3f6212;
+        --theme-secondary-900: #365314;
+        --theme-secondary-950: #1a2e05;
+        --theme-secondary-foreground: #fafafa;
+    }
+
+    .theme-secondary-teal {
+        --theme-secondary-50: #f0fdfa;
+        --theme-secondary-100: #ccfbf1;
+        --theme-secondary-200: #99f6e4;
+        --theme-secondary-300: #5eead4;
+        --theme-secondary-400: #2dd4bf;
+        --theme-secondary-500: #14b8a6;
+        --theme-secondary-600: #0d9488;
+        --theme-secondary-700: #0f766e;
+        --theme-secondary-800: #115e59;
+        --theme-secondary-900: #134e4a;
+        --theme-secondary-950: #042f2e;
+        --theme-secondary-foreground: #fafafa;
+    }
+
+    .theme-secondary-indigo {
+        --theme-secondary-50: #eef2ff;
+        --theme-secondary-100: #e0e7ff;
+        --theme-secondary-200: #c7d2fe;
+        --theme-secondary-300: #a5b4fc;
+        --theme-secondary-400: #818cf8;
+        --theme-secondary-500: #6366f1;
+        --theme-secondary-600: #4f46e5;
+        --theme-secondary-700: #4338ca;
+        --theme-secondary-800: #3730a3;
+        --theme-secondary-900: #312e81;
+        --theme-secondary-950: #1e1b4b;
+        --theme-secondary-foreground: #fafafa;
     }
 
     .theme-secondary-slate {

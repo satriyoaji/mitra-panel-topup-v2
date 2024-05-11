@@ -14,11 +14,14 @@ interface Sosmed {
 
 const getSocmed = async () => {
     var res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/all-socmeds?mitra_id=${process.env.NEXT_MITRA_ID}`,
+        `${process.env.API}/all-socmeds?mitra_id=${process.env.NEXT_MITRA_ID}`,
         {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
+            },
+            next: {
+                revalidate: 7200,
             },
         }
     );

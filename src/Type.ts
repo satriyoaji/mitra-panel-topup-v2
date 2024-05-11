@@ -1,3 +1,5 @@
+import { NextFont } from "next/dist/compiled/@next/font";
+
 export interface LooseObject {
     [key: string]: any;
 }
@@ -50,6 +52,10 @@ export interface IProductCategory {
     logo_image: string;
     description: string;
     forms?: TProductForm[];
+
+    key: string;
+    name: string;
+    image_url: string;
 }
 
 export type TTiersPrice = {
@@ -76,6 +82,10 @@ export type TProduct = {
     active: boolean;
     group_name: string;
     flash_sales?: IFlashSaleInProduct[];
+
+    key: string;
+    name: string;
+    price: number;
 };
 
 export type TMarkup = "percentage" | "fix";
@@ -141,3 +151,21 @@ export interface ITransaction {
 }
 
 export interface ITransactionItem {}
+
+export type TPrimaryPallete = {
+    title: string;
+    pallete: string;
+};
+
+export interface TSecondaryPallete extends TPrimaryPallete {}
+
+export type TFont = {
+    title: string;
+    class: NextFont;
+};
+
+export interface ITheme {
+    primary: TPrimaryPallete;
+    secondary: TSecondaryPallete;
+    font: TFont;
+}

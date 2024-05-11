@@ -5,6 +5,7 @@ import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { IFlashSaleProduct, TProduct } from "@/Type";
 import { debounce, nFormatter, priceMask } from "@/Helpers";
 import ProductCard from "./[slug]/(product)/product-card";
+import Image from "next/image";
 
 function Page() {
     const [total, setTotal] = useState(0);
@@ -60,18 +61,35 @@ function Page() {
                 </div>
             </div>
             <div className="min-h-[72vh]">
-                <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-2 gap-2 mx-2">
-                    {data?.map((item, idx) => (
-                        <div className="w-full h-full" key={`${idx}`}>
-                            <ProductCard
-                                category={item.category_alias}
-                                name={item.product_name}
-                                price={`${priceMask(item.sale_price)}`}
-                                onClick={() => {}}
-                            />
-                        </div>
-                    ))}
-                </div>
+                {data.length > 0 ? (
+                    <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-2 gap-2 mx-2">
+                        {data.map((item, idx) => (
+                            <div className="w-full h-full" key={`${idx}`}>
+                                <ProductCard
+                                    category={item.category_alias}
+                                    name={item.product_name}
+                                    price={`${priceMask(item.sale_price)}`}
+                                    onClick={() => {}}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center h-full w-full">
+                        <Image
+                            src={
+                                "illustration/DrawKit Larry Character Illustration (10).svg"
+                            }
+                            className="opacity-50"
+                            alt="dw"
+                            width={500}
+                            height={500}
+                        />
+                        <h5 className="text-xl font-bold -mt-10">
+                            Item Kosong
+                        </h5>
+                    </div>
+                )}
             </div>
             <div className="flex items-center justify-between space-x-2 py-4 mt-2">
                 <p className="text-xs text-muted-foreground mx-2">

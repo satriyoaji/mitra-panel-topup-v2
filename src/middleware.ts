@@ -2,7 +2,9 @@ import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
-export const config = { matcher: ["/profile", "/redeem-coupon/:path*"] };
+export const config = {
+    matcher: ["/profile", "/redeem-coupon/:path*"],
+};
 
 export default async function middleware(
     req: NextRequest,
