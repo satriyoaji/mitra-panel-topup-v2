@@ -9,6 +9,7 @@ import {
     IXenditBank,
     LooseObject,
     TProduct,
+    IBank,
 } from "@/Type";
 import React from "react";
 
@@ -38,7 +39,7 @@ export type TransactionSetAccount = {
 };
 export type TransactionSetXenditBank = {
     action: "SET_BANK";
-    payload?: IXenditBank;
+    payload?: IXenditBank | IBank;
 };
 
 export type TransactionDispatch =

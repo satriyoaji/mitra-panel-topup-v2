@@ -49,7 +49,7 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center pt-4">
                 <Avatar className="my-3 h-16 w-16">
                     <AvatarImage
                         src={session?.user?.image as string}

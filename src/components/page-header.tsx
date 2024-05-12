@@ -98,7 +98,7 @@ function Header() {
                 <Searchbar />
             </div>
             <div className="flex justify-self-end items-center gap-2">
-                {session && !path.includes("/profile") ? (
+                {session ? (
                     <Avatar
                         className="my-1 mx-5 cursor-pointer"
                         onClick={() => router.push("/profile")}
@@ -112,7 +112,7 @@ function Header() {
                         </AvatarFallback>
                     </Avatar>
                 ) : (
-                    <Link href="auth/login" className="m-2">
+                    <Link href="/auth/login" className="m-2">
                         <Button size="sm">Login</Button>
                     </Link>
                 )}

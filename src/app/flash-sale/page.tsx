@@ -6,12 +6,14 @@ import FlashSaleCard from "./flash-sale-card";
 import { IFlashSaleProduct } from "@/Type";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
+import Loading from "../loading";
 
 function Page() {
     const [total, setTotal] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [data, setData] = useState<IFlashSaleProduct[]>([]);
     const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const totalPage = useMemo(() => Math.ceil(total / 12), [total]);
 
@@ -22,7 +24,9 @@ function Page() {
             product_search: search,
         });
 
+        setLoading(true);
         var res = await fetch(`/api/flash-sales?` + searchParams);
+        setLoading(false);
         if (res.ok) {
             const dataJson = await res.json();
             if (dataJson.data) {
@@ -60,30 +64,39 @@ function Page() {
                     />
                 </div>
             </div>
-            <div className="">
-                {data.length > 0 ? (
-                    <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-3 gap-2 mx-2">
-                        {data.map((item, idx) => (
-                            <div className="w-full h-full" key={`${idx}`}>
-                                <FlashSaleCard data={item} />
-                            </div>
-                        ))}
-                    </div>
+            <div className="min-h-[68vh]">
+                {loading ? (
+                    <Loading />
                 ) : (
-                    <div className="flex flex-col items-center justify-center h-full w-full">
-                        <Image
-                            src={
-                                "illustration/DrawKit Larry Character Illustration (10).svg"
-                            }
-                            className="opacity-50"
-                            alt="dw"
-                            height={400}
-                            width={400}
-                        />
-                        <h5 className="text-xl font-bold">
-                            Tidak ada Flash Sale
-                        </h5>
-                    </div>
+                    <>
+                        {data.length > 0 ? (
+                            <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-3 gap-2 mx-2">
+                                {data.map((item, idx) => (
+                                    <div
+                                        className="w-full h-full"
+                                        key={`${idx}`}
+                                    >
+                                        <FlashSaleCard data={item} />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center h-full w-full">
+                                <Image
+                                    src={
+                                        "/illustration/DrawKit Larry Character Illustration (10).svg"
+                                    }
+                                    className="opacity-50"
+                                    alt="dw"
+                                    height={400}
+                                    width={400}
+                                />
+                                <h5 className="text-xl font-bold">
+                                    Tidak ada Flash Sale
+                                </h5>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
             <div className="flex items-center justify-between space-x-2 py-4 mt-2">

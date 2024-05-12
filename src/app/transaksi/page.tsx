@@ -38,7 +38,7 @@ function Page() {
                             <div className="flex flex-col items-center justify-center h-full w-full">
                                 <Image
                                     src={
-                                        "illustration/DrawKit Larry Character Illustration (10).svg"
+                                        "/illustration/DrawKit Larry Character Illustration (10).svg"
                                     }
                                     className="opacity-50"
                                     alt="dw"

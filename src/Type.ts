@@ -138,6 +138,12 @@ export interface IXenditBank {
     country: string;
     currency: string;
     is_activated: boolean;
+    url: string;
+}
+
+export interface IBank {
+    url: string;
+    name: string;
 }
 
 export interface ITransaction {
@@ -147,7 +153,7 @@ export interface ITransaction {
     payment?: IPaymentMethod;
     form?: LooseObject;
     account?: IAccount;
-    bank?: IXenditBank;
+    bank?: IXenditBank | IBank;
 }
 
 export interface ITransactionItem {}

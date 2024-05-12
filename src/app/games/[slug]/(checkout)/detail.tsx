@@ -1,4 +1,4 @@
-import { priceMask } from "@/Helpers";
+import { nFormatter, nPlainFormatter, priceMask } from "@/Helpers";
 import { IFlashSaleInProduct, IPromo, ITransaction, TProduct } from "@/Type";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -20,8 +20,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { SketchLogoIcon } from "@radix-ui/react-icons";
+import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { isWithinInterval, parseISO } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 
 const getTotalPrice = (
     product: TProduct,
@@ -37,7 +39,7 @@ const getTotalPrice = (
         else num -= (promo.promo_value * product.sale_price) / 100;
     }
 
-    return priceMask(num);
+    return num;
 };
 
 interface IDetailProp extends ITransaction {
@@ -52,7 +54,9 @@ export function Purchase({
     isOpen,
     onOpenChange,
     form,
+    bank,
 }: IDetailProp) {
+    console.log(bank);
     if (promo) {
         if (
             !isWithinInterval(new Date(), {
@@ -181,22 +185,54 @@ export function Purchase({
                                 <TableRow>
                                     <TableCell>Total Harga</TableCell>
                                     <TableCell className="text-right">
-                                        {total}
+                                        {priceMask(total)}
                                     </TableCell>
                                 </TableRow>
                             </TableFooter>
                         </Table>
+                    </div>
+                    <Separator />
+                    <p>Pembayaran</p>
+                    <div className="flex items-center w-full gap-4">
+                        <div className="p-2 w-full h-full rounded-lg border flex flex-col justify-center items-center">
+                            <p className="font-semibold text-xl ml-2">🪙</p>
+                            <Separator className="my-2" />
+                            <p className="font-semibold text-sm">
+                                {nPlainFormatter(20_000)} Points
+                            </p>
+                        </div>
+                        {bank && (
+                            <>
+                                <PlusIcon className="w-8 h-8" />
+                                <div className="p-4 w-full h-full rounded-lg border flex flex-col justify-center items-center">
+                                    <Image
+                                        alt={bank.name}
+                                        src={bank.url}
+                                        width={70}
+                                        height={70}
+                                    />
+                                    <Separator className="my-2" />
+                                    <p className="font-semibold text-sm">
+                                        {priceMask(total - 20_000)}
+                                    </p>
+                                </div>
+                            </>
+                        )}
                     </div>
                     <div>
                         <Separator className="mb-2" />
                         <div className="flex justify-between items-center">
                             <div className="text-xs space-y-0.5">
                                 <p className="font-medium">Total Harga</p>
-                                <p className="font-bold text-sm">{total}</p>
+                                <p className="font-bold text-sm">
+                                    {priceMask(total)}
+                                </p>
                             </div>
-                            <Button type="submit" size="sm">
-                                Bayar
-                            </Button>
+                            <Link href={"/transaksi/adwdadaw"}>
+                                <Button type="submit" size="sm">
+                                    Bayar
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </DialogContent>

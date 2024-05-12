@@ -9,7 +9,7 @@ function NotFound() {
         <div className="h-[80vh] flex flex-col justify-center items-center">
             <Image
                 src={
-                    "illustration/DrawKit Larry Character Illustration (1).svg"
+                    "/illustration/DrawKit Larry Character Illustration (1).svg"
                 }
                 alt="dw"
                 width={500}

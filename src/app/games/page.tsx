@@ -6,12 +6,16 @@ import { IFlashSaleProduct, TProduct } from "@/Type";
 import { debounce, nFormatter, priceMask } from "@/Helpers";
 import ProductCard from "./[slug]/(product)/product-card";
 import Image from "next/image";
+import Loading from "../loading";
+import { useRouter } from "next/navigation";
 
 function Page() {
     const [total, setTotal] = useState(0);
     const [pageIndex, setPageIndex] = useState(1);
     const [data, setData] = useState<TProduct[]>([]);
     const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
+    const route = useRouter();
 
     const totalPage = useMemo(() => Math.ceil(total / 12), [total]);
 
@@ -22,7 +26,9 @@ function Page() {
             search,
         });
 
+        setLoading(true);
         var res = await fetch(`/api/products/items?` + searchParams);
+        setLoading(false);
 
         if (res.ok) {
             const dataJson = await res.json();
@@ -60,35 +66,50 @@ function Page() {
                     />
                 </div>
             </div>
-            <div className="min-h-[72vh]">
-                {data.length > 0 ? (
-                    <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-2 gap-2 mx-2">
-                        {data.map((item, idx) => (
-                            <div className="w-full h-full" key={`${idx}`}>
-                                <ProductCard
-                                    category={item.category_alias}
-                                    name={item.product_name}
-                                    price={`${priceMask(item.sale_price)}`}
-                                    onClick={() => {}}
-                                />
-                            </div>
-                        ))}
-                    </div>
+            <div className="min-h-[68vh]">
+                {loading ? (
+                    <Loading />
                 ) : (
-                    <div className="flex flex-col items-center justify-center h-full w-full">
-                        <Image
-                            src={
-                                "illustration/DrawKit Larry Character Illustration (10).svg"
-                            }
-                            className="opacity-50"
-                            alt="dw"
-                            width={500}
-                            height={500}
-                        />
-                        <h5 className="text-xl font-bold -mt-10">
-                            Item Kosong
-                        </h5>
-                    </div>
+                    <>
+                        {data.length > 0 ? (
+                            <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-2 gap-2 mx-2">
+                                {data.map((item, idx) => (
+                                    <div
+                                        className="w-full h-full"
+                                        key={`${idx}`}
+                                    >
+                                        <ProductCard
+                                            category={item.category_alias}
+                                            name={item.product_name}
+                                            price={`${priceMask(
+                                                item.sale_price
+                                            )}`}
+                                            onClick={() =>
+                                                route.push(
+                                                    `/games/${item.category_code}?fs=${item.uuid}`
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center h-full w-full">
+                                <Image
+                                    src={
+                                        "/illustration/DrawKit Larry Character Illustration (10).svg"
+                                    }
+                                    className="opacity-50"
+                                    alt="dw"
+                                    width={500}
+                                    height={500}
+                                />
+                                <h5 className="text-xl font-bold -mt-10">
+                                    Item Kosong
+                                </h5>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
             <div className="flex items-center justify-between space-x-2 py-4 mt-2">
