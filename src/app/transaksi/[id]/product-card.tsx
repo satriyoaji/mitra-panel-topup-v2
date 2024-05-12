@@ -23,7 +23,10 @@ function ProductCard() {
     return (
         <>
             <div className="grid gap-4">
-                <Card className="bg-slate-50 px-8 pt-8 pb-6">
+                <Card className="bg-slate-50 px-6 pt-8 pb-6">
+                    <div className="flex justify-end mb-4">
+                        <Badge variant="destructive">Menunggu Pembayaran</Badge>
+                    </div>
                     <div className="text-xs mb-4 flex space-x-4">
                         {/* {val.logo_image !== "" ? (
                                             <img
@@ -37,12 +40,6 @@ function ProductCard() {
                         </div>
                         {/* )} */}
                         <div className="space-y-2 w-full items-center">
-                            <div className="flex justify-between">
-                                <p>DJOI6786ADS</p>
-                                <Badge variant="destructive">
-                                    Menunggu Pembayaran
-                                </Badge>
-                            </div>
                             <div className="flex justify-between items-end">
                                 <div>
                                     <p>INDOSAT</p>

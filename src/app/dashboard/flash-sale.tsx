@@ -5,12 +5,15 @@ import Link from "next/link";
 
 async function getFlashSale() {
     var res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/product-flash-sales?` +
+        `${process.env.API}/product-flash-sales?` +
             new URLSearchParams({
                 page_num: "1",
                 page_size: "8",
                 mitra_id: process.env.NEXT_MITRA_ID as string,
-            })
+            }),
+        {
+            cache: "no-store",
+        }
     );
 
     if (res.ok) {

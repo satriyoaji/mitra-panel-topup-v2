@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -12,6 +12,9 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import Searchbar from "@/app/dashboard/searchbar";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
+import { TextAlignJustifyIcon } from "@radix-ui/react-icons";
 
 export type path = {
     name: string;
@@ -20,7 +23,7 @@ export type path = {
 
 const paths: path[] = [
     {
-        name: "Kategori",
+        name: "Produk",
         path: "/games",
     },
     {
@@ -37,21 +40,50 @@ function Header() {
     const { data: session } = useSession();
     const path = usePathname();
     const router = useRouter();
+    const [open, setOpen] = useState(false);
 
     return (
-        <header className="w-full grid grid-cols-3 z-50 bg-theme-primary rounded-b-2xl border-b-8 border-theme-secondary items-center top-0 sticky">
-            <div className="block md:hidden"></div>
+        <header className="w-full flex justify-between z-50 bg-theme-primary rounded-b-2xl border-b-8 border-theme-secondary items-center top-0 sticky">
+            <div className="md:hidden">
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant="ghost" size="icon" className="m-2">
+                            <TextAlignJustifyIcon className="h-4 w-4" />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left">
+                        <div className="mt-8 gap-2 flex flex-col">
+                            {paths.map((i) => (
+                                <SheetClose key={i.path}>
+                                    <Button
+                                        variant="ghost"
+                                        className="w-full"
+                                        onClick={() => {
+                                            router.push(i.path);
+                                        }}
+                                    >
+                                        {i.name}
+                                    </Button>
+                                </SheetClose>
+                            ))}
+                        </div>
+                    </SheetContent>
+                </Sheet>
+            </div>
             <Link
                 href="/"
                 className="justify-self-center md:justify-self-start md:mx-4"
             >
                 <div className="font-extrabold text-xl m-0 p-0">⚡🎮⚡</div>
             </Link>
-            <div className="hidden md:flex justify-center items-center gap-4">
+            <div className="hidden md:flex justify-between items-center md:container md:px-32">
                 <NavigationMenu>
                     <NavigationMenuList>
                         {paths.map((i) => (
-                            <NavigationMenuItem className="bg-transparent">
+                            <NavigationMenuItem
+                                className="bg-transparent"
+                                key={i.path}
+                            >
                                 <Link href={i.path} legacyBehavior passHref>
                                     <NavigationMenuLink
                                         className={`${navigationMenuTriggerStyle()}`}
@@ -63,9 +95,10 @@ function Header() {
                         ))}
                     </NavigationMenuList>
                 </NavigationMenu>
+                <Searchbar />
             </div>
-            <div className="justify-self-end">
-                {session && !path.includes("/profile") ? (
+            <div className="flex justify-self-end items-center gap-2">
+                {session ? (
                     <Avatar
                         className="my-1 mx-5 cursor-pointer"
                         onClick={() => router.push("/profile")}
@@ -79,9 +112,9 @@ function Header() {
                         </AvatarFallback>
                     </Avatar>
                 ) : (
-                    <div className="m-2">
+                    <Link href="/auth/login" className="m-2">
                         <Button size="sm">Login</Button>
-                    </div>
+                    </Link>
                 )}
             </div>
         </header>

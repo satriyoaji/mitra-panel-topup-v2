@@ -19,7 +19,7 @@ export type TItemsCard = {
 function ItemsCard(props: TItemsCard) {
     return (
         <Card className="flex">
-            <div className="flex justify-between w-full my-3 mx-3">
+            <div className="flex justify-between w-full my-4 mx-4">
                 <div className="w-full">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-3">
@@ -65,11 +65,22 @@ function ItemsCard(props: TItemsCard) {
                                     {priceMask(props.price)}
                                 </p>
                             </div>
-                            <Link href="/transaksi/JIODAW31231NKJ">
-                                <Button size="sm" variant="outline">
+                            <div className="md:hidden">
+                                <Link href="/transaksi/JIODAW31231NKJ">
+                                    <Button size="sm" variant="outline">
+                                        Detail
+                                    </Button>
+                                </Link>
+                            </div>
+                            <div className="hidden md:block">
+                                <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={props.onEditClick}
+                                >
                                     Detail
                                 </Button>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

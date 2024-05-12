@@ -91,7 +91,7 @@ export default function ListGame() {
 
     return (
         <React.Fragment>
-            <div className="md:flex md:items-end md:justify-between">
+            <div className="md:flex md:items-end md:justify-between sticky top-10 pb-2 bg-white">
                 <div className="flex md:block items-end justify-between mt-8">
                     <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
                     <div

@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CubeIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React from "react";
+import Description from "./collapsible-description";
 
 function Header({ category }: { category: IProductCategory }) {
     return (
@@ -48,9 +49,7 @@ function Header({ category }: { category: IProductCategory }) {
                             <h5 className="font-bold">{category?.alias}</h5>
                         </div>
                     </div>
-                    <p className="text-xs pt-[64px] text-muted-foreground leading-5">
-                        {category?.description}
-                    </p>
+                    <Description />
                 </div>
             </CardContent>
         </Card>

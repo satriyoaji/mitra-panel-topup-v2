@@ -9,6 +9,8 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 import DetailProfile from "./detail-profile";
+import bg from "../../../public/card.svg";
+import SaldoPointHistory from "./saldopoint-history";
 
 function page() {
     const { data: session } = useSession();
@@ -16,7 +18,7 @@ function page() {
 
     return (
         <>
-            <div className="xs:m-4 sm:m-6">
+            <div className="xs:m-4 sm:m-6 md:grid md:grid-cols-2 gap-8">
                 <div className="flex justify-between items-start">
                     <div className="flex flex-row space-x-4">
                         <Avatar className="my-1">
@@ -40,35 +42,24 @@ function page() {
                         className="cursor-pointer"
                     />
                 </div>
-                <Card className="my-4">
-                    <div className="p-2 flex items-center justify-between">
-                        <div className=" w-full p-2">
-                            <p className="font-bold text-muted-foreground text-xs">
-                                Saldo Points
-                            </p>
-                            <p className="font-bold">20.000 Points</p>
-                        </div>
-                        <Tier
-                            className="place-self-center m-3"
-                            type={(session?.tier?.name as TierType) ?? "Public"}
-                        />
-                    </div>
-                </Card>
-                <Separator className="mb-6" />
-                <div className="space-y-3 px-3">
-                    <Link
-                        href="/transaksi"
-                        className="flex space-x-3 items-center text-sm hover:text-theme-primary-500"
-                    >
-                        <ReaderIcon className="mr-3" /> Daftar Transaksi
-                    </Link>
-                    <p
-                        onClick={() => signOut()}
-                        className="flex space-x-3 items-center text-sm cursor-pointer hover:text-theme-primary-500"
-                    >
-                        <ExitIcon className="mr-3" /> Logout
-                    </p>
+                <div className="flex items-center justify-center">
+                    <SaldoPointHistory />
                 </div>
+            </div>
+            <Separator className="mb-6" />
+            <div className="space-y-3 px-3">
+                <Link
+                    href="/transaksi"
+                    className="flex space-x-3 items-center text-sm hover:text-theme-primary-500"
+                >
+                    <ReaderIcon className="mr-3" /> Daftar Transaksi
+                </Link>
+                <p
+                    onClick={() => signOut()}
+                    className="flex space-x-3 items-center text-sm cursor-pointer hover:text-theme-primary-500"
+                >
+                    <ExitIcon className="mr-3" /> Logout
+                </p>
             </div>
             <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
                 <DialogContent className="sm:max-w-md">
