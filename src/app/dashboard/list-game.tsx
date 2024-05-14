@@ -28,12 +28,12 @@ export default function ListGame() {
         setLoading(true);
         var res = await fetch(
             `/api/products/categories/?` +
-                new URLSearchParams({
-                    page_num: `${pageIndex}`,
-                    page_size: "8",
-                    code: search,
-                    group_id: `${group?.id ?? ""}`,
-                })
+            new URLSearchParams({
+                page_num: `${pageIndex}`,
+                page_size: "8",
+                code: search,
+                group_id: `${group?.id ?? ""}`,
+            })
         );
 
         setLoading(false);
@@ -105,7 +105,7 @@ export default function ListGame() {
                     >
                         {groups.map((val, idx) => (
                             <Badge
-                                className={`mx-1 cursor-pointer `}
+                                className={`mx-1 cursor-pointer inline-block whitespace-nowrap`}
                                 variant={
                                     val.id == group.id ? "default" : "outline"
                                 }

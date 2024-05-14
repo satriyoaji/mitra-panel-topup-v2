@@ -17,7 +17,6 @@ import TransactionContext, {
 import FormConfirmation from "./(account-confirmation)/form-confirmation";
 import CheckoutAction from "./(checkout)/checkout-action";
 import Payment from "./(payment-method)/payment";
-import TransactionProvider from "@/infrastructures/context/transaction/transaction.provider";
 
 function Page({ params }: { params: { slug: string } }) {
     const { data, dispatch } = useContext(
@@ -77,7 +76,7 @@ function Page({ params }: { params: { slug: string } }) {
     else if (data.category !== null && data.category !== undefined)
         return (
             <div className="md:grid md:grid-cols-5 md:gap-4">
-                <div className="col-span-2">
+                <div className="col-span-2 my-0.5">
                     <div>
                         <Header category={data.category} />
                     </div>

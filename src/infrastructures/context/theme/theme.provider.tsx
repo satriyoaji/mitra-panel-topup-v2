@@ -11,19 +11,21 @@ const getInitialState = (): ITheme => {
     return theme
         ? JSON.parse(theme)
         : {
-              primary: {
-                  title: "red",
-                  class: "theme-primary-red",
-              },
-              secondary: {
-                  title: "teal",
-                  class: "theme-secondary-teal",
-              },
-              font: {
-                  title: "Roboto",
-                  class: roboto,
-              },
-          };
+            logo: "/illustration/logo/1.png",
+            primary: {
+                title: "red",
+                class: "theme-primary-red",
+            },
+            secondary: {
+                title: "teal",
+                class: "theme-secondary-teal",
+            },
+            font: {
+                title: "Roboto",
+                class: roboto,
+            },
+
+        };
 };
 
 function getRandomInt(max: number) {
@@ -50,6 +52,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
                 return;
             case "RAND_THEME":
                 setTheme({
+                    logo: `/illustration/logo/${getRandomInt(4)}.png`,
                     font: fonts[getRandomInt(fonts.length)],
                     primary: primaryColors[getRandomInt(primaryColors.length)],
                     secondary:

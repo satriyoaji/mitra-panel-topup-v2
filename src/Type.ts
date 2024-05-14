@@ -156,14 +156,14 @@ export interface ITransaction {
     bank?: IXenditBank | IBank;
 }
 
-export interface ITransactionItem {}
+export interface ITransactionItem { }
 
 export type TPrimaryPallete = {
     title: string;
     class: string;
 };
 
-export interface TSecondaryPallete extends TPrimaryPallete {}
+export interface TSecondaryPallete extends TPrimaryPallete { }
 
 export type TFont = {
     title: string;
@@ -174,4 +174,5 @@ export interface ITheme {
     primary: TPrimaryPallete;
     secondary: TSecondaryPallete;
     font: TFont;
+    logo: string
 }

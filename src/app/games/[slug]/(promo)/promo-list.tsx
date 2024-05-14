@@ -19,6 +19,7 @@ function Promo({
     const [selectedPromo, setSelectedPromo] = useState<IPromo>();
     const [promos, setPromos] = useState<IPromo[]>([]);
     const [productPromos, setProductPromos] = useState<IPromo[]>([]);
+    const [mergePromos, setMergePromos] = useState<IPromo[]>([]);
     const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
     const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -107,16 +108,18 @@ function Promo({
     };
 
     useEffect(() => {
-        getData();
-    }, []);
-
-    useEffect(() => {
         getData(product?.uuid);
         if (selectedPromo?.ref_product?.uuid != product?.uuid) {
             setSelectedPromo(undefined);
             onPromoSelected();
         }
     }, [product]);
+
+    useEffect(() => {
+        setMergePromos(promos.concat(productPromos.filter(item2 =>
+            !promos.some(item1 => item1.id === item2.id)
+        )))
+    }, [promos, productPromos])
 
     const selectPromo = (isSecret: boolean, promo?: IPromo) => {
         if (promo) {
@@ -175,15 +178,7 @@ function Promo({
                     isSecret
                 />
             )}
-            {productPromos.map((i) => (
-                <PromoCard
-                    key={i.code}
-                    promo={i}
-                    selected={selectedPromo}
-                    setSelected={(e) => selectPromo(false, e)}
-                />
-            ))}
-            {promos.map((i) => (
+            {mergePromos.map((i) => (
                 <PromoCard
                     key={i.code}
                     promo={i}

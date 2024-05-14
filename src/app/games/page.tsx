@@ -55,7 +55,7 @@ function Page() {
 
     return (
         <div className="md:mx-2">
-            <div className="flex px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3">
+            <div className="flex px-2 sticky top-14 py-4 bg-white flex-col space-y-1.5 mb-3">
                 <p className="font-semibold text-lg">Produk</p>
                 <div className="flex space-x-1">
                     <Input

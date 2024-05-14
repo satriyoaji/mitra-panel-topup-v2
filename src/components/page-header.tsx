@@ -18,6 +18,7 @@ import { TextAlignJustifyIcon } from "@radix-ui/react-icons";
 import ThemeContext, {
     IThemeContext,
 } from "@/infrastructures/context/theme/theme.context";
+import Image from "next/image";
 
 export type path = {
     name: string;
@@ -44,10 +45,10 @@ function Header() {
     const path = usePathname();
     const router = useRouter();
     const [open, setOpen] = useState(false);
-    const { dispatch } = useContext(ThemeContext) as IThemeContext;
+    const { dispatch, data } = useContext(ThemeContext) as IThemeContext;
 
     return (
-        <header className="w-full flex justify-between z-50 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-200 rounded-b-2xl items-center top-0 sticky">
+        <header className="w-full flex justify-between z-20 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-200 rounded-b-2xl items-center top-0 sticky">
             <div className="md:hidden">
                 <Sheet>
                     <SheetTrigger asChild>
@@ -87,9 +88,14 @@ function Header() {
             </div>
             <Link
                 href="/"
-                className="justify-self-center md:justify-self-start md:mx-4"
+                className="justify-self-center md:justify-self-start mx-4"
             >
-                <div className="font-extrabold text-xl m-0 p-0">⚡🎮⚡</div>
+                <Image
+                    src={data.logo}
+                    alt="dw"
+                    width={40}
+                    height={40}
+                />
             </Link>
             <div className="hidden md:flex justify-between items-center md:container md:px-32 text-theme-secondary-900">
                 <NavigationMenu>

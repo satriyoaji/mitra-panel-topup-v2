@@ -95,7 +95,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
         <React.Fragment>
             <div className="hidden justify-center items-center md:flex gap-4">
                 <Button
-                    className="rounded-full border-2 border-white p-5 z-[20]"
+                    className="rounded-full border-2 border-white p-5 z-10"
                     onClick={prev}
                 >
                     <ChevronLeftIcon
@@ -125,7 +125,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                     ))}
                 </div>
                 <Button
-                    className="rounded-full border-2 border-white p-5 z-[20]"
+                    className="rounded-full border-2 border-white p-5 z-10"
                     onClick={next}
                 >
                     <ChevronRightIcon
@@ -150,11 +150,10 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                                 sizes="100%"
                                 fill
                                 style={{ aspectRatio: 27 / 9 }}
-                                className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
-                                    index === activeIndex
-                                        ? "opacity-100"
-                                        : "opacity-0"
-                                }`}
+                                className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${index === activeIndex
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                                    }`}
                             />
                         ))}
                     </div>

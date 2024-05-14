@@ -29,6 +29,13 @@ const getData = async () => {
             updated_at: "2024-01-17T06:56:10.357787+07:00",
             title: "Banner new",
             path: "https://cdn-panel.vcg.my.id/banners/mitra/1/1708978773-a4tcRqOYsVttBfCA.webp"
+        },
+        {
+            id: 2,
+            created_at: "2024-01-17T06:52:22.054715+07:00",
+            updated_at: "2024-01-17T06:56:10.357787+07:00",
+            title: "Banner new 2",
+            path: "https://cdn-panel.vcg.my.id/banners/mitra/1/1708978685-2cXqV9Em0I0Cbme9.webp"
         }
     ]
 };
