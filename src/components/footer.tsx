@@ -38,14 +38,14 @@ const getSocmed = async () => {
             "id": 1,
             "created_at": "2023-12-16T22:20:25.32085+07:00",
             "updated_at": "2023-12-16T22:20:25.32085+07:00",
-            "name": "Instagram",
+            "name": "instagram",
             "link": "http://www.instagram.com"
         },
         {
             "id": 2,
             "created_at": "2023-12-16T22:20:25.32085+07:00",
             "updated_at": "2023-12-16T22:20:25.32085+07:00",
-            "name": "Twitter",
+            "name": "twitter",
             "link": "http://www.twitter.com"
         }
     ]

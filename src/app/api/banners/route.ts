@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
                 created_at: "2024-01-17T06:52:22.054715+07:00",
                 updated_at: "2024-01-17T06:56:10.357787+07:00",
                 title: "Banner new",
-                path: "http://www.pinteres.com"
+                path: "https://cdn-panel.vcg.my.id/banners/mitra/1/1708978773-a4tcRqOYsVttBfCA.webp"
             }
         ],
         pagination: null,
