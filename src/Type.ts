@@ -44,7 +44,7 @@ export type TProductForm =
     | IProductFormOption;
 
 export interface IProductCategory {
-    uuid: number;
+    uuid: string;
     code: string;
     alias: string;
     status: number;
@@ -160,7 +160,7 @@ export interface ITransactionItem {}
 
 export type TPrimaryPallete = {
     title: string;
-    pallete: string;
+    class: string;
 };
 
 export interface TSecondaryPallete extends TPrimaryPallete {}

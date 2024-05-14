@@ -94,7 +94,10 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
     return (
         <React.Fragment>
             <div className="hidden justify-center items-center md:flex gap-4">
-                <Button className="rounded-full p-5 z-[20]" onClick={prev}>
+                <Button
+                    className="rounded-full border-2 border-white p-5 z-[20]"
+                    onClick={prev}
+                >
                     <ChevronLeftIcon
                         width={18}
                         height={18}
@@ -121,7 +124,10 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                         </React.Fragment>
                     ))}
                 </div>
-                <Button className="rounded-full p-5 z-[20]" onClick={next}>
+                <Button
+                    className="rounded-full border-2 border-white p-5 z-[20]"
+                    onClick={next}
+                >
                     <ChevronRightIcon
                         width={18}
                         height={18}

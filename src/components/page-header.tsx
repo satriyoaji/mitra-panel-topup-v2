@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -15,6 +15,9 @@ import {
 import Searchbar from "@/app/dashboard/searchbar";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
 import { TextAlignJustifyIcon } from "@radix-ui/react-icons";
+import ThemeContext, {
+    IThemeContext,
+} from "@/infrastructures/context/theme/theme.context";
 
 export type path = {
     name: string;
@@ -41,9 +44,10 @@ function Header() {
     const path = usePathname();
     const router = useRouter();
     const [open, setOpen] = useState(false);
+    const { dispatch } = useContext(ThemeContext) as IThemeContext;
 
     return (
-        <header className="w-full flex justify-between z-50 bg-theme-primary rounded-b-2xl border-b-8 border-theme-secondary items-center top-0 sticky">
+        <header className="w-full flex justify-between z-50 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-200 rounded-b-2xl items-center top-0 sticky">
             <div className="md:hidden">
                 <Sheet>
                     <SheetTrigger asChild>
@@ -66,6 +70,17 @@ function Header() {
                                     </Button>
                                 </SheetClose>
                             ))}
+                            <SheetClose>
+                                <Button
+                                    onClick={() => {
+                                        dispatch({
+                                            action: "RAND_THEME",
+                                        });
+                                    }}
+                                >
+                                    Theme
+                                </Button>
+                            </SheetClose>
                         </div>
                     </SheetContent>
                 </Sheet>
@@ -76,7 +91,7 @@ function Header() {
             >
                 <div className="font-extrabold text-xl m-0 p-0">⚡🎮⚡</div>
             </Link>
-            <div className="hidden md:flex justify-between items-center md:container md:px-32">
+            <div className="hidden md:flex justify-between items-center md:container md:px-32 text-theme-secondary-900">
                 <NavigationMenu>
                     <NavigationMenuList>
                         {paths.map((i) => (
@@ -93,24 +108,38 @@ function Header() {
                                 </Link>
                             </NavigationMenuItem>
                         ))}
+                        <NavigationMenuItem className="bg-transparent">
+                            <NavigationMenuLink
+                                className={`${navigationMenuTriggerStyle()} cursor-pointer`}
+                                onClick={() => {
+                                    dispatch({
+                                        action: "RAND_THEME",
+                                    });
+                                }}
+                            >
+                                Theme
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
                     </NavigationMenuList>
                 </NavigationMenu>
                 <Searchbar />
             </div>
-            <div className="flex justify-self-end items-center gap-2">
+            <div className="flex justify-self-end items-center gap-2 bg-theme-primary-700 rounded-br-2xl">
                 {session ? (
-                    <Avatar
-                        className="my-1 mx-5 cursor-pointer"
-                        onClick={() => router.push("/profile")}
-                    >
-                        <AvatarImage
-                            src={session?.user?.image as string}
-                            alt={session?.user?.name as string}
-                        />
-                        <AvatarFallback>
-                            {session?.user?.name?.at(0) ?? ""}
-                        </AvatarFallback>
-                    </Avatar>
+                    <div className="my-1 mx-3">
+                        <Avatar
+                            className="cursor-pointer"
+                            onClick={() => router.push("/profile")}
+                        >
+                            <AvatarImage
+                                src={session?.user?.image as string}
+                                alt={session?.user?.name as string}
+                            />
+                            <AvatarFallback>
+                                {session?.user?.name?.at(0) ?? ""}
+                            </AvatarFallback>
+                        </Avatar>
+                    </div>
                 ) : (
                     <Link href="/auth/login" className="m-2">
                         <Button size="sm">Login</Button>

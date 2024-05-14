@@ -88,29 +88,27 @@ async function Footer() {
     };
 
     return (
-        <div className="bg-theme-secondary h-full pb-3 rounded-t-2xl">
-            <div className="bg-theme-primary pt-4 px-4 pb-12 flex flex-col items-center rounded-t-2xl border-t-8 border-theme-secondary">
-                <p className="font-bold text-theme-primary-foreground">
-                    Follow Us On
-                </p>
-                <div className="flex justify-center space-x-2 mt-2">
-                    {data?.map((item, idx) => (
-                        <Link
-                            key={`${idx}`}
-                            className="w-6 h-6 text-theme-primary-foreground"
-                            href={item.link}
-                        >
-                            {getIcon(item.name)}
-                        </Link>
-                    ))}
-                </div>
-                <Separator className="mb-3 mt-6" />
-                <p className="text-theme-primary-foreground text-xs">
-                    {`Copyright © ${new Date().getFullYear()}`}{" "}
-                    <span className="font-semibold">Panel VC Gamers</span>
-                    {` - All Right Reserved`}
-                </p>
+        <div className="bg-theme-primary-700 pt-4 px-4 pb-12 flex flex-col items-center rounded-t-2xl border-t-4 border-theme-secondary">
+            <p className="font-bold text-theme-primary-foreground">
+                Follow Us On
+            </p>
+            <div className="flex justify-center space-x-2 mt-2">
+                {data?.map((item, idx) => (
+                    <Link
+                        key={`${idx}`}
+                        className="w-6 h-6 text-theme-primary-foreground"
+                        href={item.link}
+                    >
+                        {getIcon(item.name)}
+                    </Link>
+                ))}
             </div>
+            <Separator className="mb-3 mt-6" />
+            <p className="text-theme-primary-foreground text-xs">
+                {`Copyright © ${new Date().getFullYear()}`}{" "}
+                <span className="font-semibold">Panel VC Gamers</span>
+                {` - All Right Reserved`}
+            </p>
         </div>
     );
 }

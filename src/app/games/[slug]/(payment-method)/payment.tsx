@@ -63,7 +63,7 @@ function Payment() {
                 </div>
                 <Separator className="my-3" />
                 <div className="text-sm">
-                    <div className="w-full border-4 border-theme-secondary rounded-lg px-4 mt-4">
+                    <div className="w-full border shadow-sm rounded-lg px-4 mt-4">
                         <div className="flex justify-between items-center p-3">
                             <div className="flex items-center h-full gap-3">
                                 <p className="font-semibold text-xl ml-2">🪙</p>
@@ -74,7 +74,7 @@ function Payment() {
                             </p>
                         </div>
                     </div>
-                    <div className="w-full border-4 border-theme-secondary rounded-lg px-4 mt-2">
+                    <div className="w-full border shadow-sm rounded-lg px-4 mt-2">
                         <div className="flex items-center h-full p-3 gap-2">
                             <p className="font-semibold text-3xl -mt-3">💳</p>
                             <p className="font-semibold">Transfer</p>

@@ -1,27 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThemeContext, { ThemeDispatch } from "./theme.context";
-import { useSession } from "next-auth/react";
 import { ITheme } from "@/Type";
-import { roboto } from "./fonts";
+import { roboto, fonts } from "./fonts";
+import { primaryColors, secondaryColors } from "./colors";
+
+const getInitialState = (): ITheme => {
+    const theme = localStorage.getItem("theme");
+    return theme
+        ? JSON.parse(theme)
+        : {
+              primary: {
+                  title: "red",
+                  class: "theme-primary-red",
+              },
+              secondary: {
+                  title: "teal",
+                  class: "theme-secondary-teal",
+              },
+              font: {
+                  title: "Roboto",
+                  class: roboto,
+              },
+          };
+};
+
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
+}
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const { data: session } = useSession();
-    const [theme, setTheme] = useState<ITheme>({
-        primary: {
-            title: "red",
-            pallete: "theme-primary-red",
-        },
-        secondary: {
-            title: "teal",
-            pallete: "theme-secondary-teal",
-        },
-        font: {
-            title: "Roboto",
-            class: roboto,
-        },
-    });
+    const [theme, setTheme] = useState<ITheme>(getInitialState);
+
+    useEffect(() => {
+        localStorage.setItem("theme", JSON.stringify(theme));
+    }, [theme]);
 
     const dispatch = (data: ThemeDispatch) => {
         switch (data.action) {
@@ -33,6 +47,14 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
                 return;
             case "SET_SECONDARY_COLOR":
                 setTheme((prev) => ({ ...prev, secondary: data.payload }));
+                return;
+            case "RAND_THEME":
+                setTheme({
+                    font: fonts[getRandomInt(fonts.length)],
+                    primary: primaryColors[getRandomInt(primaryColors.length)],
+                    secondary:
+                        secondaryColors[getRandomInt(secondaryColors.length)],
+                });
                 return;
             default:
                 return;

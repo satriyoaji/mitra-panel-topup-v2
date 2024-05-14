@@ -6,9 +6,10 @@ import {
     ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import Image from "next/image";
-import ProductCard from "./[id]/product-card";
 import TransactionStep from "./[id]/transaction-step";
 import List, { TData } from "./list";
+import TransactionDetail from "@/components/transaction-detail";
+import { transaction as data } from "./[id]/transaction";
 
 function Page() {
     const [selectedData, setSelectedData] = useState<TData | undefined>();
@@ -20,18 +21,28 @@ function Page() {
             </div>
             <div className="hidden md:block">
                 <ResizablePanelGroup direction="horizontal">
-                    <ResizablePanel defaultSize={66.6} minSize={50}>
+                    <ResizablePanel defaultSize={60} minSize={50}>
                         <List onClick={setSelectedData} />
                     </ResizablePanel>
                     <ResizableHandle />
-                    <ResizablePanel defaultSize={33.3} minSize={33.3}>
+                    <ResizablePanel defaultSize={40} minSize={40}>
                         {selectedData ? (
                             <div className="px-4 mt-12">
-                                <h5 className="text-2xl font-bold">
-                                    NDJKAS89DSA
-                                </h5>
-                                <hr className="mt-2 mb-4" />
-                                <ProductCard />
+                                <div>
+                                    <p className="text-muted-foreground text-xs">
+                                        Kode Transaksi
+                                    </p>
+                                    <h5 className="text-xl font-semibold">
+                                        NDJKAS89DSA
+                                    </h5>
+                                </div>
+                                <TransactionDetail
+                                    category={data.category}
+                                    product={data.product}
+                                    promo={data.promo}
+                                    form={data.form}
+                                    bank={data.bank}
+                                />{" "}
                                 <TransactionStep />
                             </div>
                         ) : (
