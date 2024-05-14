@@ -21,7 +21,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
                 "min-h-screen bg-background antialiased bg-slate-200 md:bg-theme-primary-50",
                 data.primary.class,
                 data.secondary.class,
-                data.font.class
+                data.font.class.className
             )}
         >
             {children}
