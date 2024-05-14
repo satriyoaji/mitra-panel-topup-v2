@@ -127,7 +127,7 @@ function List(props: IProps) {
 
     return (
         <div className="md:mx-2">
-            <div className="flex -mx-2 px-2 sticky top-14 md:top-0 py-4 bg-white flex-col space-y-1.5 mb-3">
+            <div className="flex -mx-2 px-2 sticky py-4 bg-white flex-col space-y-1.5 mb-3">
                 <p className="font-semibold text-lg">Invoice🧾</p>
                 <div className="flex space-x-1">
                     <Input
@@ -165,7 +165,7 @@ function List(props: IProps) {
                     )}
                 </div>
             </div>
-            <div className="flex flex-col space-y-3 md:max-h-[72vh] md:overflow-y-auto">
+            <div className="flex flex-col space-y-3 md:max-h-[78vh] md:overflow-y-auto">
                 {list.map(
                     (val, idx) =>
                         (filter.filter === "*" ||

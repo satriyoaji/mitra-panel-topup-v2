@@ -27,7 +27,7 @@ function Page() {
                     <ResizableHandle />
                     <ResizablePanel defaultSize={40} minSize={40}>
                         {selectedData ? (
-                            <div className="px-4 mt-12">
+                            <div className="px-4 mt-6">
                                 <div>
                                     <p className="text-muted-foreground text-xs">
                                         Kode Transaksi

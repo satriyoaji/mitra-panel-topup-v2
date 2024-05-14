@@ -48,7 +48,7 @@ function Header() {
     const { dispatch, data } = useContext(ThemeContext) as IThemeContext;
 
     return (
-        <header className="w-full flex justify-between z-20 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-200 rounded-b-2xl items-center top-0 sticky">
+        <header className="w-full flex justify-between z-20 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-400 rounded-b-2xl items-center top-0 sticky">
             <div className="md:hidden">
                 <Sheet>
                     <SheetTrigger asChild>
@@ -97,7 +97,7 @@ function Header() {
                     height={40}
                 />
             </Link>
-            <div className="hidden md:flex justify-between items-center md:container md:px-32 text-theme-secondary-900">
+            <div className="hidden md:flex justify-between items-center md:container md:px-32 text-theme-secondary-100">
                 <NavigationMenu>
                     <NavigationMenuList>
                         {paths.map((i) => (

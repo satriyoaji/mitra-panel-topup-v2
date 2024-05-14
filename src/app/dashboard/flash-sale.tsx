@@ -91,24 +91,26 @@ async function FlashSale() {
                             </h3>
                         </div>
                     </div>
-                    <div className="py-1 w-full flex rounded-lg bg-gradient-to-r from-theme-primary-900 to-theme-primary-200">
-                        <div
-                            className="no-scrollbar z-10 mb-2 pt-2 space-x-2 px-3"
-                            style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                overflowX: "auto",
-                                scrollbarWidth: "none",
-                            }}
-                        >
-                            {data.map((item, idx) => (
-                                <div
-                                    className="h-full w-full min-w-[7.5rem] max-w-[15rem]"
-                                    key={`${idx}`}
-                                >
-                                    <CardProduct data={item} />
-                                </div>
-                            ))}
+                    <div style={{ backgroundImage: 'url("/thunder.svg")' }} className="w-full bg-cover rounded-lg">
+                        <div className="py-1 w-full flex rounded-lg bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70">
+                            <div
+                                className="no-scrollbar z-10 mb-2 pt-2 space-x-2 px-3"
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    overflowX: "auto",
+                                    scrollbarWidth: "none",
+                                }}
+                            >
+                                {data.map((item, idx) => (
+                                    <div
+                                        className="h-full w-full min-w-[7.5rem] max-w-[15rem]"
+                                        key={`${idx}`}
+                                    >
+                                        <CardProduct data={item} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

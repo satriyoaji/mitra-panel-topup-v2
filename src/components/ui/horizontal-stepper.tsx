@@ -49,9 +49,14 @@ function HorizontalStepper({ list }: { list: TStepper[] }) {
                             {val.header}
                         </h3>
                         <div>{val.description}</div>
-                        <p className="text-xs text-muted-foreground font-semibold">
-                            Completed
-                        </p>
+                        {val.loading ?
+                            <p className="text-xs text-muted-foreground font-semibold">
+                                On Progress
+                            </p> :
+                            <p className="text-xs text-muted-foreground font-semibold">
+                                Completed
+                            </p>
+                        }
                     </li>
                 ))}
             </ol>

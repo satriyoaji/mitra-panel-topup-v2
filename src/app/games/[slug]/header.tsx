@@ -32,7 +32,7 @@ function Header({ category }: { category: IProductCategory }) {
                     )}
                 </div>
                 <div className="px-6">
-                    <div className="flex -mt-4 ml-4 z-40 absolute items-end">
+                    <div className="flex -mt-4 ml-4 z-10 absolute items-end">
                         {category?.logo_image ? (
                             <Image
                                 fill

@@ -40,9 +40,9 @@ function SaldoPointHistory() {
                 backgroundSize: "cover",
             }}
             className="my-4 md:my-0 w-[20rem]"
-            onClick={() => {}}
+            onClick={() => { }}
         >
-            <div className="p-2 h-full bg-indigo-500/70 rounded-lg">
+            <div className="p-2 h-full bg-theme-secondary-500/70 rounded-lg">
                 <div className="flex justify-end items-center">
                     <Tier
                         className="place-self-center m-3"
