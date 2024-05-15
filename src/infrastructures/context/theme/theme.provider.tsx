@@ -7,25 +7,21 @@ import { roboto, fonts } from "./fonts";
 import { primaryColors, secondaryColors } from "./colors";
 
 const getInitialState = (): ITheme => {
-    const theme = localStorage.getItem("theme");
-    return theme
-        ? JSON.parse(theme)
-        : {
-            logo: "/illustration/logo/1.png",
-            primary: {
-                title: "red",
-                class: "theme-primary-red",
-            },
-            secondary: {
-                title: "teal",
-                class: "theme-secondary-teal",
-            },
-            font: {
-                title: "Roboto",
-                class: roboto,
-            },
-
-        };
+    return global?.window?.localStorage?.getItem("theme") ? JSON.parse(localStorage.getItem("theme") as string) : {
+        logo: "/illustration/logo/1.png",
+        primary: {
+            title: "red",
+            class: "theme-primary-red",
+        },
+        secondary: {
+            title: "teal",
+            class: "theme-secondary-teal",
+        },
+        font: {
+            title: "Roboto",
+            class: roboto,
+        },
+    };
 };
 
 function getRandomInt(max: number) {
