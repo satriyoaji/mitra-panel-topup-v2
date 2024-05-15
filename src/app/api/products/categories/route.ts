@@ -31,7 +31,7 @@ export async function GET(req: Request) {
     // }
 
     // var result = await re.json();
-    
+
     var result = {
         "status": "SUCCESS",
         "code": "0000",

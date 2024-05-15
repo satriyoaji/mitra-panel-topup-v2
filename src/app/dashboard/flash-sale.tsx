@@ -94,7 +94,7 @@ async function FlashSale() {
                     <div style={{ backgroundImage: 'url("/thunder.svg")' }} className="w-full bg-cover rounded-lg">
                         <div className="py-1 w-full flex rounded-lg bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70">
                             <div
-                                className="no-scrollbar z-10 mb-2 pt-2 space-x-2 px-3"
+                                className="gap-3 p-3"
                                 style={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -104,7 +104,7 @@ async function FlashSale() {
                             >
                                 {data.map((item, idx) => (
                                     <div
-                                        className="h-full w-full min-w-[7.5rem] max-w-[15rem]"
+                                        className="h-full w-full min-w-[7.5rem] max-w-[12rem]"
                                         key={`${idx}`}
                                     >
                                         <CardProduct data={item} />

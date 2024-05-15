@@ -22,9 +22,8 @@ type prop = {
 function ProductCard(props: prop) {
     return (
         <Card
-            className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${
-                props.selected && "border-4 border-theme-secondary"
-            }`}
+            className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${props.selected && "border-4 border-theme-secondary"
+                }`}
             onClick={props.onClick}
         >
             {props.discount && (
@@ -50,8 +49,8 @@ function ProductCard(props: prop) {
                                             src={val.logo_image}
                                         />
                                     ) : ( */}
-                        <div className="p-1 hover:scale-125 transition duration-300 hover:rotate-12">
-                            <SketchLogoIcon className="m-auto" />
+                        <div className="p-1 aspect-square hover:scale-125 transition duration-300 hover:rotate-12 flex justify-center items-center">
+                            <SketchLogoIcon className="m-auto w-5 h-5" />
                         </div>
                         {/* )} */}
                     </div>

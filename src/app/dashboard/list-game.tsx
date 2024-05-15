@@ -91,7 +91,7 @@ export default function ListGame() {
 
     return (
         <React.Fragment>
-            <div className="md:flex md:items-end md:justify-between sticky top-10 py-2 bg-white">
+            <div className="md:flex md:items-end md:justify-between sticky z-10 top-10 py-2 bg-white">
                 <div className="flex md:block items-end justify-between mt-8">
                     <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
                     <div
@@ -137,15 +137,14 @@ export default function ListGame() {
                             <CardContent className="p-1 flex flex-col items-center">
                                 <div className="overflow-clip rounded w-full bg-slate-200">
                                     {val.logo_image !== "" ? (
-                                        <Image
-                                            fill
+                                        <img
                                             alt={val.alias}
-                                            className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
+                                            className="rounded aspect-square hover:scale-125 transition duration-300 hover:rotate-12"
                                             src={val.logo_image}
                                         />
                                     ) : (
-                                        <div className="w-full h-full hover:scale-125 transition duration-300 hover:rotate-12">
-                                            <CubeIcon className="text-white sm:w-20 w-16 m-auto sm:h-28 h-20" />
+                                        <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
+                                            <CubeIcon className="text-white m-auto h-20 w-20" />
                                         </div>
                                     )}
                                 </div>

@@ -17,14 +17,18 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 
     return (
         <body
+            style={{ backgroundImage: "url('/bg-global.svg')", backgroundSize: '30%' }}
             className={cn(
-                "min-h-screen bg-background antialiased bg-slate-200 md:bg-theme-primary-50",
+                "min-h-screen bg-repeat antialiased",
                 data.primary.class,
                 data.secondary.class,
                 data.font.class.className
             )}
         >
-            {children}
+            <div className="bg-gradient-to-b from-theme-primary-50/95 to-theme-primary-200/95">
+
+                {children}
+            </div>
         </body>
     );
 }
