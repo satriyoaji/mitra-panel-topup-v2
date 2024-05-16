@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import ToTopButton from "@/components/totop-button";
 import ThemeWrapper from "./theme-wrapper";
 import LayoutWrapper from "./layout-wrapper";
+import ThemeProvider from "@/infrastructures/context/theme/theme.provider";
 
 export const metadata: Metadata = {
     title: "Topup User",
@@ -22,19 +23,21 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <head />
-            <ThemeWrapper>
-                <NextAuthProvider>
-                    <Header />
-                    <LayoutWrapper>
-                        <div className="px-4 pt-2 pb-16 min-h-screen bg-slate-50 md:bg-white md:container">
-                            {children}
-                        </div>
-                    </LayoutWrapper>
-                    <Footer />
-                    <ToTopButton />
-                </NextAuthProvider>
-                <Toaster />
-            </ThemeWrapper>
+            <ThemeProvider>
+                <ThemeWrapper>
+                    <NextAuthProvider>
+                        <Header />
+                        <LayoutWrapper>
+                            <div className="px-4 pt-2 pb-16 min-h-screen bg-white md:container">
+                                {children}
+                            </div>
+                        </LayoutWrapper>
+                        <Footer />
+                        <ToTopButton />
+                    </NextAuthProvider>
+                    <Toaster />
+                </ThemeWrapper>
+            </ThemeProvider>
         </html>
     );
 }

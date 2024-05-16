@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="3584"
+   height="2026.6667"
+   viewBox="0 0 3584 2026.6667"
+   sodipodi:docname="vecteezy_monochrome-backdrop-with-edgy-spikes-and-dynamic-zigzag_28214043-0.eps"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath20">
+      <path
+         d="M 0,0 H 26880 V 15200 H 0 Z"
+         id="path18" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath26">
+      <path
+         d="M 4.57031,15200 H 26884.6 V 0 H 4.57031 Z"
+         id="path24" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="ink_ext_XXXXXX"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,2026.6667)">
+    <g
+       id="g10"
+       transform="scale(0.1)">
+      <path
+         d="M 4.57031,15200 H 26884.6 V 0 H 4.57031 v 15200"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path12" />
+      <g
+         id="g14">
+        <g
+           id="g16"
+           clip-path="url(#clipPath20)">
+          <g
+             id="g22"
+             clip-path="url(#clipPath26)">
+            <path
+               d="M -323.543,10240 6920,15556.5 6076.46,12283.5 9356.46,14320 5480,6960 360,5120 4956.46,8196.46 7116.46,11920 3560,9236.46 5240,12763.5 1356.46,9040 3000,9316.46 -760,6720 l 436.457,3520"
+               style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path28" />
+            <path
+               d="M -1000,3076.46 C -883.543,3120 9640,8960 9640,8960 l -3440,-3876.45 9323.5,4880 -3047,-4240 6683.5,3040 L 15720,3280 20323.5,4640 14883.5,-960 9080,-843.543 16556.5,2843.55 12520,2080 15443.5,5483.55 10003.5,3440 12120,6916.46 6920,1040 12643.5,3323.55 8556.46,-160 4323.55,-400 6403.55,4000 2280,1243.55 4440,4436.46 -723.543,-80 -1000,3076.46"
+               style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path30" />
+            <path
+               d="M -1036.45,11796.5 3676.46,14880 163.547,13760 4360,16297 -1160,13796.5 c 0,0 -276.45,-1236.5 -276.45,-1396.5 0,-160 400,-603.5 400,-603.5"
+               style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path32" />
+            <path
+               d="M 6944.44,8009.32 12428,10969.3 9591.53,7725.77 22280,15643.5 h -2036.5 l -6739.1,-4557.7 1600,2363.5 -8159.96,-5439.98"
+               style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path34" />
+            <path
+               d="M 11916.5,15440 6840,8560 l 8880,6036.5 -640,-1796.5 2996.5,2400 H 14920 l -3956.5,-2683.5 3433,3440 -2480,-516.5"
+               style="fill:#231f20;fill-opacity:1;fill-rule:nonzero;stroke:none"
+               id="path36" />
+            <path
+               d="m 23480,15680 -7716.5,-4960 2000,480 -2800,-3483.54 L 20520,10320 18076.5,5403.55 22760,8596.46 19880,4880 24316.5,8080 21116.5,2443.55 24563.5,4960 20200,0 l -123.5,2843.55 -3280,-3920 4123.5,-960 4320,6792.91 -523.5,-6960 3280,10000 L 23880,5323.55 27320,11680 21283.5,8763.55 l 2233,2676.45 763.5,-480 880,3403.5 -6880,-3963.5 8240,5643.5 -1716.5,-4967 3360,3600 c 0,0 473,2036.4 276.5,2080 -196.5,43.5 -1920,-716.5 -1920,-716.5 l -3040,-360"
+               style="fill:#231f20;fill-opacity:1;fill-rule:evenodd;stroke:none"
+               id="path38" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

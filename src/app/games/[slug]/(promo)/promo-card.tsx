@@ -18,7 +18,7 @@ function PromoCard({
         <div
             className={`rounded-lg shadow-sm flex cursor-pointer hover:bg-slate-50 ${
                 promo.id == selected?.id
-                    ? "border-4 divide-black border-theme-secondary divide-x-4 divide-dashed "
+                    ? "border-4 divide-theme-secondary-500 border-theme-secondary divide-x-4 divide-dashed "
                     : "border-2"
             }`}
             onClick={() => {

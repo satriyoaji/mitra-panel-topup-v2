@@ -130,9 +130,9 @@ function CheckoutAction({
             <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-sm bg-theme-secondary flex items-center justify-between px-4">
                 <div>
                     <h4 className="text-white text-xs">
-                        {session ? "Transfer + 10.000 Point" : "Transfer"}
+                        {session ? "Transfer + 20.000 Point" : "Transfer"}
                     </h4>
-                    <h4 className="text-white text-lg font-bold">
+                    <h4 className="text-white text-lg font-semibold">
                         {getTotalPrice}
                     </h4>
                 </div>
@@ -150,6 +150,7 @@ function CheckoutAction({
                 product={data.product}
                 promo={data.promo}
                 form={data.form}
+                bank={data.bank}
             />
         </>
     );

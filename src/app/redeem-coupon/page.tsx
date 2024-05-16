@@ -12,7 +12,7 @@ function Page() {
     const { data: session } = useSession();
 
     return (
-        <div className="mx-6 mt-4">
+        <div className="mx-6 mt-4 max-w-md">
             <h4 className="text-xl font-bold">Claim Coupon💸</h4>
             <p className="text-muted-foreground text-sm mt-2">
                 Kupon saldo point ini mempunyai tujuan untuk menggantikan nilai

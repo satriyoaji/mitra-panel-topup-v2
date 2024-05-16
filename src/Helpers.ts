@@ -1,4 +1,9 @@
-import { IProductCategory, TProduct } from "./Type";
+import {
+    IFlashSaleInProduct,
+    IProductCategory,
+    IPromo,
+    TProduct,
+} from "./Type";
 
 const priceMask = (val: number | undefined) => {
     if (!val) return "Rp 0";
@@ -37,6 +42,23 @@ function debounce<Params extends any[]>(
     };
 }
 
+const getTotalPrice = (
+    product: TProduct,
+    flashSale?: IFlashSaleInProduct,
+    promo?: IPromo
+) => {
+    let num = 0;
+
+    num += product.sale_price;
+    if (flashSale) num -= flashSale.discount_price;
+    if (promo) {
+        if (promo.promo_type == "fix") num -= promo.promo_value;
+        else num -= (promo.promo_value * product.sale_price) / 100;
+    }
+
+    return num;
+};
+
 function nFormatter(num: number) {
     const lookup = [
         { value: 1, symbol: "" },
@@ -65,4 +87,5 @@ export {
     debounce,
     nFormatter,
     nPlainFormatter,
+    getTotalPrice,
 };

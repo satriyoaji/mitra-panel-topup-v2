@@ -1,3 +1,5 @@
+import { NextFont } from "next/dist/compiled/@next/font";
+
 export interface LooseObject {
     [key: string]: any;
 }
@@ -42,7 +44,7 @@ export type TProductForm =
     | IProductFormOption;
 
 export interface IProductCategory {
-    uuid: number;
+    uuid: string;
     code: string;
     alias: string;
     status: number;
@@ -50,6 +52,10 @@ export interface IProductCategory {
     logo_image: string;
     description: string;
     forms?: TProductForm[];
+
+    key: string;
+    name: string;
+    image_url: string;
 }
 
 export type TTiersPrice = {
@@ -76,6 +82,10 @@ export type TProduct = {
     active: boolean;
     group_name: string;
     flash_sales?: IFlashSaleInProduct[];
+
+    key: string;
+    name: string;
+    price: number;
 };
 
 export type TMarkup = "percentage" | "fix";
@@ -128,6 +138,12 @@ export interface IXenditBank {
     country: string;
     currency: string;
     is_activated: boolean;
+    url: string;
+}
+
+export interface IBank {
+    url: string;
+    name: string;
 }
 
 export interface ITransaction {
@@ -137,7 +153,26 @@ export interface ITransaction {
     payment?: IPaymentMethod;
     form?: LooseObject;
     account?: IAccount;
-    bank?: IXenditBank;
+    bank?: IXenditBank | IBank;
 }
 
-export interface ITransactionItem {}
+export interface ITransactionItem { }
+
+export type TPrimaryPallete = {
+    title: string;
+    class: string;
+};
+
+export interface TSecondaryPallete extends TPrimaryPallete { }
+
+export type TFont = {
+    title: string;
+    class: NextFont;
+};
+
+export interface ITheme {
+    primary: TPrimaryPallete;
+    secondary: TSecondaryPallete;
+    font: TFont;
+    logo: string
+}

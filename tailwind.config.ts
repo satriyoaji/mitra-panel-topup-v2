@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
+
 module.exports = {
     darkMode: ["class"],
     content: [
@@ -29,23 +30,32 @@ module.exports = {
                     foreground: "hsl(var(--primary-foreground))",
                 },
                 "theme-primary": {
-                    DEFAULT: "var(--theme-primary-500)",
+                    DEFAULT: "hsl(var(--theme-primary-500) / <alpha-value>)",
                     foreground: "var(--theme-primary-foreground)",
-                    50: "var(--theme-primary-50)",
-                    100: "var(--theme-primary-100)",
-                    200: "var(--theme-primary-200)",
-                    300: "var(--theme-primary-300)",
-                    400: "var(--theme-primary-400)",
-                    500: "var(--theme-primary-500)",
-                    600: "var(--theme-primary-600)",
-                    700: "var(--theme-primary-700)",
-                    800: "var(--theme-primary-800)",
-                    900: "var(--theme-primary-900)",
+                    50: "hsl(var(--theme-primary-50) / <alpha-value>)",
+                    100: "hsl(var(--theme-primary-100) / <alpha-value>)",
+                    200: "hsl(var(--theme-primary-200) / <alpha-value>)",
+                    300: "hsl(var(--theme-primary-300) / <alpha-value>)",
+                    400: "hsl(var(--theme-primary-400) / <alpha-value>)",
+                    500: "hsl(var(--theme-primary-500) / <alpha-value>)",
+                    600: "hsl(var(--theme-primary-600) / <alpha-value>)",
+                    700: "hsl(var(--theme-primary-700) / <alpha-value>)",
+                    800: "hsl(var(--theme-primary-800) / <alpha-value>)",
+                    900: "hsl(var(--theme-primary-900) / <alpha-value>)",
                 },
                 "theme-secondary": {
-                    DEFAULT: "var(--theme-secondary)",
+                    DEFAULT: "hsl(var(--theme-secondary-500) / <alpha-value>)",
                     foreground: "var(--theme-secondary-foreground)",
-                    accent: "var(--theme-secondary-accent)",
+                    50: "hsl(var(--theme-secondary-50) / <alpha-value>)",
+                    100: "hsl(var(--theme-secondary-100) / <alpha-value>)",
+                    200: "hsl(var(--theme-secondary-200) / <alpha-value>)",
+                    300: "hsl(var(--theme-secondary-300) / <alpha-value>)",
+                    400: "hsl(var(--theme-secondary-400) / <alpha-value>)",
+                    500: "hsl(var(--theme-secondary-500) / <alpha-value>)",
+                    600: "hsl(var(--theme-secondary-600) / <alpha-value>)",
+                    700: "hsl(var(--theme-secondary-700) / <alpha-value>)",
+                    800: "hsl(var(--theme-secondary-800) / <alpha-value>)",
+                    900: "hsl(var(--theme-secondary-900) / <alpha-value>)",
                 },
                 secondary: {
                     DEFAULT: "hsl(var(--secondary))",

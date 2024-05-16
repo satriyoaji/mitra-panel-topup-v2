@@ -18,19 +18,16 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
     }, []);
 
     const handleSubmit = async () => {
-        const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/web/update-phone`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${session?.accessToken}`,
-                },
-                body: JSON.stringify({
-                    phone,
-                }),
-            }
-        );
+        const response = await fetch(`${process.env.API}/web/update-phone`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${session?.accessToken}`,
+            },
+            body: JSON.stringify({
+                phone,
+            }),
+        });
 
         if (!response.ok) {
             const res = await response.json();
@@ -52,7 +49,7 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center pt-4">
                 <Avatar className="my-3 h-16 w-16">
                     <AvatarImage
                         src={session?.user?.image as string}

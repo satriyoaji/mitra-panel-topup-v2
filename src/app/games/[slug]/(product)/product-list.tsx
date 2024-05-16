@@ -79,7 +79,7 @@ function ProductList(prop: IProductList) {
     };
 
     return (
-        <Card className="w-full my-4">
+        <Card className="w-full my-2">
             <CardContent>
                 <div className="flex mt-3">
                     <h4 className="font-semibold ml-1">Produk</h4>
@@ -109,10 +109,10 @@ function ProductList(prop: IProductList) {
                     className="mb-4 mt-2"
                 />
                 <div
-                    className="relative max-h-[30rem] overflow-y-auto no-scrollbar py-4 bg-slate-50 -mx-2 px-2"
+                    className="relative max-h-[30rem] overflow-y-auto py-4 bg-slate-50 -mx-2 px-2"
                     ref={ref}
                 >
-                    <div className="grid sm-grid-cols-3 grid-cols-2 no-scrollbar gap-2 -mt-2">
+                    <div className="grid sm:grid-cols-3 grid-cols-2 gap-2 -mt-2">
                         {(search ? productSearch : prop.products).map((val) => {
                             const item = (
                                 <ProductCard
@@ -124,9 +124,9 @@ function ProductList(prop: IProductList) {
                                     discount={
                                         val.flash_sales
                                             ? priceMask(
-                                                  val.flash_sales[0]
-                                                      .discount_price
-                                              )
+                                                val.flash_sales[0]
+                                                    .discount_price
+                                            )
                                             : undefined
                                     }
                                     onClick={() => {
@@ -141,10 +141,10 @@ function ProductList(prop: IProductList) {
                                     discountPrice={
                                         val.flash_sales
                                             ? priceMask(
-                                                  val.sale_price -
-                                                      val.flash_sales[0]
-                                                          .discount_price
-                                              )
+                                                val.sale_price -
+                                                val.flash_sales[0]
+                                                    .discount_price
+                                            )
                                             : undefined
                                     }
                                     name={val.product_name}
