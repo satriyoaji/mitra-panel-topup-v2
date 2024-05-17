@@ -30,7 +30,7 @@ function TransactionDetail({
         if (product.flash_sales && product.flash_sales.length > 0)
             flashSale = product.flash_sales[0];
 
-        const total = getTotalPrice(product, flashSale, promo);
+        const total = getTotalPrice(product, flashSale, promo, bank);
         return (
             <div>
                 <div className="grid gap-4 py-4">
@@ -121,6 +121,14 @@ function TransactionDetail({
                                                   promo.promo_value
                                               )}`
                                             : `- ${promo.promo_value}%`}
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {bank && bank.admin_fee && (
+                                <TableRow>
+                                    <TableCell>Admin Fee</TableCell>
+                                    <TableCell className="text-right text-red-500">
+                                        {`- ${bank.admin_fee}`}
                                     </TableCell>
                                 </TableRow>
                             )}

@@ -1,7 +1,9 @@
 import {
+    IBank,
     IFlashSaleInProduct,
     IProductCategory,
     IPromo,
+    IXenditBank,
     TProduct,
 } from "./Type";
 
@@ -45,7 +47,8 @@ function debounce<Params extends any[]>(
 const getTotalPrice = (
     product: TProduct,
     flashSale?: IFlashSaleInProduct,
-    promo?: IPromo
+    promo?: IPromo,
+    bank?: IXenditBank | IBank
 ) => {
     let num = 0;
 
@@ -55,6 +58,7 @@ const getTotalPrice = (
         if (promo.promo_type == "fix") num -= promo.promo_value;
         else num -= (promo.promo_value * product.sale_price) / 100;
     }
+    if (bank && bank.admin_fee) num += bank.admin_fee;
 
     return num;
 };

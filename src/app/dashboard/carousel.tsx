@@ -113,11 +113,17 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                                     ...getStyles(i),
                                 }}
                             >
-                                <Image
+                                {/* <Image
                                     src={item.path}
                                     alt={item.title}
                                     fill
-                                    style={{ aspectRatio: 27 / 9 }}
+                                    style={{ aspectRatio: 32 / 9 }}
+                                    className={`absolute object-cover  transition-opacity rounded-md`}
+                                /> */}
+                                <img
+                                    src={item.path}
+                                    alt={item.title}
+                                    style={{ aspectRatio: 32 / 9 }}
                                     className={`absolute object-cover  transition-opacity rounded-md`}
                                 />
                             </div>
@@ -140,21 +146,36 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                     <div
                         {...swipeHandlers}
                         className="overflow-hidden relative w-auto rounded-lg max-h-72"
-                        style={{ aspectRatio: 27 / 9 }}
+                        style={{ aspectRatio: 32 / 9 }}
                     >
                         {data.map((item, index) => (
-                            <Image
+                            <>
+                                {/* <Image
                                 key={index}
                                 src={item.path}
                                 alt={item.title}
                                 sizes="100%"
                                 fill
-                                style={{ aspectRatio: 27 / 9 }}
-                                className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${index === activeIndex
+                                style={{ aspectRatio: 32 / 9 }}
+                                className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
+                                    index === activeIndex
                                     ? "opacity-100"
                                     : "opacity-0"
+                                }`}
+                                /> */}
+                                <img
+                                    key={index}
+                                    src={item.path}
+                                    alt={item.title}
+                                    sizes="100%"
+                                    style={{ aspectRatio: 32 / 9 }}
+                                    className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
+                                        index === activeIndex
+                                            ? "opacity-100"
+                                            : "opacity-0"
                                     }`}
-                            />
+                                />
+                            </>
                         ))}
                     </div>
                 </div>

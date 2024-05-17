@@ -33,7 +33,7 @@ function PromoCard({
                         ? `${promo.promo_value}%`
                         : priceMask(promo.promo_value)}
                 </p>
-                <p className="text-xs text-center font-bold">
+                <p className="text-xs text-center">
                     {promo.limit_count && promo.limit_count > 0
                         ? `Max ${promo.limit_count}x`
                         : "No Limit"}
@@ -41,7 +41,7 @@ function PromoCard({
             </div>
             <div className="items-center justify-center pt-4 w-full">
                 <div className="pr-4 pl-8">
-                    <p className="font-semibold text-xs">{promo.code}</p>
+                    <p className="font-medium text-xs">{promo.code}</p>
                     <p className="text-sm mt-1.5 font-semibold">
                         {promo.ref_product
                             ? promo.ref_product.product_name

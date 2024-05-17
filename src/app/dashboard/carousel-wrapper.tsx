@@ -28,16 +28,23 @@ const getData = async () => {
             created_at: "2024-01-17T06:52:22.054715+07:00",
             updated_at: "2024-01-17T06:56:10.357787+07:00",
             title: "Banner new",
-            path: "https://cdn-panel.vcg.my.id/banners/mitra/1/1708978773-a4tcRqOYsVttBfCA.webp"
+            path: "https://cdn.vcgamers.com/news/wp-content/uploads/2022/08/Kode-Promo-VCGArmy.png",
         },
         {
             id: 2,
             created_at: "2024-01-17T06:52:22.054715+07:00",
             updated_at: "2024-01-17T06:56:10.357787+07:00",
             title: "Banner new 2",
-            path: "https://cdn-panel.vcg.my.id/banners/mitra/1/1708978685-2cXqV9Em0I0Cbme9.webp"
-        }
-    ]
+            path: "https://storage.googleapis.com/cdn.vcgamers.com/news/wp-content/uploads/2023/10/VCGamers-x-Gopay-All-Brand.png",
+        },
+        {
+            id: 3,
+            created_at: "2024-01-17T06:52:22.054715+07:00",
+            updated_at: "2024-01-17T06:56:10.357787+07:00",
+            title: "Banner new 2",
+            path: "https://cdn.vcgamers.com/news/wp-content/uploads/2023/07/26Jun_VCGamers-Bebas-Biaya-Admin-Free-Payment-Fee-1144x640.png",
+        },
+    ];
 };
 
 const CarouselWrapper = async () => {

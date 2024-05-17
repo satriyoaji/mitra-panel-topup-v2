@@ -45,7 +45,6 @@ export function Purchase({
     form,
     bank,
 }: IDetailProp) {
-    console.log(bank);
     if (promo) {
         if (
             !isWithinInterval(new Date(), {
@@ -61,7 +60,7 @@ export function Purchase({
         if (product.flash_sales && product.flash_sales.length > 0)
             flashSale = product.flash_sales[0];
 
-        const total = getTotalPrice(product, flashSale, promo);
+        const total = getTotalPrice(product, flashSale, promo, bank);
 
         return (
             <Dialog

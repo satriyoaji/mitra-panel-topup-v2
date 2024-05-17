@@ -1,4 +1,4 @@
-import { priceMask } from "@/Helpers";
+import { getTotalPrice, priceMask } from "@/Helpers";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
@@ -105,25 +105,19 @@ function CheckoutAction({
         return setIsCheckoutOpen(true);
     };
 
-    const getTotalPrice: string = useMemo(() => {
+    const getTotal: string = useMemo(() => {
         let num = 0;
 
-        if (data.product) {
-            num += data.product.sale_price;
-            if (data.product.flash_sales)
-                num -= data.product.flash_sales[0].discount_price;
-            if (data.promo) {
-                if (data.promo.promo_type == "fix")
-                    num -= data.promo.promo_value;
-                else
-                    num -=
-                        (data.promo.promo_value * data.product.sale_price) /
-                        100;
-            }
-        }
+        if (data.product)
+            num += getTotalPrice(
+                data.product,
+                data.product?.flash_sales?.at(0),
+                data.promo,
+                data.bank
+            );
 
         return priceMask(num);
-    }, [data.product, data.promo]);
+    }, [data.product, data.promo, data.bank]);
 
     return (
         <>
@@ -133,7 +127,7 @@ function CheckoutAction({
                         {session ? "Transfer + 20.000 Point" : "Transfer"}
                     </h4>
                     <h4 className="text-white text-lg font-semibold">
-                        {getTotalPrice}
+                        {getTotal}
                     </h4>
                 </div>
                 <div className="">
