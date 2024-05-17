@@ -11,26 +11,30 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
+import mandiri from "../../../../../public/Bank/Mandiri.png";
+import bni from "../../../../../public/Bank/BNI.png";
+import btn from "../../../../../public/Bank/BTN.png";
+import bri from "../../../../../public/Bank/BRI.png";
 
 const bank: IBank[] = [
     {
         name: "Mandiri",
-        url: "/Bank/Mandiri.PNG",
+        url: mandiri,
         admin_fee: 2500,
     },
     {
         name: "BTN",
-        url: "/Bank/BTN.PNG",
+        url: btn,
         admin_fee: 1500,
     },
     {
         name: "BRI",
-        url: "/Bank/BRI.PNG",
+        url: bri,
         admin_fee: 2500,
     },
     {
         name: "BNI",
-        url: "/Bank/BNI.PNG",
+        url: bni,
     },
 ];
 
