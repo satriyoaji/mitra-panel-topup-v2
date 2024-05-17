@@ -1,4 +1,5 @@
 import { NextFont } from "next/dist/compiled/@next/font";
+import { StaticImageData } from "next/image";
 
 export interface LooseObject {
     [key: string]: any;
@@ -138,12 +139,12 @@ export interface IXenditBank {
     country: string;
     currency: string;
     is_activated: boolean;
-    url: string;
+    url: string | StaticImageData;
     admin_fee?: number;
 }
 
 export interface IBank {
-    url: string;
+    url: string | StaticImageData;
     name: string;
     admin_fee?: number;
 }

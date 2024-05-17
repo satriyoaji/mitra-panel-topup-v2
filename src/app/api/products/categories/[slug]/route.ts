@@ -282,7 +282,13 @@ export async function GET(
                     flash_sales: null,
                 },
             ],
-            forms: null,
+            forms: [
+                {
+                    key: "hp",
+                    alias: "hp",
+                    type: "numeric",
+                },
+            ],
         },
         pagination: null,
         error_message: null,
