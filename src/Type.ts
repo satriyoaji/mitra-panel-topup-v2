@@ -139,11 +139,13 @@ export interface IXenditBank {
     currency: string;
     is_activated: boolean;
     url: string;
+    admin_fee?: number;
 }
 
 export interface IBank {
     url: string;
     name: string;
+    admin_fee?: number;
 }
 
 export interface ITransaction {
@@ -156,14 +158,14 @@ export interface ITransaction {
     bank?: IXenditBank | IBank;
 }
 
-export interface ITransactionItem { }
+export interface ITransactionItem {}
 
 export type TPrimaryPallete = {
     title: string;
     class: string;
 };
 
-export interface TSecondaryPallete extends TPrimaryPallete { }
+export interface TSecondaryPallete extends TPrimaryPallete {}
 
 export type TFont = {
     title: string;
@@ -174,5 +176,5 @@ export interface ITheme {
     primary: TPrimaryPallete;
     secondary: TSecondaryPallete;
     font: TFont;
-    logo: string
+    logo: string;
 }

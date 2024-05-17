@@ -10,6 +10,9 @@ import TransactionStep from "./[id]/transaction-step";
 import List, { TData } from "./list";
 import TransactionDetail from "@/components/transaction-detail";
 import { transaction as data } from "./[id]/transaction";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Page() {
     const [selectedData, setSelectedData] = useState<TData | undefined>();
@@ -28,13 +31,23 @@ function Page() {
                     <ResizablePanel defaultSize={40} minSize={40}>
                         {selectedData ? (
                             <div className="px-4 mt-6">
-                                <div>
-                                    <p className="text-muted-foreground text-xs">
-                                        Kode Transaksi
-                                    </p>
-                                    <h5 className="text-xl font-semibold">
-                                        NDJKAS89DSA
-                                    </h5>
+                                <div className="flex justify-between items-center mt-3">
+                                    <div className="">
+                                        <p className="text-muted-foreground text-xs">
+                                            Kode Transaksi
+                                        </p>
+                                        <h5 className="text-xl font-semibold">
+                                            NDJKAS89DSA
+                                        </h5>
+                                        <div>
+                                            <Badge variant="destructive">
+                                                Failed
+                                            </Badge>
+                                        </div>
+                                    </div>
+                                    <Link href="/redeem-coupon">
+                                        <Button size="sm">Refund</Button>
+                                    </Link>
                                 </div>
                                 <TransactionDetail
                                     category={data.category}

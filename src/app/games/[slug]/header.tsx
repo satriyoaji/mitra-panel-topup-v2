@@ -14,12 +14,11 @@ function Header({ category }: { category: IProductCategory }) {
                     style={{ aspectRatio: 64 / 9 }}
                 >
                     {category?.banner_image ? (
-                        <Image
-                            fill
+                        <img
                             alt={category.alias}
                             src={category?.banner_image ?? "/hero-games.svg"}
                             style={{ aspectRatio: 64 / 9 }}
-                            className={`relative object-cover rounded-t-xl`}
+                            className={`relative object-cover w-full rounded-t-xl`}
                         />
                     ) : (
                         <Image
@@ -34,8 +33,7 @@ function Header({ category }: { category: IProductCategory }) {
                 <div className="px-6">
                     <div className="flex -mt-4 ml-4 z-10 absolute items-end">
                         {category?.logo_image ? (
-                            <Image
-                                fill
+                            <img
                                 alt={category.alias}
                                 className="rounded  border bg-card text-card-foreground shadow w-16"
                                 src={category?.logo_image}

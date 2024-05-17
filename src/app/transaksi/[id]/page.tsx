@@ -4,6 +4,9 @@ import TransactionStep from "./transaction-step";
 import { Purchase } from "@/app/games/[slug]/(checkout)/detail";
 import { transaction as data } from "./transaction";
 import TransactionDetail from "@/components/transaction-detail";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 function DetailPage() {
     return (
@@ -12,9 +15,17 @@ function DetailPage() {
                 Detail Transaksi 📃
             </p>
             <hr className="my-2" />
-            <h5 className="text-xl font-semibold mt-3 ml-2 text-right">
-                NDJKAS89DSA
-            </h5>
+            <div className="flex justify-between items-center mt-3">
+                <div className="">
+                    <h5 className="text-xl font-semibold ml-2">NDJKAS89DSA</h5>
+                    <div>
+                        <Badge variant="destructive">Failed</Badge>
+                    </div>
+                </div>
+                <Link href="/redeem-coupon">
+                    <Button size="sm">Refund</Button>
+                </Link>
+            </div>
             <div className="md:grid grid-cols-2 gap-10">
                 <TransactionDetail
                     category={data.category}

@@ -1,4 +1,4 @@
-import { nPlainFormatter } from "@/Helpers";
+import { nPlainFormatter, priceMask } from "@/Helpers";
 import { IBank, IXenditBank } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Combobox } from "@/components/ui/combobox";
@@ -16,14 +16,17 @@ const bank: IBank[] = [
     {
         name: "Mandiri",
         url: "/Bank/Mandiri.PNG",
+        admin_fee: 2500,
     },
     {
         name: "BTN",
         url: "/Bank/BTN.PNG",
+        admin_fee: 1500,
     },
     {
         name: "BRI",
         url: "/Bank/BRI.PNG",
+        admin_fee: 2500,
     },
     {
         name: "BNI",
@@ -67,9 +70,9 @@ function Payment() {
                         <div className="flex justify-between items-center p-3">
                             <div className="flex items-center h-full gap-3">
                                 <p className="font-semibold text-xl ml-2">🪙</p>
-                                <p className="font-semibold">Points</p>
+                                <p className="font-medium">Points</p>
                             </div>
-                            <p className="text-lg font-semibold">
+                            <p className="text-lg font-medium">
                                 {nPlainFormatter(10_000)} Points
                             </p>
                         </div>
@@ -77,7 +80,7 @@ function Payment() {
                     <div className="w-full border shadow-sm rounded-lg px-4 mt-2">
                         <div className="flex items-center h-full p-3 gap-2">
                             <p className="font-semibold text-3xl -mt-3">💳</p>
-                            <p className="font-semibold">Transfer</p>
+                            <p className="font-medium">Transfer</p>
                         </div>
                         <hr />
                         {(data.payment == "transfer" ||
@@ -85,7 +88,7 @@ function Payment() {
                             <div className="my-4 grid grid-cols-2 gap-2">
                                 {bank.map((item) => (
                                     <div
-                                        className={`text-center flex flex-col justify-center items-center rounded-lg p-4 shadow cursor-pointer ${
+                                        className={`text-center flex flex-col md:flex-row justify-center md:justify-between items-center rounded-lg p-4 md:px-6 shadow cursor-pointer ${
                                             data.bank?.name == item.name
                                                 ? "border-4 border-theme-secondary"
                                                 : "border"
@@ -103,6 +106,14 @@ function Payment() {
                                             width={70}
                                             height={70}
                                         />
+                                        {item.admin_fee && (
+                                            <>
+                                                <Separator className="mb-2 mt-3 md:hidden" />
+                                                <p className="text-xs font-medium text-muted-foreground">
+                                                    +{priceMask(item.admin_fee)}
+                                                </p>
+                                            </>
+                                        )}
                                     </div>
                                 ))}
                                 {/* <Label className="ml-1 mb-1">Bank VA *</Label>

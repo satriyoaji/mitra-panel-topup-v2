@@ -22,8 +22,9 @@ type prop = {
 function ProductCard(props: prop) {
     return (
         <Card
-            className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${props.selected && "border-4 border-theme-secondary"
-                }`}
+            className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${
+                props.selected && "border-4 border-theme-secondary"
+            }`}
             onClick={props.onClick}
         >
             {props.discount && (
@@ -66,7 +67,7 @@ function ProductCard(props: prop) {
                                 {props.price}
                             </p>
                             <p
-                                className="text-red-500 text-xs font-semibold"
+                                className="text-red-500 text-xs font-medium"
                                 style={{ fontSize: "80%" }}
                             >
                                 {props.discountPrice}
@@ -74,7 +75,7 @@ function ProductCard(props: prop) {
                         </div>
                     ) : (
                         <p
-                            className="text-xs font-semibold mt-0.5"
+                            className="text-xs font-medium mt-0.5"
                             style={{ fontSize: "80%" }}
                         >
                             {props.price}

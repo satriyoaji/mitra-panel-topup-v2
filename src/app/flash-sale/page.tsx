@@ -70,7 +70,7 @@ function Page() {
                 ) : (
                     <>
                         {data.length > 0 ? (
-                            <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-3 gap-2 mx-2">
+                            <div className="grid sm:grid-cols-4 md:grid-cols-6 grid-cols-2 gap-2 mx-2">
                                 {data.map((item, idx) => (
                                     <div
                                         className="w-full h-full"
