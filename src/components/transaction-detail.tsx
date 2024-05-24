@@ -48,7 +48,7 @@ function TransactionDetail({
                             </div>
                             {/* )} */}
                             <div>
-                                <p>{category.alias}</p>
+                                <p>{category.name}</p>
                                 <p className="font-semibold">
                                     {product.product_name}
                                 </p>

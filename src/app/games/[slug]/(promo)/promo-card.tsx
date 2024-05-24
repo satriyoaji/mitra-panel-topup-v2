@@ -51,7 +51,7 @@ function PromoCard({
                         <p className="text-sm font-medium">
                             {promo.ref_product
                                 ? promo.ref_product.product_name
-                                : promo.ref_category?.alias}
+                                : promo.ref_category?.name}
                         </p>
                     </div>
                     <p className="text-xs w-full">

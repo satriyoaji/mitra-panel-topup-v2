@@ -8,7 +8,7 @@ import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { debounce, uniqeCategory } from "@/Helpers";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function ListGame() {
     const [group, setGroup] = useState<TProductGroup>({
@@ -29,9 +29,9 @@ export default function ListGame() {
         var res = await fetch(
             `/api/products/categories/?` +
             new URLSearchParams({
-                page_num: `${pageIndex}`,
-                page_size: "8",
-                code: search,
+                page: `${pageIndex}`,
+                limit: "10",
+                key: search,
                 group_id: `${group?.id ?? ""}`,
             })
         );
@@ -41,14 +41,15 @@ export default function ListGame() {
             var result = await res.json();
 
             if (result.data) {
-                if (more)
-                    setData((prev) => uniqeCategory(prev.concat(result.data)));
-                else setData(uniqeCategory(result.data));
+                setData(result.data)
+                // if (more)
+                //     setData((prev) => uniqeCategory(prev.concat(result.data)));
+                // else setData(uniqeCategory(result.data));
             } else {
                 if (!more) setData([]);
             }
 
-            setTotal(result.pagination.total_data);
+            setTotal(result.manifest.total);
         }
     };
 
@@ -129,18 +130,18 @@ export default function ListGame() {
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
                 {data.map((val: IProductCategory, idx) => (
                     <Link
-                        href={`/games/${val.uuid}`}
-                        key={val.uuid}
+                        href={`/games/${val.key}`}
+                        key={idx}
                         className="w-full h-full"
                     >
                         <Card className="w-full h-full min-w-fit rounded-sm hover:bg-slate-50">
                             <CardContent className="p-1 flex flex-col items-center">
                                 <div className="overflow-clip rounded w-full bg-slate-200">
-                                    {val.logo_image !== "" ? (
+                                    {val.image_url !== "" ? (
                                         <img
-                                            alt={val.alias}
+                                            alt={val.name}
                                             className="rounded aspect-square hover:scale-125 transition duration-300 hover:rotate-12"
-                                            src={val.logo_image}
+                                            src={val.image_url}
                                         />
                                     ) : (
                                         <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
@@ -149,7 +150,7 @@ export default function ListGame() {
                                     )}
                                 </div>
                                 <p className="text-xs text-center my-2">
-                                    {val.alias}
+                                    {val.name}
                                 </p>
                             </CardContent>
                         </Card>

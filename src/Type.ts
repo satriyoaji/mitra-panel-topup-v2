@@ -46,11 +46,11 @@ export type TProductForm =
 
 export interface IProductCategory {
     uuid: string;
-    code: string;
-    alias: string;
-    status: number;
-    banner_image: string;
-    logo_image: string;
+    // code: string;
+    // alias: string;
+    // status: number;
+    // banner_image: string;
+    // logo_image: string;
     description: string;
     forms?: TProductForm[];
 
