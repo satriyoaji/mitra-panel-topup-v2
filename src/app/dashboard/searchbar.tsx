@@ -30,9 +30,9 @@ function Searchbar() {
 
     const getList = async () => {
         let searchParams = new URLSearchParams({
-            page_num: `1`,
-            page_size: "10",
-            code: search,
+            page: `1`,
+            limit: "10",
+            key: search,
         });
 
         var res = await fetch(`/api/products/categories?` + searchParams);
@@ -45,7 +45,6 @@ function Searchbar() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 return;
             }
-            console.log("dadawd", dataJson.data);
             setData([]);
         }
     };
@@ -95,7 +94,7 @@ function Searchbar() {
                                     setIsOpen(false);
                                 }}
                             >
-                                <div className="text-sm">{i.alias}</div>
+                                <div className="text-sm">{i.name}</div>
                             </div>
                         ))
                     ) : (
