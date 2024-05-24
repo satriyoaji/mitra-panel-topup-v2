@@ -13,30 +13,27 @@ function Header({ category }: { category: IProductCategory }) {
                     className="overflow-hidden relative w-full rounded-t-xl"
                     style={{ aspectRatio: 64 / 9 }}
                 >
-                    {category?.banner_image ? (
-                        <img
-                            alt={category.alias}
-                            src={category?.banner_image ?? "/hero-games.svg"}
-                            style={{ aspectRatio: 64 / 9 }}
-                            className={`relative object-cover w-full rounded-t-xl`}
-                        />
-                    ) : (
-                        <Image
-                            fill
-                            alt={category.alias}
-                            src={"/hero-games.svg"}
-                            style={{ aspectRatio: 64 / 9 }}
-                            className={`relative object-cover w-full rounded-t-xl`}
-                        />
-                    )}
+                    {/* <img
+                        alt={category.name}
+                        src={category?.banner_image ?? "/hero-games.svg"}
+                        style={{ aspectRatio: 64 / 9 }}
+                        className={`relative object-cover w-full rounded-t-xl`}
+                    /> */}
+                    <Image
+                        fill
+                        alt={category.name}
+                        src={"/hero-games.svg"}
+                        style={{ aspectRatio: 64 / 9 }}
+                        className={`relative object-cover w-full rounded-t-xl`}
+                    />
                 </div>
                 <div className="px-6">
                     <div className="flex -mt-4 ml-4 z-10 absolute items-end">
-                        {category?.logo_image ? (
+                        {category?.image_url ? (
                             <img
-                                alt={category.alias}
+                                alt={category.name}
                                 className="rounded  border bg-card text-card-foreground shadow w-16"
-                                src={category?.logo_image}
+                                src={category?.image_url}
                             />
                         ) : (
                             <div className="border rounded flex items-center justify-center w-16 h-16 bg-slate-200">
@@ -44,7 +41,7 @@ function Header({ category }: { category: IProductCategory }) {
                             </div>
                         )}
                         <div className="flex flex-col mb-2 ml-3">
-                            <h5 className="font-bold">{category?.alias}</h5>
+                            <h5 className="font-bold">{category?.name}</h5>
                         </div>
                     </div>
                     <Description />

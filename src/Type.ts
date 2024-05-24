@@ -50,7 +50,7 @@ export interface IProductCategory {
     // alias: string;
     // status: number;
     // banner_image: string;
-    logo_image: string;
+    // logo_image: string;
     description: string;
     forms?: TProductForm[];
 

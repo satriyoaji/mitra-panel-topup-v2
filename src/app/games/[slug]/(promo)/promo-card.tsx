@@ -45,7 +45,7 @@ function PromoCard({
                     <p className="text-sm mt-1.5 font-semibold">
                         {promo.ref_product
                             ? promo.ref_product.product_name
-                            : promo.ref_category?.alias}
+                            : promo.ref_category?.name}
                     </p>
                     <p className="text-xs">
                         {format(parseISO(promo.finish_at), "dd MMM yyy")}
