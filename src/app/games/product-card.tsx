@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
 import Link from "next/link";
 import { LightningBoltIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { IFlashSaleProduct } from "@/Type";
@@ -18,7 +18,7 @@ function FlashSaleCard({
             className="w-full h-fit"
         >
             <Card
-                className={`h-full rounded-sm border-t-0 border-r-0 ${
+                className={`h-full min-h-[10rem] rounded-sm border-t-0 border-r-0 ${
                     selected && "border-4 border-theme-secondary"
                 }`}
             >
@@ -33,7 +33,7 @@ function FlashSaleCard({
                         </div>
                     </div>
                 </div>
-                <CardContent className="p-2 space-y-2 flex flex-col hover:bg-slate-50">
+                <div className="p-2 space-y-2 flex flex-col hover:bg-slate-50">
                     <div className="overflow-clip rounded w-full">
                         {/* {val.logo_image !== "" ? (
                                         <img
@@ -69,7 +69,7 @@ function FlashSaleCard({
                             )}
                         </p>
                     </div>
-                </CardContent>
+                </div>
             </Card>
         </Link>
     );

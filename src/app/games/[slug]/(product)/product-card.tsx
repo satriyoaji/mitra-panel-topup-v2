@@ -22,12 +22,12 @@ type prop = {
 function ProductCard(props: prop) {
     return (
         <Card
-            className={`h-full hover:bg-slate-50 rounded-lg cursor-pointer ${
-                props.selected && "border-4 border-theme-secondary"
+            className={`h-full min-h-[6rem] hover:bg-slate-50 rounded-lg cursor-pointer ${
+                props.selected && "border-2 border-theme-secondary"
             }`}
             onClick={props.onClick}
         >
-            {props.discount && (
+            {/* {props.discount && (
                 <div className="flex flex-row-reverse">
                     <div>
                         <div
@@ -39,9 +39,9 @@ function ProductCard(props: prop) {
                         </div>
                     </div>
                 </div>
-            )}
-            <CardContent className="p-2 space-y-2 flex flex-col justify-center h-full">
-                <div className="flex space-x-0.5 items-center">
+            )} */}
+            <div className="p-3 space-y-2 flex flex-col justify-between h-full">
+                <div className="flex space-x-0.5">
                     <div className="overflow-clip rounded w-fit min-w-[2rem]">
                         {/* {val.logo_image !== "" ? (
                                         <img
@@ -59,19 +59,24 @@ function ProductCard(props: prop) {
                 </div>
                 <div className="mx-2">
                     {props.discountPrice ? (
-                        <div className="mb-3">
-                            <p
-                                className="line-through text-xs mt-0.5"
-                                style={{ fontSize: "60%" }}
-                            >
-                                {props.price}
-                            </p>
-                            <p
-                                className="text-red-500 text-xs font-medium"
-                                style={{ fontSize: "80%" }}
-                            >
-                                {props.discountPrice}
-                            </p>
+                        <div className="flex justify-between items-end">
+                            <div>
+                                <p
+                                    className="line-through text-xs mt-0.5"
+                                    style={{ fontSize: "60%" }}
+                                >
+                                    {props.price}
+                                </p>
+                                <p
+                                    className="text-red-500 text-xs font-medium"
+                                    style={{ fontSize: "80%" }}
+                                >
+                                    {props.discountPrice}
+                                </p>
+                            </div>
+                            <div className="bg-red-500 text-white -mr-4 -mb-2 rounded-br-md rounded-tl-md p-1">
+                                <LightningBoltIcon />
+                            </div>
                         </div>
                     ) : (
                         <p
@@ -82,7 +87,7 @@ function ProductCard(props: prop) {
                         </p>
                     )}
                 </div>
-            </CardContent>
+            </div>
         </Card>
     );
 }

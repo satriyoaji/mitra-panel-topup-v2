@@ -115,41 +115,46 @@ function ProductList(prop: IProductList) {
                     <div className="grid sm:grid-cols-3 grid-cols-2 gap-2 -mt-2">
                         {(search ? productSearch : prop.products).map((val) => {
                             const item = (
-                                <ProductCard
-                                    key={val.uuid}
-                                    category={prop.category}
-                                    selected={
-                                        val.uuid === prop.productSelected?.uuid
-                                    }
-                                    discount={
-                                        val.flash_sales
-                                            ? priceMask(
-                                                val.flash_sales[0]
-                                                    .discount_price
-                                            )
-                                            : undefined
-                                    }
-                                    onClick={() => {
-                                        dispatch({
-                                            action: "SET_PRODUCT",
-                                            payload: val,
-                                        });
-                                        prop.nextRef.current?.scrollIntoView({
-                                            behavior: "smooth",
-                                        });
-                                    }}
-                                    discountPrice={
-                                        val.flash_sales
-                                            ? priceMask(
-                                                val.sale_price -
-                                                val.flash_sales[0]
-                                                    .discount_price
-                                            )
-                                            : undefined
-                                    }
-                                    name={val.product_name}
-                                    price={priceMask(val.sale_price)}
-                                />
+                                <div className="h-full">
+                                    <ProductCard
+                                        key={val.uuid}
+                                        category={prop.category}
+                                        selected={
+                                            val.uuid ===
+                                            prop.productSelected?.uuid
+                                        }
+                                        discount={
+                                            val.flash_sales
+                                                ? priceMask(
+                                                      val.flash_sales[0]
+                                                          .discount_price
+                                                  )
+                                                : undefined
+                                        }
+                                        onClick={() => {
+                                            dispatch({
+                                                action: "SET_PRODUCT",
+                                                payload: val,
+                                            });
+                                            prop.nextRef.current?.scrollIntoView(
+                                                {
+                                                    behavior: "smooth",
+                                                }
+                                            );
+                                        }}
+                                        discountPrice={
+                                            val.flash_sales
+                                                ? priceMask(
+                                                      val.sale_price -
+                                                          val.flash_sales[0]
+                                                              .discount_price
+                                                  )
+                                                : undefined
+                                        }
+                                        name={val.product_name}
+                                        price={priceMask(val.sale_price)}
+                                    />
+                                </div>
                             );
 
                             if (filter) {
