@@ -4,6 +4,14 @@ import { Input } from "@/components/ui/input";
 import React, { useCallback, useEffect, useState } from "react";
 import PromoCard from "./promo-card";
 import { useToast } from "@/components/ui/use-toast";
+import {
+    DialogContent,
+    Dialog,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+} from "@/components/ui/dialog";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 function Promo({
     categoryUuid,
@@ -23,6 +31,7 @@ function Promo({
     const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
     const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [open, setOpen] = useState(false);
     const { toast } = useToast();
 
     const getData = async (id?: string) => {
@@ -116,10 +125,14 @@ function Promo({
     }, [product]);
 
     useEffect(() => {
-        setMergePromos(promos.concat(productPromos.filter(item2 =>
-            !promos.some(item1 => item1.id === item2.id)
-        )))
-    }, [promos, productPromos])
+        setMergePromos(
+            promos.concat(
+                productPromos.filter(
+                    (item2) => !promos.some((item1) => item1.id === item2.id)
+                )
+            )
+        );
+    }, [promos, productPromos]);
 
     const selectPromo = (isSecret: boolean, promo?: IPromo) => {
         if (promo) {
@@ -143,6 +156,7 @@ function Promo({
             ) {
                 setSelectedPromo(promo);
                 onPromoSelected(promo);
+                setOpen(false);
                 return;
             }
 
@@ -159,34 +173,69 @@ function Promo({
     };
 
     return (
-        <div className="space-y-3">
-            <div className="mt-2 flex space-x-2 items-center">
-                <Input
-                    placeholder="Punya Kode Promo? Masukan di sini"
-                    value={hiddenPromoCode}
-                    onChange={(e) => setHiddenPromoCode(e.target.value)}
-                />
-                <Button disabled={loading} size="sm" onClick={getHiddenPromo}>
-                    {loading ? "Loading..." : "Get Promo"}
-                </Button>
-            </div>
-            {hiddenPromo && (
+        <>
+            {selectedPromo ? (
                 <PromoCard
-                    promo={hiddenPromo}
                     selected={selectedPromo}
-                    setSelected={(e) => selectPromo(true, e)}
-                    isSecret
+                    promo={selectedPromo}
+                    setSelected={() => setOpen(true)}
                 />
+            ) : (
+                <div
+                    onClick={() => setOpen(true)}
+                    className="rounded-lg cursor-pointer hover:bg-slate-50 py-3 px-6 border-2 flex justify-between items-center border-theme-secondary-500"
+                >
+                    <p className="p-0 m-0">Pilih Promo</p>
+                    <ChevronRightIcon />
+                </div>
             )}
-            {mergePromos.map((i) => (
-                <PromoCard
-                    key={i.code}
-                    promo={i}
-                    selected={selectedPromo}
-                    setSelected={(e) => selectPromo(false, e)}
-                />
-            ))}
-        </div>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Promo</DialogTitle>
+                        <DialogDescription>
+                            Pilih promo paling cuan.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-3">
+                        <div className="mt-2 flex space-x-2 items-center">
+                            <Input
+                                placeholder="Punya Kode Promo? Masukan di sini"
+                                value={hiddenPromoCode}
+                                onChange={(e) =>
+                                    setHiddenPromoCode(e.target.value)
+                                }
+                            />
+                            <Button
+                                disabled={loading}
+                                size="sm"
+                                onClick={getHiddenPromo}
+                            >
+                                {loading ? "Loading..." : "Get Promo"}
+                            </Button>
+                        </div>
+                        <div className="space-y-3 max-h-[56vh] overflow-y-auto">
+                            {hiddenPromo && (
+                                <PromoCard
+                                    promo={hiddenPromo}
+                                    selected={selectedPromo}
+                                    setSelected={(e) => selectPromo(true, e)}
+                                    isSecret
+                                />
+                            )}
+                            {mergePromos.map((i) => (
+                                <PromoCard
+                                    key={i.code}
+                                    promo={i}
+                                    selected={selectedPromo}
+                                    setSelected={(e) => selectPromo(true, e)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </DialogContent>
+            </Dialog>
+        </>
     );
 }
 

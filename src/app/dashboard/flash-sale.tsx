@@ -35,12 +35,12 @@ async function getFlashSale() {
                 category_alias: "INDOSAT",
                 category_code: "Indosat-C",
                 active: true,
-                group_name: "Pulsa Provider"
+                group_name: "Pulsa Provider",
             },
             discount_price: 1000,
             start_at: "2023-05-06T07:00:00+07:00",
             finish_at: "2023-05-07T07:00:00+07:00",
-            active: true
+            active: true,
         },
         {
             id: 4,
@@ -55,14 +55,14 @@ async function getFlashSale() {
                 category_alias: "Genshin Impact",
                 category_code: "GenshinImpact-C",
                 active: true,
-                group_name: "Trial"
+                group_name: "Trial",
             },
             discount_price: 2000,
             start_at: "2023-05-07T07:00:00+07:00",
             finish_at: "2023-05-08T07:00:00+07:00",
-            active: true
-        }
-    ]
+            active: true,
+        },
+    ];
 }
 
 async function FlashSale() {
@@ -91,7 +91,10 @@ async function FlashSale() {
                             </h3>
                         </div>
                     </div>
-                    <div style={{ backgroundImage: 'url("/thunder.svg")' }} className="w-full bg-cover rounded-lg">
+                    <div
+                        style={{ backgroundImage: 'url("/thunder.svg")' }}
+                        className="w-full bg-cover rounded-lg"
+                    >
                         <div className="py-1 w-full flex rounded-lg bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70">
                             <div
                                 className="gap-3 p-3"
@@ -104,7 +107,7 @@ async function FlashSale() {
                             >
                                 {data.map((item, idx) => (
                                     <div
-                                        className="h-full w-full min-w-[7.5rem] max-w-[12rem]"
+                                        className="h-full w-full min-w-[7.5rem] max-w-[11.5rem]"
                                         key={`${idx}`}
                                     >
                                         <CardProduct data={item} />

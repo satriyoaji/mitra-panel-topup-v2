@@ -58,7 +58,7 @@ function CheckoutAction({
         )
             return toast({
                 title: "Failed",
-                description: "VA Bank belum dipilih",
+                description: "Metode pembayaran belum dipilih",
                 variant: "destructive",
                 action: (
                     <ToastAction

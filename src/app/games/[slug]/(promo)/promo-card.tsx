@@ -1,5 +1,6 @@
 import { priceMask } from "@/Helpers";
 import { IPromo } from "@/Type";
+import { Separator } from "@/components/ui/separator";
 import { format, parseISO } from "date-fns";
 import React from "react";
 
@@ -16,9 +17,9 @@ function PromoCard({
 }) {
     return (
         <div
-            className={`rounded-lg shadow-sm flex cursor-pointer hover:bg-slate-50 ${
+            className={`rounded-lg shadow-sm flex cursor-pointer text-theme-secondary-900 hover:bg-slate-50 ${
                 promo.id == selected?.id
-                    ? "border-4 divide-theme-secondary-500 border-theme-secondary divide-x-4 divide-dashed "
+                    ? "border-2 divide-theme-secondary-500 border-theme-secondary divide-x-2 divide-dashed "
                     : "border-2"
             }`}
             onClick={() => {
@@ -26,7 +27,7 @@ function PromoCard({
                 else setSelected();
             }}
         >
-            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-theme-primary-200 rounded-s-md">
+            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-white rounded-s-md">
                 <p></p>
                 <p className="font-bold">
                     {promo.promo_type == "percentage"
@@ -39,16 +40,25 @@ function PromoCard({
                         : "No Limit"}
                 </p>
             </div>
-            <div className="items-center justify-center pt-4 w-full">
-                <div className="pr-4 pl-8">
-                    <p className="font-medium text-xs">{promo.code}</p>
-                    <p className="text-sm mt-1.5 font-semibold">
-                        {promo.ref_product
-                            ? promo.ref_product.product_name
-                            : promo.ref_category?.alias}
-                    </p>
-                    <p className="text-xs">
-                        {format(parseISO(promo.finish_at), "dd MMM yyy")}
+            <div className="items-center justify-center pt-4 w-full rounded-tr-md  rounded-br-md bg-gradient-to-br from-theme-secondary-50 to-theme-secondary-200">
+                <div className="pr-4 pl-6 space-y-2">
+                    <div className="flex justify-between items-center">
+                        <p className="text-xs py-1 px-2 rounded bg-theme-secondary-200 text-theme-secondary-900 font-medium w-fit">
+                            {promo.code}
+                        </p>
+                    </div>
+                    <div className="flex justify-between items-center rounded-md px-2 py-1 bg-white">
+                        <p className="text-sm font-medium">
+                            {promo.ref_product
+                                ? promo.ref_product.product_name
+                                : promo.ref_category?.name}
+                        </p>
+                    </div>
+                    <p className="text-xs w-full">
+                        →{" "}
+                        <span className="ml-2">
+                            {format(parseISO(promo.finish_at), "dd MMMM yyy")}
+                        </span>
                     </p>
                 </div>
                 {isSecret ? (

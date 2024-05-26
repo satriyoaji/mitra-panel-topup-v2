@@ -40,7 +40,7 @@ function SaldoPointHistory() {
                 backgroundSize: "cover",
             }}
             className="my-4 md:my-0 w-[20rem]"
-            onClick={() => { }}
+            onClick={() => {}}
         >
             <div className="p-2 h-full bg-theme-secondary-500/70 rounded-lg">
                 <div className="flex justify-end items-center">
@@ -50,13 +50,9 @@ function SaldoPointHistory() {
                     />
                 </div>
                 <div className="w-full flex justify-end text-start items-end h-[7rem] mb-2">
-                    <div className="w-full p-2">
-                        <p className="font-bold text-theme-primary-200 text-xs">
-                            Saldo Points
-                        </p>
-                        <p className="font-semibold text-xl text-theme-primary-100">
-                            20.000 Points
-                        </p>
+                    <div className="w-full p-2 text-white">
+                        <p className="text-xs">Saldo Points</p>
+                        <p className="font-medium text-xl">20.000 Points</p>
                     </div>
                 </div>
             </div>

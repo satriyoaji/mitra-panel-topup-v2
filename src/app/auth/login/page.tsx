@@ -27,10 +27,10 @@ async function page() {
                             🔐Login
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Masuk dengan akun google anda
+                            Redirect ke VCGamers Panel Account
                         </p>
                     </div>
-                    <UserAuthForm />
+                    {/* <UserAuthForm /> */}
                 </div>
             </div>
         </div>

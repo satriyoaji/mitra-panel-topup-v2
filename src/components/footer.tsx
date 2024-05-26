@@ -35,20 +35,20 @@ const getSocmed = async () => {
     // return [];
     return [
         {
-            "id": 1,
-            "created_at": "2023-12-16T22:20:25.32085+07:00",
-            "updated_at": "2023-12-16T22:20:25.32085+07:00",
-            "name": "instagram",
-            "link": "http://www.instagram.com"
+            id: 1,
+            created_at: "2023-12-16T22:20:25.32085+07:00",
+            updated_at: "2023-12-16T22:20:25.32085+07:00",
+            name: "instagram",
+            link: "http://www.instagram.com",
         },
         {
-            "id": 2,
-            "created_at": "2023-12-16T22:20:25.32085+07:00",
-            "updated_at": "2023-12-16T22:20:25.32085+07:00",
-            "name": "twitter",
-            "link": "http://www.twitter.com"
-        }
-    ]
+            id: 2,
+            created_at: "2023-12-16T22:20:25.32085+07:00",
+            updated_at: "2023-12-16T22:20:25.32085+07:00",
+            name: "twitter",
+            link: "http://www.twitter.com",
+        },
+    ];
 };
 
 async function Footer() {
@@ -105,7 +105,7 @@ async function Footer() {
     };
 
     return (
-        <div className="bg-theme-primary-700 pt-4 px-4 pb-12 flex flex-col items-center rounded-t-2xl border-t-4 border-theme-secondary">
+        <div className="bg-theme-primary-400 pt-4 px-4 pb-12 flex flex-col items-center rounded-t-2xl border-t-4 border-theme-secondary">
             <p className="font-bold text-theme-primary-foreground">
                 Follow Us On
             </p>

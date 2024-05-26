@@ -87,8 +87,8 @@ export function Purchase({
                         <Separator className="mb-2" />
                         <div className="flex justify-between items-center">
                             <div className="text-xs space-y-0.5">
-                                <p className="font-medium">Total Harga</p>
-                                <p className="font-bold text-sm">
+                                <p className="">Total Harga</p>
+                                <p className="font-semibold text-sm">
                                     {priceMask(total)}
                                 </p>
                             </div>

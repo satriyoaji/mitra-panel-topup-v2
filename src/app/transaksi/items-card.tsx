@@ -50,7 +50,7 @@ function ItemsCard(props: TItemsCard) {
                             <div>
                                 <div className="flex flex-col">
                                     <p className="text-sm">{props.name}</p>
-                                    <p className="text-xs font-semibold">
+                                    <p className="text-xs font-medium">
                                         {props.product}
                                     </p>
                                 </div>
@@ -61,7 +61,7 @@ function ItemsCard(props: TItemsCard) {
                                 <p className="text-xs text-muted-foreground mb-1">
                                     Total
                                 </p>
-                                <p className="text-sm font-semibold mb-2">
+                                <p className="text-sm font-medium mb-2">
                                     {priceMask(props.price)}
                                 </p>
                             </div>

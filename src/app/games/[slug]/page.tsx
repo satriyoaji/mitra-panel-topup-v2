@@ -91,7 +91,7 @@ function Page({ params }: { params: { slug: string } }) {
                     )}
                     <div ref={productListRef}>
                         <ProductList
-                            category={data.category.alias}
+                            category={data.category.name}
                             nextRef={methodRef}
                             products={product}
                             productSelected={data.product}
