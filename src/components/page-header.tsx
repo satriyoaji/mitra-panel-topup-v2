@@ -93,7 +93,7 @@ function Header() {
                 >
                     <Image src={data.logo} alt="dw" width={40} height={40} />
                 </Link>
-                <div className="hidden md:flex pl-8 text-theme-secondary-100 w-full">
+                <div className="hidden md:flex pl-8 text-theme-secondary-50 w-full">
                     <NavigationMenu>
                         <NavigationMenuList className="w-fit">
                             {paths.map((i) => (

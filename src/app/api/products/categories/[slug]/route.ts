@@ -28,11 +28,11 @@ export async function GET(
         data: {
             uuid: "4c0af17a-9883-4f6c-9b78-da1a5d03f84b",
             code: "Indosat-C",
-            alias: "INDOSAT",
+            name: "INDOSAT",
             status: 2,
             banner_image:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0ed3Oq94wXlmpj2o1y56IY7FhloNLtWqOCEV0S5cKHQ&s   ",
-            logo_image:
+            image_url:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVwx4rRHWJFMGhfj5HGs9I8KNIrsFhKiGMxFtBshmwrw&s",
             description: "",
             products: [

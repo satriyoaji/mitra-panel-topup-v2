@@ -40,14 +40,14 @@ function PromoCard({
                         : "No Limit"}
                 </p>
             </div>
-            <div className="items-center justify-center pt-4 w-full bg-gradient-to-br from-theme-secondary-50 to-theme-secondary-200">
+            <div className="items-center justify-center pt-4 w-full rounded-tr-md  rounded-br-md bg-gradient-to-br from-theme-secondary-50 to-theme-secondary-200">
                 <div className="pr-4 pl-6 space-y-2">
                     <div className="flex justify-between items-center">
                         <p className="text-xs py-1 px-2 rounded bg-theme-secondary-200 text-theme-secondary-900 font-medium w-fit">
                             {promo.code}
                         </p>
                     </div>
-                    <div className="flex justify-between items-center px-2 py-1 bg-white">
+                    <div className="flex justify-between items-center rounded-md px-2 py-1 bg-white">
                         <p className="text-sm font-medium">
                             {promo.ref_product
                                 ? promo.ref_product.product_name
