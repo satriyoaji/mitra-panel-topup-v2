@@ -5,13 +5,14 @@ import StatusSelect from "./status-select";
 import { Button } from "@/components/ui/button";
 import { DateRange } from "react-day-picker";
 
-export type TFilter = {
-    date: DateRange | undefined;
-    filter: string | undefined;
+export type TFilter = {  
+    page: number;
+    search: string | undefined;
+    status: number | undefined;
 };
 
 type Prop = {
-    onChange: (date: DateRange | undefined, filter: string | undefined) => void;
+    onChange: (filter: string | undefined) => void;
     state: TFilter;
 };
 
@@ -19,15 +20,16 @@ function FilterTransaksi(prop: Prop) {
     const [filter, setFilter] = useState<TFilter>(prop.state);
 
     const onApply = () => {
-        prop.onChange(filter.date, filter.filter);
+        // prop.onChange(filter.filter);
     };
 
     const onClear = () => {
         setFilter({
-            date: undefined,
-            filter: "*",
+            search: undefined,
+            status: undefined,
+            page: 1,
         });
-        prop.onChange(undefined, "*");
+        prop.onChange("");
     };
 
     return (
@@ -38,15 +40,15 @@ function FilterTransaksi(prop: Prop) {
             <div className="flex flex-col p-2">
                 <div className="space-y-2">
                     <StatusSelect
-                        value={filter.filter}
+                        value={filter.status?.toString()}
                         onChange={(e) =>
                             setFilter((prev) => ({
                                 ...prev,
-                                filter: e,
+                                status: Number(e),
                             }))
                         }
                     />
-                    <DatePickerWithRange
+                    {/* <DatePickerWithRange
                         date={filter.date}
                         onChange={(e) =>
                             setFilter((prev) => ({
@@ -54,7 +56,7 @@ function FilterTransaksi(prop: Prop) {
                                 date: e,
                             }))
                         }
-                    />
+                    /> */}
                 </div>
                 <div className="flex space-x-2">
                     <Button

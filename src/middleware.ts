@@ -23,6 +23,10 @@ export default async function middleware(
     res.headers.set("X-Sign", sign);
     res.headers.set("X-User-Id", mitraid);
     res.headers.set("X-Timestamp", timestamp.toString());
+    res.headers.set(
+      "Authorization",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlNDZlM2VhZi02Mzg5LTRjMzYtODNhMC1lMDY1MjYxYTY4M2EiLCJleHAiOjE3MTg1MjEwODAsImlhdCI6MTcxNTkyOTA4MCwianRpIjoiZjJlYTY5YzYtNTcyZi00ZmY3LTkyNDYtNjA1YzBlZDdjOTJlIiwiaWQiOiJlNDZlM2VhZi02Mzg5LTRjMzYtODNhMC1lMDY1MjYxYTY4M2EifQ.DH9x0I_Y3-muXwNClDIEokaTtdKANO31efF9FvyLbfE"
+    );
 
     return res;
   }

@@ -31,7 +31,6 @@ function Detail(props: TDetail) {
             <div className="py-2 flex gap-4">
                 <div className="flex flex-col justify-center">
                     <img
-                        alt="Remy Sharp"
                         className="rounded  border bg-card text-card-foreground shadow w-24"
                         src={props.icon}
                     />

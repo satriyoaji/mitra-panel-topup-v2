@@ -17,7 +17,7 @@ function StatusSelect({
     onChange: (val: string | undefined) => void;
     value?: string;
 }) {
-    const [val, setVal] = useState<string | undefined>(value ?? "*");
+    const [val, setVal] = useState<string | undefined>(value ?? "");
 
     const onSelect = useCallback((v: string | undefined) => {
         setVal(v);

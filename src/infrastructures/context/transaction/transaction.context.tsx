@@ -6,10 +6,8 @@ import {
     IProductCategory,
     IPromo,
     ITransaction,
-    IXenditBank,
     LooseObject,
     TProduct,
-    IBank,
     IPayment,
 } from "@/Type";
 import React from "react";

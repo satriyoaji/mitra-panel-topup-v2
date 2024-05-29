@@ -1,60 +1,79 @@
-import React from "react";
-import { Card } from "./ui/card";
+"use client";
+
+import { ITransactionHistoryDetail } from "@/Type";
+import { Card } from "@/components/ui/card";
 import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
-import { Table, TableBody, TableCell, TableFooter, TableRow } from "./ui/table";
-import { Separator } from "./ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableRow,
+} from "@/components/ui/table";
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { getTotalPrice, nPlainFormatter, priceMask } from "@/Helpers";
 import { ITransaction } from "@/Type";
 import { isWithinInterval, parseISO } from "date-fns";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import HorizontalStepper from "@/components/ui/horizontal-stepper";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-function TransactionDetail({
-    product,
-    category,
-    promo,
-    form,
-    bank,
-}: ITransaction) {
-    if (promo) {
-        if (
-            !isWithinInterval(new Date(), {
-                start: parseISO(promo.start_at),
-                end: parseISO(promo.finish_at),
-            })
-        )
-            promo = undefined;
-    }
+function TransactionHistoryDetail({ id }: { id: string }) {
+  const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
+    undefined
+  );
 
-    let flashSale;
-    if (product && category) {
-        if (product.flash_sales && product.flash_sales.length > 0)
-            flashSale = product.flash_sales[0];
+  useEffect(() => {
+    (async () => {
+      var re = await fetch(`/api/transaction/${id}`);
 
-        const total = getTotalPrice(product, flashSale, promo, bank);
-        return (
+      var res = await re.json();
+      console.log(res);
+      setData(res.data);
+    })();
+  }, [id]);
+
+  if (data)
+    return (
+      <div className="mt-4 mx-2">
+        <p className="font-medium ml-2 mb-2 text-lg">Detail Transaksi 📃</p>
+        <hr className="my-2" />
+        <div className="flex justify-between items-center mt-3">
+          <div className="">
             <div>
-                <div className="grid gap-4 py-4">
-                    <Card className="bg-slate-50  p-4">
-                        <div className="text-xs mb-4 flex items-center space-x-4">
-                            {/* {val.logo_image !== "" ? (
+              <Badge variant="warning">Menunggu Pembayaran</Badge>
+            </div>
+            <h5 className="font-medium ml-2 mt-1">{data.transaction_code}</h5>
+          </div>
+          <Link href="/redeem-coupon">
+            <Button size="sm">Refund</Button>
+          </Link>
+        </div>
+        <div className="md:grid grid-cols-1 gap-10">
+          <div>
+            <div className="grid gap-4 py-4">
+              <Card className="bg-slate-50  p-4">
+                <div className="text-xs mb-4 flex items-center space-x-4">
+                  {/* {val.logo_image !== "" ? (
                                             <img
                                                 alt="Remy Sharp"
                                                 className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                                                 src={val.logo_image}
                                             />
                                         ) : ( */}
-                            <div className="h-fit w-fit p-2">
-                                <SketchLogoIcon className="m-auto" />
-                            </div>
-                            {/* )} */}
-                            <div>
-                                <p>{category.name}</p>
-                                <p className="font-semibold">
-                                    {product.product_name}
-                                </p>
-                            </div>
-                        </div>
-                        {form && category.forms && (
+                  <div className="h-fit w-fit p-2">
+                    <SketchLogoIcon className="m-auto" />
+                  </div>
+                  {/* )} */}
+                  <div>
+                    <p>{data.category_name}</p>
+                    <p className="font-semibold">{data.product_name}</p>
+                  </div>
+                </div>
+                {/* {form && category.forms && (
                             <div className="mt-6">
                                 <p className="text-xs font-semibold">
                                     Data Tambahan
@@ -81,38 +100,29 @@ function TransactionDetail({
                                     </TableBody>
                                 </Table>
                             </div>
-                        )}
-                    </Card>
-                    <Table>
-                        <TableBody className="text-xs">
-                            <TableRow>
-                                <TableCell>Harga</TableCell>
-                                <TableCell className="text-right space-y-1">
-                                    {flashSale ? (
-                                        <>
-                                            <div className="flex space-x-2 justify-end">
-                                                <p className="text-red-500">
-                                                    Flash Sale
-                                                </p>
-                                                <p className="line-through">
-                                                    {priceMask(
-                                                        product.sale_price
-                                                    )}
-                                                </p>
-                                            </div>
-                                            <p>
-                                                {priceMask(
-                                                    product.sale_price -
-                                                        flashSale.discount_price
-                                                )}
-                                            </p>
-                                        </>
-                                    ) : (
-                                        <>{priceMask(product.sale_price)}</>
-                                    )}
-                                </TableCell>
-                            </TableRow>
-                            {promo && (
+                        )} */}
+              </Card>
+              <Table>
+                <TableBody className="text-xs">
+                  <TableRow>
+                    <TableCell>Harga</TableCell>
+                    <TableCell className="text-right space-y-1">
+                      {data.paid_price != data.price ? (
+                        <>
+                          <div className="flex space-x-2 justify-end">
+                            <p className="text-red-500">Discount</p>
+                            <p className="line-through">
+                              {priceMask(data.price)}
+                            </p>
+                          </div>
+                          <p>{priceMask(data.paid_price)}</p>
+                        </>
+                      ) : (
+                        <>{priceMask(data.paid_price)}</>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                  {/* {promo && (
                                 <TableRow>
                                     <TableCell>Promo</TableCell>
                                     <TableCell className="text-right text-red-500">
@@ -123,28 +133,28 @@ function TransactionDetail({
                                             : `- ${promo.promo_value}%`}
                                     </TableCell>
                                 </TableRow>
-                            )}
-                            {bank && bank.fee_amount && (
+                            )} */}
+                  {/* {bank && bank.fee_amount && (
                                 <TableRow>
                                     <TableCell>Admin Fee</TableCell>
                                     <TableCell className="text-right">
                                         {`+ ${priceMask(bank.fee_amount)}`}
                                     </TableCell>
                                 </TableRow>
-                            )}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TableCell>Total Harga</TableCell>
-                                <TableCell className="text-right">
-                                    {priceMask(total)}
-                                </TableCell>
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
-                </div>
-                <Separator className="my-4" />
-                <p>Pembayaran</p>
+                            )} */}
+                </TableBody>
+                <TableFooter>
+                  <TableRow>
+                    <TableCell>Total Harga</TableCell>
+                    <TableCell className="text-right">
+                      {priceMask(data.paid_price)}
+                    </TableCell>
+                  </TableRow>
+                </TableFooter>
+              </Table>
+            </div>
+            <Separator className="my-4" />
+            {/* <p>Pembayaran</p>
                 <div className="flex items-center w-full gap-4">
                     <div className="p-2 w-full h-full rounded-lg border flex flex-col justify-center items-center">
                         <p className="font-medium text-xl ml-2">🪙</p>
@@ -165,16 +175,19 @@ function TransactionDetail({
                                 />
                                 <Separator className="my-2" />
                                 <p className="font-medium text-sm">
-                                    {priceMask(total - 20_000)}
+                                    {priceMask(data.paid_price)}
                                 </p>
                             </div>
                         </>
                     )}
-                </div>
-            </div>
-        );
-    }
-    return <></>;
+                </div> */}
+          </div>
+          <div className="m-8">
+            <HorizontalStepper list={data.history_status} />
+          </div>
+        </div>
+      </div>
+    );
 }
 
-export default TransactionDetail;
+export default TransactionHistoryDetail;

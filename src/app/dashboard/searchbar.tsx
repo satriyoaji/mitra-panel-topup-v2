@@ -86,8 +86,9 @@ function Searchbar() {
                 />
                 <CommandList className="min-h-[15rem]">
                     {data.length > 0 ? (
-                        data.map((i) => (
+                        data.map((i, idx) => (
                             <div
+                                key={idx}
                                 className="px-5 py-2 hover:bg-slate-50 cursor-pointer"
                                 onClick={() => {
                                     router.push(`/games/${i.uuid}`);

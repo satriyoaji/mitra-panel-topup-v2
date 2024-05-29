@@ -133,16 +133,6 @@ export interface IAccount {
 
 export type IPaymentMethod = "transfer" | "transfer & points" | "points";
 
-export interface IXenditBank {
-  name: string;
-  code: string;
-  country: string;
-  currency: string;
-  is_activated: boolean;
-  url: string | StaticImageData;
-  admin_fee?: number;
-}
-
 export interface IPayment {
   payment_method: "VIRTUAL_ACCOUNT" | "EWALLET" | "QR_CODE";
   payment_channel: string;
@@ -173,7 +163,49 @@ export interface ITransaction {
   bank?: IPayment;
 }
 
-export interface ITransactionItem {}
+export interface ITransactionHistoryList {
+  date: string;
+  transaction_code: string;
+  category_name: string;
+  product_name: string;
+  status: number;
+  status_name: string;
+  price: number;
+  payment_channel: string;
+}
+
+export interface IPaymentInfo {
+  invoice_code: string;
+  payment_method: string;
+  payment_channel: string;
+  virtual_account_member: string;
+  virtual_account_name: string;
+  payment_amount: number;
+  expired_at: string;
+}
+
+export interface ITransactionHistory {
+  status: number;
+  status_name: string;
+  timestamp: string;
+}
+
+export interface ITransactionHistoryDetail {
+  date: string;
+  transaction_code: string;
+  category_key: string;
+  category_name: string;
+  product_key: string;
+  product_name: string;
+  email: string;
+  phone: string;
+  order_description: string;
+  customer_data: string;
+  price: number;
+  paid_price: number;
+  history_status: ITransactionHistory[];
+  payment_information: IPaymentInfo;
+}
 
 export type TPrimaryPallete = {
   title: string;
