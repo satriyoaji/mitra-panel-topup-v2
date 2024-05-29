@@ -32,7 +32,7 @@ function SelectedPayment({ onClick }: { onClick?: () => void }) {
                                 />
                                 <Image
                                     alt={data.bank.name}
-                                    src={data.bank.url}
+                                    src={data.bank.image_url}
                                     width={70}
                                     height={70}
                                 />

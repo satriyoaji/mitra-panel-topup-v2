@@ -10,6 +10,7 @@ import {
     LooseObject,
     TProduct,
     IBank,
+    IPayment,
 } from "@/Type";
 import React from "react";
 
@@ -39,7 +40,7 @@ export type TransactionSetAccount = {
 };
 export type TransactionSetXenditBank = {
     action: "SET_BANK";
-    payload?: IXenditBank | IBank;
+    payload?: IPayment;
 };
 
 export type TransactionDispatch =

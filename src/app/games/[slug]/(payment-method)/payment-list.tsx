@@ -18,62 +18,9 @@ import { priceMask } from "@/Helpers";
 import TransactionContext, {
     ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
-import { IBank } from "@/Type";
-import { group } from "console";
+import { IBank, IPaymentGroup } from "@/Type";
 
-interface groupMethod {
-    group: string;
-    items: IBank[];
-}
-
-const paymentMethods: groupMethod[] = [
-    {
-        group: "Transfer Virtual Account",
-        items: [
-            {
-                name: "Mandiri Virtual Account",
-                url: mandiri,
-                admin_fee: 2500,
-            },
-            {
-                name: "BTN Virtual Account",
-                url: btn,
-                admin_fee: 1500,
-            },
-            {
-                name: "BRI Virtual Account",
-                url: bri,
-                admin_fee: 2500,
-            },
-            {
-                name: "BNI Virtual Account",
-                url: bni,
-            },
-        ],
-    },
-    {
-        group: "e-Wallet",
-        items: [
-            {
-                name: "DANA",
-                url: mandiri,
-                admin_fee: 500,
-            },
-            {
-                name: "OVO",
-                url: btn,
-                admin_fee: 1000,
-            },
-            {
-                name: "Gopay",
-                url: bri,
-                admin_fee: 500,
-            },
-        ],
-    },
-];
-
-function PaymentList() {
+function PaymentList({paymentGroup} : {paymentGroup: IPaymentGroup[]}) {
     const [isOpen, setIsOpen] = useState(false);
     const { data, dispatch } = useContext(
         TransactionContext
@@ -91,13 +38,13 @@ function PaymentList() {
                         </DialogDescription>
                     </DialogHeader>
                     <div className="max-h-[56vh] overflow-y-scroll px-8 pb-8">
-                        {paymentMethods.map((item) => (
+                        {paymentGroup.map((item) => (
                             <>
                                 <p className="text-muted-foreground text-xs">
-                                    {item.group}
+                                    {item.name}
                                 </p>
                                 <div className="mt-1.5 mb-4">
-                                    {item.items.map((item) => (
+                                    {item.payment_method.map((item) => (
                                         <>
                                             <div
                                                 className={`text-center flex hover:bg-theme-secondary-50 justify-between items-center px-2 py-4 cursor-pointer`}
@@ -112,7 +59,7 @@ function PaymentList() {
                                                 <div className="md:flex items-center gap-4">
                                                     <Image
                                                         alt={item.name}
-                                                        src={item.url}
+                                                        src={item.image_url}
                                                         width={50}
                                                         height={50}
                                                     />
@@ -120,12 +67,12 @@ function PaymentList() {
                                                         {item.name}
                                                     </p>
                                                 </div>
-                                                {item.admin_fee && (
+                                                {item.fee_amount && (
                                                     <>
                                                         <p className="text-xs font-medium text-muted-foreground">
                                                             +
                                                             {priceMask(
-                                                                item.admin_fee
+                                                                item.fee_amount
                                                             )}
                                                         </p>
                                                     </>
