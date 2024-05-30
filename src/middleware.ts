@@ -46,6 +46,7 @@ export default async function middleware(
   const authMiddleware = await withAuth({
     pages: {
       signIn: `/auth/login`,
+      newUser: "/auth/register",
     },
   });
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { UserAuthForm } from "./user-auth-form";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
@@ -8,11 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { getCsrfToken } from "next-auth/react";
 
 async function page() {
   const session = await getServerSession(options);
-  const csrfToken = await getCsrfToken();
 
   if (session) return redirect("/");
 
@@ -31,18 +28,15 @@ async function page() {
           <div className="w-full">
             <div className="border p-8 rounded-lg shadow-md w-full max-w-md">
               <h1 className="pt-4 text-2xl font-semibold tracking-tight">
-                🔐Login
+                🔐Register
               </h1>
-              <form
-                method="post"
-                action="/api/auth/signin/email"
-                className="w-full max-w-md grid gap-2 pt-4"
-              >
-                <input
-                  name="csrfToken"
-                  type="hidden"
-                  defaultValue={csrfToken}
-                />
+              <div className="w-full max-w-md grid gap-2 pt-4">
+                <div className="grid w-full max-w-sm gap-1.5">
+                  <Label htmlFor="nama" className="text-left">
+                    Nama
+                  </Label>
+                  <Input id="nama" placeholder="Masukan nama" />
+                </div>
                 <div className="grid w-full max-w-sm gap-1.5">
                   <Label htmlFor="email" className="text-left">
                     Email
@@ -50,7 +44,7 @@ async function page() {
                   <Input id="email" type="email" placeholder="Masukan Email" />
                 </div>
                 <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="passwor" className="text-left">
+                  <Label htmlFor="password" className="text-left">
                     Password
                   </Label>
                   <Input
@@ -59,21 +53,29 @@ async function page() {
                     placeholder="Masukan Password"
                   />
                 </div>
+                <div className="grid w-full max-w-sm gap-1.5">
+                  <Label htmlFor="Whatsapp" className="text-left">
+                    No. Whatsapp
+                  </Label>
+                  <Input
+                    id="Whatsapp"
+                    type="tel"
+                    placeholder="Masukan No. Whatsapp"
+                  />
+                </div>
 
                 <div className="mt-4 space-y-1">
-                  <Button type="submit" className="w-full">
-                    Login
-                  </Button>
+                  <Button className="w-full">Register</Button>
                   <div className="flex items-center justify-center">
-                    <p className="text-xs">Belum Punya Akun? </p>
-                    <Link href="/auth/register">
+                    <p className="text-xs">Sudah Punya Akun? </p>
+                    <Link href="/auth/login">
                       <Button variant="link" size="sm" className="w-full">
-                        Register
+                        Login
                       </Button>
                     </Link>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
