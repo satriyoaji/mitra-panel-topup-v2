@@ -17,7 +17,7 @@ async function page() {
     <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex space-y-2 justify-center items-center w-full">
-          <div className="w-full flex justify-center">
+          <div className="w-full md:flex hidden justify-center">
             <Image
               src={"/illustration/DrawKit Larry Character Illustration (8).svg"}
               alt="dw"
@@ -25,7 +25,7 @@ async function page() {
               height={220}
             />
           </div>
-          <div className="w-full">
+          <div className="w-full flex justify-center md:justify-start">
             <div className="border p-8 rounded-lg shadow-md w-full max-w-md">
               <h1 className="pt-4 text-2xl font-semibold tracking-tight">
                 🔐Register
