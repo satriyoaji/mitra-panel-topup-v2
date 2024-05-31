@@ -12,8 +12,6 @@ export async function GET(
     headers: GetAuthHeader(req),
   });
   var result = await re.json();
-  console.log(result);
-  console.log(`${process.env.API}/transaction/detail/${params.id}`);
 
   return NextResponse.json(result, { status: re.status });
 }

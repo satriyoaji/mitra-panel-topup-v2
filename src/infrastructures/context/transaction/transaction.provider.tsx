@@ -10,8 +10,8 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
   const [transaction, setTransaction] = useState<ITransaction>({
     payment: session?.user ? "transfer & points" : "transfer",
     account: {
-      email: session?.profile.email ?? "",
-      noWhatsapp: session?.profile.phone ?? "",
+      email: session?.profile?.email ?? "",
+      noWhatsapp: session?.profile?.phone ?? "",
     },
   });
 

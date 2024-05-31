@@ -20,7 +20,7 @@ function Page() {
   const [selectedData, setSelectedData] = useState<
     ITransactionHistoryList | undefined
   >();
-  console.log(selectedData);
+
   return (
     <ResizablePanelGroup direction="horizontal">
       <ResizablePanel defaultSize={60} minSize={50} className="h-[100vh]">

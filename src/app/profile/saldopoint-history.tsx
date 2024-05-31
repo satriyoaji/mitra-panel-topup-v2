@@ -46,7 +46,7 @@ function SaldoPointHistory() {
         <div className="flex justify-end items-center">
           <Tier
             className="place-self-center m-3"
-            type={session?.profile.tier_name ?? "Public"}
+            type={session?.profile?.tier_name ?? "Public"}
           />
         </div>
         <div className="w-full flex justify-end text-start items-end h-[7rem] mb-2">

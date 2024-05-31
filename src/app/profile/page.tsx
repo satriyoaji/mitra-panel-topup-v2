@@ -14,7 +14,7 @@ function Page() {
   const { data: session } = useSession();
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
-  console.log(session);
+  console.log("PAGE SESSION", session);
 
   return (
     <>
@@ -31,8 +31,8 @@ function Page() {
               </AvatarFallback>
             </Avatar>
             <div>
-              <h5 className="font-bold text-xl">{session?.user?.name}</h5>
-              <h6 className="text-xs">{session?.user?.email}</h6>
+              <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
+              <h6 className="text-xs">{session?.profile?.email}</h6>
             </div>
           </div>
           <Pencil1Icon

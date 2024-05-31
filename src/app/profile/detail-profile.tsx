@@ -14,7 +14,7 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
   const { toast } = useToast();
 
   useEffect(() => {
-    setPhone(session?.profile.phone);
+    setPhone(session?.profile?.phone);
   }, []);
 
   const handleSubmit = async () => {
@@ -57,8 +57,8 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
           />
           <AvatarFallback>{session?.user?.name?.at(0) ?? ""}</AvatarFallback>
         </Avatar>
-        <h5 className="font-bold text-xl">{session?.user?.name}</h5>
-        <h6 className="text-xs">{session?.user?.email}</h6>
+        <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
+        <h6 className="text-xs">{session?.profile?.email}</h6>
         <div className="w-full my-3 px-12">
           <Label htmlFor="invoice">No. Whatsapp</Label>
           <PhoneInput

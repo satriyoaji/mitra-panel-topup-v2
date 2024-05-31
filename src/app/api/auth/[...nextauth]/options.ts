@@ -57,11 +57,11 @@ export const options: NextAuthOptions = {
       });
 
       var res = await response.json();
-      console.log("Session", res);
       if (response.ok) {
         session.token = token.token;
-        session.profile = res.data.profile;
+        session.profile = res.data;
       }
+      console.log("SESSION", session);
 
       return session;
     },
