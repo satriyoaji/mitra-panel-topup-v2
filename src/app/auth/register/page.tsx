@@ -1,34 +1,23 @@
-"use client";
-
-import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import React from "react";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 
-function Page() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const searchParams = useSearchParams();
+async function page() {
+  const session = await getServerSession(options);
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    var res = await signIn("credentials", {
-      username,
-      password,
-      callbackUrl: searchParams.get("callback") || "/",
-    });
-  };
+  if (session) return redirect("/");
 
   return (
     <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex space-y-2 justify-center items-center w-full">
-          <div className="w-full md:flex justify-center hidden">
+          <div className="w-full md:flex hidden justify-center">
             <Image
               src={"/illustration/DrawKit Larry Character Illustration (8).svg"}
               alt="dw"
@@ -39,51 +28,54 @@ function Page() {
           <div className="w-full flex justify-center md:justify-start">
             <div className="border p-8 rounded-lg shadow-md w-full max-w-md">
               <h1 className="pt-4 text-2xl font-semibold tracking-tight">
-                🔐Login
+                🔐Register
               </h1>
-              <form
-                onSubmit={onSubmit}
-                className="w-full max-w-md grid gap-2 pt-4"
-              >
+              <div className="w-full max-w-md grid gap-2 pt-4">
                 <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="username" className="text-left">
-                    Email
+                  <Label htmlFor="nama" className="text-left">
+                    Nama
                   </Label>
-                  <Input
-                    id="username"
-                    name="username"
-                    type="email"
-                    placeholder="Masukan Email"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
+                  <Input id="nama" placeholder="Masukan nama" />
                 </div>
                 <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="passwor" className="text-left">
+                  <Label htmlFor="email" className="text-left">
+                    Email
+                  </Label>
+                  <Input id="email" type="email" placeholder="Masukan Email" />
+                </div>
+                <div className="grid w-full max-w-sm gap-1.5">
+                  <Label htmlFor="password" className="text-left">
                     Password
                   </Label>
                   <Input
                     id="password"
                     type="password"
-                    name="password"
                     placeholder="Masukan Password"
-                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="grid w-full max-w-sm gap-1.5">
+                  <Label htmlFor="Whatsapp" className="text-left">
+                    No. Whatsapp
+                  </Label>
+                  <Input
+                    id="Whatsapp"
+                    type="tel"
+                    placeholder="Masukan No. Whatsapp"
                   />
                 </div>
 
                 <div className="mt-4 space-y-1">
-                  <Button type="submit" className="w-full">
-                    Login
-                  </Button>
+                  <Button className="w-full">Register</Button>
                   <div className="flex items-center justify-center">
-                    <p className="text-xs">Belum Punya Akun? </p>
-                    <Link href="/auth/register">
+                    <p className="text-xs">Sudah Punya Akun? </p>
+                    <Link href="/auth/login">
                       <Button variant="link" size="sm" className="w-full">
-                        Register
+                        Login
                       </Button>
                     </Link>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -92,4 +84,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default page;
