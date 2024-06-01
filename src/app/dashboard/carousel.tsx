@@ -108,6 +108,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                     {data.map((item, i) => (
                         <React.Fragment key={item.id}>
                             <div
+                                key={i.toString()}
                                 className="slide"
                                 style={{
                                     ...getStyles(i),
@@ -148,34 +149,32 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                         className="overflow-hidden relative w-auto rounded-lg max-h-72"
                         style={{ aspectRatio: 32 / 9 }}
                     >
+                        {/* <Image
+                            key={index}
+                            src={item.path}
+                            alt={item.title}
+                            sizes="100%"
+                            fill
+                            style={{ aspectRatio: 32 / 9 }}
+                            className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
+                                index === activeIndex
+                                ? "opacity-100"
+                                : "opacity-0"
+                            }`}
+                            /> */}
                         {data.map((item, index) => (
-                            <>
-                                {/* <Image
+                            <img
                                 key={index}
                                 src={item.path}
                                 alt={item.title}
                                 sizes="100%"
-                                fill
                                 style={{ aspectRatio: 32 / 9 }}
                                 className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
                                     index === activeIndex
-                                    ? "opacity-100"
-                                    : "opacity-0"
+                                        ? "opacity-100"
+                                        : "opacity-0"
                                 }`}
-                                /> */}
-                                <img
-                                    key={index}
-                                    src={item.path}
-                                    alt={item.title}
-                                    sizes="100%"
-                                    style={{ aspectRatio: 32 / 9 }}
-                                    className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
-                                        index === activeIndex
-                                            ? "opacity-100"
-                                            : "opacity-0"
-                                    }`}
-                                />
-                            </>
+                            />
                         ))}
                     </div>
                 </div>

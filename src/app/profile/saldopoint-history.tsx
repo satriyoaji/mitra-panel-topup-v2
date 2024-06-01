@@ -46,13 +46,15 @@ function SaldoPointHistory() {
                 <div className="flex justify-end items-center">
                     <Tier
                         className="place-self-center m-3"
-                        type={(session?.tier?.name as TierType) ?? "Public"}
+                        type={session?.profile?.tier_name ?? "Public"}
                     />
                 </div>
                 <div className="w-full flex justify-end text-start items-end h-[7rem] mb-2">
                     <div className="w-full p-2 text-white">
                         <p className="text-xs">Saldo Points</p>
-                        <p className="font-medium text-xl">20.000 Points</p>
+                        <p className="font-medium text-xl">
+                            {session?.profile.saldo} Points
+                        </p>
                     </div>
                 </div>
             </div>
@@ -75,8 +77,11 @@ function SaldoPointHistory() {
                         Riwayat Transaksi
                     </h5>
                     <div className="gap-2 grid">
-                        {history.map((item) => (
-                            <div className="p-2 flex justify-between items-center bg-slate-50 border rounded-sm">
+                        {history.map((item, i) => (
+                            <div
+                                key={i.toString()}
+                                className="p-2 flex justify-between items-center bg-slate-50 border rounded-sm"
+                            >
                                 <div>{format(item.date, "dd MMM yyy")}</div>
                                 {item.type == "save" ? (
                                     <p className="font-semibold text-green-600">

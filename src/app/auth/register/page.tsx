@@ -1,48 +1,54 @@
 "use client";
 
 import React, { useState } from "react";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
+import { PhoneInput } from "@/components/ui/custom-input";
 
 function Page() {
     const [loading, setLoading] = useState(false);
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const searchParams = useSearchParams();
+    const [phone, setPhone] = useState("");
+    const [name, setName] = useState("");
     const { toast } = useToast();
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         setLoading(true);
-        var res = await signIn("credentials", {
-            username,
-            password,
-            redirect: false,
+        var res = await fetch("/api/register", {
+            method: "POST",
+            body: JSON.stringify({
+                email,
+                password,
+                phone,
+                name,
+            }),
         });
 
         setLoading(false);
-        if (!res?.ok)
+        if (!res.ok) {
             return toast({
                 title: "Failed",
-                description: "Login gagal, periksa kembali data anda",
+                description: "Registrasi Akun Gagal",
                 variant: "destructive",
             });
+        }
 
-        redirect(searchParams.get("callback") || "/");
+        redirect("/auth/login");
     };
 
     return (
         <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
             <div className="mx-auto flex w-full flex-col justify-center space-y-6">
                 <div className="flex space-y-2 justify-center items-center w-full">
-                    <div className="w-full md:flex justify-center hidden">
+                    <div className="w-full md:flex hidden justify-center">
                         <Image
                             src={
                                 "/illustration/DrawKit Larry Character Illustration (8).svg"
@@ -54,33 +60,46 @@ function Page() {
                     </div>
                     <div className="w-full flex justify-center md:justify-start">
                         <div className="border p-8 rounded-lg shadow-md w-full max-w-md">
-                            <h1 className="pt-4 text-2xl font-semibold text-center tracking-tight">
-                                🔐Login
+                            <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight">
+                                🔐Register
                             </h1>
                             <form
-                                onSubmit={onSubmit}
                                 className="w-full max-w-md grid gap-2 pt-4"
+                                onSubmit={onSubmit}
                             >
                                 <div className="grid w-full max-w-sm gap-1.5">
-                                    <Label
-                                        htmlFor="username"
-                                        className="text-left"
-                                    >
-                                        Email
+                                    <Label htmlFor="nama" className="text-left">
+                                        Nama
                                     </Label>
                                     <Input
-                                        id="username"
-                                        name="username"
-                                        type="email"
-                                        placeholder="Masukan Email"
+                                        id="nama"
+                                        placeholder="Masukan nama"
+                                        name="name"
                                         onChange={(e) =>
-                                            setUsername(e.target.value)
+                                            setName(e.target.value)
                                         }
                                     />
                                 </div>
                                 <div className="grid w-full max-w-sm gap-1.5">
                                     <Label
-                                        htmlFor="passwor"
+                                        htmlFor="email"
+                                        className="text-left"
+                                    >
+                                        Email
+                                    </Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        placeholder="Masukan Email"
+                                        name="email"
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                    />
+                                </div>
+                                <div className="grid w-full max-w-sm gap-1.5">
+                                    <Label
+                                        htmlFor="password"
                                         className="text-left"
                                     >
                                         Password
@@ -95,6 +114,21 @@ function Page() {
                                         }
                                     />
                                 </div>
+                                <div className="grid w-full max-w-sm gap-1.5">
+                                    <Label
+                                        htmlFor="Whatsapp"
+                                        className="text-left"
+                                    >
+                                        No. Whatsapp
+                                    </Label>
+                                    <PhoneInput
+                                        id="Whatsapp"
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="Masukan No. Whatsapp"
+                                        onValueChange={(e) => setPhone(`${e}`)}
+                                    />
+                                </div>
 
                                 <div className="mt-4 space-y-1">
                                     <Button
@@ -102,19 +136,19 @@ function Page() {
                                         className="w-full"
                                         disabled={loading}
                                     >
-                                        {loading ? "Loading..." : "Login"}
+                                        {loading ? "Loading..." : "Register"}
                                     </Button>
                                     <div className="flex items-center justify-center">
                                         <p className="text-xs">
-                                            Belum Punya Akun?{" "}
+                                            Sudah Punya Akun?{" "}
                                         </p>
-                                        <Link href="/auth/register">
+                                        <Link href="/auth/login">
                                             <Button
                                                 variant="link"
                                                 size="sm"
                                                 className="w-full"
                                             >
-                                                Register
+                                                Login
                                             </Button>
                                         </Link>
                                     </div>

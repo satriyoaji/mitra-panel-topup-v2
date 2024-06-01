@@ -41,7 +41,6 @@ function Searchbar() {
             const dataJson = await res.json();
             if (dataJson.data) {
                 setData(dataJson.data);
-                console.log(dataJson.data);
                 window.scrollTo({ top: 0, behavior: "smooth" });
                 return;
             }
@@ -51,9 +50,9 @@ function Searchbar() {
 
     React.useEffect(() => {
         (async () => {
-            await getList();
+            if (isOpen) await getList();
         })();
-    }, [search]);
+    }, [search, isOpen]);
 
     const doSearch = debounce((e: string) => {
         setSearch(e);
