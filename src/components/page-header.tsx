@@ -134,11 +134,11 @@ function Header() {
                                 onClick={() => router.push("/profile")}
                             >
                                 <AvatarImage
-                                    src={session?.user?.image as string}
-                                    alt={session?.user?.name as string}
+                                    src={session?.profile?.name as string}
+                                    alt={session?.profile?.name as string}
                                 />
                                 <AvatarFallback>
-                                    {session?.user?.name?.at(0) ?? ""}
+                                    {session?.profile?.name?.at(0) ?? ""}
                                 </AvatarFallback>
                             </Avatar>
                         </div>

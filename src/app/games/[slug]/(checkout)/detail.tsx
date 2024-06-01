@@ -1,13 +1,7 @@
-import {
-    getTotalPrice,
-    nFormatter,
-    nPlainFormatter,
-    priceMask,
-} from "@/Helpers";
-import { IFlashSaleInProduct, IPromo, ITransaction, TProduct } from "@/Type";
+import { getTotalPrice, priceMask } from "@/Helpers";
+import { ITransaction } from "@/Type";
 import TransactionDetail from "@/components/transaction-detail";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
@@ -17,16 +11,6 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { isWithinInterval, parseISO } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
