@@ -28,12 +28,12 @@ export default function ListGame() {
         setLoading(true);
         var res = await fetch(
             `/api/products/categories/?` +
-            new URLSearchParams({
-                page: `${pageIndex}`,
-                limit: "10",
-                key: search,
-                group_id: `${group?.id ?? ""}`,
-            })
+                new URLSearchParams({
+                    page: `${pageIndex}`,
+                    limit: "10",
+                    key: search,
+                    group_id: `${group?.id ?? ""}`,
+                })
         );
 
         setLoading(false);
@@ -41,7 +41,7 @@ export default function ListGame() {
             var result = await res.json();
 
             if (result.data) {
-                setData(result.data)
+                setData(result.data);
                 // if (more)
                 //     setData((prev) => uniqeCategory(prev.concat(result.data)));
                 // else setData(uniqeCategory(result.data));
@@ -92,7 +92,7 @@ export default function ListGame() {
 
     return (
         <React.Fragment>
-            <div className="md:flex md:items-end md:justify-between sticky z-10 top-10 py-2 bg-white">
+            <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-white">
                 <div className="flex md:block items-end justify-between mt-8">
                     <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
                     <div

@@ -183,7 +183,7 @@ function Promo({
             ) : (
                 <div
                     onClick={() => setOpen(true)}
-                    className="rounded-lg cursor-pointer hover:bg-slate-50 py-3 px-6 border-2 flex justify-between items-center border-theme-secondary-500"
+                    className="rounded-lg cursor-pointer hover:bg-slate-50 py-4 px-6 border-2 flex justify-between items-center border-theme-secondary-500"
                 >
                     <p className="p-0 m-0">Pilih Promo</p>
                     <ChevronRightIcon />
