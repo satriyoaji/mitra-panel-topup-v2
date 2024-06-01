@@ -10,6 +10,7 @@ import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import FilterTransaksi, { TFilter } from "./filter-transaksi";
 import { ITransactionHistoryList } from "@/Type";
 import { debounce } from "@/Helpers";
+import Loading from "../loading";
 
 interface IProps {
     onClick: (val: ITransactionHistoryList | undefined) => void;
@@ -23,6 +24,7 @@ function List(props: IProps) {
         search: undefined,
         status: undefined,
     });
+    const [loading, setLoading] = useState(false);
 
     const getData = async () => {
         let searchParams = new URLSearchParams({
@@ -31,7 +33,9 @@ function List(props: IProps) {
         if (filter.search) searchParams.append("search", filter.search);
         if (filter.status) searchParams.append("search", `${filter.status}`);
 
+        setLoading(true);
         var res = await fetch(`/api/transaction?` + searchParams);
+        setLoading(false);
 
         if (res.ok) {
             const resData = await res.json();
@@ -98,15 +102,19 @@ function List(props: IProps) {
                 </div>
             </div>
             <div className="flex flex-col space-y-3 md:max-h-[78vh] md:overflow-y-auto">
-                {lists.map((val, idx) => (
-                    <ItemsCard
-                        key={`${idx}`}
-                        data={val}
-                        onEditClick={() => {
-                            props.onClick(val);
-                        }}
-                    />
-                ))}
+                {!loading ? (
+                    lists.map((val, idx) => (
+                        <ItemsCard
+                            key={`${idx}`}
+                            data={val}
+                            onEditClick={() => {
+                                props.onClick(val);
+                            }}
+                        />
+                    ))
+                ) : (
+                    <Loading />
+                )}
             </div>
         </div>
     );
