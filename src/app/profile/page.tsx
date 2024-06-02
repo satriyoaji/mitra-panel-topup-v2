@@ -15,8 +15,8 @@ function Page() {
     const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
     return (
-        <>
-            <div className="xs:m-4 sm:m-6 md:grid gap-8">
+        <div className="md:flex gap-4">
+            <div className="xs:m-4 sm:m-6">
                 <div className="flex justify-between items-start">
                     <div className="flex flex-row space-x-4">
                         <Avatar className="my-1">
@@ -42,12 +42,16 @@ function Page() {
                         className="cursor-pointer"
                     />
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="mt-6 flex items-center justify-center">
                     <SaldoPointHistory />
                 </div>
             </div>
-            <Separator className="mb-6" />
-            <div className="space-y-3 px-3">
+            <Separator className="mb-6 md:hidden" />
+            <Separator
+                className="hidden md:block h-full min-h-[80vh]"
+                orientation="vertical"
+            />
+            <div className="space-y-3 px-3 md:mt-6">
                 <Link
                     href="/transaksi"
                     className="flex space-x-3 items-center text-sm hover:text-theme-primary-500"
@@ -66,7 +70,7 @@ function Page() {
                     <DetailProfile onSuccess={() => setProfileOpen(false)} />
                 </DialogContent>
             </Dialog>
-        </>
+        </div>
     );
 }
 

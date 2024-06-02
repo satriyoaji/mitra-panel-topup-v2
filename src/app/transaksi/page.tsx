@@ -20,11 +20,11 @@ function Page() {
             <ResizablePanel defaultSize={60} minSize={50} className="h-[100vh]">
                 <List onClick={setSelectedData} />
             </ResizablePanel>
-            <ResizableHandle className="hidden md:block" />
+            <ResizableHandle className="hidden lg:block" />
             <ResizablePanel
                 defaultSize={40}
                 minSize={40}
-                className="hidden md:block h-[80vh]"
+                className="hidden lg:block h-[80vh]"
             >
                 {selectedData ? (
                     <div className="px-4 mt-6">

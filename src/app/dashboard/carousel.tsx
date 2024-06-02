@@ -119,13 +119,13 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                                     alt={item.title}
                                     fill
                                     style={{ aspectRatio: 32 / 9 }}
-                                    className={`absolute object-cover  transition-opacity rounded-md`}
+                                    className={`absolute object-cover  transition-opacity rounded-xl`}
                                 /> */}
                                 <img
                                     src={item.path}
                                     alt={item.title}
                                     style={{ aspectRatio: 32 / 9 }}
-                                    className={`absolute object-cover  transition-opacity rounded-md`}
+                                    className={`absolute object-cover  transition-opacity rounded-xl`}
                                 />
                             </div>
                         </React.Fragment>
@@ -146,7 +146,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                 <div className="max-h-72">
                     <div
                         {...swipeHandlers}
-                        className="overflow-hidden relative w-auto rounded-lg max-h-72"
+                        className="overflow-hidden relative w-auto rounded-xl max-h-72"
                         style={{ aspectRatio: 32 / 9 }}
                     >
                         {/* <Image
@@ -180,7 +180,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                 </div>
                 {data.length > 1 && (
                     <div className="flex justify-end mr-2 md:hidden">
-                        <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-md mt-[-1.5rem] absolute cursor-pointer">
+                        <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
                             <ChevronLeftIcon
                                 width={12}
                                 height={12}
