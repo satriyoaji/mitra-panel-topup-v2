@@ -57,23 +57,26 @@ function Header() {
                                 <TextAlignJustifyIcon className="h-4 w-4" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="left">
+                        <SheetContent
+                            side="left"
+                            className="max-w-[15rem] border-r-8 border-theme-primary-400"
+                        >
                             <div className="mt-8 gap-2 flex flex-col">
                                 {paths.map((i) => (
                                     <SheetClose key={i.path}>
-                                        <Button
-                                            variant="ghost"
-                                            className="w-full"
+                                        <p
+                                            className="w-full text-left p-1 px-2 rounded hover:bg-slate-200"
                                             onClick={() => {
                                                 router.push(i.path);
                                             }}
                                         >
                                             {i.name}
-                                        </Button>
+                                        </p>
                                     </SheetClose>
                                 ))}
                                 <SheetClose>
-                                    <Button
+                                    <p
+                                        className="w-full text-left p-1 px-2 rounded hover:bg-slate-200"
                                         onClick={() => {
                                             dispatch({
                                                 action: "RAND_THEME",
@@ -81,7 +84,7 @@ function Header() {
                                         }}
                                     >
                                         Theme
-                                    </Button>
+                                    </p>
                                 </SheetClose>
                             </div>
                         </SheetContent>
