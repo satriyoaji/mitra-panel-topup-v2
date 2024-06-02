@@ -41,7 +41,7 @@ function Page() {
             });
         }
 
-        redirect("/auth/login");
+        window.location.replace("/auth/login");
     };
 
     return (
