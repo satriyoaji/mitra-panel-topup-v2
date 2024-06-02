@@ -5,13 +5,13 @@ import React from "react";
 
 function Stats() {
     return (
-        <Card className="md:w-full bg-theme-secondary space-y-2 pt-6 flex items-center justify-center">
+        <Card className="md:w-full rounded-xl bg-theme-secondary space-y-2 pt-6 flex items-center justify-center">
             <div className="md:flex gap-8 pb-4 px-8 items-center">
                 <div className="md:mb-4 w-full">
                     <p className="text-white text-sm font-semibold mt-4">
                         Dipercaya oleh gamers Indonesia
                     </p>
-                    <p className="text-theme-primary-50 text-2xl mt-2 font-bold w-fit">
+                    <p className="text-white text-2xl mt-2 font-bold w-fit">
                         Termurah dan Terpercaya
                     </p>
                     <p className="text-slate-100 text-xs mt-1">
@@ -21,7 +21,7 @@ function Stats() {
                     </p>
                 </div>
                 <div className="w-full h-full">
-                    <div className="flex h-full items-center justify-between mt-8 px-6 mb-4 rounded">
+                    <div className="flex h-full items-center justify-between mt-8 px-6 mb-4 rounded-xl">
                         {/* <div className="flex flex-col items-center"> */}
                         <div>
                             <p className="font-semibold md:text-3xl text-2xl text-white">

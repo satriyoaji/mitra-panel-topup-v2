@@ -127,20 +127,20 @@ export default function ListGame() {
                     className="bg-white md:max-w-xs"
                 />
             </div>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
+            <div className="grid grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
                 {data.map((val: IProductCategory, idx) => (
                     <Link
                         href={`/games/${val.key}`}
                         key={idx}
                         className="w-full h-full"
                     >
-                        <Card className="w-full h-full min-w-fit rounded-sm hover:bg-slate-50">
-                            <CardContent className="p-1 flex flex-col items-center">
-                                <div className="overflow-clip rounded w-full bg-slate-200">
+                        <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50">
+                            <CardContent className="p-1 md:p-2 flex flex-col items-center">
+                                <div className="overflow-clip rounded-xl w-full bg-slate-200">
                                     {val.image_url !== "" ? (
                                         <img
                                             alt={val.name}
-                                            className="rounded aspect-square hover:scale-125 transition duration-300 hover:rotate-12"
+                                            className="rounded-xl aspect-square hover:scale-125 transition duration-300 hover:rotate-12"
                                             src={val.image_url}
                                         />
                                     ) : (
@@ -149,7 +149,7 @@ export default function ListGame() {
                                         </div>
                                     )}
                                 </div>
-                                <p className="text-xs text-center my-2">
+                                <p className="md:text-xs text-[70%] text-center my-2">
                                     {val.name}
                                 </p>
                             </CardContent>

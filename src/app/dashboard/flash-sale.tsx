@@ -83,19 +83,19 @@ async function FlashSale() {
                     <div className="md:flex flex-col items-center justify-center px-4 mx-4 hidden">
                         <h4 className="text-xl">⚡</h4>
                         <div className="flex flex-col">
-                            <h3 className="text-4xl font-bold italic bg-theme-secondary text-theme-secondary-foreground px-3 py-2 -skew-x-12 z-10">
+                            <h3 className="text-3xl font-bold italic bg-theme-secondary text-theme-secondary-foreground px-3 py-2 -skew-x-12 z-10">
                                 Flash
                             </h3>
-                            <h3 className="text-4xl font-bold italic bg-theme-secondary text-theme-secondary-foreground p-3 -skew-x-12 -mt-4 w-fit">
+                            <h3 className="text-3xl font-bold italic bg-theme-secondary text-theme-secondary-foreground p-3 -skew-x-12 -mt-4 w-fit">
                                 Sale
                             </h3>
                         </div>
                     </div>
                     <div
                         style={{ backgroundImage: 'url("/thunder.svg")' }}
-                        className="w-full bg-cover rounded-lg"
+                        className="w-full bg-cover rounded-xl"
                     >
-                        <div className="py-1 w-full flex rounded-lg bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70">
+                        <div className="py-1 w-full flex rounded-xl bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70">
                             <div
                                 className="gap-3 p-3"
                                 style={{

@@ -101,7 +101,7 @@ function List(props: IProps) {
                     )}
                 </div>
             </div>
-            <div className="flex flex-col space-y-3 md:max-h-[78vh] md:overflow-y-auto">
+            <div className="flex flex-col space-y-4 md:max-h-[78vh] md:overflow-y-auto">
                 {!loading ? (
                     lists.map((val, idx) => (
                         <ItemsCard

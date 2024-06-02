@@ -103,7 +103,7 @@ function Page({ params }: { params: { slug: string } }) {
                     <Card className="w-full my-4" ref={couponRef}>
                         <CardContent>
                             <div className="flex mt-3">
-                                <h4 className="font-semibold ml-1">Promo</h4>
+                                <h4 className="font-medium ml-1">Promo</h4>
                             </div>
                             <Separator className="my-3" />
                             <Promo

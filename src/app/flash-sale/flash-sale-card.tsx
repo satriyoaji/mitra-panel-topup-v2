@@ -18,8 +18,8 @@ function FlashSaleCard({
             className="w-full h-full"
         >
             <Card
-                className={`min-h-[6rem] h-full hover:bg-slate-50 rounded-sm border-t-0 border-r-0 ${
-                    selected ? "border-4 border-theme-secondary" : ""
+                className={`min-h-[6rem] h-full hover:bg-slate-50 rounded-xl border-t-0 border-r-0 ${
+                    selected ? "border-4 border-theme-secondary" : "border"
                 }`}
             >
                 <div className="p-0 flex flex-col m-0 h-full">
@@ -72,7 +72,7 @@ function FlashSaleCard({
                                         )}
                                     </p>
                                 </div>
-                                <div className="bg-red-500 text-white -mb-[.562rem] rounded-br-md rounded-tl-md p-1">
+                                <div className="bg-red-500 text-white -mb-[.562rem] rounded-br-lg rounded-tl-md p-1">
                                     <LightningBoltIcon />
                                 </div>
                             </div>

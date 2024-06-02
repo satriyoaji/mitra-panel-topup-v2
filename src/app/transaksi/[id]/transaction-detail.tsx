@@ -55,7 +55,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                         <Button size="sm">Refund</Button>
                     </Link>
                 </div>
-                <div className="md:grid md:grid-cols-2 grid-cols-1">
+                <div className="md:grid md:grid-cols-1 grid-cols-1">
                     <div>
                         <div className="grid gap-4 py-4">
                             <Card className="bg-slate-50  p-4">

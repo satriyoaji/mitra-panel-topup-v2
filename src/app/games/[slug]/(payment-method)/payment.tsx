@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { IPaymentGroup } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,7 +8,6 @@ import TransactionContext, {
 } from "@/infrastructures/context/transaction/transaction.context";
 import React, { useContext, useEffect, useState } from "react";
 import PaymentList from "./payment-list";
-
 
 function Payment() {
     const { data, dispatch } = useContext(
@@ -37,7 +36,7 @@ function Payment() {
         <Card className="w-full">
             <CardContent>
                 <div className="flex mt-3">
-                    <h4 className="font-semibold ml-1">Metode Pembayaran</h4>
+                    <h4 className="font-medium ml-1">Metode Pembayaran</h4>
                 </div>
                 <Separator className="my-3" />
                 <PaymentList paymentGroup={paymentGroups} />

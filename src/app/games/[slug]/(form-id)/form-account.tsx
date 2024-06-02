@@ -40,7 +40,7 @@ function FormAccount({ forms }: Prop) {
 
     return (
         <>
-            <h4 className="font-semibold ml-1">Data Akun</h4>
+            <h4 className="font-medium ml-1">Data Akun</h4>
             <Separator className="my-3" />
             <div className="grid w-full items-center gap-4">
                 {forms.map((item) => (

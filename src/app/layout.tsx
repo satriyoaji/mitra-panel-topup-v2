@@ -9,6 +9,7 @@ import ToTopButton from "@/components/totop-button";
 import ThemeWrapper from "./theme-wrapper";
 import LayoutWrapper from "./layout-wrapper";
 import ThemeProvider from "@/infrastructures/context/theme/theme.provider";
+import WhatsappButton from "@/components/whatsapp-button";
 
 export const metadata: Metadata = {
     title: "Topup User",
@@ -34,6 +35,7 @@ export default function RootLayout({
                         </LayoutWrapper>
                         <Footer />
                         <ToTopButton />
+                        <WhatsappButton />
                     </NextAuthProvider>
                     <Toaster />
                 </ThemeWrapper>

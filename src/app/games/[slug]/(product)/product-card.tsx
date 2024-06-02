@@ -22,7 +22,7 @@ type prop = {
 function ProductCard(props: prop) {
     return (
         <Card
-            className={`h-full min-h-[6rem] hover:bg-slate-50 rounded-lg cursor-pointer ${
+            className={`h-full min-h-[6rem] hover:bg-slate-50 rounded-xl cursor-pointer ${
                 props.selected && "border-2 border-theme-secondary"
             }`}
             onClick={props.onClick}
@@ -74,7 +74,7 @@ function ProductCard(props: prop) {
                                     {props.discountPrice}
                                 </p>
                             </div>
-                            <div className="bg-red-500 text-white -mr-4 -mb-2 rounded-br-md rounded-tl-md p-1">
+                            <div className="bg-red-500 text-white -mr-4 -mb-2 rounded-br-lg rounded-tl-md p-1">
                                 <LightningBoltIcon />
                             </div>
                         </div>

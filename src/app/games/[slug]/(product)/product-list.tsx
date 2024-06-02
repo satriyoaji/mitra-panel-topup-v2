@@ -82,7 +82,7 @@ function ProductList(prop: IProductList) {
         <Card className="w-full my-2">
             <CardContent>
                 <div className="flex mt-3">
-                    <h4 className="font-semibold ml-1">Produk</h4>
+                    <h4 className="font-medium ml-1">Produk</h4>
                 </div>
                 <Separator className="my-3" />
                 <div className="flex w-full overflow-x-auto">

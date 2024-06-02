@@ -18,7 +18,7 @@ function FlashSaleCard({
             className="w-full h-fit"
         >
             <Card
-                className={`h-full min-h-[10rem] rounded-sm border-t-0 border-r-0 ${
+                className={`h-full min-h-[10rem] rounded-xl border-t-0 border-r-0 ${
                     selected && "border-4 border-theme-secondary"
                 }`}
             >
