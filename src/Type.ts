@@ -22,15 +22,9 @@ export interface IProductFormBase {
   key: string;
 }
 
-export interface IProductFormDetail {
-  id: number;
-  value: string;
-  value_alias: string;
-}
-
 export interface IProductFormOption extends IProductFormBase {
   type: "option";
-  form_details: IProductFormDetail[];
+  options: string[];
 }
 export interface IProductFormText extends IProductFormBase {
   type: "text";
