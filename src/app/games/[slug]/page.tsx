@@ -126,7 +126,7 @@ function Page({ params }: { params: { slug: string } }) {
             </CardContent>
           </Card>
           <div ref={confirmationRef}>
-            <FormConfirmation />
+            <FormConfirmation number={data.category.forms ? 2 : 1} />
           </div>
           {data.product && (
             <CheckoutAction
