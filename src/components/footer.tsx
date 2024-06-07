@@ -1,12 +1,15 @@
+"use client";
+
 import {
   DiscordLogoIcon,
   InstagramLogoIcon,
   TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Separator } from "./ui/separator";
 import { headers } from "next/headers";
+import { usePathname } from "next/navigation";
 
 interface Sosmed {
   name: string;
@@ -52,13 +55,16 @@ const getSocmed = async () => {
   ];
 };
 
-async function Footer() {
-  //   const heads = headers();
-  //   const pathname = heads.get("next-url");
+function Footer() {
+  const [data, setData] = useState<Sosmed[]>([]);
+  const path = usePathname();
 
-  //   if (pathname?.includes("/games/")) return <></>;
-
-  var data: Sosmed[] = await getSocmed();
+  useEffect(() => {
+    (async () => {
+      var res = await getSocmed();
+      setData(res);
+    })();
+  }, []);
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -101,6 +107,7 @@ async function Footer() {
     }
   };
 
+  if (path.includes("/games/")) return <></>;
   return (
     <div className="bg-theme-primary-400 pt-4 px-4 pb-12 flex flex-col items-center rounded-t-2xl border-t-4 border-theme-secondary">
       <p className="font-bold text-theme-primary-foreground">Follow Us On</p>

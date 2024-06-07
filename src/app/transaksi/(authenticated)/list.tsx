@@ -8,9 +8,10 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import FilterTransaksi, { TFilter } from "./filter-transaksi";
-import { ITransactionHistoryList } from "@/Type";
+import { ITransactionHistoryList, TPaginationMeta } from "@/Type";
 import { debounce } from "@/Helpers";
 import Loading from "../../loading";
+import Pagination from "@/components/pagination";
 
 interface IProps {
   onClick: (val: ITransactionHistoryList | undefined) => void;
@@ -20,15 +21,16 @@ function List(props: IProps) {
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
   const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
   const [filter, setFilter] = useState<TFilter>({
-    page: 1,
     search: undefined,
     status: undefined,
   });
   const [loading, setLoading] = useState(false);
+  const [meta, setMeta] = useState<TPaginationMeta | undefined>();
+  const [page, setPage] = useState(1);
 
   const getData = async () => {
     let searchParams = new URLSearchParams({
-      page: `${filter.page}`,
+      page: `${page}`,
     });
     if (filter.search) searchParams.append("search", filter.search);
     if (filter.status) searchParams.append("search", `${filter.status}`);
@@ -40,6 +42,7 @@ function List(props: IProps) {
     if (res.ok) {
       const resData = await res.json();
       console.log(resData);
+      setMeta(resData.manifest);
       if (resData) {
         setLists(resData.data);
         return;
@@ -49,7 +52,7 @@ function List(props: IProps) {
 
   useEffect(() => {
     getData();
-  }, [filter]);
+  }, [filter, page]);
 
   const { data: session } = useSession();
 
@@ -100,7 +103,7 @@ function List(props: IProps) {
           )}
         </div>
       </div>
-      <div className="flex flex-col space-y-4 md:max-h-[78vh] md:overflow-y-auto">
+      <div className="flex flex-col space-y-4 md:max-h-[76vh] md:overflow-y-auto">
         {!loading ? (
           lists.map((val, idx) => (
             <ItemsCard
@@ -115,6 +118,11 @@ function List(props: IProps) {
           <Loading />
         )}
       </div>
+      {meta ? (
+        <Pagination meta={meta} onChange={(val) => setPage(val)} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

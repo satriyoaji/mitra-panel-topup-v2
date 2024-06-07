@@ -19,6 +19,7 @@ import HorizontalStepper from "@/components/ui/horizontal-stepper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
+import BadgeTransaksi from "../badge-transaksi";
 
 function TransactionHistoryDetail({ id }: { id: string }) {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
@@ -46,9 +47,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
         <hr className="my-2" />
         <div className="flex justify-between items-center mt-3">
           <div className="">
-            <div>
-              <Badge variant="warning">Menunggu Pembayaran</Badge>
-            </div>
+            <div></div>
             <h5 className="font-medium ml-2 mt-1">{data.transaction_code}</h5>
           </div>
           <Link href="/redeem-coupon">

@@ -213,6 +213,12 @@ export type TFont = {
   class: NextFont;
 };
 
+export type TPaginationMeta = {
+  limit: number;
+  page: number;
+  total: number;
+};
+
 export interface ITheme {
   primary: TPrimaryPallete;
   secondary: TSecondaryPallete;

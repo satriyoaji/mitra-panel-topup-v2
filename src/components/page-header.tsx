@@ -27,7 +27,7 @@ export type path = {
 
 const paths: path[] = [
   {
-    name: "Produk",
+    name: "Price List",
     path: "/games",
   },
   {
@@ -95,7 +95,7 @@ function Header() {
             <Image src={data.logo} alt="dw" width={40} height={40} />
           </Link>
         </div>
-        <div className="hidden md:flex pl-8 text-theme-secondary-50">
+        <div className="hidden md:flex pl-8 text-white">
           <NavigationMenu>
             <NavigationMenuList className="w-fit">
               {paths.map((i) => (

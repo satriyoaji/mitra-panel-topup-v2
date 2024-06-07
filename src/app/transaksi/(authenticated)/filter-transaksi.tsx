@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { DateRange } from "react-day-picker";
 
 export type TFilter = {
-  page: number;
   search: string | undefined;
   status: number | undefined;
 };
@@ -27,7 +26,6 @@ function FilterTransaksi(prop: Prop) {
     setFilter({
       search: undefined,
       status: undefined,
-      page: 1,
     });
     prop.onChange("");
   };
