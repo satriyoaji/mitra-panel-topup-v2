@@ -8,10 +8,11 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import FilterTransaksi, { TFilter } from "./filter-transaksi";
-import { ITransactionHistoryList, TPaginationMeta } from "@/Type";
+import { ITransactionHistoryList } from "@/Type";
 import { debounce } from "@/Helpers";
 import Loading from "../../loading";
 import Pagination from "@/components/pagination";
+import { TPaginationMeta } from "@/types/utils";
 
 interface IProps {
   onClick: (val: ITransactionHistoryList | undefined) => void;

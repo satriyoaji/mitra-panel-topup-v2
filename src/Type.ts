@@ -101,12 +101,6 @@ export interface IFlashSaleProduct extends IFlashSaleInProduct {
   product: IFlashSaleProductDetail;
 }
 
-export interface IBanner {
-  id: number;
-  title: string;
-  path: string;
-}
-
 export interface IPromo {
   id: string;
   code: string;
@@ -199,29 +193,4 @@ export interface ITransactionHistoryDetail {
   paid_price: number;
   history_status: ITransactionHistory[];
   payment_information: IPaymentInfo;
-}
-
-export type TPrimaryPallete = {
-  title: string;
-  class: string;
-};
-
-export interface TSecondaryPallete extends TPrimaryPallete {}
-
-export type TFont = {
-  title: string;
-  class: NextFont;
-};
-
-export type TPaginationMeta = {
-  limit: number;
-  page: number;
-  total: number;
-};
-
-export interface ITheme {
-  primary: TPrimaryPallete;
-  secondary: TSecondaryPallete;
-  font: TFont;
-  logo: string;
 }

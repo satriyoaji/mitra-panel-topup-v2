@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -34,9 +34,9 @@ export function Combobox({
   placeholder?: string;
   className?: string;
 }) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState<TValue | undefined>();
-  console.log(data);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState<TValue | undefined>(data[0]);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

@@ -1,6 +1,6 @@
-import { TPaginationMeta } from "@/Type";
 import React from "react";
 import { Button } from "./ui/button";
+import { TPaginationMeta } from "@/types/utils";
 
 export type TPaginationProp = {
   meta: TPaginationMeta;
