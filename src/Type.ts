@@ -22,15 +22,9 @@ export interface IProductFormBase {
   key: string;
 }
 
-export interface IProductFormDetail {
-  id: number;
-  value: string;
-  value_alias: string;
-}
-
 export interface IProductFormOption extends IProductFormBase {
   type: "option";
-  form_details: IProductFormDetail[];
+  options: string[];
 }
 export interface IProductFormText extends IProductFormBase {
   type: "text";
@@ -105,12 +99,6 @@ export interface IFlashSaleProductDetail {
 
 export interface IFlashSaleProduct extends IFlashSaleInProduct {
   product: IFlashSaleProductDetail;
-}
-
-export interface IBanner {
-  id: number;
-  title: string;
-  path: string;
 }
 
 export interface IPromo {
@@ -205,23 +193,4 @@ export interface ITransactionHistoryDetail {
   paid_price: number;
   history_status: ITransactionHistory[];
   payment_information: IPaymentInfo;
-}
-
-export type TPrimaryPallete = {
-  title: string;
-  class: string;
-};
-
-export interface TSecondaryPallete extends TPrimaryPallete {}
-
-export type TFont = {
-  title: string;
-  class: NextFont;
-};
-
-export interface ITheme {
-  primary: TPrimaryPallete;
-  secondary: TSecondaryPallete;
-  font: TFont;
-  logo: string;
 }

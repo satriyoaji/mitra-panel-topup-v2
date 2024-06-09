@@ -9,37 +9,37 @@ import ToTopButton from "@/components/totop-button";
 import ThemeWrapper from "./theme-wrapper";
 import LayoutWrapper from "./layout-wrapper";
 import ThemeProvider from "@/infrastructures/context/theme/theme.provider";
-import WhatsappButton from "@/components/whatsapp-button";
+import HelpButton from "@/components/help-button";
 
 export const metadata: Metadata = {
-    title: "Topup User",
-    description: "Topup User Web",
+  title: "Topup User",
+  description: "Topup User Web",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <html lang="en" suppressHydrationWarning>
-            <head />
-            <ThemeProvider>
-                <ThemeWrapper>
-                    <NextAuthProvider>
-                        <Header />
-                        <LayoutWrapper>
-                            <div className="px-4 pt-2 pb-16 min-h-screen bg-white md:container">
-                                {children}
-                            </div>
-                        </LayoutWrapper>
-                        <Footer />
-                        <ToTopButton />
-                        <WhatsappButton />
-                    </NextAuthProvider>
-                    <Toaster />
-                </ThemeWrapper>
-            </ThemeProvider>
-        </html>
-    );
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <ThemeProvider>
+        <ThemeWrapper>
+          <NextAuthProvider>
+            <Header />
+            <LayoutWrapper>
+              <div className="px-4 pt-2 pb-16 min-h-screen bg-white md:container">
+                {children}
+              </div>
+            </LayoutWrapper>
+            <Footer />
+            {/* <ToTopButton /> */}
+            <HelpButton />
+          </NextAuthProvider>
+          <Toaster />
+        </ThemeWrapper>
+      </ThemeProvider>
+    </html>
+  );
 }

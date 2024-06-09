@@ -7,6 +7,7 @@ import { IFlashSaleProduct } from "@/Type";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
 import Loading from "../loading";
+import Pagination from "@/components/pagination";
 
 function Page() {
   const [total, setTotal] = useState(0);
@@ -14,8 +15,6 @@ function Page() {
   const [data, setData] = useState<IFlashSaleProduct[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-
-  const totalPage = useMemo(() => Math.ceil(total / 12), [total]);
 
   const getFlashSale = async () => {
     let searchParams = new URLSearchParams({
@@ -93,32 +92,14 @@ function Page() {
           </>
         )}
       </div>
-      <div className="flex items-center justify-between space-x-2 py-4 mt-2">
-        <p className="text-xs text-muted-foreground mx-2">Total {total} data</p>
-        <div className="flex items-center justify-end space-x-2">
-          <p className="font-semibold text-xs mr-2">
-            Page {pageIndex} of {totalPage}
-          </p>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setPageIndex((prev) => prev - 1)}
-            disabled={pageIndex == 1}
-            className="flex items-center justify-center"
-          >
-            <span>Prev</span>
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setPageIndex((prev) => prev + 1)}
-            disabled={pageIndex >= totalPage}
-            className="flex justify-center items-center"
-          >
-            <span>Next</span>
-          </Button>
-        </div>
-      </div>
+      <Pagination
+        onChange={setPageIndex}
+        meta={{
+          limit: 12,
+          page: pageIndex,
+          total,
+        }}
+      />
     </div>
   );
 }
