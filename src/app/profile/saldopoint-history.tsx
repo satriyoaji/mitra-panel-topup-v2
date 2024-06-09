@@ -7,77 +7,60 @@ import { useSession } from "next-auth/react";
 import React from "react";
 
 interface IHistory {
-  amount: number;
-  date: Date;
-  type: "save" | "withdraw";
+    amount: number;
+    date: Date;
+    type: "save" | "withdraw";
 }
 
 const history: IHistory[] = [
-  {
-    amount: 10_000,
-    date: new Date(),
-    type: "save",
-  },
-  {
-    amount: 10_000,
-    date: new Date(),
-    type: "withdraw",
-  },
-  {
-    amount: 20_000,
-    date: new Date(),
-    type: "save",
-  },
+    {
+        amount: 10_000,
+        date: new Date(),
+        type: "save",
+    },
+    {
+        amount: 10_000,
+        date: new Date(),
+        type: "withdraw",
+    },
+    {
+        amount: 20_000,
+        date: new Date(),
+        type: "save",
+    },
 ];
 
 function SaldoPointHistory() {
-  const { data: session } = useSession();
+    const { data: session } = useSession();
 
-  const SaldoCard = () => (
-    <>
-      <div className="flex px-4 py-3 w-full rounded-xl justify-between gap-4 items-center bg-theme-secondary-50 border border-theme-secondary-100">
-        <p className="text-sm text-theme-secondary-700">Saldo Points</p>
-        <p className="font-medium text-theme-secondary-800">
-          {session?.profile.saldo} Points
-        </p>
-      </div>
-    </>
-  );
-
-  return (
-    <>
-      <Dialog>
-        <DialogTrigger className="cursor-pointer hover:opacity-90 w-full">
-          <SaldoCard />
-        </DialogTrigger>
-        <DialogContent>
-          <div className="flex justify-center items-center mt-4">
-            <SaldoCard />
-          </div>
-          <h5 className="text-lg font-semibold mt-2">Riwayat Transaksi</h5>
-          <div className="gap-2 grid">
-            {history.map((item, i) => (
-              <div
-                key={i.toString()}
-                className="p-2 flex justify-between items-center bg-slate-50 border rounded-sm"
-              >
-                <div>{format(item.date, "dd MMM yyy")}</div>
-                {item.type == "save" ? (
-                  <p className="font-semibold text-green-600">
-                    + Rp {nPlainFormatter(item.amount)}
-                  </p>
-                ) : (
-                  <p className="font-semibold text-red-500">
-                    - Rp {nPlainFormatter(item.amount)}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
+    return (
+        <>
+            <div className="gap-2 grid text-sm">
+                {history.map((item, i) => (
+                    <div
+                        key={i.toString()}
+                        className="py-2 px-4 flex justify-between items-center bg-slate-50 border rounded-sm"
+                    >
+                        <div className="text-xs">
+                            <p>TRX-DAS7319J221JDIU</p>
+                            <p className="text-muted-foreground mt-1.5">
+                                {format(item.date, "dd MMM yyy, hh:mm:ss")}
+                            </p>
+                        </div>
+                        {item.type == "save" ? (
+                            <p className="font-medium text-green-600">
+                                + Rp {nPlainFormatter(item.amount)}
+                            </p>
+                        ) : (
+                            <p className="font-medium text-red-500">
+                                - Rp {nPlainFormatter(item.amount)}
+                            </p>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </>
+    );
 }
 
 export default SaldoPointHistory;
