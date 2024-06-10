@@ -28,14 +28,20 @@ export function Combobox({
   onChange,
   placeholder,
   className,
+  defaultValue,
 }: {
   data: TValue[];
-  onChange: (e: string) => void;
+  onChange: (e: TValue) => void;
   placeholder?: string;
   className?: string;
+  defaultValue?: TValue;
 }) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState<TValue | undefined>(data[0]);
+  const [value, setValue] = useState<TValue | undefined>();
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -68,7 +74,7 @@ export function Combobox({
                 onSelect={(currentValue) => {
                   var selected =
                     currentValue === value?.value ? "" : currentValue;
-                  onChange(selected);
+                  onChange(item);
                   setValue(item);
                   setOpen(false);
                 }}

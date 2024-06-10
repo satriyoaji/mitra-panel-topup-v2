@@ -14,6 +14,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 function Filter() {
   const [data, setData] = useState<TValue[]>([]);
   const [search, setSearch] = useState("");
+  const [value, setValue] = useState<TValue | undefined>();
 
   const getList = async () => {
     let searchParams = new URLSearchParams({
@@ -34,6 +35,7 @@ function Filter() {
           };
         });
         setData(resData);
+        if (resData.length > 0) setValue(resData[0]);
         return;
       }
       setData([]);
@@ -54,9 +56,10 @@ function Filter() {
     <div className="md:flex md:space-x-1 space-y-1 md:space-y-0 w-full">
       <div className="w-full">
         <Combobox
-          onChange={() => {}}
+          onChange={setValue}
           data={data}
           placeholder="Pilih Kategori"
+          defaultValue={value}
         />
       </div>
       <div className="w-full">
