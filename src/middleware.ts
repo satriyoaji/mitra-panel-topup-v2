@@ -4,34 +4,52 @@ import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 import { GetCredHeader } from "./app/api/api-utils";
 
 export const config = {
-    matcher: ["/profile", "/redeem-coupon/:path*", "/api/:path*"],
+  matcher: ["/((?!_next/static|assets|_next/image|favicon.ico).*)"],
 };
 
 export default async function middleware(
-    req: NextRequest,
-    event: NextFetchEvent
+  req: NextRequest,
+  event: NextFetchEvent
 ) {
-    const token = await getToken({ req });
+  const token = await getToken({ req });
 
-    if (req.nextUrl.pathname.startsWith("/api")) {
-        var credentials = GetCredHeader();
+  if (req.nextUrl.pathname.startsWith("/api")) {
+    var credentials = GetCredHeader();
 
-        var res = NextResponse.next();
-        res.headers.set("X-Sign", credentials.sign);
-        res.headers.set("X-User-Id", credentials.mitraid);
-        res.headers.set("X-Timestamp", credentials.timestamp.toString());
-        res.headers.set("Authorization", `Bearer ${token?.token}`);
+    var res = NextResponse.next();
+    res.headers.set("X-Sign", credentials.sign);
+    res.headers.set("X-User-Id", credentials.mitraid);
+    res.headers.set("X-Timestamp", credentials.timestamp.toString());
+    res.headers.set("Authorization", `Bearer ${token?.token}`);
 
-        return res;
-    }
+    return res;
+  }
 
+  if (req.nextUrl.pathname.includes("/auth") && token)
+    return NextResponse.redirect(new URL("/", req.url));
+
+  if (
+    // req.nextUrl.pathname.includes("/games") &&
+    !req.nextUrl.pathname.includes("/v1")
+  )
+    return NextResponse.redirect(
+      new URL(`/v1/${req.nextUrl.pathname}`, req.url)
+    );
+
+  if (
+    req.nextUrl.pathname.includes("/profile") ||
+    req.nextUrl.pathname.includes("/redeem-coupon")
+  ) {
     const authMiddleware = withAuth({
-        pages: {
-            signIn: `/auth/login`,
-            newUser: "/auth/register",
-        },
+      pages: {
+        signIn: `/auth/login`,
+        newUser: "/auth/register",
+      },
     });
 
     // @ts-expect-error
     return authMiddleware(req, event);
+  }
+
+  return NextResponse.next();
 }
