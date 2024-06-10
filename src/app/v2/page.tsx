@@ -1,8 +1,8 @@
-import FlashSale from "@/app/(v1)/dashboard/flash-sale";
-import ListGame from "@/app/(v1)/dashboard/list-game";
-import CarouselWrapper from "./dashboard/carousel-wrapper";
-import Stats from "./dashboard/stats";
-import Promo from "./dashboard/promo";
+import FlashSale from "@/app/v1/dashboard/flash-sale";
+import ListGame from "@/app/v1/dashboard/list-game";
+import CarouselWrapper from "../v1/dashboard/carousel-wrapper";
+import Stats from "../v1/dashboard/stats";
+import Promo from "../v1/dashboard/promo";
 
 export default async function Home() {
   return (

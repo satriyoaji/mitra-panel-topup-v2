@@ -8,7 +8,7 @@ function PublicPage() {
       className="bg-no-repeat bg-center"
       style={{
         backgroundImage:
-          'url("/illustration/DrawKit Larry Character Illustration (10).svg")',
+          'url("/assets/illustration/DrawKit Larry Character Illustration (10).svg")',
       }}
     >
       <div className="h-full min-h-[80vh] flex pt-16 bg-white bg-opacity-95 items-center flex-col">

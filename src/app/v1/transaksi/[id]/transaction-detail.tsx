@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import HorizontalStepper from "@/components/ui/horizontal-stepper";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Loading from "@/app/(v1)/loading";
+import Loading from "@/app/loading";
 import BadgeTransaksi from "../badge-transaksi";
 
 function TransactionHistoryDetail({ id }: { id: string }) {

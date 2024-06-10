@@ -1,5 +1,5 @@
-import Carousel from "@/app/v1/dashboard/carousel";
 import { IBanner } from "@/types/utils";
+import Carousel from "./carousel";
 
 const getData = async () => {
   // var res = await fetch(

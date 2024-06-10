@@ -6,7 +6,7 @@ import FlashSaleCard from "./flash-sale-card";
 import { IFlashSaleProduct } from "@/Type";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
-import Loading from "../loading";
+import Loading from "../../loading";
 import Pagination from "@/components/pagination";
 
 function Page() {
@@ -79,7 +79,7 @@ function Page() {
               <div className="flex flex-col items-center justify-center h-full w-full">
                 <Image
                   src={
-                    "/illustration/DrawKit Larry Character Illustration (10).svg"
+                    "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
                   }
                   className="opacity-50"
                   alt="dw"

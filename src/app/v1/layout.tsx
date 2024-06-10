@@ -12,24 +12,18 @@ export const metadata: Metadata = {
   description: "Topup User Web",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <RootTemplateLayout>
-      <ThemeWrapper>
-        <Header />
-        <LayoutWrapper>
-          <div className="px-4 pt-2 pb-16 min-h-screen bg-white md:container">
-            {children}
-          </div>
-        </LayoutWrapper>
-        <Footer />
-        <HelpButton />
-        <Toaster />
-      </ThemeWrapper>
-    </RootTemplateLayout>
+    <>
+      <Header />
+      <LayoutWrapper>
+        <div className="px-4 pt-2 pb-16 min-h-screen bg-white md:container">
+          {children}
+        </div>
+      </LayoutWrapper>
+      <Footer />
+      <HelpButton />
+      <Toaster />
+    </>
   );
 }

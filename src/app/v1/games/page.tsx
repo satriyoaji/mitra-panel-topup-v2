@@ -6,7 +6,7 @@ import { IFlashSaleProduct, TProduct } from "@/Type";
 import { debounce, nFormatter, priceMask } from "@/Helpers";
 import ProductCard from "./[slug]/(product)/product-card";
 import Image from "next/image";
-import Loading from "../loading";
+import Loading from "../../loading";
 import { useRouter } from "next/navigation";
 import Filter from "./filter";
 import Pagination from "@/components/pagination";
@@ -81,7 +81,7 @@ function Page() {
               <div className="flex flex-col items-center justify-center h-full w-full">
                 <Image
                   src={
-                    "/illustration/DrawKit Larry Character Illustration (10).svg"
+                    "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
                   }
                   className="opacity-50"
                   alt="dw"

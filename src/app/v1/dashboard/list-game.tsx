@@ -8,7 +8,7 @@ import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { debounce, uniqeCategory } from "@/Helpers";
-import Loading from "../loading";
+import Loading from "../../loading";
 // import Image from "next/image";
 
 export default function ListGame() {
