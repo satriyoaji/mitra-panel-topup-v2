@@ -30,8 +30,6 @@ function FormAccount({ forms }: Prop) {
     }));
   };
 
-  console.log(forms);
-
   useEffect(() => {
     if (data)
       dispatch({

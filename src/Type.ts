@@ -66,6 +66,11 @@ export interface IFlashSaleInProduct {
   start_at: string;
   finish_at: string;
 }
+export interface IFlashSaleInfo {
+  id: number;
+  name: string;
+  exapired_at: string;
+}
 
 export type TProduct = {
   uuid: string;
@@ -81,6 +86,15 @@ export type TProduct = {
   key: string;
   name: string;
   price: number;
+};
+export type TProductItem = {
+  flash_sale_info?: IFlashSaleInfo;
+
+  key: string;
+  name: string;
+  price: number;
+  discounted_price: number;
+  image_url: string;
 };
 
 export type TMarkup = "percentage" | "fix";

@@ -65,8 +65,9 @@ function Page() {
                 {data.map((item, idx) => (
                   <div className="w-full h-full" key={`${idx}`}>
                     <ProductCard
-                      category={item.category_alias}
+                      // category={item.category_alias}
                       name={item.product_name}
+                      imageURL=""
                       price={`${priceMask(item.sale_price)}`}
                       onClick={() =>
                         route.push(

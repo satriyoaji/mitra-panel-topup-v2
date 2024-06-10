@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { uniqeProduct } from "@/Helpers";
-import { TProduct } from "@/Type";
+import { TProductItem } from "@/Type";
 import Loading from "@/app/loading";
 import Header from "./header";
 import ProductList from "./(product)/product-list";
@@ -22,7 +22,7 @@ function Page({ params }: { params: { slug: string } }) {
   const { data, dispatch } = useContext(
     TransactionContext
   ) as ITransactionContext;
-  const [product, setProduct] = useState<TProduct[]>([]);
+  const [products, setProducts] = useState<TProductItem[]>([]);
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
 
@@ -34,7 +34,7 @@ function Page({ params }: { params: { slug: string } }) {
 
   const getData = async () => {
     setLoading(true);
-    var res = await fetch(`/api/products/categories/${params.slug}?`);
+    var res = await fetch(`/api/products/items/${params.slug}?`);
 
     if (res.ok) {
       var result = await res.json();
@@ -44,15 +44,15 @@ function Page({ params }: { params: { slug: string } }) {
           action: "SET_CATEGORY",
           payload: result.data,
         });
+        // setProducts(uniqeProduct(result.data.products));
+        setProducts(result.data);
 
         if (result.data.products) {
-          setProduct(uniqeProduct(result.data.products));
-
           var flashSaleItem = searchParams.get("fs");
           dispatch({
             action: "SET_PRODUCT",
             payload: result.data.products.find(
-              (i: TProduct) => i.uuid == flashSaleItem
+              (i: TProductItem) => i.key == flashSaleItem
             ),
           });
         }
@@ -92,10 +92,10 @@ function Page({ params }: { params: { slug: string } }) {
           <div ref={productListRef}>
             <ProductList
               number={data.category.forms ? 2 : 1}
-              category={data.category.name}
+              // category={data.category.name}
               nextRef={methodRef}
-              products={product}
-              productSelected={data.product}
+              products={products}
+              // productSelected={data.product}
             />
           </div>
           <div className="my-4" ref={methodRef}>
@@ -119,7 +119,7 @@ function Page({ params }: { params: { slug: string } }) {
                     payload: e,
                   })
                 }
-                listProductId={product.map((i) => i.uuid)}
+                listProductId={products.map((i) => i.key)}
                 categoryUuid={params.slug}
                 product={data.product}
               />
