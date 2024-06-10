@@ -4,12 +4,12 @@ import { Separator } from "@/components/ui/separator";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { uniqeProduct } from "@/Helpers";
 import { TProduct } from "@/Type";
-import Loading from "@/app/loading";
+import Loading from "@/app/(v1)/loading";
 import Header from "./header";
 import ProductList from "./(product)/product-list";
 import Promo from "./(promo)/promo-list";
 import { useSearchParams } from "next/navigation";
-import NotFound from "@/app/not-found";
+import NotFound from "@/app/(v1)/not-found";
 import FormAccount from "./(form-id)/form-account";
 import TransactionContext, {
   ITransactionContext,

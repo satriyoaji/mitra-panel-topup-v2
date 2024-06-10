@@ -12,7 +12,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
-import Searchbar from "@/app/dashboard/searchbar";
+import Searchbar from "@/app/(v1)/dashboard/searchbar";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
 import { TextAlignJustifyIcon } from "@radix-ui/react-icons";
 import ThemeContext, {
