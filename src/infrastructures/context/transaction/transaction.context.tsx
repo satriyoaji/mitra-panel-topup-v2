@@ -1,62 +1,63 @@
 "use client";
 
 import {
-    IAccount,
-    IPaymentMethod,
-    IProductCategory,
-    IPromo,
-    ITransaction,
-    LooseObject,
-    TProduct,
-    IPayment,
+  IAccount,
+  IPaymentMethod,
+  IProductCategory,
+  IPromo,
+  ITransaction,
+  LooseObject,
+  TProduct,
+  IPayment,
+  TProductItem,
 } from "@/Type";
 import React from "react";
 
 export type TransactionSetCategory = {
-    action: "SET_CATEGORY";
-    payload: IProductCategory | null;
+  action: "SET_CATEGORY";
+  payload: IProductCategory | null;
 };
 export type TransactionSetProduct = {
-    action: "SET_PRODUCT";
-    payload: TProduct;
+  action: "SET_PRODUCT";
+  payload: TProductItem;
 };
 export type TransactionSetPromo = {
-    action: "SET_PROMO";
-    payload?: IPromo;
+  action: "SET_PROMO";
+  payload?: IPromo;
 };
 export type TransactionSetForm = {
-    action: "SET_FORM";
-    payload: LooseObject;
+  action: "SET_FORM";
+  payload: LooseObject;
 };
 export type TransactionSetPayment = {
-    action: "SET_PAYMENT";
-    payload: IPaymentMethod;
+  action: "SET_PAYMENT";
+  payload: IPaymentMethod;
 };
 export type TransactionSetAccount = {
-    action: "SET_ACCOUNT";
-    payload: IAccount;
+  action: "SET_ACCOUNT";
+  payload: IAccount;
 };
 export type TransactionSetXenditBank = {
-    action: "SET_BANK";
-    payload?: IPayment;
+  action: "SET_BANK";
+  payload?: IPayment;
 };
 
 export type TransactionDispatch =
-    | TransactionSetCategory
-    | TransactionSetForm
-    | TransactionSetProduct
-    | TransactionSetPromo
-    | TransactionSetAccount
-    | TransactionSetXenditBank
-    | TransactionSetPayment;
+  | TransactionSetCategory
+  | TransactionSetForm
+  | TransactionSetProduct
+  | TransactionSetPromo
+  | TransactionSetAccount
+  | TransactionSetXenditBank
+  | TransactionSetPayment;
 
 export interface ITransactionContext {
-    data: ITransaction;
-    dispatch: (data: TransactionDispatch) => void;
+  data: ITransaction;
+  dispatch: (data: TransactionDispatch) => void;
 }
 
 const TransactionContext = React.createContext<ITransactionContext | null>(
-    null
+  null
 );
 
 export default TransactionContext;

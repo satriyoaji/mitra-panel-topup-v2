@@ -17,6 +17,10 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <body
+      style={{
+        backgroundImage: "url('/assets/hero-games.svg')",
+        backgroundSize: "30%",
+      }}
       className={cn(
         "min-h-screen bg-repeat antialiased",
         data.primary.class,
@@ -24,7 +28,9 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         data.font.class.className
       )}
     >
-      <div>{children}</div>
+      <div className="bg-gradient-to-b from-theme-primary-50/95 to-theme-primary-200/95">
+        {children}
+      </div>
     </body>
   );
 }

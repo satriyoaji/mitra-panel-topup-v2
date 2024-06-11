@@ -6,6 +6,7 @@ import {
   IProductCategory,
   IPromo,
   TProduct,
+  TProductItem,
 } from "./Type";
 
 const priceMask = (val: number | undefined) => {
@@ -40,18 +41,17 @@ function debounce<Params extends any[]>(
 }
 
 const getTotalPrice = (
-  product: TProduct,
-  flashSale?: IFlashSaleInProduct,
+  product: TProductItem,
   promo?: IPromo,
   bank?: IPayment
 ) => {
   let num = 0;
 
-  num += product.sale_price;
-  if (flashSale) num -= flashSale.discount_price;
+  num += product.price;
+  if (product.discounted_price) num = product.discounted_price;
   if (promo) {
     if (promo.promo_type == "fix") num -= promo.promo_value;
-    else num -= (promo.promo_value * product.sale_price) / 100;
+    else num -= (promo.promo_value * product.price) / 100;
   }
   if (bank && bank.fee_amount) num += bank.fee_amount;
 
