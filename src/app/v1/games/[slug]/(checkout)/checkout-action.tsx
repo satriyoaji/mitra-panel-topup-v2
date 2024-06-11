@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import React, { RefObject, useContext, useMemo, useState } from "react";
 import { Purchase } from "./detail";
 import { TProductForm } from "@/Type";
+import { ITransactionCreate } from "@/types/transaction";
 
 function CheckoutAction({
   formRef,

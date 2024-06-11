@@ -16,3 +16,13 @@ export async function GET(req: NextRequest) {
   var result = await re.json();
   return NextResponse.json(result, { status: re.status });
 }
+
+export async function POST(req: NextRequest) {
+  var re = await fetch(`${process.env.API}/transaction/create`, {
+    method: "POST",
+    headers: GetAuthHeader(req),
+    body: JSON.stringify(await req.json()),
+  });
+  var result = await re.json();
+  return NextResponse.json(result, { status: re.status });
+}

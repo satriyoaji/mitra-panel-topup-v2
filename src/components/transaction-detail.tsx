@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useMemo } from "react";
 import { Card } from "./ui/card";
 import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { Table, TableBody, TableCell, TableFooter, TableRow } from "./ui/table";
@@ -7,6 +9,7 @@ import Image from "next/image";
 import { getTotalPrice, nPlainFormatter, priceMask } from "@/Helpers";
 import { ITransaction } from "@/Type";
 import { isWithinInterval, parseISO } from "date-fns";
+import { useSession } from "next-auth/react";
 
 function TransactionDetail({
   product,
@@ -15,22 +18,14 @@ function TransactionDetail({
   form,
   bank,
 }: ITransaction) {
-  if (promo) {
-    if (
-      !isWithinInterval(new Date(), {
-        start: parseISO(promo.start_at),
-        end: parseISO(promo.finish_at),
-      })
-    )
-      promo = undefined;
-  }
+  const { data: session } = useSession();
 
-  let flashSale;
+  const total = useMemo(() => {
+    if (product) return getTotalPrice(product, promo, bank);
+    return 0;
+  }, [product, promo, bank]);
+
   if (product && category) {
-    // if (product.flash_sales && product.flash_sales.length > 0)
-    //     flashSale = product.flash_sales[0];
-
-    const total = getTotalPrice(product, promo, bank);
     return (
       <div>
         <div className="grid gap-4 py-4">
@@ -126,16 +121,18 @@ function TransactionDetail({
         <Separator className="my-4" />
         <p>Pembayaran</p>
         <div className="flex items-center w-full gap-4">
-          <div className="p-2 w-full h-full rounded-lg border flex flex-col justify-center items-center">
-            <p className="font-medium text-xl ml-2">🪙</p>
-            <Separator className="my-2" />
-            <p className="font-medium text-sm">
-              {nPlainFormatter(20_000)} Points
-            </p>
-          </div>
+          {session && session.profile.saldo > 0 && (
+            <div className="p-2 w-full h-full rounded-lg border flex flex-col justify-center items-center">
+              <p className="font-medium text-xl ml-2">🪙</p>
+              <Separator className="my-2" />
+              <p className="font-medium text-sm">
+                {nPlainFormatter(20_000)} Points
+              </p>
+            </div>
+          )}
           {bank && (
             <>
-              <PlusIcon className="w-8 h-8" />
+              {/* <PlusIcon className="w-8 h-8" /> */}
               <div className="p-4 w-full h-full rounded-lg border flex flex-col justify-center items-center">
                 {bank.image_url ? (
                   <Image
@@ -151,9 +148,7 @@ function TransactionDetail({
                   </div>
                 )}
                 <Separator className="my-2" />
-                <p className="font-medium text-sm">
-                  {priceMask(total - 20_000)}
-                </p>
+                <p className="font-medium text-sm">{priceMask(total)}</p>
               </div>
             </>
           )}
