@@ -34,27 +34,31 @@ function Page({ params }: { params: { slug: string } }) {
 
   const getData = async () => {
     setLoading(true);
-    var res = await fetch(`/api/products/items/${params.slug}?`);
+    var res = await fetch(`/api/products/categories/${params.slug}?`);
 
     if (res.ok) {
       var result = await res.json();
-
       if (result.data) {
         dispatch({
           action: "SET_CATEGORY",
           payload: result.data,
         });
         // setProducts(uniqeProduct(result.data.products));
-        setProducts(result.data);
 
-        if (result.data.products) {
-          var flashSaleItem = searchParams.get("fs");
-          dispatch({
-            action: "SET_PRODUCT",
-            payload: result.data.products.find(
-              (i: TProductItem) => i.key == flashSaleItem
-            ),
-          });
+        res = await fetch(`/api/products/items/${params.slug}?`);
+        if (res.ok) {
+          result = await res.json();
+          setProducts(result.data);
+
+          if (result.data.products) {
+            var flashSaleItem = searchParams.get("fs");
+            dispatch({
+              action: "SET_PRODUCT",
+              payload: result.data.products.find(
+                (i: TProductItem) => i.key == flashSaleItem
+              ),
+            });
+          }
         }
       }
     } else
