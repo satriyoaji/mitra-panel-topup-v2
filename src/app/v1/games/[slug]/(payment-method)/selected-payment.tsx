@@ -25,8 +25,12 @@ function SelectedPayment({ onClick }: { onClick?: () => void }) {
           <div className="flex w-full items-center">
             {data.bank ? (
               <>
-                <p>🪙 Points</p>
-                <Separator orientation="vertical" className="mx-4 h-10" />
+                {session && session?.profile.saldo > 0 && (
+                  <>
+                    <p>🪙 Points</p>
+                    <Separator orientation="vertical" className="mx-4 h-10" />
+                  </>
+                )}
                 <div className="flex items-center gap-2">
                   {data.bank.image_url ? (
                     <Image

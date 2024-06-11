@@ -6,6 +6,7 @@ import ThemeWrapper from "./theme-wrapper";
 import LayoutWrapper from "./layout-wrapper";
 import HelpButton from "@/components/help-button";
 import RootTemplateLayout from "../template-layout";
+import BottomNav from "@/components/bottom-nav";
 
 export const metadata: Metadata = {
   title: "Topup User",

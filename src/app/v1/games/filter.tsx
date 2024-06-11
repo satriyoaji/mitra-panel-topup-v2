@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/popover";
 import React, { ChangeEvent, useEffect, useState } from "react";
 
-function Filter() {
+function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
   const [data, setData] = useState<TValue[]>([]);
   const [search, setSearch] = useState("");
   const [value, setValue] = useState<TValue | undefined>();
@@ -35,7 +35,10 @@ function Filter() {
           };
         });
         setData(resData);
-        if (resData.length > 0) setValue(resData[0]);
+        if (resData.length > 0) {
+          setValue(resData[0]);
+          onChange(resData[0]);
+        }
         return;
       }
       setData([]);
@@ -56,7 +59,10 @@ function Filter() {
     <div className="md:flex md:space-x-1 space-y-1 md:space-y-0 w-full">
       <div className="w-full">
         <Combobox
-          onChange={setValue}
+          onChange={(val) => {
+            setValue(val);
+            onChange(val);
+          }}
           data={data}
           placeholder="Pilih Kategori"
           defaultValue={value}

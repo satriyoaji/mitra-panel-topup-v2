@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { IFlashSaleProduct, TProduct } from "@/Type";
+import { IFlashSaleProduct, TProduct, TProductItem } from "@/Type";
 import { debounce, nFormatter, priceMask } from "@/Helpers";
 import ProductCard from "./[slug]/(product)/product-card";
 import Image from "next/image";
@@ -10,13 +10,15 @@ import Loading from "../../loading";
 import { useRouter } from "next/navigation";
 import Filter from "./filter";
 import Pagination from "@/components/pagination";
+import { TValue } from "@/components/ui/combobox";
 
 function Page() {
   const [total, setTotal] = useState(0);
   const [pageIndex, setPageIndex] = useState(1);
-  const [data, setData] = useState<TProduct[]>([]);
+  const [data, setData] = useState<TProductItem[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState<TValue | undefined>();
   const route = useRouter();
 
   const getList = async () => {
@@ -27,33 +29,40 @@ function Page() {
     });
 
     setLoading(true);
-    var res = await fetch(`/api/products/items?` + searchParams);
-    setLoading(false);
+    if (category) {
+      var res = await fetch(
+        `/api/products/items/${category.value}?` + searchParams
+      );
 
-    if (res.ok) {
-      const dataJson = await res.json();
-      if (dataJson.data) {
-        setData(dataJson.data);
-        setTotal(dataJson.pagination.total_data);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
+      if (res.ok) {
+        const dataJson = await res.json();
+        console.log(dataJson);
+        if (dataJson.data) {
+          setData(dataJson.data);
+          setTotal(dataJson.data.length);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          setLoading(false);
+          return;
+        }
+        setData([]);
+        setTotal(0);
       }
-      setData([]);
-      setTotal(0);
     }
+    setLoading(false);
   };
+  console.log(category);
 
   useEffect(() => {
     (async () => {
       await getList();
     })();
-  }, [search, pageIndex]);
+  }, [search, pageIndex, category]);
 
   return (
     <div className="md:mx-2">
       <div className="flex px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3">
         <p className="font-semibold text-lg">Produk</p>
-        <Filter />
+        <Filter onChange={setCategory} />
       </div>
       <div className="min-h-[68vh]">
         {loading ? (
@@ -65,13 +74,13 @@ function Page() {
                 {data.map((item, idx) => (
                   <div className="w-full h-full" key={`${idx}`}>
                     <ProductCard
-                      category={item.category_alias}
-                      name={item.product_name}
-                      price={`${priceMask(item.sale_price)}`}
+                      // category={item.category_alias}
+                      discountedPrice={item.discounted_price}
+                      name={item.name}
+                      imageURL={item.image_url}
+                      price={`${priceMask(item.price)}`}
                       onClick={() =>
-                        route.push(
-                          `/games/${item.category_code}?fs=${item.uuid}`
-                        )
+                        route.push(`/games/${category?.value}?item=${item.key}`)
                       }
                     />
                   </div>

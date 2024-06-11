@@ -29,7 +29,6 @@ const getSocmed = async () => {
   //         },
   //     }
   // );
-  // console.log("RESS: ", res)
 
   // if (res.ok) {
   //     var result = await res.json();

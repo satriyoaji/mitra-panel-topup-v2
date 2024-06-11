@@ -107,13 +107,7 @@ function CheckoutAction({
   const getTotal: string = useMemo(() => {
     let num = 0;
 
-    if (data.product)
-      num += getTotalPrice(
-        data.product,
-        data.product?.flash_sales?.at(0),
-        data.promo,
-        data.bank
-      );
+    if (data.product) num += getTotalPrice(data.product, data.promo, data.bank);
 
     return priceMask(num);
   }, [data.product, data.promo, data.bank]);

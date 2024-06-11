@@ -1,4 +1,4 @@
-import { TProduct } from "@/Type";
+import { TProductItem, TProduct } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -19,11 +19,11 @@ import TransactionContext, {
 } from "@/infrastructures/context/transaction/transaction.context";
 
 interface IProductList {
-  products: TProduct[];
-  productSelected?: TProduct;
-  nextRef: RefObject<HTMLDivElement>;
-  category: string;
   number: number;
+  // category: string;
+  products: TProductItem[];
+  // productSelected?: TProductItem;
+  nextRef: RefObject<HTMLDivElement>;
 }
 
 interface productType {
@@ -48,7 +48,7 @@ function ProductList(prop: IProductList) {
     TransactionContext
   ) as ITransactionContext;
   const [search, setSearch] = useState("");
-  const [productSearch, setProductSearch] = useState<TProduct[]>([]);
+  const [productSearch, setProductSearch] = useState<TProductItem[]>([]);
   const [filter, setFilter] = useState<productType>();
   const [oldScrollY, setOldScrollY] = useState<number>(0);
   const [isScroll, setIsScroll] = useState<boolean>(false);
@@ -61,9 +61,7 @@ function ProductList(prop: IProductList) {
   }, 500);
 
   useEffect(() => {
-    const data = prop.products.filter((item) =>
-      item.product_name.includes(search)
-    );
+    const data = prop.products.filter((item) => item.name.includes(search));
     setProductSearch(data);
   }, [search]);
 
@@ -127,14 +125,16 @@ function ProductList(prop: IProductList) {
               const item = (
                 <div className="h-full">
                   <ProductCard
-                    key={val.uuid}
-                    category={prop.category}
-                    selected={val.uuid === prop.productSelected?.uuid}
-                    discount={
-                      val.flash_sales
-                        ? priceMask(val.flash_sales[0].discount_price)
-                        : undefined
-                    }
+                    key={val.key}
+                    selected={val.key === data.product?.key}
+                    // discount={
+                    //   val.flash_sales
+                    //     ? priceMask(val.flash_sales[0].discount_price)
+                    //     : undefined
+                    // }
+                    // discount={`${
+                    //   ((val.price - val.discounted_price) / val.price) * 100
+                    // }%`}
                     onClick={() => {
                       dispatch({
                         action: "SET_PRODUCT",
@@ -144,24 +144,19 @@ function ProductList(prop: IProductList) {
                         behavior: "smooth",
                       });
                     }}
-                    discountPrice={
-                      val.flash_sales
-                        ? priceMask(
-                            val.sale_price - val.flash_sales[0].discount_price
-                          )
-                        : undefined
-                    }
-                    name={val.product_name}
-                    price={priceMask(val.sale_price)}
+                    discountedPrice={val.discounted_price}
+                    name={val.name}
+                    imageURL={val.image_url}
+                    price={priceMask(val.price)}
                   />
                 </div>
               );
 
-              if (filter) {
-                if (filter.type === "flash-sale" && val.flash_sales)
-                  return item;
-                return;
-              }
+              // if (filter) {
+              //   if (filter.type === "flash-sale" && val.flash_sales)
+              //     return item;
+              //   return;
+              // }
 
               return item;
             })}

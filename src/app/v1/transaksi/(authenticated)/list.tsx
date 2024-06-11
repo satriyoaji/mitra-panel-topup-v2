@@ -42,7 +42,6 @@ function List(props: IProps) {
 
     if (res.ok) {
       const resData = await res.json();
-      console.log(resData);
       setMeta(resData.manifest);
       if (resData) {
         setLists(resData.data);

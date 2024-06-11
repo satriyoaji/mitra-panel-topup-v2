@@ -33,7 +33,10 @@ export default async function middleware(
     !req.nextUrl.pathname.includes("/v1")
   )
     return NextResponse.redirect(
-      new URL(`/v1/${req.nextUrl.pathname}`, req.url)
+      new URL(
+        `/v1/${req.nextUrl.pathname}?${req.nextUrl.searchParams}`,
+        req.url
+      )
     );
 
   if (
