@@ -65,18 +65,18 @@ function ItemsCard(props: TItemsCard) {
                   {priceMask(props.data.price)}
                 </p>
               </div>
-              <div className="md:hidden">
+              <div>
                 <Link href={`/transaksi/${props.data.transaction_code}`}>
                   <Button size="sm" variant="outline">
                     Detail
                   </Button>
                 </Link>
               </div>
-              <div className="hidden md:block">
+              {/* <div className="hidden md:block">
                 <Button size="sm" variant="outline" onClick={props.onEditClick}>
                   Detail
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

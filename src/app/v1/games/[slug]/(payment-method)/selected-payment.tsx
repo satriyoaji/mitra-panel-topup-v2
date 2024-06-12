@@ -23,7 +23,7 @@ function SelectedPayment({ onClick }: { onClick?: () => void }) {
       <div className="py-4 px-6 w-full">
         <div className="flex justify-between items-center w-full">
           <div className="flex w-full items-center">
-            {data.bank ? (
+            {data.payment ? (
               <>
                 {session && session?.profile.saldo > 0 && (
                   <>
@@ -32,17 +32,17 @@ function SelectedPayment({ onClick }: { onClick?: () => void }) {
                   </>
                 )}
                 <div className="flex items-center gap-2">
-                  {data.bank.image_url ? (
+                  {data.payment.image_url ? (
                     <Image
-                      alt={data.bank.name}
-                      src={data.bank.image_url}
+                      alt={data.payment.name}
+                      src={data.payment.image_url}
                       width={70}
                       height={70}
                     />
                   ) : (
                     <p className="text-xl p-0 m-0 mb-1">💳</p>
                   )}
-                  <p className="text-xs mt-0 p-0">{data.bank.name}</p>
+                  <p className="text-xs mt-0 p-0">{data.payment.name}</p>
                 </div>
               </>
             ) : (

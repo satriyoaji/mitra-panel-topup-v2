@@ -7,23 +7,22 @@ import { Table, TableBody, TableCell, TableFooter, TableRow } from "./ui/table";
 import { Separator } from "./ui/separator";
 import Image from "next/image";
 import { getTotalPrice, nPlainFormatter, priceMask } from "@/Helpers";
-import { ITransaction } from "@/Type";
-import { isWithinInterval, parseISO } from "date-fns";
 import { useSession } from "next-auth/react";
+import { ITransaction } from "@/types/transaction";
 
 function TransactionDetail({
   product,
   category,
   promo,
   form,
-  bank,
+  payment,
 }: ITransaction) {
   const { data: session } = useSession();
 
   const total = useMemo(() => {
-    if (product) return getTotalPrice(product, promo, bank);
+    if (product) return getTotalPrice(product, promo, payment);
     return 0;
-  }, [product, promo, bank]);
+  }, [product, promo, payment]);
 
   if (product && category) {
     return (
@@ -99,11 +98,11 @@ function TransactionDetail({
                   </TableCell>
                 </TableRow>
               )}
-              {bank && bank.fee_amount ? (
+              {payment && payment.fee_amount ? (
                 <TableRow>
                   <TableCell>Admin Fee</TableCell>
                   <TableCell className="text-right">
-                    {`+ ${priceMask(bank.fee_amount)}`}
+                    {`+ ${priceMask(payment.fee_amount)}`}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -130,21 +129,21 @@ function TransactionDetail({
               </p>
             </div>
           )}
-          {bank && (
+          {payment && (
             <>
               {/* <PlusIcon className="w-8 h-8" /> */}
               <div className="p-4 w-full h-full rounded-lg border flex flex-col justify-center items-center">
-                {bank.image_url ? (
+                {payment.image_url ? (
                   <Image
-                    alt={bank.name}
-                    src={bank.image_url}
+                    alt={payment.name}
+                    src={payment.image_url}
                     width={70}
                     height={70}
                   />
                 ) : (
                   <div className="flex items-center gap-1.5">
                     <p className="font-medium text-xl -mt-1">💳</p>
-                    <p className="font-medium text-xs">{bank.name}</p>
+                    <p className="font-medium text-xs">{payment.name}</p>
                   </div>
                 )}
                 <Separator className="my-2" />

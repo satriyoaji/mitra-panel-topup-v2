@@ -1,6 +1,5 @@
 "use client";
 
-import { IPaymentGroup } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import TransactionContext, {
@@ -8,6 +7,7 @@ import TransactionContext, {
 } from "@/infrastructures/context/transaction/transaction.context";
 import React, { useContext, useEffect, useState } from "react";
 import PaymentList from "./payment-list";
+import { IPaymentGroup } from "@/types/transaction";
 
 function Payment({ number }: { number: number }) {
   const { data, dispatch } = useContext(
@@ -28,8 +28,7 @@ function Payment({ number }: { number: number }) {
   };
 
   useEffect(() => {
-    if (data.payment == "transfer" || data.payment == "transfer & points")
-      getBank();
+    getBank();
   }, []);
 
   return (
