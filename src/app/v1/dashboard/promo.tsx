@@ -5,21 +5,21 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 function Promo() {
-    const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(true);
 
-    return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="bg-transparent border-0 shadow-none z-50 max-w-4xl p-8 rounded-xl">
-                <Image
-                    src="/promo.webp"
-                    height={2000}
-                    width={2000}
-                    alt="promo"
-                    className="rounded-xl"
-                />
-            </DialogContent>
-        </Dialog>
-    );
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="bg-transparent border-0 shadow-none z-50 max-w-4xl p-8 rounded-xl">
+        <Image
+          src="/assets/promo.webp"
+          height={2000}
+          width={2000}
+          alt="promo"
+          className="rounded-xl"
+        />
+      </DialogContent>
+    </Dialog>
+  );
 }
 
 export default Promo;
