@@ -1,4 +1,4 @@
-import { ITransactionHistory } from "@/Type";
+import { ITransactionHistory } from "@/types/transaction";
 import { format, parseISO } from "date-fns";
 import React from "react";
 

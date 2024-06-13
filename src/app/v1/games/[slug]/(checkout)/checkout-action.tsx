@@ -8,7 +8,6 @@ import TransactionContext, {
 import { useSession } from "next-auth/react";
 import React, { RefObject, useContext, useMemo, useState } from "react";
 import { Purchase } from "./detail";
-import { TProductForm } from "@/Type";
 
 function CheckoutAction({
   formRef,
@@ -51,10 +50,7 @@ function CheckoutAction({
         ),
       });
 
-    if (
-      (data.payment == "transfer" || data.payment == "transfer & points") &&
-      !data.bank
-    )
+    if (!data.payment)
       return toast({
         title: "Failed",
         description: "Metode pembayaran belum dipilih",
@@ -107,10 +103,11 @@ function CheckoutAction({
   const getTotal: string = useMemo(() => {
     let num = 0;
 
-    if (data.product) num += getTotalPrice(data.product, data.promo, data.bank);
+    if (data.product)
+      num += getTotalPrice(data.product, data.promo, data.payment);
 
     return priceMask(num);
-  }, [data.product, data.promo, data.bank]);
+  }, [data.product, data.promo, data.payment]);
 
   return (
     <>
@@ -128,14 +125,14 @@ function CheckoutAction({
         </div>
       </div>
       <Purchase
-        payment="transfer & points"
+        payment={data.payment}
         onOpenChange={setIsCheckoutOpen}
         isOpen={isCheckoutOpen}
         category={data.category}
         product={data.product}
         promo={data.promo}
         form={data.form}
-        bank={data.bank}
+        account={data.account}
       />
     </>
   );

@@ -65,7 +65,7 @@ function List(props: IProps) {
 
   return (
     <div className="md:mx-2">
-      <div className="flex -mx-2 px-2 sticky py-4 bg-white flex-col space-y-1.5 mb-3">
+      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3">
         <p className="font-semibold text-lg">Riwayat Transaksi🧾</p>
         <div className="flex space-x-1">
           <Input
@@ -103,7 +103,7 @@ function List(props: IProps) {
           )}
         </div>
       </div>
-      <div className="flex flex-col space-y-4 md:max-h-[76vh] md:overflow-y-auto">
+      <div className="flex flex-col space-y-4">
         {!loading ? (
           lists.map((val, idx) => (
             <ItemsCard
@@ -119,7 +119,13 @@ function List(props: IProps) {
         )}
       </div>
       {meta ? (
-        <Pagination meta={meta} onChange={(val) => setPage(val)} />
+        <Pagination
+          meta={meta}
+          onChange={(val) => {
+            setPage(val);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
       ) : (
         <></>
       )}

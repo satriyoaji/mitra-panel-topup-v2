@@ -1,19 +1,25 @@
+"use client";
+
 import { getTotalPrice, priceMask } from "@/Helpers";
-import { ITransaction } from "@/Type";
 import TransactionDetail from "@/components/transaction-detail";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { isWithinInterval, parseISO } from "date-fns";
-import Image from "next/image";
-import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import {
+  ICategoryForm,
+  ITransaction,
+  ITransactionCreate,
+} from "@/types/transaction";
+import { useState } from "react";
+import Swal from "@/components/swal";
 
 interface IDetailProp extends ITransaction {
   isOpen: boolean;
@@ -27,22 +33,70 @@ export function Purchase({
   isOpen,
   onOpenChange,
   form,
-  bank,
+  payment,
+  account,
 }: IDetailProp) {
-  if (promo) {
-    if (
-      !isWithinInterval(new Date(), {
-        start: parseISO(promo.start_at),
-        end: parseISO(promo.finish_at),
-      })
-    )
-      promo = undefined;
-  }
+  const [success, setSuccess] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
-  if (product && category) {
-    const total = getTotalPrice(product, promo, bank);
+  const createTransaction = async () => {
+    if (!account || !payment || !product || !category) return false;
 
-    return (
+    var payload: ITransactionCreate = {
+      category_key: category?.key,
+      product_key: product?.key,
+      payment_method: payment.payment_method,
+      payment_channel: payment.payment_channel,
+      email: account?.email,
+      phone: account?.noWhatsapp,
+    };
+
+    if (form) {
+      var forms: ICategoryForm[] = [];
+      for (const [key, value] of Object.entries(form)) {
+        forms.push({
+          key,
+          value: value as string,
+        });
+      }
+
+      payload.form_data = forms;
+    }
+
+    var res = await fetch("/api/transaction", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+
+    onOpenChange(false);
+    if (res.ok) {
+      toast({
+        title: "Success",
+        description: "Transaksi Sukses",
+        variant: "success",
+      });
+
+      var data = await res.json();
+      setTimeout(() => {
+        router.push(`/transaksi/${data.data.transaction_code}`);
+      }, 3000);
+
+      return;
+    }
+
+    setSuccess(false);
+    return toast({
+      title: "Failed",
+      description: "Checkout Failed",
+      variant: "destructive",
+    });
+  };
+
+  if (!product) return <></>;
+  return (
+    <>
       <Dialog open={isOpen} defaultOpen={false} onOpenChange={onOpenChange}>
         <DialogContent className="max-w-sm w-full">
           <DialogHeader>
@@ -52,7 +106,7 @@ export function Purchase({
             </DialogDescription>
           </DialogHeader>
           <TransactionDetail
-            bank={bank}
+            payment={payment}
             category={category}
             form={form}
             product={product}
@@ -63,19 +117,24 @@ export function Purchase({
             <div className="flex justify-between items-center">
               <div className="text-xs space-y-0.5">
                 <p className="">Total Harga</p>
-                <p className="font-semibold text-sm">{priceMask(total)}</p>
+                <p className="font-semibold text-sm">
+                  {priceMask(getTotalPrice(product, promo, payment))}
+                </p>
               </div>
-              <Link href={"/transaksi/adwdadaw"}>
-                <Button type="submit" size="sm">
-                  Bayar
-                </Button>
-              </Link>
+
+              <Button type="submit" size="sm" onClick={createTransaction}>
+                Bayar
+              </Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
-    );
-  }
-
-  return <></>;
+      <Swal
+        open={alertOpen}
+        variant={success ? "success" : "failed"}
+        title="Checkout Berhasil"
+        description="Terimakasih telah memesan"
+      />
+    </>
+  );
 }

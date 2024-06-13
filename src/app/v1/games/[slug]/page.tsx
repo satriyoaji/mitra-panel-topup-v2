@@ -16,8 +16,11 @@ import TransactionContext, {
 import FormConfirmation from "./(account-confirmation)/form-confirmation";
 import CheckoutAction from "./(checkout)/checkout-action";
 import Payment from "./(payment-method)/payment";
+import { useSession } from "next-auth/react";
+import Swal from "@/components/swal";
 
 function Page({ params }: { params: { slug: string } }) {
+  const { data: session } = useSession();
   const { data, dispatch } = useContext(
     TransactionContext
   ) as ITransactionContext;
@@ -72,6 +75,17 @@ function Page({ params }: { params: { slug: string } }) {
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    if (session)
+      dispatch({
+        action: "SET_ACCOUNT",
+        payload: {
+          email: session.profile.email,
+          noWhatsapp: session.profile.phone,
+        },
+      });
+  }, [session]);
 
   if (loading) return <Loading />;
 

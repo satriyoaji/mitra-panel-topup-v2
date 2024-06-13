@@ -115,56 +115,6 @@ export interface IFlashSaleProduct extends IFlashSaleInProduct {
   product: IFlashSaleProductDetail;
 }
 
-export interface IPromo {
-  id: string;
-  code: string;
-  promo_type: "fix" | "percentage";
-  promo_value: number;
-  showable: boolean;
-  start_at: string;
-  finish_at: string;
-  limit_count?: number;
-  ref_product?: TProduct;
-  ref_category?: IProductCategory;
-}
-
-export interface IAccount {
-  noWhatsapp: string;
-  email: string;
-}
-
-export type IPaymentMethod = "transfer" | "transfer & points" | "points";
-
-export interface IPayment {
-  payment_method: "VIRTUAL_ACCOUNT" | "EWALLET" | "QR_CODE";
-  payment_channel: string;
-  name: string;
-  image_url: string;
-  fee_percent: number;
-  fee_amount: number;
-}
-
-export interface IPaymentGroup {
-  name: string;
-  payment_method: IPayment[];
-}
-
-export interface IBank {
-  url: string | StaticImageData;
-  name: string;
-  admin_fee?: number;
-}
-
-export interface ITransaction {
-  product?: TProductItem;
-  category?: IProductCategory | null;
-  promo?: IPromo;
-  payment?: IPaymentMethod;
-  form?: LooseObject;
-  account?: IAccount;
-  bank?: IPayment;
-}
-
 export interface ITransactionHistoryList {
   date: string;
   transaction_code: string;
@@ -174,37 +124,4 @@ export interface ITransactionHistoryList {
   status_name: string;
   price: number;
   payment_channel: string;
-}
-
-export interface IPaymentInfo {
-  invoice_code: string;
-  payment_method: string;
-  payment_channel: string;
-  virtual_account_member: string;
-  virtual_account_name: string;
-  payment_amount: number;
-  expired_at: string;
-}
-
-export interface ITransactionHistory {
-  status: number;
-  status_name: string;
-  timestamp: string;
-}
-
-export interface ITransactionHistoryDetail {
-  date: string;
-  transaction_code: string;
-  category_key: string;
-  category_name: string;
-  product_key: string;
-  product_name: string;
-  email: string;
-  phone: string;
-  order_description: string;
-  customer_data: string;
-  price: number;
-  paid_price: number;
-  history_status: ITransactionHistory[];
-  payment_information: IPaymentInfo;
 }

@@ -1,13 +1,11 @@
 import { format, parseISO } from "date-fns";
 import {
-  IBank,
   IFlashSaleInProduct,
-  IPayment,
   IProductCategory,
-  IPromo,
   TProduct,
   TProductItem,
 } from "./Type";
+import { IPayment, IPromo } from "./types/transaction";
 
 const priceMask = (val: number | undefined) => {
   if (!val) return "Rp 0";

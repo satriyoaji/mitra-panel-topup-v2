@@ -1,16 +1,7 @@
 "use client";
 
-import {
-  IAccount,
-  IPaymentMethod,
-  IProductCategory,
-  IPromo,
-  ITransaction,
-  LooseObject,
-  TProduct,
-  IPayment,
-  TProductItem,
-} from "@/Type";
+import { IProductCategory, LooseObject, TProductItem } from "@/Type";
+import { IAccount, IPayment, IPromo, ITransaction } from "@/types/transaction";
 import React from "react";
 
 export type TransactionSetCategory = {
@@ -30,16 +21,12 @@ export type TransactionSetForm = {
   payload: LooseObject;
 };
 export type TransactionSetPayment = {
-  action: "SET_PAYMENT";
-  payload: IPaymentMethod;
+  action: "SET_PAYMENT_METHOD";
+  payload: IPayment;
 };
 export type TransactionSetAccount = {
   action: "SET_ACCOUNT";
   payload: IAccount;
-};
-export type TransactionSetXenditBank = {
-  action: "SET_BANK";
-  payload?: IPayment;
 };
 
 export type TransactionDispatch =
@@ -48,7 +35,6 @@ export type TransactionDispatch =
   | TransactionSetProduct
   | TransactionSetPromo
   | TransactionSetAccount
-  | TransactionSetXenditBank
   | TransactionSetPayment;
 
 export interface ITransactionContext {
