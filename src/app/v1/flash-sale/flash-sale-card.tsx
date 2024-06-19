@@ -2,19 +2,20 @@ import React from "react";
 import { Card, CardContent } from "../../../components/ui/card";
 import Link from "next/link";
 import { LightningBoltIcon, SketchLogoIcon } from "@radix-ui/react-icons";
-import { IFlashSaleProduct } from "@/Type";
 import { priceMask } from "@/Helpers";
+import { IFlashSaleInProduct } from "@/types/flash-sale";
+import Image from "next/image";
 
 function FlashSaleCard({
   data,
   selected,
 }: {
-  data: IFlashSaleProduct;
+  data: IFlashSaleInProduct;
   selected?: boolean;
 }) {
   return (
     <Link
-      href={`/games/${data.product.category_uuid}?fs=${data.product.uuid}`}
+      href={`/games/${data.category_key}?item=${data.key}`}
       className="w-full h-full"
     >
       <Card
@@ -37,19 +38,21 @@ function FlashSaleCard({
           <div className="p-3 flex flex-col justify-between h-full items-start">
             <div className="flex space-x-0.5">
               <div className="overflow-clip rounded w-fit min-w-[2rem]">
-                {/* {val.logo_image !== "" ? (
-                                            <img
-                                                alt="Remy Sharp"
-                                                className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                                                src={val.logo_image}
-                                            />
-                                        ) : ( */}
-                <div className="p-1 aspect-square hover:scale-125 transition duration-300 hover:rotate-12 flex justify-center items-center">
-                  <SketchLogoIcon className="m-auto w-5 h-5" />
-                </div>
-                {/* )} */}
+                {data.image_url ? (
+                  <Image
+                    width={30}
+                    height={30}
+                    alt={data.name}
+                    className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
+                    src={data.image_url}
+                  />
+                ) : (
+                  <div className="p-1 aspect-square hover:scale-125 transition duration-300 hover:rotate-12 flex justify-center items-center">
+                    <SketchLogoIcon className="m-auto w-5 h-5" />
+                  </div>
+                )}
               </div>
-              <p className="text-xs">{data.product.product_name}</p>
+              <p className="text-xs">{data.name}</p>
             </div>
             <div className="mx-2 w-full">
               <div className="flex justify-between items-end">
@@ -58,13 +61,13 @@ function FlashSaleCard({
                     className="line-through text-xs mt-0.5"
                     style={{ fontSize: "60%" }}
                   >
-                    {priceMask(data.product.sale_price)}
+                    {priceMask(data.price)}
                   </p>
                   <p
                     className="text-red-500 text-xs font-medium"
                     style={{ fontSize: "80%" }}
                   >
-                    {priceMask(data.product.sale_price - data.discount_price)}
+                    {priceMask(data.discounted_price)}
                   </p>
                 </div>
                 <div className="bg-red-500 text-white -mb-[.562rem] rounded-br-lg rounded-tl-md p-1">

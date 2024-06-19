@@ -74,7 +74,7 @@ function List(props: IProps) {
             className="bg-white"
             onChange={doSearch}
           />
-          {session && (
+          {session ? (
             <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
               <DialogTrigger asChild>
                 <Button
@@ -100,7 +100,7 @@ function List(props: IProps) {
                 />
               </DialogContent>
             </Dialog>
-          )}
+          ) : null}
         </div>
       </div>
       <div className="flex flex-col space-y-4">

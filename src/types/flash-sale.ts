@@ -1,12 +1,15 @@
 export interface IFlashSaleInProduct {
-  id: number;
-  discount_price: number;
-  active: boolean;
-  start_at: string;
-  finish_at: string;
+  category_key: string;
+  key: string;
+  name: string;
+  image_url: string;
+  price: number;
+  discounted_price: number;
 }
 export interface IFlashSaleInfo {
-  id: number;
   name: string;
-  exapired_at: string;
+  banner_url: string;
+  image_url: string;
+  expired_at: string;
+  products: IFlashSaleInProduct[];
 }

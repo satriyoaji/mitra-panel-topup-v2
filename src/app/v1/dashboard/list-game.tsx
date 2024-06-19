@@ -1,14 +1,14 @@
 "use client";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { Badge } from "../../../components/ui/badge";
-import { Card, CardContent } from "../../../components/ui/card";
 import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { debounce, uniqeCategory } from "@/Helpers";
 import Loading from "../../loading";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 // import Image from "next/image";
 
 export default function ListGame() {
@@ -18,7 +18,7 @@ export default function ListGame() {
   });
   const [data, setData] = useState<Array<IProductCategory>>([]);
   const [search, setSearch] = useState<string>("");
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [groups, setGroups] = useState<TProductGroup[]>([]);
@@ -32,8 +32,8 @@ export default function ListGame() {
         new URLSearchParams({
           page: `${pageIndex}`,
           limit: "10",
-          key: search,
-          group_id: `${group?.id ?? ""}`,
+          search,
+          label_id: `${group?.id ?? ""}`,
         })
     );
 
@@ -42,10 +42,8 @@ export default function ListGame() {
       var result = await res.json();
 
       if (result.data) {
-        setData(result.data);
-        // if (more)
-        //     setData((prev) => uniqeCategory(prev.concat(result.data)));
-        // else setData(uniqeCategory(result.data));
+        if (more) setData((prev) => [...prev, result.data]);
+        else setData(result.data);
       } else {
         if (!more) setData([]);
       }
@@ -80,7 +78,7 @@ export default function ListGame() {
   }, [search, group]);
 
   useEffect(() => {
-    getData(true);
+    if (pageIndex > 0) getData(true);
   }, [pageIndex]);
 
   const showMore = () => {
@@ -152,14 +150,14 @@ export default function ListGame() {
           </Link>
         ))}
       </div>
-      {loading && <Loading />}
-      {pageIndex < totalPage && (
+      {loading ? <Loading /> : null}
+      {pageIndex < totalPage ? (
         <div className="flex items-center justify-center my-2 mt-6">
           <Button size="sm" onClick={showMore}>
             Show More
           </Button>
         </div>
-      )}
+      ) : null}
     </React.Fragment>
   );
 }

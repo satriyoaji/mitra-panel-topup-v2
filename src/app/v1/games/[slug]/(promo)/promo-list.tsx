@@ -5,241 +5,173 @@ import React, { useCallback, useEffect, useState } from "react";
 import PromoCard from "./promo-card";
 import { useToast } from "@/components/ui/use-toast";
 import {
-    DialogContent,
-    Dialog,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
+  DialogContent,
+  Dialog,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import { IPromo } from "@/types/transaction";
 
 function Promo({
-    categoryUuid,
-    product,
-    listProductId,
-    onPromoSelected,
+  categoryUuid,
+  product,
+  listProductId,
+  onPromoSelected,
 }: {
-    categoryUuid: string;
-    product?: TProductItem;
-    listProductId: string[];
-    onPromoSelected: (promo?: IPromo) => void;
+  categoryUuid: string;
+  product?: TProductItem;
+  listProductId: string[];
+  onPromoSelected: (promo?: IPromo) => void;
 }) {
-    const [selectedPromo, setSelectedPromo] = useState<IPromo>();
-    const [promos, setPromos] = useState<IPromo[]>([]);
-    const [productPromos, setProductPromos] = useState<IPromo[]>([]);
-    const [mergePromos, setMergePromos] = useState<IPromo[]>([]);
-    const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
-    const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
-    const [loading, setLoading] = useState<boolean>(false);
-    const [open, setOpen] = useState(false);
-    const { toast } = useToast();
+  const [selectedPromo, setSelectedPromo] = useState<IPromo>();
+  const [promos, setPromos] = useState<IPromo[]>([]);
+  const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
+  const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
-    const getData = async (id?: string) => {
-        console.log(id, categoryUuid);
-        if (!id || !categoryUuid) return setProductPromos([]);
-        setLoading(true);
-        let qParams = new URLSearchParams();
+  const getData = async (id?: string) => {
+    console.log(id, categoryUuid);
+    if (!id || !categoryUuid) return;
+    setLoading(true);
 
-        if (id) qParams.append("product_key", id);
-        else qParams.append("category_key", categoryUuid);
+    let qParams = new URLSearchParams();
+    qParams.append("product_key", id);
+    qParams.append("category_key", categoryUuid);
 
-        var res = await fetch(`/api/products/promo?` + qParams);
+    var res = await fetch(`/api/products/promo?` + qParams);
 
-        if (res.ok) {
-            var result = await res.json();
+    if (res.ok) {
+      var result = await res.json();
 
-            if (result.data) {
-                if (id) {
-                    setProductPromos(result.data);
-                    setLoading(false);
-                    return;
-                }
-
-                setPromos(result.data);
-                setLoading(false);
-                return;
-            }
-
-            if (id) {
-                setProductPromos([]);
-                setLoading(false);
-                return;
-            }
-
-            setPromos([]);
-        }
+      if (result.data) {
+        setPromos(result.data);
         setLoading(false);
-    };
+        return;
+      }
 
-    const isDuplicatePromo = (p: IPromo) => {
-        const arr: IPromo[] = promos.concat(productPromos);
-        if (hiddenPromo) arr.push(hiddenPromo);
+      setPromos([]);
+    }
+    setLoading(false);
+  };
 
-        return arr.some((i) => i.id === p.id);
-    };
+  const isDuplicatePromo = (p: IPromo) => {
+    const arr: IPromo[] = promos;
+    if (hiddenPromo) arr.push(hiddenPromo);
 
-    const getHiddenPromo = async () => {
-        setLoading(true);
-        var res = await fetch(`/api/products/promo/${hiddenPromoCode}?`);
+    return arr.some((i) => i.id === p.id);
+  };
 
-        if (res.ok) {
-            var result = await res.json();
+  const getHiddenPromo = async () => {
+    setLoading(true);
+    var res = await fetch(`/api/products/promo/${hiddenPromoCode}?`);
 
-            if (result.data) {
-                if (
-                    (result.data.ref_category &&
-                        result.data.ref_category?.uuid == categoryUuid) ||
-                    (result.data.ref_product &&
-                        listProductId.some(
-                            (i) => i === result.data.ref_product?.uuid
-                        ))
-                ) {
-                    if (!isDuplicatePromo(result.data)) {
-                        setHiddenPromo(result.data);
-                        setSelectedPromo(result.data.id);
-                    } else
-                        toast({
-                            title: "Failed",
-                            description: "Promo Tidak Ditemukan",
-                            variant: "destructive",
-                        });
-                    setLoading(false);
-                    return;
-                }
-            }
+    if (res.ok) {
+      var result = await res.json();
+
+      if (result.data) {
+        if (
+          (result.data.ref_category &&
+            result.data.ref_category?.uuid == categoryUuid) ||
+          (result.data.ref_product &&
+            listProductId.some((i) => i === result.data.ref_product?.uuid))
+        ) {
+          if (!isDuplicatePromo(result.data)) {
+            setHiddenPromo(result.data);
+            setSelectedPromo(result.data.id);
+          } else
+            toast({
+              title: "Failed",
+              description: "Promo Tidak Ditemukan",
+              variant: "destructive",
+            });
+          setLoading(false);
+          return;
         }
+      }
+    }
 
-        toast({
-            title: "Failed",
-            description: "Promo Tidak Ditemukan",
-            variant: "destructive",
-        });
-        setHiddenPromo(undefined);
-        setLoading(false);
-    };
+    toast({
+      title: "Failed",
+      description: "Promo Tidak Ditemukan",
+      variant: "destructive",
+    });
+    setHiddenPromo(undefined);
+    setLoading(false);
+  };
 
-    useEffect(() => {
-        getData(product?.key);
-        // if (selectedPromo?.ref_product?.uuid != product?.uuid) {
-        //     setSelectedPromo(undefined);
-        //     onPromoSelected();
-        // }
-    }, [product]);
+  useEffect(() => {
+    getData(product?.key);
+    setSelectedPromo(undefined);
+    onPromoSelected();
+  }, [product, categoryUuid]);
 
-    useEffect(() => {
-        setMergePromos(
-            promos.concat(
-                productPromos.filter(
-                    (item2) => !promos.some((item1) => item1.id === item2.id)
-                )
-            )
-        );
-    }, [promos, productPromos]);
+  const selectPromo = (isSecret: boolean, promo?: IPromo) => {
+    setSelectedPromo(promo);
+    onPromoSelected(promo);
+    setOpen(false);
+  };
 
-    const selectPromo = (isSecret: boolean, promo?: IPromo) => {
-        // if (promo) {
-        //     if (
-        //         promo.ref_product &&
-        //         product &&
-        //         product.uuid !== promo.ref_product.uuid
-        //     ) {
-        //         toast({
-        //             title: "Failed",
-        //             description:
-        //                 "Promo tidak dapat digunakan untuk product yang dipilih",
-        //             variant: "destructive",
-        //         });
-        //         return;
-        //     }
-
-        //     if (
-        //         !isSecret ||
-        //         (isSecret && promo?.ref_product?.uuid == product?.uuid)
-        //     ) {
-        //         setSelectedPromo(promo);
-        //         onPromoSelected(promo);
-        //         setOpen(false);
-        //         return;
-        //     }
-
-        //     toast({
-        //         title: "Failed",
-        //         description:
-        //             "Promo tidak dapat digunakan untuk product yang dipilih",
-        //         variant: "destructive",
-        //     });
-        //     return;
-        // }
-        setSelectedPromo(undefined);
-        onPromoSelected(undefined);
-    };
-
-    return (
-        <>
-            {selectedPromo ? (
+  return (
+    <>
+      {selectedPromo ? (
+        <PromoCard
+          selected={selectedPromo}
+          promo={selectedPromo}
+          setSelected={() => setOpen(true)}
+        />
+      ) : (
+        <div
+          onClick={() => setOpen(true)}
+          className="rounded-xl cursor-pointer hover:bg-slate-50 py-4 px-6 border-2 flex justify-between items-center border-theme-secondary-500"
+        >
+          <p className="p-0 m-0">Pilih Promo</p>
+          <ChevronRightIcon />
+        </div>
+      )}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Promo</DialogTitle>
+            <DialogDescription>Pilih promo paling cuan.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div className="mt-2 flex space-x-2 items-center">
+              <Input
+                placeholder="Punya Kode Promo? Masukan di sini"
+                value={hiddenPromoCode}
+                onChange={(e) => setHiddenPromoCode(e.target.value)}
+              />
+              <Button disabled={loading} size="sm" onClick={getHiddenPromo}>
+                {loading ? "Loading..." : "Get Promo"}
+              </Button>
+            </div>
+            <div className="space-y-3 max-h-[56vh] overflow-y-auto">
+              {hiddenPromo ? (
                 <PromoCard
-                    selected={selectedPromo}
-                    promo={selectedPromo}
-                    setSelected={() => setOpen(true)}
+                  promo={hiddenPromo}
+                  selected={selectedPromo}
+                  setSelected={(e) => selectPromo(true, e)}
+                  isSecret
                 />
-            ) : (
-                <div
-                    onClick={() => setOpen(true)}
-                    className="rounded-xl cursor-pointer hover:bg-slate-50 py-4 px-6 border-2 flex justify-between items-center border-theme-secondary-500"
-                >
-                    <p className="p-0 m-0">Pilih Promo</p>
-                    <ChevronRightIcon />
-                </div>
-            )}
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Promo</DialogTitle>
-                        <DialogDescription>
-                            Pilih promo paling cuan.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-3">
-                        <div className="mt-2 flex space-x-2 items-center">
-                            <Input
-                                placeholder="Punya Kode Promo? Masukan di sini"
-                                value={hiddenPromoCode}
-                                onChange={(e) =>
-                                    setHiddenPromoCode(e.target.value)
-                                }
-                            />
-                            <Button
-                                disabled={loading}
-                                size="sm"
-                                onClick={getHiddenPromo}
-                            >
-                                {loading ? "Loading..." : "Get Promo"}
-                            </Button>
-                        </div>
-                        <div className="space-y-3 max-h-[56vh] overflow-y-auto">
-                            {hiddenPromo && (
-                                <PromoCard
-                                    promo={hiddenPromo}
-                                    selected={selectedPromo}
-                                    setSelected={(e) => selectPromo(true, e)}
-                                    isSecret
-                                />
-                            )}
-                            {mergePromos.map((i) => (
-                                <PromoCard
-                                    key={i.promo_code}
-                                    promo={i}
-                                    selected={selectedPromo}
-                                    setSelected={(e) => selectPromo(true, e)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </DialogContent>
-            </Dialog>
-        </>
-    );
+              ) : null}
+              {promos.map((i) => (
+                <PromoCard
+                  key={i.promo_code}
+                  promo={i}
+                  selected={selectedPromo}
+                  setSelected={(e) => selectPromo(true, e)}
+                />
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
 }
 
 export default Promo;

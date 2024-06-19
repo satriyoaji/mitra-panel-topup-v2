@@ -33,7 +33,7 @@ function Page() {
             placeholder="Pilih bukti transaksi"
           />
         </div>
-        {!session && (
+        {!session ? (
           <>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Email</Label>
@@ -48,7 +48,7 @@ function Page() {
               />
             </div>
           </>
-        )}
+        ) : null}
         <Button
           className="mt-4"
           onClick={() => {

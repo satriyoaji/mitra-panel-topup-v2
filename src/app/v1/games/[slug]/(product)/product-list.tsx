@@ -89,7 +89,7 @@ function ProductList(prop: IProductList) {
           <h4 className="font-medium ml-1">Produk</h4>
         </div>
         <Separator className="my-3" />
-        <div className="flex w-full overflow-x-auto">
+        {/* <div className="flex w-full overflow-x-auto">
           {typeList.map((val, idx) => (
             <Badge
               className="mx-1 cursor-pointer space-x-2"
@@ -104,7 +104,7 @@ function ProductList(prop: IProductList) {
               {val.title}
             </Badge>
           ))}
-        </div>
+        </div> */}
         <Input
           placeholder="Search Product..."
           onChange={doSearch}
