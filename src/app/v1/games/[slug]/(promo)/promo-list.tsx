@@ -1,4 +1,4 @@
-import { TProduct } from "@/Type";
+import { TProduct, TProductItem } from "@/Type";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useCallback, useEffect, useState } from "react";
@@ -21,14 +21,12 @@ function Promo({
   onPromoSelected,
 }: {
   categoryUuid: string;
-  product?: TProduct;
+  product?: TProductItem;
   listProductId: string[];
   onPromoSelected: (promo?: IPromo) => void;
 }) {
   const [selectedPromo, setSelectedPromo] = useState<IPromo>();
   const [promos, setPromos] = useState<IPromo[]>([]);
-  const [productPromos, setProductPromos] = useState<IPromo[]>([]);
-  const [mergePromos, setMergePromos] = useState<IPromo[]>([]);
   const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
   const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,11 +34,13 @@ function Promo({
   const { toast } = useToast();
 
   const getData = async (id?: string) => {
+    console.log(id, categoryUuid);
+    if (!id || !categoryUuid) return;
     setLoading(true);
-    let qParams = new URLSearchParams();
 
-    if (id) qParams.append("product_uuid", id);
-    else qParams.append("category_uuid", categoryUuid);
+    let qParams = new URLSearchParams();
+    qParams.append("product_key", id);
+    qParams.append("category_key", categoryUuid);
 
     var res = await fetch(`/api/products/promo?` + qParams);
 
@@ -48,19 +48,7 @@ function Promo({
       var result = await res.json();
 
       if (result.data) {
-        if (id) {
-          setProductPromos(result.data);
-          setLoading(false);
-          return;
-        }
-
         setPromos(result.data);
-        setLoading(false);
-        return;
-      }
-
-      if (id) {
-        setProductPromos([]);
         setLoading(false);
         return;
       }
@@ -71,7 +59,7 @@ function Promo({
   };
 
   const isDuplicatePromo = (p: IPromo) => {
-    const arr: IPromo[] = promos.concat(productPromos);
+    const arr: IPromo[] = promos;
     if (hiddenPromo) arr.push(hiddenPromo);
 
     return arr.some((i) => i.id === p.id);
@@ -116,57 +104,15 @@ function Promo({
   };
 
   useEffect(() => {
-    getData(product?.uuid);
-    if (selectedPromo?.ref_product?.uuid != product?.uuid) {
-      setSelectedPromo(undefined);
-      onPromoSelected();
-    }
-  }, [product]);
-
-  useEffect(() => {
-    setMergePromos(
-      promos.concat(
-        productPromos.filter(
-          (item2) => !promos.some((item1) => item1.id === item2.id)
-        )
-      )
-    );
-  }, [promos, productPromos]);
+    getData(product?.key);
+    setSelectedPromo(undefined);
+    onPromoSelected();
+  }, [product, categoryUuid]);
 
   const selectPromo = (isSecret: boolean, promo?: IPromo) => {
-    if (promo) {
-      if (
-        promo.ref_product &&
-        product &&
-        product.uuid !== promo.ref_product.uuid
-      ) {
-        toast({
-          title: "Failed",
-          description: "Promo tidak dapat digunakan untuk product yang dipilih",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (
-        !isSecret ||
-        (isSecret && promo?.ref_product?.uuid == product?.uuid)
-      ) {
-        setSelectedPromo(promo);
-        onPromoSelected(promo);
-        setOpen(false);
-        return;
-      }
-
-      toast({
-        title: "Failed",
-        description: "Promo tidak dapat digunakan untuk product yang dipilih",
-        variant: "destructive",
-      });
-      return;
-    }
-    setSelectedPromo(undefined);
-    onPromoSelected(undefined);
+    setSelectedPromo(promo);
+    onPromoSelected(promo);
+    setOpen(false);
   };
 
   return (
@@ -204,17 +150,17 @@ function Promo({
               </Button>
             </div>
             <div className="space-y-3 max-h-[56vh] overflow-y-auto">
-              {hiddenPromo && (
+              {hiddenPromo ? (
                 <PromoCard
                   promo={hiddenPromo}
                   selected={selectedPromo}
                   setSelected={(e) => selectPromo(true, e)}
                   isSecret
                 />
-              )}
-              {mergePromos.map((i) => (
+              ) : null}
+              {promos.map((i) => (
                 <PromoCard
-                  key={i.code}
+                  key={i.promo_code}
                   promo={i}
                   selected={selectedPromo}
                   setSelected={(e) => selectPromo(true, e)}

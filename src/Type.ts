@@ -111,10 +111,6 @@ export interface IFlashSaleProductDetail {
   group_name: string;
 }
 
-export interface IFlashSaleProduct extends IFlashSaleInProduct {
-  product: IFlashSaleProductDetail;
-}
-
 export interface ITransactionHistoryList {
   date: string;
   transaction_code: string;

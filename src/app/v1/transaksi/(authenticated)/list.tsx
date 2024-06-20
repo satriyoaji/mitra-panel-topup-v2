@@ -34,7 +34,7 @@ function List(props: IProps) {
       page: `${page}`,
     });
     if (filter.search) searchParams.append("search", filter.search);
-    if (filter.status) searchParams.append("search", `${filter.status}`);
+    if (filter.status) searchParams.append("status", `${filter.status}`);
 
     setLoading(true);
     var res = await fetch(`/api/transaction?` + searchParams);
@@ -74,7 +74,7 @@ function List(props: IProps) {
             className="bg-white"
             onChange={doSearch}
           />
-          {session && (
+          {session ? (
             <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
               <DialogTrigger asChild>
                 <Button
@@ -100,7 +100,7 @@ function List(props: IProps) {
                 />
               </DialogContent>
             </Dialog>
-          )}
+          ) : null}
         </div>
       </div>
       <div className="flex flex-col space-y-4">

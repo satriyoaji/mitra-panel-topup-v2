@@ -27,6 +27,22 @@ export interface ITheme {
 
 export interface IBanner {
   id: number;
+  name: string;
+  image_url: string;
+  is_clickable: string;
+}
+
+export interface ISosmed {
+  key: string;
+  name: string;
+  value: string;
+}
+
+export interface ISiteProfile {
+  name: string;
+  logo_url: string;
   title: string;
-  path: string;
+  keywords: string;
+  description: string;
+  terms_condition: string;
 }

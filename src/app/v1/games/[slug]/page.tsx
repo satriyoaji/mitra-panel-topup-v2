@@ -99,13 +99,13 @@ function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
         <div className="col-span-3">
-          {data.category.forms && (
+          {data.category.forms ? (
             <Card ref={formRef} className="w-full my-4 md:mt-2">
               <CardContent className="mt-3">
                 <FormAccount forms={data.category.forms} />
               </CardContent>
             </Card>
-          )}
+          ) : null}
           <div ref={productListRef}>
             <ProductList
               number={data.category.forms ? 2 : 1}
@@ -138,7 +138,7 @@ function Page({ params }: { params: { slug: string } }) {
                 }
                 listProductId={products.map((i) => i.key)}
                 categoryUuid={params.slug}
-                // product={data.product}
+                product={data.product}
               />
             </CardContent>
           </Card>

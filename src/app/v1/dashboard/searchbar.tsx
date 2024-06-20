@@ -85,7 +85,7 @@ function Searchbar() {
                 key={idx}
                 className="px-5 py-2 hover:bg-slate-50 cursor-pointer"
                 onClick={() => {
-                  router.push(`/games/${i.uuid}`);
+                  router.push(`/games/${i.key}`);
                   setIsOpen(false);
                 }}
               >

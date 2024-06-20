@@ -1,9 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { IFlashSaleProduct, TProduct, TProductItem } from "@/Type";
-import { debounce, nFormatter, priceMask } from "@/Helpers";
+import React, { useEffect, useState } from "react";
+import { TProductItem } from "@/Type";
+import { priceMask } from "@/Helpers";
 import ProductCard from "./[slug]/(product)/product-card";
 import Image from "next/image";
 import Loading from "../../loading";
@@ -103,14 +101,14 @@ function Page() {
           </>
         )}
       </div>
-      <Pagination
+      {/* <Pagination
         onChange={setPageIndex}
         meta={{
           limit: 12,
           page: pageIndex,
           total,
         }}
-      />
+      /> */}
     </div>
   );
 }

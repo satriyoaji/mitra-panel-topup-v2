@@ -1,4 +1,3 @@
-import { format, parseISO } from "date-fns";
 import {
   IFlashSaleInProduct,
   IProductCategory,
@@ -48,8 +47,8 @@ const getTotalPrice = (
   num += product.price;
   if (product.discounted_price) num = product.discounted_price;
   if (promo) {
-    if (promo.promo_type == "fix") num -= promo.promo_value;
-    else num -= (promo.promo_value * product.price) / 100;
+    if (!promo.is_discount_percent) num -= promo.discount_amount;
+    else num -= (promo.discount_percent * product.price) / 100;
   }
   if (bank && bank.fee_amount) num += bank.fee_amount;
 
