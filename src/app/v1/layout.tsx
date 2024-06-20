@@ -1,26 +1,13 @@
 import Header from "@/components/page-header";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/footer";
-import ThemeWrapper from "./theme-wrapper";
 import LayoutWrapper from "./layout-wrapper";
 import HelpButton from "@/components/help-button";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { ISiteProfile } from "@/types/utils";
-import { headers } from "next/headers";
-import { GetAuthHeader, GetCredHeader } from "../api/api-utils";
+import { GetCredHeader } from "../api/api-utils";
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // read route params
-  const id = params.id;
-
+export async function generateMetadata(): Promise<Metadata> {
   var credentialHeader = GetCredHeader();
 
   // fetch data
@@ -38,14 +25,13 @@ export async function generateMetadata(
     var setting: ISiteProfile = data.data;
 
     // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || [];
 
     return {
       title: setting.title,
       description: setting.description,
       keywords: setting.keywords,
       openGraph: {
-        images: [setting.logo_url, ...previousImages],
+        images: [setting.logo_url],
       },
     };
   }

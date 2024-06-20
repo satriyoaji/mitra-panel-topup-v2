@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
+import SearchList from "./search-list";
 
 function PublicPage() {
   return (
@@ -16,15 +17,9 @@ function PublicPage() {
           <div>
             <p>LACAK TRANSAKSI</p>
             <h3 className="text-3xl max-w-[40rem] mt-4 font-semibold">
-              Lacak pesanan kamu hanya dengan nomor telepon atau nomor invoice
+              Lacak pesanan kamu hanya dengan nomor invoice
             </h3>
-            <div className="flex items-center w-full mt-8 gap-2">
-              <Input
-                className="w-full bg-white"
-                placeholder="Masukkan nomor handphone atau invoice"
-              />
-              <Button>Cari</Button>
-            </div>
+            <SearchList />
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ function List(props: IProps) {
       page: `${page}`,
     });
     if (filter.search) searchParams.append("search", filter.search);
-    if (filter.status) searchParams.append("search", `${filter.status}`);
+    if (filter.status) searchParams.append("status", `${filter.status}`);
 
     setLoading(true);
     var res = await fetch(`/api/transaction?` + searchParams);
