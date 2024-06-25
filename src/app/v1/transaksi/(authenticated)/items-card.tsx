@@ -1,6 +1,5 @@
 import { priceMask } from "@/Helpers";
 import { ITransactionHistoryList } from "@/Type";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -10,7 +9,7 @@ import Link from "next/link";
 import BadgeTransaksi from "../badge-transaksi";
 
 export interface TItemsCard {
-  onEditClick: () => void;
+  onEditClick?: (transaction_code: string) => void;
   data: ITransactionHistoryList;
 }
 
@@ -66,17 +65,25 @@ function ItemsCard(props: TItemsCard) {
                 </p>
               </div>
               <div>
-                <Link href={`/transaksi/${props.data.transaction_code}`}>
-                  <Button size="sm" variant="outline">
+                {props.onEditClick ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() =>
+                      props.onEditClick &&
+                      props.onEditClick(props.data.transaction_code)
+                    }
+                  >
                     Detail
                   </Button>
-                </Link>
+                ) : (
+                  <Link href={`/transaksi/${props.data.transaction_code}`}>
+                    <Button size="sm" variant="outline">
+                      Detail
+                    </Button>
+                  </Link>
+                )}
               </div>
-              {/* <div className="hidden md:block">
-                <Button size="sm" variant="outline" onClick={props.onEditClick}>
-                  Detail
-                </Button>
-              </div> */}
             </div>
           </div>
         </div>

@@ -40,17 +40,8 @@ function TransactionHistoryDetail({ id }: { id: string }) {
 
   if (data)
     return (
-      <div className="mt-4 mx-2">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <p className="font-medium ml-2 text-lg">Detail Transaksi 📃</p>
-          </div>
-          <Link href="/redeem-coupon">
-            <Button size="sm">Refund</Button>
-          </Link>
-        </div>
-        <hr className="my-2" />
-        <div className="md:grid md:grid-cols-2 grid-cols-1">
+      <div className="mx-2">
+        <div className="md:grid grid-cols-1">
           <div>
             <div className="grid gap-4 py-4">
               <Card className="bg-slate-50  p-4">
@@ -67,8 +58,6 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   </div>
                   {/* )} */}
                   <div>
-                    <p className="text-xs mb-1.5">{data.transaction_code}</p>
-
                     <p>{data.category_name}</p>
                     <p className="font-semibold">{data.product_name}</p>
                   </div>
@@ -172,7 +161,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
               </div>
             </div>
           </div>
-          <div className="md:mx-8 md:mb-8 mt-8 md:mt-4 mx-4">
+          <div className="m-8">
             <HorizontalStepper list={data.history_status} />
           </div>
         </div>

@@ -63,48 +63,9 @@ function Header() {
   return (
     <header className="w-full z-20 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-400 rounded-b-2xl items-center top-0 sticky">
       <div className="w-full flex sm:container items-center justify-between">
-        <div className="md:hidden w-full">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="m-2">
-                <TextAlignJustifyIcon className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="left"
-              className="max-w-[15rem] border-r-8 border-theme-primary-400"
-            >
-              <div className="mt-8 gap-2 flex flex-col">
-                {paths.map((i) => (
-                  <SheetClose key={i.path}>
-                    <p
-                      className="w-full text-left p-1 px-2 rounded hover:bg-slate-200"
-                      onClick={() => {
-                        router.push(i.path);
-                      }}
-                    >
-                      {i.name}
-                    </p>
-                  </SheetClose>
-                ))}
-                <SheetClose>
-                  <p
-                    className="w-full text-left p-1 px-2 rounded hover:bg-slate-200"
-                    onClick={() => {
-                      dispatch({
-                        action: "RAND_THEME",
-                      });
-                    }}
-                  >
-                    Theme
-                  </p>
-                </SheetClose>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+        <div className="md:hidden w-full"></div>
         <div className="flex md:w-fit w-full justify-center md:justify-start">
-          <Link href="/" className="">
+          <Link href="/" className="p-1">
             <Image
               src={profile?.logo_url ?? ""}
               alt="logo"

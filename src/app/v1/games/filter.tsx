@@ -68,14 +68,14 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
           defaultValue={value}
         />
       </div>
-      <div className="w-full">
+      {/* <div className="w-full">
         <Input
           id="invoice"
           placeholder="Search..."
           className="bg-white w-full"
           onChange={doSearch}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
