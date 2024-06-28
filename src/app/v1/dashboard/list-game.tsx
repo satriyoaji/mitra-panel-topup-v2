@@ -1,14 +1,14 @@
 "use client";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { Badge } from "../../../components/ui/badge";
-import { Card, CardContent } from "../../../components/ui/card";
 import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { debounce, uniqeCategory } from "@/Helpers";
 import Loading from "../../loading";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 // import Image from "next/image";
 
 export default function ListGame() {
@@ -18,7 +18,7 @@ export default function ListGame() {
   });
   const [data, setData] = useState<Array<IProductCategory>>([]);
   const [search, setSearch] = useState<string>("");
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [groups, setGroups] = useState<TProductGroup[]>([]);
@@ -32,8 +32,8 @@ export default function ListGame() {
         new URLSearchParams({
           page: `${pageIndex}`,
           limit: "10",
-          key: search,
-          group_id: `${group?.id ?? ""}`,
+          search,
+          label_id: `${group?.id ?? ""}`,
         })
     );
 
@@ -42,10 +42,8 @@ export default function ListGame() {
       var result = await res.json();
 
       if (result.data) {
-        setData(result.data);
-        // if (more)
-        //     setData((prev) => uniqeCategory(prev.concat(result.data)));
-        // else setData(uniqeCategory(result.data));
+        if (more) setData((prev) => [...prev, result.data]);
+        else setData(result.data);
       } else {
         if (!more) setData([]);
       }
@@ -80,7 +78,7 @@ export default function ListGame() {
   }, [search, group]);
 
   useEffect(() => {
-    getData(true);
+    if (pageIndex > 0) getData(true);
   }, [pageIndex]);
 
   const showMore = () => {
@@ -120,11 +118,11 @@ export default function ListGame() {
             ))}
           </div>
         </div>
-        <Input
+        {/* <Input
           onChange={doSearch}
           placeholder="Search..."
           className="bg-white md:max-w-xs"
-        />
+        /> */}
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
         {data.map((val: IProductCategory, idx) => (
@@ -135,7 +133,7 @@ export default function ListGame() {
                   {val.image_url !== "" ? (
                     <img
                       alt={val.name}
-                      className="rounded-xl aspect-square hover:scale-125 transition duration-300 hover:rotate-12"
+                      className="rounded-xl aspect-square w-full hover:scale-125 transition duration-300 hover:rotate-12"
                       src={val.image_url}
                     />
                   ) : (
@@ -152,14 +150,41 @@ export default function ListGame() {
           </Link>
         ))}
       </div>
-      {loading && <Loading />}
-      {pageIndex < totalPage && (
+      {loading ? (
+        <div className="h-[20vh] flex items-center justify-center">
+          <svg
+            className="text-gray-300 animate-spin"
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+          >
+            <path
+              d="M32 3C35.8083 3 39.5794 3.75011 43.0978 5.20749C46.6163 6.66488 49.8132 8.80101 52.5061 11.4939C55.199 14.1868 57.3351 17.3837 58.7925 20.9022C60.2499 24.4206 61 28.1917 61 32C61 35.8083 60.2499 39.5794 58.7925 43.0978C57.3351 46.6163 55.199 49.8132 52.5061 52.5061C49.8132 55.199 46.6163 57.3351 43.0978 58.7925C39.5794 60.2499 35.8083 61 32 61C28.1917 61 24.4206 60.2499 20.9022 58.7925C17.3837 57.3351 14.1868 55.199 11.4939 52.5061C8.801 49.8132 6.66487 46.6163 5.20749 43.0978C3.7501 39.5794 3 35.8083 3 32C3 28.1917 3.75011 24.4206 5.2075 20.9022C6.66489 17.3837 8.80101 14.1868 11.4939 11.4939C14.1868 8.80099 17.3838 6.66487 20.9022 5.20749C24.4206 3.7501 28.1917 3 32 3L32 3Z"
+              stroke="currentColor"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+            <path
+              d="M32 3C36.5778 3 41.0906 4.08374 45.1692 6.16256C49.2477 8.24138 52.7762 11.2562 55.466 14.9605C58.1558 18.6647 59.9304 22.9531 60.6448 27.4748C61.3591 31.9965 60.9928 36.6232 59.5759 40.9762"
+              stroke="currentColor"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-gray-900"
+            ></path>
+          </svg>{" "}
+        </div>
+      ) : null}
+      {pageIndex < totalPage ? (
         <div className="flex items-center justify-center my-2 mt-6">
           <Button size="sm" onClick={showMore}>
             Show More
           </Button>
         </div>
-      )}
+      ) : null}
     </React.Fragment>
   );
 }

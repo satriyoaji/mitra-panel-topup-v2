@@ -8,6 +8,7 @@ import {
   CommandInput,
   CommandList,
 } from "@/components/ui/command";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
@@ -64,7 +65,7 @@ function Searchbar() {
 
   return (
     <>
-      <div className="mr-2">
+      <div className="mr-2 hidden md:block">
         <button
           className="inline-flex items-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 w-40 lg:w-64"
           onClick={() => setIsOpen(true)}
@@ -76,6 +77,12 @@ function Searchbar() {
           </kbd>
         </button>
       </div>
+      <div className="md:hidden text-white p-2 mr-2">
+        <MagnifyingGlassIcon
+          className="cursor-pointer"
+          onClick={() => setIsOpen(true)}
+        />
+      </div>
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
         <CommandInput placeholder="Cari Produk..." onValueChange={doSearch} />
         <CommandList className="min-h-[15rem]">
@@ -85,7 +92,7 @@ function Searchbar() {
                 key={idx}
                 className="px-5 py-2 hover:bg-slate-50 cursor-pointer"
                 onClick={() => {
-                  router.push(`/games/${i.uuid}`);
+                  router.push(`/games/${i.key}`);
                   setIsOpen(false);
                 }}
               >

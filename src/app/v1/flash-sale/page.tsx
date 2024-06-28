@@ -3,16 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import FlashSaleCard from "./flash-sale-card";
-import { IFlashSaleProduct } from "@/Type";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
 import Loading from "../../loading";
 import Pagination from "@/components/pagination";
+import { IFlashSaleInfo } from "@/types/flash-sale";
 
 function Page() {
   const [total, setTotal] = useState(0);
   const [pageIndex, setPageIndex] = useState(1);
-  const [data, setData] = useState<IFlashSaleProduct[]>([]);
+  const [data, setData] = useState<IFlashSaleInfo | undefined>();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -30,11 +30,11 @@ function Page() {
       const dataJson = await res.json();
       if (dataJson.data) {
         setData(dataJson.data);
-        setTotal(dataJson.pagination.total_data);
+        // setTotal(dataJson.pagination.total_data);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
       }
-      setData([]);
+      setData(undefined);
       setTotal(0);
     }
   };
@@ -67,9 +67,9 @@ function Page() {
           <Loading />
         ) : (
           <>
-            {data.length > 0 ? (
+            {data && data.products?.length > 0 ? (
               <div className="grid sm:grid-cols-4 xl:grid-cols-6 grid-cols-2 gap-2 mx-2">
-                {data.map((item, idx) => (
+                {data.products.map((item, idx) => (
                   <div className="w-full h-full" key={`${idx}`}>
                     <FlashSaleCard data={item} />
                   </div>
@@ -92,14 +92,14 @@ function Page() {
           </>
         )}
       </div>
-      <Pagination
+      {/* <Pagination
         onChange={setPageIndex}
         meta={{
           limit: 12,
           page: pageIndex,
           total,
         }}
-      />
+      /> */}
     </div>
   );
 }

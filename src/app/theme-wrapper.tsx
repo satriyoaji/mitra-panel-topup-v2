@@ -24,7 +24,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         data.font.class.className
       )}
     >
-      <div>{children}</div>
+      <div className="bg-theme-primary-50">{children}</div>
     </body>
   );
 }

@@ -86,110 +86,57 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
   };
 
   return (
-    <React.Fragment>
-      <div className="hidden justify-center items-center md:flex gap-4">
-        <Button
-          className="rounded-full border-2 border-white p-5 z-10"
-          onClick={prev}
+    <div className="block bg-gradient-to-r from-background via-theme-secondary-400 to-background  md:py-4 md:-mx-8 md:-mt-4">
+      <div className="h-full flex w-full justify-center items-center">
+        <div
+          {...swipeHandlers}
+          className="overflow-hidden relative w-auto max-w-5xl rounded-xl"
+          style={{ aspectRatio: 27 / 9 }}
         >
-          <ChevronLeftIcon
-            width={18}
-            height={18}
-            className="mx-1 hover:cursor-pointer"
-          />
-        </Button>
-        <div className="slideC">
-          {data.map((item, i) => (
-            <React.Fragment key={item.id}>
-              <div
-                key={i.toString()}
-                className="slide"
-                style={{
-                  ...getStyles(i),
-                }}
-              >
-                {/* <Image
-                                    src={item.path}
-                                    alt={item.title}
-                                    fill
-                                    style={{ aspectRatio: 32 / 9 }}
-                                    className={`absolute object-cover  transition-opacity rounded-xl`}
-                                /> */}
-                <img
-                  src={item.path}
-                  alt={item.title}
-                  style={{ aspectRatio: 32 / 9 }}
-                  className={`absolute object-cover  transition-opacity rounded-xl`}
-                />
-              </div>
-            </React.Fragment>
+          {/* <img
+              key={index}
+              src={item.image_url}
+              alt={item.name}
+              sizes="100%"
+              style={{ aspectRatio: 27 / 9 }}
+              className={`object-cover w-auto transition-opacity h-full w-full duration-500 bg-slate-200 ease-in-out ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
+              /> */}
+          {data.map((item, index) => (
+            <Image
+              key={index}
+              src={item.image_url}
+              alt={item.name}
+              sizes="100%"
+              fill
+              style={{ aspectRatio: 27 / 9 }}
+              className={`absolute object-cover w-auto transition-opacity duration-500 ease-in-out ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
+            />
           ))}
         </div>
-        <Button
-          className="rounded-full border-2 border-white p-5 z-10"
-          onClick={next}
-        >
-          <ChevronRightIcon
-            width={18}
-            height={18}
-            className="mx-1 hover:cursor-pointer"
-          />
-        </Button>
       </div>
-      <div className="md:hidden block">
-        <div className="max-h-72">
-          <div
-            {...swipeHandlers}
-            className="overflow-hidden relative w-auto rounded-xl max-h-72"
-            style={{ aspectRatio: 32 / 9 }}
-          >
-            {/* <Image
-                            key={index}
-                            src={item.path}
-                            alt={item.title}
-                            sizes="100%"
-                            fill
-                            style={{ aspectRatio: 32 / 9 }}
-                            className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
-                                index === activeIndex
-                                ? "opacity-100"
-                                : "opacity-0"
-                            }`}
-                            /> */}
-            {data.map((item, index) => (
-              <img
-                key={index}
-                src={item.path}
-                alt={item.title}
-                sizes="100%"
-                style={{ aspectRatio: 32 / 9 }}
-                className={`absolute object-cover w-auto transition-opacity max-h-72 duration-500 ease-in-out ${
-                  index === activeIndex ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
+      {data.length > 1 ? (
+        <div className="flex justify-end mr-2 md:hidden">
+          <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
+            <ChevronLeftIcon
+              width={12}
+              height={12}
+              className="mx-1 bg-wh"
+              onClick={prev}
+            />
+            <ChevronRightIcon
+              width={12}
+              height={12}
+              className="mx-1"
+              onClick={next}
+            />
           </div>
         </div>
-        {data.length > 1 && (
-          <div className="flex justify-end mr-2 md:hidden">
-            <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
-              <ChevronLeftIcon
-                width={12}
-                height={12}
-                className="mx-1 bg-wh"
-                onClick={prev}
-              />
-              <ChevronRightIcon
-                width={12}
-                height={12}
-                className="mx-1"
-                onClick={next}
-              />
-            </div>
-          </div>
-        )}
-      </div>
-    </React.Fragment>
+      ) : null}
+    </div>
   );
 };
 

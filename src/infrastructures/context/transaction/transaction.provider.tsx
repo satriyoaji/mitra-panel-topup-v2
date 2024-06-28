@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import TransactionContext, { TransactionDispatch } from "./transaction.context";
-import { ITransaction, LooseObject } from "@/Type";
+import { LooseObject } from "@/Type";
 import { useSession } from "next-auth/react";
+import { ITransaction } from "@/types/transaction";
 
 function TransactionProvider({ children }: { children: React.ReactNode }) {
   const { data: session } = useSession();
   const [transaction, setTransaction] = useState<ITransaction>({
-    payment: session?.user ? "transfer & points" : "transfer",
     account: {
       email: session?.profile?.email ?? "",
       noWhatsapp: session?.profile?.phone ?? "",
@@ -45,7 +45,7 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
       case "SET_FORM":
         setTransaction((prev) => ({ ...prev, form: data.payload }));
         return;
-      case "SET_PAYMENT":
+      case "SET_PAYMENT_METHOD":
         setTransaction((prev) => ({ ...prev, payment: data.payload }));
         return;
       case "SET_PRODUCT":
@@ -56,9 +56,6 @@ function TransactionProvider({ children }: { children: React.ReactNode }) {
         return;
       case "SET_ACCOUNT":
         setTransaction((prev) => ({ ...prev, account: data.payload }));
-        return;
-      case "SET_BANK":
-        setTransaction((prev) => ({ ...prev, bank: data.payload }));
         return;
       default:
         return;

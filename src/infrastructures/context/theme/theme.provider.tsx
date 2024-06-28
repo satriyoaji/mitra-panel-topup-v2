@@ -10,7 +10,7 @@ const getInitialState = (): ITheme => {
   return global?.window?.localStorage?.getItem("theme")
     ? JSON.parse(localStorage.getItem("theme") as string)
     : {
-        logo: "/illustration/logo/1.png",
+        logo: "/assets/illustration/logo/1.png",
         primary: {
           title: "red",
           class: "theme-primary-red",
@@ -50,7 +50,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
         return;
       case "RAND_THEME":
         setTheme({
-          logo: `/illustration/logo/${getRandomInt(4)}.png`,
+          logo: `/assets/illustration/logo/${getRandomInt(4)}.png`,
           font: fonts[getRandomInt(fonts.length)],
           primary: primaryColors[getRandomInt(primaryColors.length)],
           secondary: secondaryColors[getRandomInt(secondaryColors.length)],

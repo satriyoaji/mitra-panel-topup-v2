@@ -14,11 +14,7 @@ import Loading from "../../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 
-interface IProps {
-  onClick: (val: ITransactionHistoryList | undefined) => void;
-}
-
-function List(props: IProps) {
+function List() {
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
   const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
   const [filter, setFilter] = useState<TFilter>({
@@ -34,7 +30,7 @@ function List(props: IProps) {
       page: `${page}`,
     });
     if (filter.search) searchParams.append("search", filter.search);
-    if (filter.status) searchParams.append("search", `${filter.status}`);
+    if (filter.status) searchParams.append("status", `${filter.status}`);
 
     setLoading(true);
     var res = await fetch(`/api/transaction?` + searchParams);
@@ -42,7 +38,6 @@ function List(props: IProps) {
 
     if (res.ok) {
       const resData = await res.json();
-      console.log(resData);
       setMeta(resData.manifest);
       if (resData) {
         setLists(resData.data);
@@ -66,7 +61,7 @@ function List(props: IProps) {
 
   return (
     <div className="md:mx-2">
-      <div className="flex -mx-2 px-2 sticky py-4 bg-white flex-col space-y-1.5 mb-3">
+      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3">
         <p className="font-semibold text-lg">Riwayat Transaksi🧾</p>
         <div className="flex space-x-1">
           <Input
@@ -75,7 +70,7 @@ function List(props: IProps) {
             className="bg-white"
             onChange={doSearch}
           />
-          {session && (
+          {session ? (
             <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
               <DialogTrigger asChild>
                 <Button
@@ -101,26 +96,24 @@ function List(props: IProps) {
                 />
               </DialogContent>
             </Dialog>
-          )}
+          ) : null}
         </div>
       </div>
-      <div className="flex flex-col space-y-4 md:max-h-[76vh] md:overflow-y-auto">
+      <div className="flex flex-col space-y-4">
         {!loading ? (
-          lists.map((val, idx) => (
-            <ItemsCard
-              key={`${idx}`}
-              data={val}
-              onEditClick={() => {
-                props.onClick(val);
-              }}
-            />
-          ))
+          lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
         ) : (
           <Loading />
         )}
       </div>
       {meta ? (
-        <Pagination meta={meta} onChange={(val) => setPage(val)} />
+        <Pagination
+          meta={meta}
+          onChange={(val) => {
+            setPage(val);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
       ) : (
         <></>
       )}

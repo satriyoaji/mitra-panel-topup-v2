@@ -1,12 +1,10 @@
-import { format, parseISO } from "date-fns";
 import {
-  IBank,
   IFlashSaleInProduct,
-  IPayment,
   IProductCategory,
-  IPromo,
   TProduct,
+  TProductItem,
 } from "./Type";
+import { IPayment, IPromo } from "./types/transaction";
 
 const priceMask = (val: number | undefined) => {
   if (!val) return "Rp 0";
@@ -40,18 +38,17 @@ function debounce<Params extends any[]>(
 }
 
 const getTotalPrice = (
-  product: TProduct,
-  flashSale?: IFlashSaleInProduct,
+  product: TProductItem,
   promo?: IPromo,
   bank?: IPayment
 ) => {
   let num = 0;
 
-  num += product.sale_price;
-  if (flashSale) num -= flashSale.discount_price;
+  num += product.price;
+  if (product.discounted_price) num = product.discounted_price;
   if (promo) {
-    if (promo.promo_type == "fix") num -= promo.promo_value;
-    else num -= (promo.promo_value * product.sale_price) / 100;
+    if (!promo.is_discount_percent) num -= promo.discount_amount;
+    else num -= (promo.discount_percent * product.price) / 100;
   }
   if (bank && bank.fee_amount) num += bank.fee_amount;
 

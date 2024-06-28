@@ -44,7 +44,7 @@ function Header({ category }: { category: IProductCategory }) {
               <h5 className="font-bold">{category?.name}</h5>
             </div>
           </div>
-          <Description />
+          <Description description={category?.description} />
         </div>
       </CardContent>
     </Card>
