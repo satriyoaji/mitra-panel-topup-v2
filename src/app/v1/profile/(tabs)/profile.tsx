@@ -17,8 +17,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { IProfile } from "@/Type";
 
-function Profile() {
+type prop = {
+    data: IProfile | null;
+}
+
+function Profile(props: prop) {
     const { data: session } = useSession();
     const [profileOpen, setProfileOpen] = useState<boolean>(false);
 
@@ -30,14 +35,14 @@ function Profile() {
                         Nama
                     </Label>
                     {/* <Input className="col-span-3" placeholder="Masukan Nama..." /> */}
-                    <p className="text-sm">{session?.profile.name}</p>
+                    <p className="text-sm">{props?.data?.name}</p>
                 </div>
                 <div className="md:grid md:grid-cols-3 space-y-1 md:space-y-0 w-full items-center">
                     <Label className="text-sm text-muted-foreground">
                         Email
                     </Label>
                     {/* <Input className="col-span-3" readOnly /> */}
-                    <p className="text-sm">{session?.profile.email}</p>
+                    <p className="text-sm">{props?.data?.email}</p>
                 </div>
                 <div className="md:grid md:grid-cols-3 space-y-1 md:space-y-0 w-full items-center">
                     <Label className="text-sm text-muted-foreground">
@@ -48,7 +53,7 @@ function Profile() {
             placeholder="Masukkan No Whatsapp..."
             /> */}
                     <div className="flex space-x-4">
-                        <p className="text-sm">{session?.profile.phone}</p>
+                        <p className="text-sm">{props?.data?.phone}</p>
                         <Pencil1Icon
                             onClick={() => setProfileOpen(true)}
                             className="cursor-pointer"

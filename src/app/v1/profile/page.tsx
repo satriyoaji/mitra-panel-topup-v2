@@ -6,16 +6,51 @@ import { Separator } from "@/components/ui/separator";
 import { ExitIcon, Pencil1Icon, ReaderIcon } from "@radix-ui/react-icons";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DetailProfile from "./detail-profile";
 import SaldoPointHistory from "./saldopoint-history";
 import Profile from "./(tabs)/profile";
 import Tier from "@/components/tier";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SaldoCard from "./saldo-card";
+import { IProfile } from "@/Type";
+import TransactionContext, {
+  ITransactionContext,
+} from "@/infrastructures/context/transaction/transaction.context";
 
 function Page() {
   const { data: session } = useSession();
+  const { data, dispatch } = useContext(
+    TransactionContext
+  ) as ITransactionContext;
+  const [loading, setLoading] = useState(false);
+  const [dataProfile, setDataProfile] = useState<IProfile | null>(null);
+  
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    setLoading(true);
+    var res = await fetch(`/api/profile`);
+    if (res.ok) {
+      var result = await res.json();
+      if (result.data) {
+        dispatch({
+          action: "SET_PROFILE",
+          payload: result.data,
+        });
+        setDataProfile(result.data);
+      }
+    } else
+      dispatch({
+        action: "SET_PROFILE",
+        payload: null,
+      });
+
+    setLoading(false);
+  }
+
 
   return (
     <div className="md:flex gap-4 h-full md:mt-4">
@@ -24,18 +59,18 @@ function Page() {
           <div className="flex items-center space-x-4">
             <Avatar className="my-1">
               <AvatarImage
-                src={session?.profile?.name as string}
-                alt={session?.profile?.name as string}
+                src={dataProfile?.name ? dataProfile?.name : session?.profile?.name as string}
+                alt={dataProfile?.name ? dataProfile?.name : session?.profile?.name as string}
               />
               <AvatarFallback>
-                {session?.profile?.name?.at(0) ?? ""}
+                {dataProfile?.name ? dataProfile?.name.at(0) : session?.profile?.name?.at(0) ?? ""}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h5 className="font-bold">{session?.profile?.name}</h5>
+              <h5 className="font-bold">{dataProfile?.name ? dataProfile?.name : session?.profile?.name}</h5>
             </div>
           </div>
-          <Tier type={session?.profile?.tier_name ?? "Public"} />
+          <Tier type={dataProfile?.tier_name ? dataProfile?.tier_name : session?.profile?.tier_name ?? "Public"} />
         </div>
         <Separator className="w-full my-2" />
         <div className="mt-6 w-full">
@@ -81,7 +116,7 @@ function Page() {
               </TabsList>
             </div>
             <TabsContent value="profile">
-              <Profile />
+              <Profile data={dataProfile} />
             </TabsContent>
             <TabsContent value="saldo">
               <SaldoPointHistory />
