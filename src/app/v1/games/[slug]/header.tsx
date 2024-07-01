@@ -13,19 +13,19 @@ function Header({ category }: { category: IProductCategory }) {
           className="overflow-hidden relative w-full rounded-t-xl"
           style={{ aspectRatio: 64 / 9 }}
         >
-          {/* <img
-                        alt={category.name}
-                        src={category?.banner_image ?? "/assets/hero-games.svg"}
-                        style={{ aspectRatio: 64 / 9 }}
-                        className={`relative object-cover w-full rounded-t-xl`}
-                    /> */}
-          <Image
+          <img
+            alt={category.name}
+            src={category?.image_url ?? "/assets/hero-games.svg"}
+            style={{ aspectRatio: 64 / 9 }}
+            className={`relative object-cover w-full rounded-t-xl blur-md`}
+          />
+          {/* <Image
             fill
             alt={category.name}
             src={"/assets/hero-games.svg"}
             style={{ aspectRatio: 64 / 9 }}
             className={`relative object-cover w-full rounded-t-xl`}
-          />
+          /> */}
         </div>
         <div className="px-6">
           <div className="flex -mt-4 ml-4 z-10 absolute items-end">

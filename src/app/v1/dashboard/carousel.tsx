@@ -86,32 +86,35 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
   };
 
   return (
-    <div className="block bg-gradient-to-r from-background via-theme-secondary-400 to-background  md:py-4 md:-mx-8 md:-mt-4">
+    <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:py-4 md:-mx-8 md:-mt-4">
       <div className="h-full flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
-          className="overflow-hidden relative w-auto max-w-5xl rounded-xl"
+          className="overflow-hidden relative w-auto max-w-5xl rounded-xl h-full"
           style={{ aspectRatio: 27 / 9 }}
         >
-          {/* <img
-              key={index}
-              src={item.image_url}
-              alt={item.name}
-              sizes="100%"
-              style={{ aspectRatio: 27 / 9 }}
-              className={`object-cover w-auto transition-opacity h-full w-full duration-500 bg-slate-200 ease-in-out ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
-              }`}
-              /> */}
+          {/* <Image
+                            key={index}
+                            src={item.image_url}
+                            alt={item.name}
+                            sizes="100%"
+                            height={100}
+                            width={100}
+                            style={{ aspectRatio: 27 / 9 }}
+                            className={`absolute object-cover w-auto transition-opacity duration-500 ease-in-out ${
+                                index === activeIndex
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                            }`}
+                        /> */}
           {data.map((item, index) => (
-            <Image
+            <img
               key={index}
               src={item.image_url}
               alt={item.name}
               sizes="100%"
-              fill
               style={{ aspectRatio: 27 / 9 }}
-              className={`absolute object-cover w-auto transition-opacity duration-500 ease-in-out ${
+              className={`object-cover transition-opacity h-full w-full duration-500 bg-slate-200 ease-in-out ${
                 index === activeIndex ? "opacity-100" : "opacity-0"
               }`}
             />

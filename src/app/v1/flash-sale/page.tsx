@@ -51,13 +51,13 @@ function Page() {
 
   return (
     <div className="md:mx-2">
-      <div className="flex px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3 z-10">
+      <div className="flex px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3 z-10">
         <p className="font-semibold text-lg">Flash Sale⚡</p>
         <div className="flex space-x-1">
           <Input
             id="invoice"
             placeholder="Search..."
-            className="bg-white"
+            className="bg-background"
             onChange={doSearch}
           />
         </div>

@@ -72,7 +72,7 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
         <Input
           id="invoice"
           placeholder="Search..."
-          className="bg-white w-full"
+          className="bg-background w-full"
           onChange={doSearch}
         />
       </div> */}
