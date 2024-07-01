@@ -1,3 +1,4 @@
+import { IProfile } from "@/Type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/custom-input";
@@ -8,23 +9,34 @@ import { useToast } from "@/components/ui/use-toast";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
-function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
+type prop = {
+  data: IProfile | null;
+  onSuccess: () => void;
+}
+
+function DetailProfile(props: prop) {
   const { data: session, update } = useSession();
+  const [email, setEmail] = useState<string>();
+  const [name, setName] = useState<string>();
   const [phone, setPhone] = useState<string>();
   const { toast } = useToast();
 
   useEffect(() => {
-    setPhone(session?.profile?.phone);
+    setName(props.data?.name ? session?.profile?.name : "");
+    setEmail(props.data?.email ? session?.profile?.email : "");
+    setPhone(props.data?.phone ? session?.profile?.phone : "");
   }, []);
 
   const handleSubmit = async () => {
-    const response = await fetch(`${process.env.API}/web/update-phone`, {
+    const response =  await fetch("/api/profile", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.token}`,
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Authorization: `Bearer ${session?.token}`,
+      // },
       body: JSON.stringify({
+        name,
+        email,
         phone,
       }),
     });
@@ -38,11 +50,11 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
       });
     }
 
-    onSuccess();
+    props.onSuccess();
     await update();
     return toast({
       title: "Success",
-      description: "Update phone number success",
+      description: "Update profile success",
       variant: "success",
     });
   };
@@ -57,8 +69,30 @@ function DetailProfile({ onSuccess }: { onSuccess: () => void }) {
           />
           <AvatarFallback>{session?.user?.name?.at(0) ?? ""}</AvatarFallback>
         </Avatar>
-        <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
-        <h6 className="text-xs">{session?.profile?.email}</h6>
+        {/* <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
+        <h6 className="text-xs">{session?.profile?.email}</h6> */}
+        <div className="w-full my-3 px-12">
+          <Label htmlFor="invoice">Nama</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Masukan Name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+        </div>
+        <div className="w-full my-3 px-12">
+          <Label htmlFor="invoice">Email</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Masukan Email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+        </div>
         <div className="w-full my-3 px-12">
           <Label htmlFor="invoice">No. Whatsapp</Label>
           <PhoneInput
