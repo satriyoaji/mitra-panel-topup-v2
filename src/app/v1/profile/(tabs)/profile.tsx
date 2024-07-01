@@ -1,22 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { PhoneInput } from "@/components/ui/custom-input";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import DetailProfile from "../detail-profile";
-import { Pencil1Icon } from "@radix-ui/react-icons";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import { IProfile } from "@/Type";
 
 type prop = {
@@ -24,8 +9,7 @@ type prop = {
 }
 
 function Profile(props: prop) {
-    const { data: session } = useSession();
-    const [profileOpen, setProfileOpen] = useState<boolean>(false);
+    // const { data: session } = useSession();
 
     return (
         <>
@@ -54,18 +38,9 @@ function Profile(props: prop) {
             /> */}
                     <div className="flex space-x-4">
                         <p className="text-sm">{props?.data?.phone}</p>
-                        <Pencil1Icon
-                            onClick={() => setProfileOpen(true)}
-                            className="cursor-pointer"
-                        />
                     </div>
                 </div>
             </div>
-            <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
-                <DialogContent className="sm:max-w-md">
-                    <DetailProfile onSuccess={() => setProfileOpen(false)} />
-                </DialogContent>
-            </Dialog>
         </>
     );
 }

@@ -25,10 +25,16 @@ function Page() {
   ) as ITransactionContext;
   const [loading, setLoading] = useState(false);
   const [dataProfile, setDataProfile] = useState<IProfile | null>(null);
+  const [profileOpen, setProfileOpen] = useState<boolean>(false);
   
   useEffect(() => {
     getData();
   }, []);
+
+  const toggleModalProfile = () => {
+    setProfileOpen(false);
+    getData();
+  }
 
   const getData = async () => {
     setLoading(true);
@@ -101,7 +107,13 @@ function Page() {
             <div className="flex w-full mb-5">
               <div className="w-full">
                 <TabsContent value="profile">
-                  <h5 className="font-semibold">Detail Profile</h5>
+                  <div className="flex py-1 justify-start gap-4 items-center">
+                    <h5 className="font-semibold">Detail Profile</h5>
+                    <Pencil1Icon
+                      onClick={() => setProfileOpen(true)}
+                      className="cursor-pointer"
+                    />
+                  </div>
                   <p className="text-xs text-muted-foreground mt-1">
                     Pastikan profil anda adalah data terbaru
                   </p>
@@ -122,6 +134,12 @@ function Page() {
               <SaldoPointHistory />
             </TabsContent>
           </Tabs>
+          
+          <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
+            <DialogContent className="sm:max-w-md">
+              <DetailProfile data={dataProfile} onSuccess={() => toggleModalProfile} />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

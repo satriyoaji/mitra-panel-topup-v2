@@ -13,3 +13,13 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json(result, { status: 200 });
 }
+
+export async function POST(req: NextRequest) {
+  var re = await fetch(`${process.env.API}/member/update-profile`, {
+    method: "POST",
+    headers: GetAuthHeader(req),
+    body: JSON.stringify(await req.json()),
+  });
+  var result = await re.json();
+  return NextResponse.json(result, { status: re.status });
+}
