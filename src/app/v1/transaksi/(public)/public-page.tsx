@@ -12,7 +12,7 @@ function PublicPage() {
           'url("/assets/illustration/DrawKit Larry Character Illustration (10).svg")',
       }}
     >
-      <div className="h-full min-h-[80vh] flex pt-16 bg-white bg-opacity-95 items-center flex-col">
+      <div className="h-full min-h-[80vh] flex pt-16 bg-background bg-opacity-95 items-center flex-col">
         <div className="max-w-[60rem] bg-opacity-90 min-h-full">
           <div>
             <p>LACAK TRANSAKSI</p>

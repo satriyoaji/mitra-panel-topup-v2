@@ -70,7 +70,7 @@ function SearchList() {
     <>
       <div className="flex items-center w-full mt-2 gap-2 sticky top-12 -mx-2 px-2 bg-background py-4">
         <Input
-          className="w-full bg-white"
+          className="w-full bg-background"
           placeholder="Masukkan nomor handphone atau invoice"
           value={search}
           onChange={(e) => setSearch(e.target.value)}

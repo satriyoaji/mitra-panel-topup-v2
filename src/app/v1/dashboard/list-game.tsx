@@ -82,7 +82,7 @@ export default function ListGame() {
 
   return (
     <React.Fragment>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-white rounded-t-lg">
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-background rounded-t-lg">
         <div className="flex md:block items-end justify-between mt-8">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div
@@ -112,7 +112,7 @@ export default function ListGame() {
         {/* <Input
           onChange={doSearch}
           placeholder="Search..."
-          className="bg-white md:max-w-xs"
+          className="bg-background md:max-w-xs"
         /> */}
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
