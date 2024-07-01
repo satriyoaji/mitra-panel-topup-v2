@@ -6,13 +6,26 @@ export async function GET(req: NextRequest) {
   let qParams = url.searchParams;
   qParams.append("limit", "10");
 
-  var re = await fetch(`${process.env.API}/transaction/list?` + qParams, {
-    headers: GetAuthHeader(req),
-    cache: "no-store",
-    // next: {
-    //   revalidate: 30,
-    // },
-  });
+  var re: Response;
+  if (qParams.get("isAdvance"))
+    re = await fetch(
+      `${process.env.API}/transaction/advance-search?` + qParams,
+      {
+        headers: GetAuthHeader(req),
+        cache: "no-store",
+        // next: {
+        //   revalidate: 30,
+        // },
+      }
+    );
+  else
+    re = await fetch(`${process.env.API}/transaction/list?` + qParams, {
+      headers: GetAuthHeader(req),
+      cache: "no-store",
+      // next: {
+      //   revalidate: 30,
+      // },
+    });
   var result = await re.json();
   return NextResponse.json(result, { status: re.status });
 }

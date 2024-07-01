@@ -14,11 +14,7 @@ import Loading from "../../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 
-interface IProps {
-  onClick: (val: ITransactionHistoryList | undefined) => void;
-}
-
-function List(props: IProps) {
+function List() {
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
   const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
   const [filter, setFilter] = useState<TFilter>({
@@ -105,15 +101,7 @@ function List(props: IProps) {
       </div>
       <div className="flex flex-col space-y-4">
         {!loading ? (
-          lists.map((val, idx) => (
-            <ItemsCard
-              key={`${idx}`}
-              data={val}
-              onEditClick={() => {
-                props.onClick(val);
-              }}
-            />
-          ))
+          lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
         ) : (
           <Loading />
         )}

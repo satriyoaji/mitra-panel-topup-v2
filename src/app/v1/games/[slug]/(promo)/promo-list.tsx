@@ -12,7 +12,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
-import { IPromo } from "@/types/transaction";
+import { IPromo, IPromoDetail } from "@/types/transaction";
+import { isBefore, parseISO } from "date-fns";
 
 function Promo({
   categoryUuid,
@@ -27,10 +28,11 @@ function Promo({
 }) {
   const [selectedPromo, setSelectedPromo] = useState<IPromo>();
   const [promos, setPromos] = useState<IPromo[]>([]);
-  const [hiddenPromo, setHiddenPromo] = useState<IPromo>();
+  const [hiddenPromo, setHiddenPromo] = useState<IPromoDetail>();
   const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [openDetail, setOpenDetail] = useState(false);
   const { toast } = useToast();
 
   const getData = async (id?: string) => {
@@ -58,36 +60,20 @@ function Promo({
     setLoading(false);
   };
 
-  const isDuplicatePromo = (p: IPromo) => {
-    const arr: IPromo[] = promos;
-    if (hiddenPromo) arr.push(hiddenPromo);
-
-    return arr.some((i) => i.id === p.id);
-  };
-
   const getHiddenPromo = async () => {
     setLoading(true);
-    var res = await fetch(`/api/products/promo/${hiddenPromoCode}?`);
-
+    var res = await fetch(`/api/products/promo/${hiddenPromoCode}?by-code=1`);
     if (res.ok) {
       var result = await res.json();
+      console.log(result);
 
-      if (result.data) {
-        if (
-          (result.data.ref_category &&
-            result.data.ref_category?.uuid == categoryUuid) ||
-          (result.data.ref_product &&
-            listProductId.some((i) => i === result.data.ref_product?.uuid))
-        ) {
-          if (!isDuplicatePromo(result.data)) {
-            setHiddenPromo(result.data);
-            setSelectedPromo(result.data.id);
-          } else
-            toast({
-              title: "Failed",
-              description: "Promo Tidak Ditemukan",
-              variant: "destructive",
-            });
+      if (
+        result.data &&
+        !isBefore(parseISO(result.data.time_finish), new Date())
+      ) {
+        {
+          setHiddenPromo(result.data);
+          setSelectedPromo(result.data.id);
           setLoading(false);
           return;
         }

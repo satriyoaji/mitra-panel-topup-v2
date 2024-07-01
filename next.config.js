@@ -8,6 +8,11 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
+                hostname: "cdn.vcgamers.com",
+                port: "",
+            },
+            {
+                protocol: "https",
                 hostname: "cdn-panel.vcg.my.id",
                 port: "",
             },

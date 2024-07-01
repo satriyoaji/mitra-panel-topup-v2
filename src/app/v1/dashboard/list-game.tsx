@@ -3,10 +3,7 @@ import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
-import { debounce, uniqeCategory } from "@/Helpers";
-import Loading from "../../loading";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 // import Image from "next/image";
@@ -17,7 +14,6 @@ export default function ListGame() {
     name: "All",
   });
   const [data, setData] = useState<Array<IProductCategory>>([]);
-  const [search, setSearch] = useState<string>("");
   const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -32,7 +28,6 @@ export default function ListGame() {
         new URLSearchParams({
           page: `${pageIndex}`,
           limit: "10",
-          search,
           label_id: `${group?.id ?? ""}`,
         })
     );
@@ -75,7 +70,7 @@ export default function ListGame() {
   useEffect(() => {
     setPageIndex(1);
     getData(false);
-  }, [search, group]);
+  }, [group]);
 
   useEffect(() => {
     if (pageIndex > 0) getData(true);
@@ -85,13 +80,9 @@ export default function ListGame() {
     setPageIndex((last) => last + 1);
   };
 
-  const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  }, 500);
-
   return (
     <React.Fragment>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-white">
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-white rounded-t-lg">
         <div className="flex md:block items-end justify-between mt-8">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div

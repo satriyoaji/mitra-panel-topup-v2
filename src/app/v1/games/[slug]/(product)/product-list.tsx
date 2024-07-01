@@ -115,12 +115,6 @@ function ProductList(prop: IProductList) {
           ref={ref}
         >
           <div className="grid sm:grid-cols-3 grid-cols-2 gap-2 -mt-2">
-            <div className="col-span-2 sm:col-span-3">
-              <p className="text-xs text-muted-foreground ml-2">Voucher</p>
-            </div>
-            <div className="col-span-2 sm:col-span-3">
-              <Separator />
-            </div>
             {(search ? productSearch : prop.products).map((val) => {
               const item = (
                 <div className="h-full">

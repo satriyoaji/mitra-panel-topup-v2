@@ -30,7 +30,7 @@ function FlashSale() {
 
   if (data)
     return (
-      <div className="mt-6">
+      <div className="mt-6 rounded-t-lg">
         <div className="flex justify-between">
           <p className="px-2 font-semibold md:hidden">🔥{data.name}</p>
           <CountdownCard
