@@ -26,7 +26,7 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [dataProfile, setDataProfile] = useState<IProfile | null>(null);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
-  
+
   useEffect(() => {
     getData();
   }, []);
@@ -34,7 +34,7 @@ function Page() {
   const toggleModalProfile = () => {
     setProfileOpen(false);
     getData();
-  }
+  };
 
   const getData = async () => {
     setLoading(true);
@@ -55,8 +55,7 @@ function Page() {
       });
 
     setLoading(false);
-  }
-
+  };
 
   return (
     <div className="md:flex gap-4 h-full md:mt-4">
@@ -65,18 +64,36 @@ function Page() {
           <div className="flex items-center space-x-4">
             <Avatar className="my-1">
               <AvatarImage
-                src={dataProfile?.name ? dataProfile?.name : session?.profile?.name as string}
-                alt={dataProfile?.name ? dataProfile?.name : session?.profile?.name as string}
+                src={
+                  dataProfile?.name
+                    ? dataProfile?.name
+                    : (session?.profile?.name as string)
+                }
+                alt={
+                  dataProfile?.name
+                    ? dataProfile?.name
+                    : (session?.profile?.name as string)
+                }
               />
               <AvatarFallback>
-                {dataProfile?.name ? dataProfile?.name.at(0) : session?.profile?.name?.at(0) ?? ""}
+                {dataProfile?.name
+                  ? dataProfile?.name.at(0)
+                  : session?.profile?.name?.at(0) ?? ""}
               </AvatarFallback>
             </Avatar>
             <div>
-              <h5 className="font-bold">{dataProfile?.name ? dataProfile?.name : session?.profile?.name}</h5>
+              <h5 className="font-bold">
+                {dataProfile?.name ? dataProfile?.name : session?.profile?.name}
+              </h5>
             </div>
           </div>
-          <Tier type={dataProfile?.tier_name ? dataProfile?.tier_name : session?.profile?.tier_name ?? "Public"} />
+          <Tier
+            type={
+              dataProfile?.tier_name
+                ? dataProfile?.tier_name
+                : session?.profile?.tier_name ?? "Public"
+            }
+          />
         </div>
         <Separator className="w-full my-2" />
         <div className="mt-6 w-full">
@@ -102,7 +119,7 @@ function Page() {
         className="ml-4 hidden md:block h-[88vh]"
       />
       <div className="w-full h-full hidden md:block">
-        <div className="py-5 px-4">
+        <div className="pt-4 px-4">
           <Tabs defaultValue="profile">
             <div className="flex w-full mb-5">
               <div className="w-full">
@@ -134,10 +151,13 @@ function Page() {
               <SaldoPointHistory />
             </TabsContent>
           </Tabs>
-          
+
           <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
             <DialogContent className="sm:max-w-md">
-              <DetailProfile data={dataProfile} onSuccess={() => toggleModalProfile} />
+              <DetailProfile
+                data={dataProfile}
+                onSuccess={() => toggleModalProfile}
+              />
             </DialogContent>
           </Dialog>
         </div>

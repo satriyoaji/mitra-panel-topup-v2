@@ -120,11 +120,11 @@ export default function ListGame() {
           <Link href={`/games/${val.key}`} key={idx} className="w-full h-full">
             <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50">
               <CardContent className="p-1 md:p-2 flex flex-col items-center">
-                <div className="overflow-clip rounded-xl w-full bg-slate-200">
+                <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
                   {val.image_url !== "" ? (
                     <img
                       alt={val.name}
-                      className="rounded-xl aspect-square w-full hover:scale-125 transition duration-300 hover:rotate-12"
+                      className="rounded-xl w-full hover:scale-125 transition duration-300 hover:rotate-12"
                       src={val.image_url}
                     />
                   ) : (

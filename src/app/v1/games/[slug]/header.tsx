@@ -30,11 +30,13 @@ function Header({ category }: { category: IProductCategory }) {
         <div className="px-6">
           <div className="flex -mt-4 ml-4 z-10 absolute items-end">
             {category?.image_url ? (
-              <img
-                alt={category.name}
-                className="rounded  border bg-card text-card-foreground shadow w-16"
-                src={category?.image_url}
-              />
+              <div className="border rounded flex items-center justify-center w-16 h-16 bg-white">
+                <img
+                  alt={category.name}
+                  className="h-auto w-14 rounded"
+                  src={category?.image_url}
+                />
+              </div>
             ) : (
               <div className="border rounded flex items-center justify-center w-16 h-16 bg-slate-200">
                 <CubeIcon className="w-10 h-10 text-white" />
