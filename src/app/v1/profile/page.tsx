@@ -80,7 +80,7 @@ function Page() {
         </div>
         <Separator className="w-full my-2" />
         <div className="mt-6 w-full">
-          <SaldoCard />
+          <SaldoCard balance={dataProfile?.saldo ?? 0} />
         </div>
         <div className="space-y-3 px-3 mt-6 mb-4">
           <Link
