@@ -1,6 +1,6 @@
 "use client";
 
-import { IProductCategory, LooseObject, TProductItem } from "@/Type";
+import { IProductCategory, IProfile, LooseObject, TProductItem } from "@/Type";
 import { IAccount, IPayment, IPromo, ITransaction } from "@/types/transaction";
 import React from "react";
 
@@ -28,6 +28,10 @@ export type TransactionSetAccount = {
   action: "SET_ACCOUNT";
   payload: IAccount;
 };
+export type TransactionSetProfile = {
+  action: "SET_PROFILE";
+  payload: IProfile | null;
+};
 
 export type TransactionDispatch =
   | TransactionSetCategory
@@ -35,6 +39,7 @@ export type TransactionDispatch =
   | TransactionSetProduct
   | TransactionSetPromo
   | TransactionSetAccount
+  | TransactionSetProfile
   | TransactionSetPayment;
 
 export interface ITransactionContext {
