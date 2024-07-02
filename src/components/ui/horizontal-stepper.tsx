@@ -25,7 +25,7 @@ function Bullets({ status = 0 }: { status: number }) {
     );
   else if (status == 1)
     return (
-      <span className="absolute animate-spin flex items-center justify-center w-6 h-6 bg-white rounded-full start-[-.75rem] ring-4 ring-white border-orange-400 border-s-4"></span>
+      <span className="absolute animate-spin flex items-center justify-center w-6 h-6 bg-background rounded-full start-[-.75rem] ring-4 ring-white border-orange-400 border-s-4"></span>
     );
   else
     return (

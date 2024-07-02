@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Header />
       <LayoutWrapper>
-        <div className="px-4 pt-2 pb-16 min-h-screen bg-white md:container">
+        <div className="px-4 pt-2 pb-16 min-h-screen bg-background md:container">
           {children}
         </div>
       </LayoutWrapper>

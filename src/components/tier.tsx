@@ -23,7 +23,7 @@ function Tier(prop: ITier) {
     );
   else
     return (
-      <Badge className={`${prop.className} bg-white`} variant="outline">
+      <Badge className={`${prop.className} bg-background`} variant="outline">
         Public
       </Badge>
     );

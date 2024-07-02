@@ -82,7 +82,7 @@ export default function ListGame() {
 
   return (
     <React.Fragment>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-white rounded-t-lg">
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-background rounded-t-lg">
         <div className="flex md:block items-end justify-between mt-8">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div
@@ -112,7 +112,7 @@ export default function ListGame() {
         {/* <Input
           onChange={doSearch}
           placeholder="Search..."
-          className="bg-white md:max-w-xs"
+          className="bg-background md:max-w-xs"
         /> */}
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
@@ -120,11 +120,11 @@ export default function ListGame() {
           <Link href={`/games/${val.key}`} key={idx} className="w-full h-full">
             <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50">
               <CardContent className="p-1 md:p-2 flex flex-col items-center">
-                <div className="overflow-clip rounded-xl w-full bg-slate-200">
+                <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
                   {val.image_url !== "" ? (
                     <img
                       alt={val.name}
-                      className="rounded-xl aspect-square w-full hover:scale-125 transition duration-300 hover:rotate-12"
+                      className="rounded-xl w-full hover:scale-125 transition duration-300 hover:rotate-12"
                       src={val.image_url}
                     />
                   ) : (

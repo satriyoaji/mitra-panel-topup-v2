@@ -15,9 +15,11 @@ function Description({ description }: { description: string }) {
         {description}
       </p>
       <div className="flex items-center justify-center mt-3">
-        <Button size="sm" variant="link" onClick={() => setShow((el) => !el)}>
-          {show ? "Hide" : "Show More"}
-        </Button>
+        {description && (
+          <Button size="sm" variant="link" onClick={() => setShow((el) => !el)}>
+            {show ? "Hide" : "Show More"}
+          </Button>
+        )}
       </div>
     </>
   );

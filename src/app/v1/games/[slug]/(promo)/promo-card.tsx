@@ -35,7 +35,7 @@ function PromoCard({
         }}
       >
         <div className="flex">
-          <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-white rounded-s-xl">
+          <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-background rounded-s-xl">
             <p className="font-bold text-xl">
               {promo.discount_percent > 0
                 ? `${promo.discount_percent}%`
@@ -52,7 +52,7 @@ function PromoCard({
                   {promo.promo_code}
                 </p>
               </div>
-              <div className="flex-row justify-between items-center rounded-xl px-2 py-1 bg-white">
+              <div className="flex-row justify-between items-center rounded-xl px-2 py-1 bg-background">
                 <p className="text-sm font-medium">{promo.name}</p>
               </div>
               <p className="text-xs pl-1">{promo.short_description}</p>

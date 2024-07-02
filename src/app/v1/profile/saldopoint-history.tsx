@@ -1,66 +1,67 @@
 import { nFormatter, nPlainFormatter } from "@/Helpers";
-import Tier, { TierType } from "@/components/tier";
 import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 interface IHistory {
-    amount: number;
-    date: Date;
-    type: "save" | "withdraw";
+  transaction_code: string;
+  description: string;
+  amount: number;
+  created_at: string;
 }
 
-const history: IHistory[] = [
-    {
-        amount: 10_000,
-        date: new Date(),
-        type: "save",
-    },
-    {
-        amount: 10_000,
-        date: new Date(),
-        type: "withdraw",
-    },
-    {
-        amount: 20_000,
-        date: new Date(),
-        type: "save",
-    },
-];
-
 function SaldoPointHistory() {
-    const { data: session } = useSession();
+  const [balances, setBalances] = useState<IHistory[]>([]);
 
-    return (
-        <>
-            <div className="gap-2 grid text-sm">
-                {history.map((item, i) => (
-                    <div
-                        key={i.toString()}
-                        className="py-2 px-4 flex justify-between items-center bg-slate-50 border rounded-sm"
-                    >
-                        <div className="text-xs">
-                            <p>TRX-DAS7319J221JDIU</p>
-                            <p className="text-muted-foreground mt-1.5">
-                                {format(item.date, "dd MMM yyy, hh:mm:ss")}
-                            </p>
-                        </div>
-                        {item.type == "save" ? (
-                            <p className="font-medium text-green-600">
-                                + Rp {nPlainFormatter(item.amount)}
-                            </p>
-                        ) : (
-                            <p className="font-medium text-red-500">
-                                - Rp {nPlainFormatter(item.amount)}
-                            </p>
-                        )}
-                    </div>
-                ))}
-            </div>
-        </>
-    );
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    var res = await fetch(`/api/profile/balance-history`);
+    if (res.ok) {
+      var result = await res.json();
+      if (result.data) {
+        setBalances(result.data);
+      }
+    }
+  };
+
+  return (
+    <>
+      <div className="gap-2 grid text-sm">
+        {balances.map((item, i) => (
+          <Link
+            href={`/transaksi/${item.transaction_code}`}
+            className="cursor-pointer"
+            key={i.toString()}
+          >
+            <Card className="py-3 px-4 flex flex-col">
+              <p className="text-xs">{item.transaction_code}</p>
+              <Separator className="my-1" />
+              <div className="flex justify-between items-center">
+                <p className="text-xs text-muted-foreground mt-1.5">
+                  {format(new Date(item.created_at), "dd MMM yyy, HH:mm:ss")}
+                </p>
+                {item.amount < 0 ? (
+                  <p className="font-medium text-red-500">
+                    - Rp {nPlainFormatter(Math.abs(item.amount))}
+                  </p>
+                ) : (
+                  <p className="font-medium text-green-600">
+                    + Rp {nPlainFormatter(item.amount)}
+                  </p>
+                )}
+              </div>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
 }
 
 export default SaldoPointHistory;

@@ -12,6 +12,18 @@ export interface TTier {
   markup_base?: number;
 }
 
+export interface IProfile {
+  // id: string;
+  name: string;
+  email: string;
+  phone: string;
+  saldo: number;
+  tier_name: string;
+  registered_at: string;
+  qty_success: number;
+  amount_success: number;
+}
+
 export interface TProductGroup {
   id: string;
   name: string;

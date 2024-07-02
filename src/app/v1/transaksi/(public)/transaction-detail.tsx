@@ -65,7 +65,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 {/* {form && category.forms && (
               <div className="mt-6">
                 <p className="text-xs font-semibold">Data Tambahan</p>
-                <Table className="border-y bg-white rounded mt-1">
+                <Table className="border-y bg-background rounded mt-1">
                   <TableBody className="text-xs">
                     {Object.keys(form).map((key) => (
                       <TableRow key={key}>

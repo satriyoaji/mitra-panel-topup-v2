@@ -61,13 +61,13 @@ function List() {
 
   return (
     <div className="md:mx-2">
-      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-white flex-col space-y-1.5 mb-3">
+      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3">
         <p className="font-semibold text-lg">Riwayat Transaksi🧾</p>
         <div className="flex space-x-1">
           <Input
             id="invoice"
             placeholder="Masukan No. Invoice"
-            className="bg-white"
+            className="bg-background"
             onChange={doSearch}
           />
           {session ? (
