@@ -80,7 +80,6 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                     <CopyToClipboard text={data.transaction_code} />
                   </div>
                 </div>
-                <Separator />
                 <Card className="bg-slate-50  p-4">
                   <div className="text-xs mb-4 flex items-center space-x-4">
                     {/* {val.logo_image !== "" ? (
@@ -120,17 +119,23 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 </Table>
               </div>
             )} */}
-                  <VAPayment payment={data.payment_information} />
-                  <QRPayment payment={data.payment_information} />
+                  {data.payment_information && (
+                    <>
+                      <VAPayment payment={data.payment_information} />
+                      <QRPayment payment={data.payment_information} />
+                    </>
+                  )}
                 </Card>
                 <Table>
                   <TableBody className="text-xs">
-                    <TableRow>
-                      <TableCell>Metode Pembayaran</TableCell>
-                      <TableCell className="text-right">
-                        {data.payment_information.payment_channel}
-                      </TableCell>
-                    </TableRow>
+                    {data.payment_information && (
+                      <TableRow>
+                        <TableCell>Metode Pembayaran</TableCell>
+                        <TableCell className="text-right">
+                          {data.payment_information.payment_channel}
+                        </TableCell>
+                      </TableRow>
+                    )}
                     <TableRow>
                       <TableCell>Harga</TableCell>
                       <TableCell className="text-right space-y-1">
