@@ -95,7 +95,7 @@ function Page() {
               </h5>
               <Pencil1Icon
                 onClick={() => setProfileOpen(true)}
-                className="cursor-pointer ml-1 mt-1"
+                className="cursor-pointer ml-1 mt-1 md:hidden"
               />
             </div>
           </div>
@@ -113,7 +113,7 @@ function Page() {
         </div>
         <div className="mt-6 mb-4">
           <Dialog>
-            <DialogTrigger>
+            <DialogTrigger className="md:hidden">
               <p className="flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-theme-secondary-50">
                 <DiscIcon className="mr-3" /> Saldo Point History
               </p>
