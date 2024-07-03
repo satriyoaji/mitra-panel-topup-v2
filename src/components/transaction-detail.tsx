@@ -27,8 +27,8 @@ function TransactionDetail({
   if (product && category) {
     return (
       <div>
-        <div className="grid gap-4 py-4">
-          <Card className="bg-slate-50  p-4">
+        <div className="grid gap-4 pt-4">
+          <Card className="bg-slate-50 p-4">
             <div className="text-xs mb-4 flex items-center space-x-4">
               {/* {val.logo_image !== "" ? (
                                             <img
@@ -70,6 +70,25 @@ function TransactionDetail({
           </Card>
           <Table>
             <TableBody className="text-xs">
+              <TableRow>
+                <TableCell>
+                  <p>Metode Pembayaran</p>
+                </TableCell>
+                <TableCell className="space-y-1">
+                  <div className="flex justify-end">
+                    {payment?.image_url ? (
+                      <Image
+                        alt={payment.name}
+                        src={payment.image_url}
+                        width={50}
+                        height={50}
+                      />
+                    ) : (
+                      <p>payment?.name</p>
+                    )}
+                  </div>
+                </TableCell>
+              </TableRow>
               <TableRow>
                 <TableCell>Harga</TableCell>
                 <TableCell className="text-right space-y-1">
@@ -114,41 +133,6 @@ function TransactionDetail({
               </TableRow>
             </TableFooter>
           </Table>
-        </div>
-        <Separator className="my-4" />
-        <p>Pembayaran</p>
-        <div className="flex items-center w-full gap-4">
-          {session && session.profile.saldo > 0 ? (
-            <div className="p-2 w-full h-full rounded-lg border flex flex-col justify-center items-center">
-              <p className="font-medium text-xl ml-2">🪙</p>
-              <Separator className="my-2" />
-              <p className="font-medium text-sm">
-                {nPlainFormatter(session.profile.saldo)} Points
-              </p>
-            </div>
-          ) : null}
-          {payment ? (
-            <>
-              {/* <PlusIcon className="w-8 h-8" /> */}
-              <div className="p-4 w-full h-full rounded-lg border flex flex-col justify-center items-center">
-                {payment.image_url ? (
-                  <Image
-                    alt={payment.name}
-                    src={payment.image_url}
-                    width={70}
-                    height={70}
-                  />
-                ) : (
-                  <div className="flex items-center gap-1.5">
-                    <p className="font-medium text-xl -mt-1">💳</p>
-                    <p className="font-medium text-xs">{payment.name}</p>
-                  </div>
-                )}
-                <Separator className="my-2" />
-                <p className="font-medium text-sm">{priceMask(total)}</p>
-              </div>
-            </>
-          ) : null}
         </div>
       </div>
     );

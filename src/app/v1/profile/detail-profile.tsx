@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 type prop = {
   data: IProfile | null;
   onSuccess: () => void;
-}
+};
 
 function DetailProfile(props: prop) {
   const { data: session, update } = useSession();
@@ -28,7 +28,7 @@ function DetailProfile(props: prop) {
   }, []);
 
   const handleSubmit = async () => {
-    const response =  await fetch("/api/profile", {
+    const response = await fetch("/api/profile", {
       method: "POST",
       // headers: {
       //   "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function DetailProfile(props: prop) {
         </Avatar>
         {/* <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
         <h6 className="text-xs">{session?.profile?.email}</h6> */}
-        <div className="w-full my-3 px-12">
+        <div className="w-full my-1.5 px-12">
           <Label htmlFor="invoice">Nama</Label>
           <Input
             id="name"
@@ -82,7 +82,7 @@ function DetailProfile(props: prop) {
             value={name}
           />
         </div>
-        <div className="w-full my-3 px-12">
+        <div className="w-full my-1.5 px-12">
           <Label htmlFor="invoice">Email</Label>
           <Input
             id="email"
@@ -93,7 +93,7 @@ function DetailProfile(props: prop) {
             value={email}
           />
         </div>
-        <div className="w-full my-3 px-12">
+        <div className="w-full my-1.5 px-12">
           <Label htmlFor="invoice">No. Whatsapp</Label>
           <PhoneInput
             onValueChange={(e) => {

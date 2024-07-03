@@ -53,6 +53,8 @@ export function Purchase({
       phone: account?.noWhatsapp,
     };
 
+    if (promo) payload.promo_code = promo.promo_code;
+
     if (form) {
       var forms: ICategoryForm[] = [];
       for (const [key, value] of Object.entries(form)) {
@@ -79,10 +81,7 @@ export function Purchase({
       });
 
       var data = await res.json();
-      setTimeout(() => {
-        router.push(`/transaksi/${data.data.transaction_code}`);
-      }, 3000);
-
+      router.push(`/transaksi/${data.data.transaction_code}`);
       return;
     }
 
@@ -112,20 +111,15 @@ export function Purchase({
             product={product}
             promo={promo}
           />
-          <div>
-            <Separator className="mb-2" />
-            <div className="flex justify-between items-center">
-              <div className="text-xs space-y-0.5">
-                <p className="">Total Harga</p>
-                <p className="font-semibold text-sm">
-                  {priceMask(getTotalPrice(product, promo, payment))}
-                </p>
-              </div>
-
-              <Button type="submit" size="sm" onClick={createTransaction}>
-                Bayar
-              </Button>
-            </div>
+          <div className="flex justify-between items-center">
+            <Button
+              type="submit"
+              className="w-full"
+              size="sm"
+              onClick={createTransaction}
+            >
+              Bayar
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

@@ -26,7 +26,7 @@ function PromoCard({
       <div
         className={`rounded-xl shadow-sm cursor-pointer text-theme-secondary-900 hover:bg-slate-50 ${
           promo.id == selected?.id
-            ? "border-2 divide-theme-secondary-500 border-theme-secondary divide-x-2 divide-dashed "
+            ? "border-2 border-theme-secondary"
             : "border-2"
         }`}
         onClick={() => {
@@ -68,7 +68,9 @@ function PromoCard({
             )}
           </div>
         </div>
-        <div className="px-3 py-2 bg-theme-primary-200 rounded-b-lg text-theme-primary-950">
+        <div
+          className={`px-3 py-2 bg-theme-primary-200 rounded-b-xl text-theme-primary-950`}
+        >
           <p className="text-xs">
             Berakhir dalam
             <span className="font-semibold ml-1">
