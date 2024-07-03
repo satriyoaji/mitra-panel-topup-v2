@@ -13,6 +13,7 @@ export interface ITransactionCreate {
   email: string;
   phone: string;
   form_data?: ICategoryForm[];
+  promo_code?: string;
 }
 
 export interface ITransactionHistory {

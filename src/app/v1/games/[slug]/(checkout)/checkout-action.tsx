@@ -113,9 +113,7 @@ function CheckoutAction({
     <>
       <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-theme-secondary flex items-center justify-between px-4">
         <div>
-          <h4 className="text-white text-xs">
-            {session ? "Transfer + 20.000 Point" : "Transfer"}
-          </h4>
+          <p className="text-white text-xs">Total Bayar</p>
           <h4 className="text-white text-lg font-semibold">{getTotal}</h4>
         </div>
         <div className="">
