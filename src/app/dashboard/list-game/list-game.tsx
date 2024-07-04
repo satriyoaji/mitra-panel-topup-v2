@@ -6,6 +6,7 @@ import { CubeIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import ListGameWrapper from "./list-game-wrapper";
 // import Image from "next/image";
 
 export default function ListGame() {
@@ -81,8 +82,8 @@ export default function ListGame() {
   };
 
   return (
-    <React.Fragment>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 bg-background rounded-t-lg">
+    <ListGameWrapper>
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 rounded-t-lg">
         <div className="flex md:block items-end justify-between mt-8">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div
@@ -176,6 +177,6 @@ export default function ListGame() {
           </Button>
         </div>
       ) : null}
-    </React.Fragment>
+    </ListGameWrapper>
   );
 }

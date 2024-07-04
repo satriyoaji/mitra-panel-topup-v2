@@ -4,7 +4,7 @@ import { TProductItem } from "@/Type";
 import { priceMask } from "@/Helpers";
 import ProductCard from "./[slug]/(product)/product-card";
 import Image from "next/image";
-import Loading from "../../loading";
+import Loading from "../loading";
 import { useRouter } from "next/navigation";
 import Filter from "./filter";
 import Pagination from "@/components/pagination";

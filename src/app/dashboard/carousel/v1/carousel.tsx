@@ -6,7 +6,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import "./carousel.css";
-import { Button } from "@/components/ui/button";
 import { IBanner } from "@/types/utils";
 
 const Carousel = ({ data }: { data: IBanner[] }) => {
@@ -40,54 +39,9 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
     trackMouse: false,
   });
 
-  const getStyles = (index: number) => {
-    if (activeIndex === index)
-      return {
-        opacity: 1,
-        transform: "translateX(0px) translateZ(0px) rotateY(0deg)",
-        zIndex: 10,
-      };
-    else if (activeIndex - 1 === index)
-      return {
-        opacity: 0.3,
-        transform: "translateX(-240px) translateZ(-400px) rotateY(35deg)",
-        zIndex: 9,
-      };
-    else if (activeIndex + 1 === index)
-      return {
-        opacity: 0.3,
-        transform: "translateX(240px) translateZ(-400px) rotateY(-35deg)",
-        zIndex: 9,
-      };
-    else if (activeIndex - 2 === index)
-      return {
-        opacity: 0,
-        transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
-        zIndex: 8,
-      };
-    else if (activeIndex + 2 === index)
-      return {
-        opacity: 0,
-        transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-        zIndex: 8,
-      };
-    else if (index < activeIndex - 2)
-      return {
-        opacity: 0,
-        transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
-        zIndex: 7,
-      };
-    else if (index > activeIndex + 2)
-      return {
-        opacity: 0,
-        transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-        zIndex: 7,
-      };
-  };
-
   return (
     <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:py-4 md:-mx-8 md:-mt-4">
-      <div className="h-full flex w-full justify-center items-center">
+      <div className="h-full pt-3 flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
           className="overflow-hidden relative w-auto max-w-5xl rounded-xl h-full"

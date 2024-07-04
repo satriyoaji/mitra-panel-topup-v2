@@ -1,30 +1,31 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import Header from "@/components/page-header";
-import BottomNav from "@/components/bottom-nav";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/footer";
-import ToTopButton from "@/components/totop-button";
-import ThemeProvider from "@/infrastructures/context/theme/theme.provider";
 import HelpButton from "@/components/help-button";
-import { NextAuthProvider } from "./_app";
+import BottomNav from "@/components/bottom-nav";
+import { GetCookie } from "@/infrastructures/cookieStore";
 
-export const metadata: Metadata = {
-  title: "Topup User",
-  description: "Topup User Web",
-};
-
-export default function RootTemplateLayout({
+export default function TemplateLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const version = GetCookie("version");
+
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <ThemeProvider>
-        <NextAuthProvider>{children}</NextAuthProvider>
-      </ThemeProvider>
-    </html>
+    <>
+      <Header />
+      <div className={`${version == "1" ? "md:container md:max-w-7xl" : ""}`}>
+        <div
+          className={`min-h-screen bg-background ${version == "1" ? "" : ""}`}
+        >
+          {children}
+        </div>
+        <BottomNav />
+      </div>
+      <Footer />
+      <HelpButton />
+      <Toaster />
+    </>
   );
 }

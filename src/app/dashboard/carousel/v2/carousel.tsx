@@ -1,0 +1,99 @@
+import {
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  Carousel,
+} from "@/components/ui/carousel";
+import { IBanner } from "@/types/utils";
+import React from "react";
+import Autoplay from "embla-carousel-autoplay";
+
+function CarouselV2({ data }: { data: IBanner[] }) {
+  return (
+    <div className="bg-theme-primary-50 flex justify-center items-center py-4">
+      <Carousel
+        className="w-fit"
+        opts={{
+          align: "center",
+          loop: true,
+        }}
+        plugins={[
+          Autoplay({
+            delay: 7500,
+          }),
+        ]}
+      >
+        <CarouselContent
+          style={{ aspectRatio: 27 / 9 }}
+          className="p-4 max-h-72 "
+        >
+          {data.map((item, index) => (
+            <CarouselItem
+              key={index.toString()}
+              className="flex justify-center "
+            >
+              <img
+                key={index}
+                src={item.image_url}
+                alt={item.name}
+                sizes="100%"
+                style={{ aspectRatio: 27 / 9 }}
+                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+              />
+            </CarouselItem>
+          ))}
+          {data.map((item, index) => (
+            <CarouselItem
+              key={index.toString()}
+              className="flex justify-center w-fit"
+            >
+              <img
+                key={index}
+                src={item.image_url}
+                alt={item.name}
+                sizes="100%"
+                style={{ aspectRatio: 27 / 9 }}
+                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+              />
+            </CarouselItem>
+          ))}
+          {data.map((item, index) => (
+            <CarouselItem
+              key={index.toString()}
+              className="flex justify-center w-fit"
+            >
+              <img
+                key={index}
+                src={item.image_url}
+                alt={item.name}
+                sizes="100%"
+                style={{ aspectRatio: 27 / 9 }}
+                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+              />
+            </CarouselItem>
+          ))}
+          {data.map((item, index) => (
+            <CarouselItem
+              key={index.toString()}
+              className="flex justify-center w-fit"
+            >
+              <img
+                key={index}
+                src={item.image_url}
+                alt={item.name}
+                sizes="100%"
+                style={{ aspectRatio: 27 / 9 }}
+                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
+  );
+}
+
+export default CarouselV2;

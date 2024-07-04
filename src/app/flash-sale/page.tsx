@@ -5,7 +5,7 @@ import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import FlashSaleCard from "./flash-sale-card";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
-import Loading from "../../loading";
+import Loading from "../loading";
 import Pagination from "@/components/pagination";
 import { IFlashSaleInfo } from "@/types/flash-sale";
 

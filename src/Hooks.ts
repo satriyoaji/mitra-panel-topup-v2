@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { SetCookie } from "./infrastructures/cookieStore";
 
 export const useCountdown = (targetDate: string | number | Date) => {
   const [countDownDate, _] = useState(new Date(targetDate).getTime());
