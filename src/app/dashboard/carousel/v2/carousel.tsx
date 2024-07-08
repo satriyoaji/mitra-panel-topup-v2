@@ -11,87 +11,92 @@ import Autoplay from "embla-carousel-autoplay";
 
 function CarouselV2({ data }: { data: IBanner[] }) {
   return (
-    <div className="bg-theme-primary-50 flex justify-center items-center py-4">
-      <Carousel
-        className="w-fit"
-        opts={{
-          align: "center",
-          loop: true,
-        }}
-        plugins={[
-          Autoplay({
-            delay: 7500,
-          }),
-        ]}
-      >
-        <CarouselContent
-          style={{ aspectRatio: 27 / 9 }}
-          className="p-4 max-h-72 "
+    <div
+      style={{ backgroundImage: 'url("/assets/illustration/v1/carousel.svg")' }}
+      className="bg-no-repeat bg-cover"
+    >
+      <div className="bg-theme-primary-400/50 flex justify-center items-center py-4">
+        <Carousel
+          className="w-fit"
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 7500,
+            }),
+          ]}
         >
-          {data.map((item, index) => (
-            <CarouselItem
-              key={index.toString()}
-              className="flex justify-center "
-            >
-              <img
-                key={index}
-                src={item.image_url}
-                alt={item.name}
-                sizes="100%"
-                style={{ aspectRatio: 27 / 9 }}
-                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-              />
-            </CarouselItem>
-          ))}
-          {data.map((item, index) => (
-            <CarouselItem
-              key={index.toString()}
-              className="flex justify-center w-fit"
-            >
-              <img
-                key={index}
-                src={item.image_url}
-                alt={item.name}
-                sizes="100%"
-                style={{ aspectRatio: 27 / 9 }}
-                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-              />
-            </CarouselItem>
-          ))}
-          {data.map((item, index) => (
-            <CarouselItem
-              key={index.toString()}
-              className="flex justify-center w-fit"
-            >
-              <img
-                key={index}
-                src={item.image_url}
-                alt={item.name}
-                sizes="100%"
-                style={{ aspectRatio: 27 / 9 }}
-                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-              />
-            </CarouselItem>
-          ))}
-          {data.map((item, index) => (
-            <CarouselItem
-              key={index.toString()}
-              className="flex justify-center w-fit"
-            >
-              <img
-                key={index}
-                src={item.image_url}
-                alt={item.name}
-                sizes="100%"
-                style={{ aspectRatio: 27 / 9 }}
-                className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+          <CarouselContent
+            style={{ aspectRatio: 27 / 9 }}
+            className="p-4 max-h-72 "
+          >
+            {data.map((item, index) => (
+              <CarouselItem
+                key={index.toString()}
+                className="flex justify-center "
+              >
+                <img
+                  key={index}
+                  src={item.image_url}
+                  alt={item.name}
+                  sizes="100%"
+                  style={{ aspectRatio: 27 / 9 }}
+                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+                />
+              </CarouselItem>
+            ))}
+            {data.map((item, index) => (
+              <CarouselItem
+                key={index.toString()}
+                className="flex justify-center w-fit"
+              >
+                <img
+                  key={index}
+                  src={item.image_url}
+                  alt={item.name}
+                  sizes="100%"
+                  style={{ aspectRatio: 27 / 9 }}
+                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+                />
+              </CarouselItem>
+            ))}
+            {data.map((item, index) => (
+              <CarouselItem
+                key={index.toString()}
+                className="flex justify-center w-fit"
+              >
+                <img
+                  key={index}
+                  src={item.image_url}
+                  alt={item.name}
+                  sizes="100%"
+                  style={{ aspectRatio: 27 / 9 }}
+                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+                />
+              </CarouselItem>
+            ))}
+            {data.map((item, index) => (
+              <CarouselItem
+                key={index.toString()}
+                className="flex justify-center w-fit"
+              >
+                <img
+                  key={index}
+                  src={item.image_url}
+                  alt={item.name}
+                  sizes="100%"
+                  style={{ aspectRatio: 27 / 9 }}
+                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="ml-16 bg-background" />
+          <CarouselNext className="mr-16 bg-background" />
+        </Carousel>
+      </div>
     </div>
   );
 }
