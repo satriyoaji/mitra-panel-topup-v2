@@ -6,7 +6,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import "./carousel.css";
-import { Button } from "@/components/ui/button";
 import { IBanner } from "@/types/utils";
 
 const Carousel = ({ data }: { data: IBanner[] }) => {
@@ -40,51 +39,6 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
     trackMouse: false,
   });
 
-  const getStyles = (index: number) => {
-    if (activeIndex === index)
-      return {
-        opacity: 1,
-        transform: "translateX(0px) translateZ(0px) rotateY(0deg)",
-        zIndex: 10,
-      };
-    else if (activeIndex - 1 === index)
-      return {
-        opacity: 0.3,
-        transform: "translateX(-240px) translateZ(-400px) rotateY(35deg)",
-        zIndex: 9,
-      };
-    else if (activeIndex + 1 === index)
-      return {
-        opacity: 0.3,
-        transform: "translateX(240px) translateZ(-400px) rotateY(-35deg)",
-        zIndex: 9,
-      };
-    else if (activeIndex - 2 === index)
-      return {
-        opacity: 0,
-        transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
-        zIndex: 8,
-      };
-    else if (activeIndex + 2 === index)
-      return {
-        opacity: 0,
-        transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-        zIndex: 8,
-      };
-    else if (index < activeIndex - 2)
-      return {
-        opacity: 0,
-        transform: "translateX(-480px) translateZ(-500px) rotateY(35deg)",
-        zIndex: 7,
-      };
-    else if (index > activeIndex + 2)
-      return {
-        opacity: 0,
-        transform: "translateX(480px) translateZ(-500px) rotateY(-35deg)",
-        zIndex: 7,
-      };
-  };
-
   return (
     <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:py-4 md:-mx-8 md:-mt-4">
       <div className="h-full flex w-full justify-center items-center">
@@ -108,21 +62,20 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                             }`}
                         /> */}
           {data.map((item, index) => (
-            <img
-              key={index}
-              src={item.image_url}
-              alt={item.name}
-              sizes="100%"
-              style={{ aspectRatio: 27 / 9 }}
-              className={`object-cover transition-opacity h-full w-full duration-500 bg-slate-200 ease-in-out ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
-              }`}
-            />
+            <div key={index} className="bg-slate-50">
+              <img
+                src={item.image_url}
+                alt={item.name}
+                className={`object-cover transition-opacity duration-500 bg-slate-200 ease-in-out ${
+                  index === activeIndex ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            </div>
           ))}
         </div>
       </div>
       {data.length > 1 ? (
-        <div className="flex justify-end mr-2 md:hidden">
+        <div className="flex justify-end mr-2">
           <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
             <ChevronLeftIcon
               width={12}

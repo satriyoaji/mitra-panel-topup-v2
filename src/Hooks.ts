@@ -1,7 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export const useCountdown = (targetDate: string | number | Date) => {
+interface ICountdownResponse {
+  days: number;
+  hours: number;
+  minutes: string;
+  seconds: string;
+  isExpired: boolean;
+}
+
+export const useCountdown = (
+  targetDate: string | number | Date
+): ICountdownResponse => {
   const [countDownDate, _] = useState(new Date(targetDate).getTime());
 
   const [countDown, setCountDown] = useState(
@@ -19,7 +29,7 @@ export const useCountdown = (targetDate: string | number | Date) => {
   return getReturnValues(countDown);
 };
 
-const getReturnValues = (countDown: number) => {
+const getReturnValues = (countDown: number): ICountdownResponse => {
   // calculate time left
   const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
   const hours = Math.floor(
@@ -31,11 +41,11 @@ const getReturnValues = (countDown: number) => {
   let isExpired = false;
   if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) isExpired = true;
 
-  return [
+  return {
     days,
-    hours + days * 24,
-    minutes.toString().padStart(2, "0"),
-    seconds.toString().padStart(2, "0"),
+    hours: hours + days * 24,
+    minutes: minutes.toString().padStart(2, "0"),
+    seconds: seconds.toString().padStart(2, "0"),
     isExpired,
-  ];
+  };
 };
