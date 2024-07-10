@@ -5,7 +5,7 @@ import React from "react";
 import QRCode from "react-qr-code";
 
 function QRPayment({ payment }: { payment: IPaymentInfo }) {
-  const [_, hours, minutes, seconds, isExpired] = useCountdown(
+  const { hours, minutes, seconds, isExpired } = useCountdown(
     payment.expired_at ?? ""
   );
 

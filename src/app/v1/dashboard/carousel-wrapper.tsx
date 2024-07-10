@@ -11,7 +11,6 @@ const CarouselWrapper = () => {
     var res = await fetch("/api/banners");
 
     var data = await res.json();
-    console.log(data);
     setBanners(data);
   };
 
