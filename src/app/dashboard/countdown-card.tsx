@@ -8,18 +8,22 @@ function CountdownCard({
   onExpired,
 }: {
   date: Date;
-  onExpired: () => void;
+  onExpired?: () => void;
 }) {
-  const [hours, minutes, seconds, isExpired] = useCountdown(date);
+  const { days, hours, minutes, seconds, isExpired } = useCountdown(date);
 
   useEffect(() => {
-    if (isExpired) onExpired();
+    if (isExpired && onExpired) onExpired();
   }, [seconds]);
 
   return (
-    <div className="w-[7.9rem] flex bg- z-50 rounded-xl space-x-1 text-center text-xs items-center justify-center bg-red-500 backdrop-blur text-white font-medium">
+    <div className="flex rounded-xl py-1 pl-1.5 pr-2 space-x-1 text-center text-xs items-center justify-center bg-red-500 backdrop-blur text-white font-medium">
       <ClockIcon />
-      <p className="p-0">{`${hours}h : ${minutes}m : ${seconds}s`}</p>
+      <p className="p-0">
+        {days > 0
+          ? `${days} hari lagi`
+          : `${hours}h : ${minutes}m : ${seconds}s`}
+      </p>
     </div>
   );
 }

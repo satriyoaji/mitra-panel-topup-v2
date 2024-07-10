@@ -18,7 +18,6 @@ import Loading from "@/app/loading";
 import { ITransactionHistoryDetail } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
-import { useCountdown } from "@/Hooks";
 import {
   Accordion,
   AccordionContent,

@@ -1,4 +1,4 @@
-import FlashSale from "@/app/dashboard/flash-sale";
+import FlashSaleWrapper from "@/app/dashboard/flash-sale/flash-sale-wrapper";
 import ListGame from "@/app/dashboard/list-game/list-game";
 import CarouselWrapper from "./dashboard/carousel/carousel-wrapper";
 import Stats from "./dashboard/stats";
@@ -9,7 +9,7 @@ export default async function Home() {
     <>
       <div className="">
         <CarouselWrapper />
-        <FlashSale />
+        <FlashSaleWrapper />
         <ListGame />
         <div className="flex justify-center items-center">
           <Stats />

@@ -2,10 +2,16 @@
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Promo() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(true);
+    }, 1000);
+  }, []);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

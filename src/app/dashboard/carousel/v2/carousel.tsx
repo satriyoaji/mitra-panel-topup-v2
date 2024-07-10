@@ -15,7 +15,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
       style={{ backgroundImage: 'url("/assets/illustration/v1/carousel.svg")' }}
       className="bg-no-repeat bg-cover"
     >
-      <div className="bg-theme-primary-400/50 flex justify-center items-center py-4">
+      <div className="bg-theme-primary-400/50 flex justify-center items-center md:py-4">
         <Carousel
           className="w-fit"
           opts={{
@@ -30,7 +30,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
         >
           <CarouselContent
             style={{ aspectRatio: 27 / 9 }}
-            className="p-4 max-h-72 "
+            className="max-h-72 "
           >
             {data.map((item, index) => (
               <CarouselItem

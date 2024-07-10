@@ -1,13 +1,20 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import React, {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import FlashSaleCard from "./flash-sale-card";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
 import Loading from "../loading";
-import Pagination from "@/components/pagination";
 import { IFlashSaleInfo } from "@/types/flash-sale";
+import ThemeContext, {
+  IThemeContext,
+} from "@/infrastructures/context/theme/theme.context";
 
 function Page() {
   const [total, setTotal] = useState(0);
@@ -15,6 +22,7 @@ function Page() {
   const [data, setData] = useState<IFlashSaleInfo | undefined>();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   const getFlashSale = async () => {
     let searchParams = new URLSearchParams({
@@ -50,7 +58,12 @@ function Page() {
   }, 500);
 
   return (
-    <div className="md:mx-2">
+    <div
+      className={`container ${
+        theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
+      }`}
+    >
+      {" "}
       <div className="flex px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3 z-10">
         <p className="font-semibold text-lg">Flash Sale⚡</p>
         <div className="flex space-x-1">

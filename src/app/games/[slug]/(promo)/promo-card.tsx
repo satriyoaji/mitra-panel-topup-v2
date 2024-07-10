@@ -17,7 +17,7 @@ function PromoCard({
   setSelected: (promo?: IPromo) => void;
   isSecret?: boolean;
 }) {
-  const [days, hours, minutes, seconds, isExpired] = useCountdown(
+  const { days, hours, minutes, seconds, isExpired } = useCountdown(
     promo.time_finish
   );
 

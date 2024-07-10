@@ -5,7 +5,7 @@ import { IPaymentInfo } from "@/types/transaction";
 import React from "react";
 
 function VAPayment({ payment }: { payment: IPaymentInfo }) {
-  const [_, hours, minutes, seconds, isExpired] = useCountdown(
+  const { hours, minutes, seconds, isExpired } = useCountdown(
     payment.expired_at ?? ""
   );
 

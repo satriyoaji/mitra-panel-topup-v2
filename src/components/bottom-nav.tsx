@@ -4,33 +4,26 @@ import { usePathname } from "next/navigation";
 import { paths } from "./navlist";
 
 function BottomNav() {
-    const path = usePathname();
-    if (
-        path === "/v1" ||
-        path === "/v1/transaksi" ||
-        path === "/v1/profile" ||
-        path === "/v2" ||
-        path === "/v2/transaksi" ||
-        path === "/v2/profile"
-    )
-        return (
-            <div className="block md:hidden fixed bottom-0 h-12 z-10 w-full border-t-2 shadow-md bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">
-                <div className="flex justify-between items-center h-full">
-                    {paths.map((val) => (
-                        <Link
-                            key={val.path}
-                            href={val.path}
-                            className={`flex flex-col h-fit items-center w-full hover:text-theme-primary-500 cursor-pointer ${
-                                path == val.path && "text-theme-primary-700"
-                            }`}
-                        >
-                            <val.icon className="w-4 h-4" />
-                            <p className="text-xs">{val.name}</p>
-                        </Link>
-                    ))}
-                </div>
-            </div>
-        );
+  const path = usePathname();
+  if (!path.includes("/games/"))
+    return (
+      <div className="block md:hidden fixed bottom-0 h-12 z-10 w-full border-t-2 shadow-md bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">
+        <div className="flex justify-between items-center h-full">
+          {paths.map((val) => (
+            <Link
+              key={val.path}
+              href={val.path}
+              className={`flex flex-col h-fit items-center w-full hover:text-theme-primary-500 cursor-pointer ${
+                path == val.path && "text-theme-primary-700"
+              }`}
+            >
+              <val.icon className="w-4 h-4" />
+              <p className="text-xs">{val.name}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
 }
 
 export default BottomNav;

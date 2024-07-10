@@ -41,11 +41,11 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
 
   return (
     <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:py-4 md:-mx-8 md:-mt-4">
-      <div className="h-full pt-3 flex w-full justify-center items-center">
+      <div className="h-full md:pt-3 flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
           className="overflow-hidden relative w-auto max-w-5xl rounded-xl h-full"
-          style={{ aspectRatio: 27 / 9 }}
+          style={{ aspectRatio: 3 / 1 }}
         >
           {/* <Image
                             key={index}
@@ -54,7 +54,7 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                             sizes="100%"
                             height={100}
                             width={100}
-                            style={{ aspectRatio: 27 / 9 }}
+                            style={{ aspectRatio: 3/1 }}
                             className={`absolute object-cover w-auto transition-opacity duration-500 ease-in-out ${
                                 index === activeIndex
                                     ? "opacity-100"
@@ -62,21 +62,43 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
                             }`}
                         /> */}
           {data.map((item, index) => (
-            <img
-              key={index}
+            <Image
               src={item.image_url}
               alt={item.name}
-              sizes="100%"
-              style={{ aspectRatio: 27 / 9 }}
-              className={`object-cover transition-opacity h-full w-full duration-500 bg-slate-200 ease-in-out ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
+              key={index}
+              width={900}
+              height={300}
+              style={{
+                aspectRatio: 3 / 1,
+              }}
+              className={`object-cover transition-all duration-500 ease-in-out ${
+                index === activeIndex ? "h-full" : "h-0"
               }`}
             />
           ))}
+          {/* <div>
+            <Image
+              // src={
+              //   "https://cdn-h2h.s3.ap-southeast-1.amazonaws.com/h2h/20240621120831_66756d3f12ad47dea12a8794.webp"
+              // }
+              src={
+                "https://cdn-h2h.s3.ap-southeast-1.amazonaws.com/h2h/20240708131834_668be72ad8c88b87876848a9.webp"
+              }
+              alt={"dwa"}
+              height={100}
+              width={100}
+              style={{
+                aspectRatio: 3/1,
+              }}
+              className={`object-cover transition-opacity duration-500 ease-in-out ${
+                true ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </div> */}
         </div>
       </div>
       {data.length > 1 ? (
-        <div className="flex justify-end mr-2 md:hidden">
+        <div className="flex justify-end mr-2">
           <div className="flex bg-background/95 ml-1 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-1 rounded-xl mt-[-1.5rem] absolute cursor-pointer">
             <ChevronLeftIcon
               width={12}
