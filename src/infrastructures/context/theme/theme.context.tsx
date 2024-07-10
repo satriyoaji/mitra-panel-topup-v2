@@ -19,6 +19,10 @@ export type ThemeSetFont = {
   action: "SET_FONT";
   payload: TFont;
 };
+export type ThemeSetVersion = {
+  action: "SET_VERSION";
+  payload: string;
+};
 export type RandTheme = {
   action: "RAND_THEME";
 };
@@ -27,6 +31,7 @@ export type ThemeDispatch =
   | ThemeSetPrimary
   | ThemeSetSecondary
   | ThemeSetFont
+  | ThemeSetVersion
   | RandTheme;
 
 export interface IThemeContext {

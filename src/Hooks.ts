@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { SetCookie } from "./infrastructures/cookieStore";
 
 interface ICountdownResponse {
   days: number;

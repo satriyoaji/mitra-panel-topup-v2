@@ -12,14 +12,12 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
-import Searchbar from "@/app/v1/dashboard/searchbar";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
-import { TextAlignJustifyIcon } from "@radix-ui/react-icons";
 import ThemeContext, {
     IThemeContext,
 } from "@/infrastructures/context/theme/theme.context";
 import Image from "next/image";
 import { ISiteProfile } from "@/types/utils";
+import Searchbar from "@/app/dashboard/searchbar";
 
 export type path = {
     name: string;
@@ -32,10 +30,6 @@ const paths: path[] = [
         path: "/games",
     },
     {
-        name: "Flash Sale",
-        path: "/flash-sale",
-    },
-    {
         name: "Transaksi",
         path: "/transaksi",
     },
@@ -43,7 +37,6 @@ const paths: path[] = [
 
 function Header() {
     const { data: session } = useSession();
-    const path = usePathname();
     const router = useRouter();
     const [profile, setProfile] = useState<ISiteProfile>();
     const { dispatch, data } = useContext(ThemeContext) as IThemeContext;
