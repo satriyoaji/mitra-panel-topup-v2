@@ -24,7 +24,13 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         data.font.class.className
       )}
     >
-      <div className="bg-theme-primary-50">{children}</div>
+      <div
+        className={
+          data.version == "1" ? "bg-theme-primary-50" : "bg-background"
+        }
+      >
+        {children}
+      </div>
     </body>
   );
 }

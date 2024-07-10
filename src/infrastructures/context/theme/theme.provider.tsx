@@ -5,6 +5,7 @@ import ThemeContext, { ThemeDispatch } from "./theme.context";
 import { roboto, fonts } from "./fonts";
 import { primaryColors, secondaryColors } from "./colors";
 import { ITheme } from "@/types/utils";
+import { SetCookie } from "@/infrastructures/cookieStore";
 
 const getInitialState = (): ITheme => {
   return global?.window?.localStorage?.getItem("theme")
@@ -35,12 +36,22 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(theme));
+    setThemeCookie(theme.version);
   }, [theme]);
+
+  const setThemeCookie = (version: string) => {
+    SetCookie("version", version);
+  };
+
+  //get template
 
   const dispatch = (data: ThemeDispatch) => {
     switch (data.action) {
       case "SET_FONT":
         setTheme((prev) => ({ ...prev, font: data.payload }));
+        return;
+      case "SET_VERSION":
+        setTheme((prev) => ({ ...prev, ve: data.payload }));
         return;
       case "SET_PRIMARY_COLOR":
         setTheme((prev) => ({ ...prev, primary: data.payload }));
@@ -54,6 +65,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
           font: fonts[getRandomInt(fonts.length)],
           primary: primaryColors[getRandomInt(primaryColors.length)],
           secondary: secondaryColors[getRandomInt(secondaryColors.length)],
+          version: `${getRandomInt(2)}`,
         });
         return;
       default:

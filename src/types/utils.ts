@@ -23,6 +23,7 @@ export interface ITheme {
   secondary: TSecondaryPallete;
   font: TFont;
   logo: string;
+  version: string;
 }
 
 export interface IBanner {
