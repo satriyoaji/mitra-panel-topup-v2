@@ -43,7 +43,7 @@ function Footer() {
         }`}
       >
         {theme.version !== "1" && (
-          <div className="md:flex gap-8 pb-4 px-8 items-center mb-6">
+          <div className="md:flex gap-8 pb-4 px-8 items-center my-6">
             <div className="md:mb-4 w-full">
               <p className="text-white text-sm font-semibold mt-4">
                 Dipercaya oleh gamers Indonesia

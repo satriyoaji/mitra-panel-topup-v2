@@ -40,11 +40,11 @@ const Carousel = ({ data }: { data: IBanner[] }) => {
   });
 
   return (
-    <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:py-4 md:-mx-8 md:-mt-4">
+    <div className="block bg-gradient-to-r from-theme-primary-50 via-theme-secondary-400 to-theme-primary-50 md:pt-6 pb-6 md:-mx-8 md:-mt-4">
       <div className="h-full md:pt-3 flex w-full justify-center items-center">
         <div
           {...swipeHandlers}
-          className="overflow-hidden relative w-auto max-w-5xl rounded-xl h-full"
+          className="overflow-hidden relative w-auto max-w-5xl md:rounded-xl h-full"
           style={{ aspectRatio: 3 / 1 }}
         >
           {/* <Image

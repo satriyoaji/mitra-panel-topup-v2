@@ -11,19 +11,32 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 function FlashSaleV1({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
       <div
-        className="relative rounded-xl bg-cover"
+        className="relative md:rounded-xl bg-cover mb-6"
         style={{ backgroundImage: 'url("/assets/thunder.svg")' }}
       >
-        <div className="w-full rounded-xl bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70 pb-2">
+        <div className="w-full md:rounded-xl bg-gradient-to-r from-theme-primary-900/95 to-theme-primary-200/70 pb-2">
           <div className="flex justify-between items-center">
-            <div className="flex items-center bg-white/80 backdrop-blur-sm py-1 pr-1 rounded-tl-lg rounded-br-lg">
-              <p className="px-2 text-sm font-semibold">🔥{data.name}</p>
+            <div className="flex items-center bg-white/80 backdrop-blur-sm py-1 pr-1 md:rounded-tl-lg rounded-br-lg">
+              <p className="px-2 text-sm font-semibold flex">
+                <span className="mr-3">
+                  <Image
+                    src={"/assets/illustration/lightning.gif"}
+                    alt="flash"
+                    width={20}
+                    height={20}
+                  />
+                </span>
+                {data.name}
+              </p>
               <CountdownCard
                 date={parseISO(data.expired_at)}
                 onExpired={() => {}}
@@ -39,7 +52,7 @@ function FlashSaleV1({ data }: { data: IFlashSaleInfo }) {
           </div>
           <div className="">
             <div className="bg-cover rounded-xl">
-              <Carousel className="py-3 flex rounded-xl ">
+              <Carousel className="py-3 flex rounded-xl">
                 <CarouselContent className="mx-1.5">
                   {data?.products?.slice(0, 8).map((item, idx) => (
                     <CarouselItem
@@ -50,6 +63,8 @@ function FlashSaleV1({ data }: { data: IFlashSaleInfo }) {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
+                <CarouselPrevious className="ml-14 bg-background" />
+                <CarouselNext className="mr-14 bg-background" />
               </Carousel>
             </div>
           </div>

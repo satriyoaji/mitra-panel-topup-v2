@@ -43,52 +43,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                   alt={item.name}
                   sizes="100%"
                   style={{ aspectRatio: 27 / 9 }}
-                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-                />
-              </CarouselItem>
-            ))}
-            {data.map((item, index) => (
-              <CarouselItem
-                key={index.toString()}
-                className="flex justify-center w-fit"
-              >
-                <img
-                  key={index}
-                  src={item.image_url}
-                  alt={item.name}
-                  sizes="100%"
-                  style={{ aspectRatio: 27 / 9 }}
-                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-                />
-              </CarouselItem>
-            ))}
-            {data.map((item, index) => (
-              <CarouselItem
-                key={index.toString()}
-                className="flex justify-center w-fit"
-              >
-                <img
-                  key={index}
-                  src={item.image_url}
-                  alt={item.name}
-                  sizes="100%"
-                  style={{ aspectRatio: 27 / 9 }}
-                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
-                />
-              </CarouselItem>
-            ))}
-            {data.map((item, index) => (
-              <CarouselItem
-                key={index.toString()}
-                className="flex justify-center w-fit"
-              >
-                <img
-                  key={index}
-                  src={item.image_url}
-                  alt={item.name}
-                  sizes="100%"
-                  style={{ aspectRatio: 27 / 9 }}
-                  className={`object-cover rounded-lg h-full w-auto duration-500 bg-slate-200`}
+                  className={`object-cover md:rounded-lg h-full w-auto duration-500 bg-slate-200`}
                 />
               </CarouselItem>
             ))}

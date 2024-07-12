@@ -5,8 +5,8 @@ function ListGameWrapper({ children }: { children: React.ReactNode }) {
   let version = GetCookie("version");
   if (version == "1") return children;
   return (
-    <div className="bg-theme-primary-100 pb-4">
-      <div className="md:container md:max-w-7xl">{children}</div>
+    <div className="bg-theme-primary-100 pb-4 flex justify-center">
+      <div className="w-full max-w-6xl px-2">{children}</div>
     </div>
   );
 }
