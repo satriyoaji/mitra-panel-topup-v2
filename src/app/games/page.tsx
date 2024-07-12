@@ -63,7 +63,7 @@ function Page() {
         theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
       }`}
     >
-      <div className="flex px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3">
+      <div className="flex px-2 sticky top-10 py-4 bg-transparent backdrop-blur-lg rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
         <p className="font-semibold text-lg">Produk</p>
         <Filter onChange={setCategory} />
       </div>

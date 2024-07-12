@@ -50,7 +50,7 @@ export function Combobox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className={cn("w-full justify-between", className)}
         >
           {value ? (
             value.label
