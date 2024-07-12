@@ -17,9 +17,7 @@ export default function TemplateLayout({
       <PageHeaderWrapper />
       <div className={`${version == "1" ? "md:container md:max-w-7xl" : ""}`}>
         <div
-          className={`min-h-screen bg-background ${
-            version == "1" ? "bg-theme-primary-50" : ""
-          }`}
+          className={`min-h-screen bg-background ${version == "1" ? "" : ""}`}
         >
           {children}
         </div>

@@ -73,7 +73,7 @@ function Page() {
         theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
       }`}
     >
-      <div className="md:flex gap-4 h-full md:mt-4">
+      <div className="md:flex gap-4 h-full md:pt-4">
         <div className="md:border md:shadow min-w-[22rem] h-full rounded-xl p-2 md:p-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
