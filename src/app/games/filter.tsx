@@ -63,6 +63,7 @@ function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {
             setValue(val);
             onChange(val);
           }}
+          className="bg-background"
           data={data}
           placeholder="Pilih Kategori"
           defaultValue={value}
