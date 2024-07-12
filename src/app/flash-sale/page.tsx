@@ -15,6 +15,8 @@ import { IFlashSaleInfo } from "@/types/flash-sale";
 import ThemeContext, {
   IThemeContext,
 } from "@/infrastructures/context/theme/theme.context";
+import CountdownCard from "../dashboard/countdown-card";
+import { parseISO } from "date-fns";
 
 function Page() {
   const [total, setTotal] = useState(0);
@@ -57,55 +59,68 @@ function Page() {
     setSearch(e.target.value);
   }, 500);
 
-  return (
-    <div
-      className={`container ${
-        theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
-      }`}
-    >
-      {" "}
-      <div className="flex px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3 z-10">
-        <p className="font-semibold text-lg">Flash Sale⚡</p>
-        <div className="flex space-x-1">
-          <Input
-            id="invoice"
-            placeholder="Search..."
-            className="bg-background"
-            onChange={doSearch}
-          />
-        </div>
-      </div>
-      <div className="min-h-[68vh]">
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            {data && data.products?.length > 0 ? (
-              <div className="grid sm:grid-cols-4 xl:grid-cols-6 grid-cols-2 gap-2 mx-2">
-                {data.products.map((item, idx) => (
-                  <div className="w-full h-full" key={`${idx}`}>
-                    <FlashSaleCard data={item} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full w-full">
+  if (data && data.products.length > 0)
+    return (
+      <div
+        className={`container ${
+          theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
+        }`}
+      >
+        <div className="flex px-2 sticky top-10 py-4 bg-background flex-col space-y-1.5 mb-3 z-10">
+          <div className="flex items-center justify-between">
+            <p className="font-semibold text-lg flex">
+              <span className="mr-3">
                 <Image
-                  src={
-                    "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
-                  }
-                  className="opacity-50"
-                  alt="dw"
-                  height={400}
-                  width={400}
+                  src={"/assets/illustration/lightning.gif"}
+                  alt="flash"
+                  width={20}
+                  height={20}
                 />
-                <h5 className="text-xl font-bold">Tidak ada Flash Sale</h5>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-      {/* <Pagination
+              </span>
+              {data.name}
+            </p>
+            <CountdownCard date={parseISO(data.expired_at)} />
+          </div>
+          <div className="flex space-x-1">
+            <Input
+              id="invoice"
+              placeholder="Search..."
+              className="bg-background"
+              onChange={doSearch}
+            />
+          </div>
+        </div>
+        <div className="min-h-[68vh]">
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              {data && data.products?.length > 0 ? (
+                <div className="grid sm:grid-cols-4 xl:grid-cols-6 grid-cols-2 gap-2 mx-2">
+                  {data.products.map((item, idx) => (
+                    <div className="w-full h-full" key={`${idx}`}>
+                      <FlashSaleCard data={item} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full w-full">
+                  <Image
+                    src={
+                      "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
+                    }
+                    className="opacity-50"
+                    alt="dw"
+                    height={400}
+                    width={400}
+                  />
+                  <h5 className="text-xl font-bold">Tidak ada Flash Sale</h5>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        {/* <Pagination
         onChange={setPageIndex}
         meta={{
           limit: 12,
@@ -113,6 +128,18 @@ function Page() {
           total,
         }}
       /> */}
+      </div>
+    );
+
+  return (
+    <div
+      className={`container min-h-full flex items-center justify-center ${
+        theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
+      }`}
+    >
+      <h4 className="text-2xl text-muted-foreground font-semibold my-10">
+        Tidak ada Flash Sale
+      </h4>
     </div>
   );
 }

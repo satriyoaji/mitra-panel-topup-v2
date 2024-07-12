@@ -9,16 +9,27 @@ import {
   CarouselItem,
   CarouselNext,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 function FlashSaleV2({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
-      <div className="relative md:p-4 bg-gradient-to-r from-theme-secondary-900/95 to-theme-secondary-200/70">
-        <div className="md:container p-2">
+      <div className="relative flex justify-center md:p-4 bg-gradient-to-r from-theme-secondary-900/95 to-theme-secondary-200/70">
+        <div className="max-w-6xl p-2 w-full">
           <div className="bg-white/50 backdrop-blur rounded-xl pb-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center py-1 pr-1 rounded-tl-lg rounded-br-lg mt-2">
-                <p className="px-2 text-sm font-semibold">🔥{data.name}</p>
+                <p className="px-2 ml-2 text-sm font-semibold flex">
+                  <span className="mr-3">
+                    <Image
+                      src={"/assets/illustration/lightning.gif"}
+                      alt="flash"
+                      width={20}
+                      height={20}
+                    />
+                  </span>
+                  {data.name}
+                </p>{" "}
                 <CountdownCard date={parseISO(data.expired_at)} />
               </div>
             </div>
