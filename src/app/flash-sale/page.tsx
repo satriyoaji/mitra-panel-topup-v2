@@ -15,6 +15,8 @@ import { IFlashSaleInfo } from "@/types/flash-sale";
 import ThemeContext, {
   IThemeContext,
 } from "@/infrastructures/context/theme/theme.context";
+import CountdownCard from "../dashboard/countdown-card";
+import { parseISO } from "date-fns";
 
 function Page() {
   const [total, setTotal] = useState(0);
@@ -37,7 +39,7 @@ function Page() {
     if (res.ok) {
       const dataJson = await res.json();
       if (dataJson.data) {
-        // setData(dataJson.data);
+        setData(dataJson.data);
         // setTotal(dataJson.pagination.total_data);
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
@@ -64,18 +66,21 @@ function Page() {
           theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
         }`}
       >
-        <div className="flex px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3 z-10">
-          <p className="font-semibold text-lg flex">
-            <span className="mr-3">
-              <Image
-                src={"/assets/illustration/lightning.gif"}
-                alt="flash"
-                width={20}
-                height={20}
-              />
-            </span>
-            {data.name}
-          </p>
+        <div className="flex px-2 sticky top-10 py-4 bg-background flex-col space-y-1.5 mb-3 z-10">
+          <div className="flex items-center justify-between">
+            <p className="font-semibold text-lg flex">
+              <span className="mr-3">
+                <Image
+                  src={"/assets/illustration/lightning.gif"}
+                  alt="flash"
+                  width={20}
+                  height={20}
+                />
+              </span>
+              {data.name}
+            </p>
+            <CountdownCard date={parseISO(data.expired_at)} />
+          </div>
           <div className="flex space-x-1">
             <Input
               id="invoice"
