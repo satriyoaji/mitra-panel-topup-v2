@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { SketchLogoIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import {
   Table,
   TableBody,
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/accordion";
 import VAPayment from "./(payment)/va-payment";
 import QRPayment from "./(payment)/qr-payment";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 function TransactionHistoryDetail({ id }: { id: string }) {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
@@ -54,50 +55,60 @@ function TransactionHistoryDetail({ id }: { id: string }) {
 
   if (data)
     return (
-      <div className="mt-4 mx-2">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <p className="font-medium ml-2 text-lg">Detail Transaksi 📃</p>
+      <div className="pt-4 mx-2 flex w-full justify-center">
+        <div className="max-w-5xl w-full">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <p className="font-medium ml-2 text-lg">Detail Transaksi 📃</p>
+            </div>
+            {canRefund() && (
+              <Link href="/redeem-coupon">
+                <Button size="sm">Refund</Button>
+              </Link>
+            )}
           </div>
-          {canRefund() && (
-            <Link href="/redeem-coupon">
-              <Button size="sm">Refund</Button>
-            </Link>
-          )}
-        </div>
-        <hr className="my-2" />
-        <div className="flex flex-row justify-center items-center">
-          <div className="flex md:flex-row flex-col w-full max-w-4xl bg-background p-4">
-            <div className="w-full">
-              <div className="grid gap-4 pb-4">
-                <div>
-                  <p className="text-xs mb-0.5 text-muted-foreground">
-                    Kode Transaksi
-                  </p>
-                  <div className="flex items-center">
-                    <p className="text-sm">{data.transaction_code}</p>
-                    <CopyToClipboard text={data.transaction_code} />
+          <div className="w-full my-2">
+            <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
+              <InfoCircledIcon className="text-white" />
+              <AlertTitle>Penting!</AlertTitle>
+              <AlertDescription>
+                Pastikan anda menyimpan nomor transaksi dan email serta nomor
+                telpon yang anda gunakan dalam proses transaksi.
+              </AlertDescription>
+            </Alert>
+          </div>
+          <div className="flex flex-row justify-center items-center">
+            <div className="flex md:flex-row flex-col w-full bg-background p-4">
+              <div className="w-full">
+                <div className="grid gap-4 pb-4">
+                  <div>
+                    <p className="text-xs mb-0.5 text-muted-foreground">
+                      Kode Transaksi
+                    </p>
+                    <div className="flex items-center">
+                      <p className="text-sm">{data.transaction_code}</p>
+                      <CopyToClipboard text={data.transaction_code} />
+                    </div>
                   </div>
-                </div>
-                <Card className="bg-slate-50  p-4">
-                  <div className="text-xs mb-4 flex items-center space-x-4">
-                    {/* {val.logo_image !== "" ? (
+                  <Card className="bg-slate-50  p-4">
+                    <div className="text-xs mb-4 flex items-center space-x-4">
+                      {/* {val.logo_image !== "" ? (
                                             <img
                                                 alt="Remy Sharp"
                                                 className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
                                                 src={val.logo_image}
                                             />
                                         ) : ( */}
-                    <div className="h-fit w-fit p-2">
-                      <SketchLogoIcon className="m-auto" />
+                      <div className="h-fit w-fit p-2">
+                        <SketchLogoIcon className="m-auto" />
+                      </div>
+                      {/* )} */}
+                      <div>
+                        <p>{data.category_name}</p>
+                        <p className="font-semibold">{data.product_name}</p>
+                      </div>
                     </div>
-                    {/* )} */}
-                    <div>
-                      <p>{data.category_name}</p>
-                      <p className="font-semibold">{data.product_name}</p>
-                    </div>
-                  </div>
-                  {/* {form && category.forms && (
+                    {/* {form && category.forms && (
               <div className="mt-6">
                 <p className="text-xs font-semibold">Data Tambahan</p>
                 <Table className="border-y bg-background rounded mt-1">
@@ -118,42 +129,42 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 </Table>
               </div>
             )} */}
-                  {data.payment_information && (
-                    <>
-                      <VAPayment payment={data.payment_information} />
-                      <QRPayment payment={data.payment_information} />
-                    </>
-                  )}
-                </Card>
-                <Table>
-                  <TableBody className="text-xs">
                     {data.payment_information && (
+                      <>
+                        <VAPayment payment={data.payment_information} />
+                        <QRPayment payment={data.payment_information} />
+                      </>
+                    )}
+                  </Card>
+                  <Table>
+                    <TableBody className="text-xs">
+                      {data.payment_information && (
+                        <TableRow>
+                          <TableCell>Metode Pembayaran</TableCell>
+                          <TableCell className="text-right">
+                            {data.payment_information.payment_channel}
+                          </TableCell>
+                        </TableRow>
+                      )}
                       <TableRow>
-                        <TableCell>Metode Pembayaran</TableCell>
-                        <TableCell className="text-right">
-                          {data.payment_information.payment_channel}
+                        <TableCell>Harga</TableCell>
+                        <TableCell className="text-right space-y-1">
+                          {data.price != data.paid_price ? (
+                            <>
+                              <div className="flex space-x-2 justify-end">
+                                <p className="text-red-500">Discount</p>
+                                <p className="line-through">
+                                  {priceMask(data.price)}
+                                </p>
+                              </div>
+                              <p>{priceMask(data.paid_price)}</p>
+                            </>
+                          ) : (
+                            <>{priceMask(data.paid_price)}</>
+                          )}
                         </TableCell>
                       </TableRow>
-                    )}
-                    <TableRow>
-                      <TableCell>Harga</TableCell>
-                      <TableCell className="text-right space-y-1">
-                        {data.price != data.paid_price ? (
-                          <>
-                            <div className="flex space-x-2 justify-end">
-                              <p className="text-red-500">Discount</p>
-                              <p className="line-through">
-                                {priceMask(data.price)}
-                              </p>
-                            </div>
-                            <p>{priceMask(data.paid_price)}</p>
-                          </>
-                        ) : (
-                          <>{priceMask(data.paid_price)}</>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                    {/* {promo && (
+                      {/* {promo && (
                 <TableRow>
                   <TableCell>Promo</TableCell>
                   <TableCell className="text-right text-red-500">
@@ -163,7 +174,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   </TableCell>
                 </TableRow>
               )} */}
-                    {/* {payment && payment.fee_amount ? (
+                      {/* {payment && payment.fee_amount ? (
                 <TableRow>
                   <TableCell>Admin Fee</TableCell>
                   <TableCell className="text-right">
@@ -173,35 +184,36 @@ function TransactionHistoryDetail({ id }: { id: string }) {
               ) : (
                 <></>
               )} */}
-                  </TableBody>
-                  <TableFooter>
-                    <TableRow>
-                      <TableCell>Total Harga</TableCell>
-                      <TableCell className="text-right">
-                        {priceMask(data.paid_price)}
-                      </TableCell>
-                    </TableRow>
-                  </TableFooter>
-                </Table>
+                    </TableBody>
+                    <TableFooter>
+                      <TableRow>
+                        <TableCell>Total Harga</TableCell>
+                        <TableCell className="text-right">
+                          {priceMask(data.paid_price)}
+                        </TableCell>
+                      </TableRow>
+                    </TableFooter>
+                  </Table>
+                </div>
               </div>
-            </div>
-            <div className="md:mx-8 md:mb-8 mt-8 md:mt-0 mx-4 w-full">
-              <div className="hidden md:block">
-                <p className="mb-4 font-medium">Order History</p>
-                <HorizontalStepper list={data.history_status} />
+              <div className="md:mx-8 md:mb-8 mt-8 md:mt-0 mx-4 w-full">
+                <div className="hidden md:block">
+                  <p className="mb-4 font-medium">Order History</p>
+                  <HorizontalStepper list={data.history_status} />
+                </div>
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="w-full md:hidden -ml-4"
+                >
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>Order History</AccordionTrigger>
+                    <AccordionContent>
+                      <HorizontalStepper list={data.history_status} />
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </div>
-              <Accordion
-                type="single"
-                collapsible
-                className="w-full md:hidden -ml-4"
-              >
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>Order History</AccordionTrigger>
-                  <AccordionContent>
-                    <HorizontalStepper list={data.history_status} />
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
             </div>
           </div>
         </div>
