@@ -90,11 +90,15 @@ function Page() {
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? "Loading..." : "Login"}
                   </Button>
-                  <div className="flex items-center justify-center">
-                    <p className="text-xs">Belum Punya Akun? </p>
+                  <div className="flex flex-col -space-y-2 items-center justify-center">
+                    <Link href="/auth/reset-password">
+                      <Button variant="link" size="sm" className="w-full">
+                        Lupa Password?
+                      </Button>
+                    </Link>
                     <Link href="/auth/register">
                       <Button variant="link" size="sm" className="w-full">
-                        Register
+                        Belum Punya Akun? Register
                       </Button>
                     </Link>
                   </div>
