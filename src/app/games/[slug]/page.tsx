@@ -13,7 +13,6 @@ function Page({ params }: { params: { slug: string } }) {
     const data: IUseCategoryData = useCategory(params.slug);
     const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
-    console.log(theme);
     if (data.loading) return <Loading />;
 
     if (data.data.category === null) return <NotFound />;
