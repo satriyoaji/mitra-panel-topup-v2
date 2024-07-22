@@ -17,9 +17,11 @@ import { isBefore, parseISO } from "date-fns";
 import TransactionContext, {
     ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
+import PromoDetail from "./promo-detail";
 
 function Promo({ categoryUuid }: { categoryUuid: string }) {
     const [selectedPromo, setSelectedPromo] = useState<IPromo>();
+    const [selectedDetailPromo, setSelectedDetailPromo] = useState<IPromo>();
     const [promos, setPromos] = useState<IPromo[]>([]);
     const [hiddenPromo, setHiddenPromo] = useState<IPromoDetail>();
     const [hiddenPromoCode, setHiddenPromoCode] = useState<string>();
@@ -38,7 +40,6 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
     };
 
     const getData = async (id?: string) => {
-        console.log(id, categoryUuid);
         if (!id || !categoryUuid) return;
         setLoading(true);
 
@@ -52,7 +53,10 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
             var result = await res.json();
 
             if (result.data) {
-                setPromos(result.data);
+                var list = result.data.filter((i: any) =>
+                    isBefore(new Date(), parseISO(i.time_finish))
+                );
+                setPromos(list);
                 setLoading(false);
                 return;
             }
@@ -69,7 +73,6 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
         );
         if (res.ok) {
             var result = await res.json();
-            console.log(result);
 
             if (
                 result.data &&
@@ -94,7 +97,6 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
     };
 
     useEffect(() => {
-        console.log("changed");
         getData(data.product?.key);
         setSelectedPromo(undefined);
         onPromoSelected();
@@ -155,6 +157,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                                     selected={selectedPromo}
                                     setSelected={(e) => selectPromo(true, e)}
                                     isSecret
+                                    onDetailClicked={setSelectedDetailPromo}
                                 />
                             ) : null}
                             {promos.map((i) => (
@@ -163,12 +166,17 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                                     promo={i}
                                     selected={selectedPromo}
                                     setSelected={(e) => selectPromo(true, e)}
+                                    onDetailClicked={setSelectedDetailPromo}
                                 />
                             ))}
                         </div>
                     </div>
                 </DialogContent>
             </Dialog>
+            <PromoDetail
+                id={selectedDetailPromo?.id}
+                onClose={() => setSelectedDetailPromo(undefined)}
+            />
         </>
     );
 }

@@ -55,7 +55,7 @@ function V1DetailCategory(props: IUseCategoryData) {
                                 <h4 className="font-medium ml-1">Promo</h4>
                             </div>
                             <Separator className="my-3" />
-                            <Promo categoryUuid={props.data.category?.uuid} />
+                            <Promo categoryUuid={props.data.category?.key} />
                         </CardContent>
                     </Card>
                     <div ref={props.confirmationRef}>
