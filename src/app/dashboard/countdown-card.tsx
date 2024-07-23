@@ -17,8 +17,7 @@ function CountdownCard({
   }, [seconds]);
 
   return (
-    <div className="flex rounded-xl py-1 pl-1.5 pr-2 space-x-1 text-center text-xs items-center justify-center bg-red-500 backdrop-blur text-white font-medium">
-      <ClockIcon />
+    <div className="flex rounded-xl pt-1 pb-0.5 px-2 space-x-1 text-center text-xs items-center justify-center bg-red-500 backdrop-blur text-white font-medium">
       <p className="p-0">
         {days > 0
           ? `${days} hari lagi`

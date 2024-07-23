@@ -83,7 +83,7 @@ export default function ListGame() {
 
   return (
     <ListGameWrapper>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 rounded-t-lg bg-theme-primary-100/80 backdrop-blur-md">
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 rounded-t-lg bg-slate-50 backdrop-blur-md">
         <div className="flex md:block items-end justify-between mt-4">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div
@@ -119,13 +119,13 @@ export default function ListGame() {
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
         {data.map((val: IProductCategory, idx) => (
           <Link href={`/games/${val.key}`} key={idx} className="w-full h-full">
-            <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50">
+            <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50 hover:text-theme-primary-500 transition duration-300">
               <CardContent className="p-1 md:p-2 flex flex-col items-center">
                 <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
                   {val.image_url !== "" ? (
                     <img
                       alt={val.name}
-                      className="rounded-xl w-full hover:scale-125 transition duration-300 hover:rotate-12"
+                      className="rounded-xl w-full hover:scale-125 transition duration-300"
                       src={val.image_url}
                     />
                   ) : (

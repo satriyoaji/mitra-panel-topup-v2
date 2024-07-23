@@ -24,7 +24,7 @@ export default function TemplateLayout({
         <BottomNav />
       </div>
       <Footer />
-      <HelpButton />
+      {/* <HelpButton /> */}
       <Toaster />
     </>
   );

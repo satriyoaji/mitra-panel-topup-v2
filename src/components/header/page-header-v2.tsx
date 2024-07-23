@@ -18,6 +18,7 @@ import ThemeContext, {
 import Image from "next/image";
 import { ISiteProfile } from "@/types/utils";
 import Searchbar from "@/app/dashboard/searchbar";
+import HelpButton from "../help-button";
 
 export type path = {
   name: string;
@@ -26,8 +27,8 @@ export type path = {
 
 const paths: path[] = [
   {
-    name: "Price List",
-    path: "/games",
+    name: "Home",
+    path: "/",
   },
   {
     name: "Transaksi",
@@ -54,7 +55,7 @@ function HeaderV2() {
   }, []);
 
   return (
-    <header className="w-full z-20 shadow bg-theme-primary-400/80 backdrop-blur-md items-center top-0 sticky">
+    <header className="w-full z-20 bg-background backdrop-blur-md items-center top-0 sticky p-1">
       <div className="w-full flex sm:container items-center justify-between">
         <div className="md:hidden w-full"></div>
         <div className="flex md:w-fit w-full justify-center md:justify-start">
@@ -70,6 +71,23 @@ function HeaderV2() {
           </Link>
         </div>
         <div className="flex w-full justify-end items-center gap-2">
+          <div className="hidden md:flex pl-8">
+            <NavigationMenu>
+              <NavigationMenuList className="w-fit">
+                {paths.map((i) => (
+                  <NavigationMenuItem className="bg-transparent" key={i.path}>
+                    <Link href={i.path} legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={`${navigationMenuTriggerStyle()}`}
+                      >
+                        {i.name}
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
           <Searchbar />
           {session ? (
             <div className="my-1 mx-3 hidden md:block">
@@ -91,36 +109,8 @@ function HeaderV2() {
               <Button size="sm">Login</Button>
             </Link>
           )}
+          <HelpButton />
         </div>
-      </div>
-      <div className="bg-theme-secondary-500/90 hidden w-full md:flex pl-8 text-white items-center justify-center">
-        <NavigationMenu>
-          <NavigationMenuList>
-            {paths.map((i) => (
-              <NavigationMenuItem className="bg-transparent" key={i.path}>
-                <Link href={i.path} legacyBehavior passHref>
-                  <NavigationMenuLink
-                    className={`${navigationMenuTriggerStyle()}`}
-                  >
-                    {i.name}
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            ))}
-            <NavigationMenuItem className="bg-transparent">
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} cursor-pointer`}
-                onClick={() => {
-                  dispatch({
-                    action: "RAND_THEME",
-                  });
-                }}
-              >
-                Theme
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
       </div>
     </header>
   );

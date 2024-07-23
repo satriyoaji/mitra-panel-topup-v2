@@ -11,11 +11,8 @@ import Autoplay from "embla-carousel-autoplay";
 
 function CarouselV2({ data }: { data: IBanner[] }) {
   return (
-    <div
-      style={{ backgroundImage: 'url("/assets/illustration/v1/carousel.svg")' }}
-      className="bg-no-repeat bg-cover"
-    >
-      <div className="bg-theme-primary-400/50 flex justify-center items-center md:py-4">
+    <div>
+      <div className="bg-background flex justify-center items-center md:py-4">
         <Carousel
           className="w-fit"
           opts={{

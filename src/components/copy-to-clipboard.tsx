@@ -1,19 +1,31 @@
 "use client";
-import { ClipboardCopyIcon } from "@radix-ui/react-icons";
-import React from "react";
+import { CheckCircledIcon, ClipboardCopyIcon } from "@radix-ui/react-icons";
+import React, { useEffect, useState } from "react";
 import { useToast } from "./ui/use-toast";
 
 function CopyToClipboard({ text }: { text: string }) {
   const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
 
   const onClick = () => {
     navigator.clipboard.writeText(text);
-    return toast({
+    toast({
       description: "Success copy to clipboard",
       variant: "default",
     });
+
+    setCopied(true);
   };
 
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false);
+      }, 1500);
+    }
+  }, [copied]);
+
+  if (copied) return <CheckCircledIcon className="ml-2" />;
   return (
     <ClipboardCopyIcon onClick={onClick} className="ml-2 cursor-pointer" />
   );

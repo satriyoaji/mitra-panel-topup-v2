@@ -67,14 +67,14 @@ function Searchbar() {
     <>
       <div className="mr-2 hidden md:block">
         <button
-          className="inline-flex items-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 w-40 lg:w-64"
+          className="inline-flex items-center rounded-full whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground px-4 py-2 relative h-8 justify-start bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 w-40 lg:w-64"
           onClick={() => setIsOpen(true)}
         >
           <span className="hidden lg:inline-flex">Cari Produk...</span>
           <span className="inline-flex lg:hidden">Search...</span>
-          <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+          {/* <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
             <span className="text-xs">⌘</span>K
-          </kbd>
+          </kbd> */}
         </button>
       </div>
       <div className="md:hidden text-white p-2 mr-2">
