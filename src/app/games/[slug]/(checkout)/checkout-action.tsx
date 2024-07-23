@@ -111,13 +111,29 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="sticky bottom-0 w-full pb-1 pt-1.5 rounded-xl bg-theme-secondary flex items-center justify-between px-4">
-        <div>
-          <p className="text-white text-xs">Total Bayar</p>
-          <h4 className="text-white text-lg font-semibold">{getTotal}</h4>
+      <div className="sticky bottom-0 w-full pb-1 pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
+        <div className="grid grid-cols-3 w-full ml-2">
+          <div>
+            <p className="text-muted-foreground text-xs">Total Belanja</p>
+            <h4 className="text-foreground font-semibold">
+              {priceMask(data.product?.discounted_price || data.product?.price)}
+            </h4>
+          </div>
+          <div>
+            <p className="text-muted-foreground text-xs">Payment Charge</p>
+            <h4 className="text-foreground font-semibold">
+              {priceMask(data.payment?.fee_amount)}
+            </h4>
+          </div>
+          <div>
+            <p className="text-foreground text-xs">Total Bayar</p>
+            <h4 className="text-foreground text-lg text-green-500 font-semibold">
+              {getTotal}
+            </h4>
+          </div>
         </div>
         <div className="">
-          <Button variant="secondary" size="sm" onClick={checkout}>
+          <Button size="sm" className="w-full mt-2 md:mt-0" onClick={checkout}>
             Checkout
           </Button>
         </div>

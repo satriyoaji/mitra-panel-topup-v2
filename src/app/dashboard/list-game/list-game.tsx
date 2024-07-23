@@ -28,7 +28,6 @@ export default function ListGame() {
       `/api/products/categories/?` +
         new URLSearchParams({
           page: `${pageIndex}`,
-          limit: "10",
           label_id: `${group?.id ?? ""}`,
         })
     );
@@ -83,7 +82,7 @@ export default function ListGame() {
 
   return (
     <ListGameWrapper>
-      <div className="md:flex md:items-end md:justify-between sticky z-10 top-6 py-2 rounded-t-lg bg-slate-50 backdrop-blur-md">
+      <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-slate-50 backdrop-blur-md">
         <div className="flex md:block items-end justify-between mt-4">
           <h5 className="mr-8 font-semibold px-2 mb-2">Kategori</h5>
           <div
@@ -120,7 +119,7 @@ export default function ListGame() {
         {data.map((val: IProductCategory, idx) => (
           <Link href={`/games/${val.key}`} key={idx} className="w-full h-full">
             <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50 hover:text-theme-primary-500 transition duration-300">
-              <CardContent className="p-1 md:p-2 flex flex-col items-center">
+              <CardContent className="p-4 md:p-5 flex flex-col items-center">
                 <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
                   {val.image_url !== "" ? (
                     <img
@@ -170,13 +169,13 @@ export default function ListGame() {
           </svg>{" "}
         </div>
       ) : null}
-      {pageIndex < totalPage ? (
+      {/* {pageIndex < totalPage ? (
         <div className="flex items-center justify-center my-2 mt-6">
           <Button size="sm" onClick={showMore}>
             Show More
           </Button>
         </div>
-      ) : null}
+      ) : null} */}
     </ListGameWrapper>
   );
 }

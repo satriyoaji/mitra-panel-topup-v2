@@ -68,7 +68,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
             )}
           </div>
           <div className="w-full my-2">
-            <Alert className="bg-theme-secondary-50 text-theme-secondary-900">
+            <Alert className="bg-theme-primary-50 text-theme-primary-900">
               <InfoCircledIcon className="text-white" />
               <AlertTitle>Penting!</AlertTitle>
               <AlertDescription>

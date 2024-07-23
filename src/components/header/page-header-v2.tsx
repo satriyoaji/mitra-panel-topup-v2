@@ -109,7 +109,9 @@ function HeaderV2() {
               <Button size="sm">Login</Button>
             </Link>
           )}
-          <HelpButton />
+          <div className="hidden sm:block">
+            <HelpButton />
+          </div>
         </div>
       </div>
     </header>

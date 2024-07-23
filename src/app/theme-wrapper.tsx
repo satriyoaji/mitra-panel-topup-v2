@@ -24,7 +24,7 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
         data.font.class.className
       )}
     >
-      <div className="bg-background">{children}</div>
+      <div className="bg-slate-50">{children}</div>
     </body>
   );
 }
