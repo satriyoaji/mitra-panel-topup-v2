@@ -3,12 +3,6 @@
 import { debounce } from "@/Helpers";
 import { IProductCategory } from "@/Type";
 import { Combobox, TValue } from "@/components/ui/combobox";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import React, { ChangeEvent, useEffect, useState } from "react";
 
 function Filter({ onChange }: { onChange: (val: TValue | undefined) => void }) {

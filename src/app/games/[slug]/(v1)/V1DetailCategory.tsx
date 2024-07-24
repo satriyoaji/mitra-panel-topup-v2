@@ -23,7 +23,7 @@ function V1DetailCategory(props: IUseCategoryData) {
     return (
       <>
         <div className="md:grid md:grid-cols-5 md:gap-4 md:container px-4">
-          <div className="col-span-full -mb-4 mt-4">
+          <div className="col-span-full mt-4">
             <Breadcrumb className="mb-4">
               <BreadcrumbList>
                 <BreadcrumbItem>

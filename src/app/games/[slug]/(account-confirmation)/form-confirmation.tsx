@@ -30,7 +30,7 @@ function FormConfirmation({ number }: { number: number }) {
           </div>
           <Separator className="my-3" />
           <form>
-            <div className="grid w-full items-center gap-4">
+            <div className="grid sm:grid-cols-2 w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email *</Label>
                 <Input

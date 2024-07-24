@@ -7,9 +7,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import ThemeContext, {
@@ -19,6 +21,8 @@ import Image from "next/image";
 import { ISiteProfile } from "@/types/utils";
 import Searchbar from "@/app/dashboard/searchbar";
 import HelpButton from "../help-button";
+import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export type path = {
   name: string;
@@ -30,17 +34,14 @@ const paths: path[] = [
     name: "Home",
     path: "/",
   },
-  {
-    name: "Transaksi",
-    path: "/transaksi",
-  },
 ];
 
 function HeaderV2() {
   const { data: session } = useSession();
   const router = useRouter();
   const [profile, setProfile] = useState<ISiteProfile>();
-  const { dispatch, data } = useContext(ThemeContext) as IThemeContext;
+  const [invoice, setInvoice] = useState<string | undefined>("");
+  const [open, setOpen] = useState(false);
 
   const getProfile = async () => {
     var res = await fetch("/api/site-profile");
@@ -85,6 +86,35 @@ function HeaderV2() {
                     </Link>
                   </NavigationMenuItem>
                 ))}
+                <NavigationMenuItem className="bg-transparent">
+                  <Popover open={open} onOpenChange={setOpen}>
+                    <PopoverTrigger>
+                      <NavigationMenuTrigger onClick={() => setOpen(true)}>
+                        Cek Pesanan
+                      </NavigationMenuTrigger>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full">
+                      <div className="flex p-2 gap-2">
+                        <Input
+                          className="w-full min-w-[20rem]"
+                          placeholder="Masukkan No.Invoice / No.Ponsel"
+                          onChange={(e) => setInvoice(e.target.value)}
+                        />
+                        <Button
+                          size="sm"
+                          onClick={() => {
+                            router.refresh();
+                            window.location.replace(
+                              `/transaksi?search=${invoice}&page=1`
+                            );
+                          }}
+                        >
+                          Cek
+                        </Button>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
