@@ -14,7 +14,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
     <div>
       <div className="bg-background flex justify-center items-center md:py-4">
         <Carousel
-          className="w-fit"
+          className="h-auto w-full max-w-6xl shadow rounded-lg"
           opts={{
             align: "center",
             loop: true,
@@ -27,12 +27,12 @@ function CarouselV2({ data }: { data: IBanner[] }) {
         >
           <CarouselContent
             style={{ aspectRatio: 27 / 9 }}
-            className="max-h-72 "
+            className="rounded-lg"
           >
             {data.map((item, index) => (
               <CarouselItem
                 key={index.toString()}
-                className="flex justify-center "
+                className="flex justify-center rounded-lg"
               >
                 <img
                   key={index}
@@ -45,8 +45,8 @@ function CarouselV2({ data }: { data: IBanner[] }) {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="ml-16 bg-background" />
-          <CarouselNext className="mr-16 bg-background" />
+          <CarouselPrevious className="ml-16 bg-background border-theme-primary-500 text-theme-primary-500 hover:text-theme-primary-600" />
+          <CarouselNext className="mr-16 bg-background border-theme-primary-500 text-theme-primary-500 hover:text-theme-primary-600" />
         </Carousel>
       </div>
     </div>

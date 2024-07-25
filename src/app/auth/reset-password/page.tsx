@@ -47,7 +47,7 @@ function Page() {
             />
           </div>
           <div className="w-full flex justify-center md:justify-start">
-            <div className="border p-8 rounded-lg shadow-md w-full max-w-md">
+            <div className="border p-8 bg-background rounded-lg shadow-md w-full max-w-md">
               <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight">
                 🔐Reset Password
               </h1>

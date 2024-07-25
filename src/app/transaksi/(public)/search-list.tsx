@@ -58,17 +58,17 @@ function SearchList() {
     const params = new URLSearchParams(searchParams);
     params.set("search", search);
     params.set("page", `${page}`);
-    router.replace(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`);
     get();
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [page]);
 
   return (
     <>
-      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 -mx-2 px-2 bg-background py-4">
+      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 px-2 bg-background py-4">
         <Input
           className="w-full bg-background"
           placeholder="Masukkan nomor handphone atau invoice"
@@ -80,22 +80,23 @@ function SearchList() {
       <div className="flex flex-col space-y-4 mt-4">
         {!loading ? (
           <>
-            {list.map((val, idx) => (
-              <ItemsCard
-                key={`${idx}`}
-                data={val}
-                // onEditClick={() => {
-                //   setTransaction(val);
-                //   setOpen(true);
-                // }}
-              />
-            ))}
+            <div className="grid md:grid-cols-2 gap-4">
+              {list.map((val, idx) => (
+                <ItemsCard
+                  key={`${idx}`}
+                  data={val}
+                  // onEditClick={() => {
+                  //   setTransaction(val);
+                  //   setOpen(true);
+                  // }}
+                />
+              ))}
+            </div>
             {meta && meta.total > 0 ? (
               <Pagination
                 meta={meta}
                 onChange={(val) => {
                   setPage(val);
-                  getData();
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
               />

@@ -14,8 +14,8 @@ import Image from "next/image";
 function FlashSaleV2({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
-      <div className="relative flex justify-center md:p-4 ">
-        <div className="max-w-6xl p-2 w-full">
+      <div className="relative flex justify-center md:p-4 my-4 md:my-0">
+        <div className="max-w-6xl p-2 md:p-0 w-full">
           <div className="bg-gradient-to-r from-theme-primary-200/95 to-theme-primary-50/70 backdrop-blur rounded-xl pb-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center py-1 pr-1 rounded-tl-lg rounded-br-lg mt-2">
@@ -38,9 +38,9 @@ function FlashSaleV2({ data }: { data: IFlashSaleInfo }) {
                 </div>
               </div>
             </div>
-            <div className="flex items-center relative py-3">
-              <Carousel className="py-3 rounded-x w-full">
-                <CarouselContent className="mx-4">
+            <div className="flex items-center relative py-1">
+              <Carousel className="py-1 rounded-x w-full">
+                <CarouselContent className="mx-1">
                   {data?.products?.slice(0, 8).map((item, idx) => (
                     <CarouselItem
                       className="h-full w-full min-w-[9.5rem] max-w-[11.5rem]"

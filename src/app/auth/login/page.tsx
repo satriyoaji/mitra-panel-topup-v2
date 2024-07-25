@@ -53,7 +53,7 @@ function Page() {
             />
           </div>
           <div className="w-full flex justify-center md:justify-start">
-            <div className="border p-8 rounded-lg shadow-md w-full max-w-md">
+            <div className="border bg-background p-8 rounded-lg shadow-md w-full max-w-md">
               <h1 className="pt-4 text-2xl font-semibold text-center tracking-tight">
                 🔐Login
               </h1>

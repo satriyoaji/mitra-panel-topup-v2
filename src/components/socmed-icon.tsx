@@ -9,32 +9,26 @@ import {
 function Socmed({ type }: { type: string }) {
   switch (type) {
     case "instagram":
-      return (
-        <InstagramLogoIcon className="w-6 h-6 text-theme-primary-foreground" />
-      );
+      return <InstagramLogoIcon className="w-6 h-6 text-white" />;
     case "twitter":
-      return (
-        <TwitterLogoIcon className="w-6 h-6 text-theme-primary-foreground" />
-      );
+      return <TwitterLogoIcon className="w-6 h-6 text-white" />;
     case "discord":
-      return (
-        <DiscordLogoIcon className="w-6 h-6 text-theme-primary-foreground" />
-      );
+      return <DiscordLogoIcon className="w-6 h-6 text-white" />;
     case "facebook":
       return (
-        <svg viewBox="0 0 32 32" className="fill-theme-primary-foreground">
+        <svg viewBox="0 0 32 32" className="fill-white">
           <path d="M 16 4 C 9.3844276 4 4 9.3844276 4 16 C 4 22.615572 9.3844276 28 16 28 C 22.615572 28 28 22.615572 28 16 C 28 9.3844276 22.615572 4 16 4 z M 16 6 C 21.534692 6 26 10.465308 26 16 C 26 21.027386 22.311682 25.161277 17.488281 25.878906 L 17.488281 18.916016 L 20.335938 18.916016 L 20.783203 16.023438 L 17.488281 16.023438 L 17.488281 14.443359 C 17.488281 13.242359 17.882859 12.175781 19.005859 12.175781 L 20.810547 12.175781 L 20.810547 9.6523438 C 20.493547 9.6093438 19.822688 9.515625 18.554688 9.515625 C 15.906688 9.515625 14.355469 10.913609 14.355469 14.099609 L 14.355469 16.023438 L 11.632812 16.023438 L 11.632812 18.916016 L 14.355469 18.916016 L 14.355469 25.853516 C 9.6088556 25.070647 6 20.973047 6 16 C 6 10.465308 10.465308 6 16 6 z"></path>
         </svg>
       );
     case "tiktok":
       return (
-        <svg viewBox="0 0 24 24" className="fill-theme-primary-foreground">
+        <svg viewBox="0 0 24 24" className="fill-white">
           <path d="M 3 3 L 3 4 L 3 21 L 21 21 L 21 3 L 3 3 z M 5 5 L 19 5 L 19 19 L 5 19 L 5 5 z M 12 7 L 12 14 C 12 14.56503 11.56503 15 11 15 C 10.43497 15 10 14.56503 10 14 C 10 13.43497 10.43497 13 11 13 L 11 11 C 9.3550302 11 8 12.35503 8 14 C 8 15.64497 9.3550302 17 11 17 C 12.64497 17 14 15.64497 14 14 L 14 10.232422 C 14.616148 10.671342 15.259118 11 16 11 L 16 9 C 15.952667 9 15.262674 8.7809373 14.78125 8.3613281 C 14.299826 7.941719 14 7.4149911 14 7 L 12 7 z"></path>
         </svg>
       );
     case "youtube":
       return (
-        <svg viewBox="0 0 64 64" className="fill-theme-primary-foreground">
+        <svg viewBox="0 0 64 64" className="fill-white">
           <path d="M 32 15 C 14.938 15 12.659656 15.177734 10.472656 17.427734 C 8.2856563 19.677734 8 23.252 8 32 C 8 40.748 8.2856562 44.323266 10.472656 46.572266 C 12.659656 48.821266 14.938 49 32 49 C 49.062 49 51.340344 48.821266 53.527344 46.572266 C 55.714344 44.322266 56 40.748 56 32 C 56 23.252 55.714344 19.677734 53.527344 17.427734 C 51.340344 15.177734 49.062 15 32 15 z M 32 19 C 45.969 19 49.379156 19.062422 50.535156 20.232422 C 51.691156 21.402422 52 24.538 52 32 C 52 39.462 51.691156 42.597578 50.535156 43.767578 C 49.379156 44.937578 45.969 45 32 45 C 18.031 45 14.620844 44.937578 13.464844 43.767578 C 12.308844 42.597578 12.03125 39.462 12.03125 32 C 12.03125 24.538 12.308844 21.402422 13.464844 20.232422 C 14.620844 19.062422 18.031 19 32 19 z M 27.949219 25.017578 L 27.949219 38.982422 L 40.095703 31.945312 L 27.949219 25.017578 z"></path>
         </svg>
       );
@@ -51,7 +45,7 @@ function Socmed({ type }: { type: string }) {
         </svg>
       );
     default:
-      return <CubeIcon className="w-6 h-6 text-theme-primary-foreground" />;
+      return <CubeIcon className="w-6 h-6 text-white" />;
   }
 }
 

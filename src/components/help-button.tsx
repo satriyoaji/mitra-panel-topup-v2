@@ -42,7 +42,7 @@ function HelpButton() {
               className="flex hover:bg-theme-primary-50 gap-4 px-2 cursor-pointer items-center"
               key={item.key}
             >
-              <div className="w-7 p-0.5 bg-theme-secondary-500 rounded-full flex items-center justify-center">
+              <div className="w-7 p-0.5 bg-theme-primary-500 rounded-full flex items-center justify-center">
                 <Socmed type={item.key} />
               </div>
               <p className="text-xs text-theme-primary-900">{item.name}</p>

@@ -54,7 +54,7 @@ function HeaderV1() {
   }, []);
 
   return (
-    <header className="w-full z-20 shadow border-b-4 border-theme-secondary-500 bg-theme-primary-400 rounded-b-2xl items-center top-0 sticky">
+    <header className="w-full z-20 shadow border-b-4 border-theme-primary-500 bg-theme-primary-400 rounded-b-2xl items-center top-0 sticky">
       <div className="w-full flex sm:container items-center justify-between">
         <div className="md:hidden w-full"></div>
         <div className="flex md:w-fit w-full justify-center md:justify-start">
