@@ -64,8 +64,8 @@ function PromoCard({
                       size="sm"
                       variant="link"
                       className="text-theme-primary-900 text-xs"
-                      onClick={() => {
-                        console.log("clicked");
+                      onClick={(e) => {
+                        e.stopPropagation();
                         onDetailClicked(promo);
                       }}
                     >

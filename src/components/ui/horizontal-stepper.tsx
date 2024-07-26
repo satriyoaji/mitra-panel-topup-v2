@@ -36,7 +36,7 @@ function Bullets({ status = 0 }: { status: number }) {
 function HorizontalStepper({ list }: { list: ITransactionHistory[] }) {
   return (
     <div>
-      <ol className="relative text-gray-700 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ml-2">
+      <ol className="list-none relative text-gray-700 border-s border-gray-200 dark:border-gray-700 dark:text-gray-400 ml-2">
         {list.map((val, idx) => (
           <li className="mb-8 ms-8" key={idx}>
             <span className="absolute flex items-center justify-center w-4 h-4 bg-gray-300 rounded-full start-[-.55rem] mt-0.5 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-900"></span>

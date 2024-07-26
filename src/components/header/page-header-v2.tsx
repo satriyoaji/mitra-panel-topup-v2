@@ -58,8 +58,7 @@ function HeaderV2() {
   return (
     <header className="w-full z-20 bg-background backdrop-blur-md items-center top-0 sticky p-1">
       <div className="w-full flex sm:container items-center justify-between">
-        <div className="md:hidden w-full"></div>
-        <div className="flex md:w-fit w-full justify-center md:justify-start">
+        <div className="flex md:w-fit w-full justify-start">
           <Link href="/" className="p-1">
             {profile?.logo_url && (
               <Image
@@ -139,7 +138,7 @@ function HeaderV2() {
               <Button size="sm">Login</Button>
             </Link>
           )}
-          <div className="hidden sm:block">
+          <div>
             <HelpButton />
           </div>
         </div>

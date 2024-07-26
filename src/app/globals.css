@@ -213,6 +213,26 @@ html {
     body {
         @apply bg-background text-foreground;
     }
+
+    h1 {
+        @apply text-2xl;
+    }
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
+    }
+    p {
+        @apply text-sm
+    }
+
+    ol {
+        @apply list-decimal list-outside ml-4
+    }
+    ul {
+        @apply list-disc list-outside ml-4
+    }
 }
 
 @layer utilities {

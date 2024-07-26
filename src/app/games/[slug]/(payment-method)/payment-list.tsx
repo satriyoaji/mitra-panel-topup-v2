@@ -32,7 +32,7 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                 {group.payment_method.map((item) => (
                   <Card
                     key={item.name}
-                    className={`flex hover:bg-theme-secondary-50 rounded-lg justify-between items-center px-3 py-3 cursor-pointer ${
+                    className={`flex hover:bg-theme-primary-50 rounded-lg justify-between items-center px-3 py-3 cursor-pointer ${
                       data.payment?.payment_channel == item.payment_channel &&
                       "border border-theme-primary-500"
                     }`}

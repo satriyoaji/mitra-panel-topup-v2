@@ -111,7 +111,7 @@ function CheckoutAction({
 
   return (
     <>
-      <div className="sticky bottom-0 w-full pb-1 pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
+      <div className="sticky bottom-12 md:bottom-0 w-full pb-1 shadow pt-2 rounded-xl bg-background md:flex items-center justify-between px-4">
         <div className="grid grid-cols-3 w-full ml-2">
           <div>
             <p className="text-muted-foreground text-xs">Total Belanja</p>
@@ -132,7 +132,7 @@ function CheckoutAction({
             </h4>
           </div>
         </div>
-        <div className="">
+        <div className="mb-2 md:mb-0">
           <Button size="sm" className="w-full mt-2 md:mt-0" onClick={checkout}>
             Checkout
           </Button>
