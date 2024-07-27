@@ -6,20 +6,26 @@ import V1DetailCategory from "./(v1)/V1DetailCategory";
 import V2DetailCategory from "./(v2)/V2DetailCategory";
 import { useContext } from "react";
 import ThemeContext, {
-  IThemeContext,
+    IThemeContext,
 } from "@/infrastructures/context/theme/theme.context";
 
 function Page({ params }: { params: { slug: string } }) {
-  const data: IUseCategoryData = useCategory(params.slug);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
+    const data: IUseCategoryData = useCategory(params.slug);
+    const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
-  if (data.loading) return <Loading />;
+    if (data.loading) return <Loading />;
 
-  if (data.data.category === null) return <NotFound />;
-  else if (data.data.category !== null && data.data.category !== undefined) {
-    return <V1DetailCategory {...data} />;
-  }
-  return <NotFound />;
+    if (data.data.category === null) return <NotFound />;
+    else if (data.data.category !== null && data.data.category !== undefined) {
+        return (
+            <div className="flex justify-center w-full">
+                <div className="max-w-6xl w-full mb-12 sm:mb-0 mx-2 md:mx-0">
+                    <V1DetailCategory {...data} />
+                </div>
+            </div>
+        );
+    }
+    return <NotFound />;
 }
 
 export default Page;

@@ -15,110 +15,120 @@ import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 
 function List() {
-  const [filterOpen, setfilterOpen] = useState<boolean>(false);
-  const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
-  const [filter, setFilter] = useState<TFilter>({
-    search: undefined,
-    status: undefined,
-  });
-  const [loading, setLoading] = useState(false);
-  const [meta, setMeta] = useState<TPaginationMeta | undefined>();
-  const [page, setPage] = useState(1);
-
-  const getData = async () => {
-    let searchParams = new URLSearchParams({
-      page: `${page}`,
+    const [filterOpen, setfilterOpen] = useState<boolean>(false);
+    const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
+    const [filter, setFilter] = useState<TFilter>({
+        search: undefined,
+        status: undefined,
     });
-    if (filter.search) searchParams.append("search", filter.search);
-    if (filter.status) searchParams.append("status", `${filter.status}`);
+    const [loading, setLoading] = useState(false);
+    const [meta, setMeta] = useState<TPaginationMeta | undefined>();
+    const [page, setPage] = useState(1);
 
-    setLoading(true);
-    var res = await fetch(`/api/transaction?` + searchParams);
-    setLoading(false);
+    const getData = async () => {
+        let searchParams = new URLSearchParams({
+            page: `${page}`,
+        });
+        if (filter.search) searchParams.append("search", filter.search);
+        if (filter.status) searchParams.append("status", `${filter.status}`);
 
-    if (res.ok) {
-      const resData = await res.json();
-      setMeta(resData.manifest);
-      if (resData) {
-        setLists(resData.data);
-        return;
-      }
-    }
-  };
+        setLoading(true);
+        var res = await fetch(`/api/transaction?` + searchParams);
+        setLoading(false);
 
-  useEffect(() => {
-    getData();
-  }, [filter, page]);
+        if (res.ok) {
+            const resData = await res.json();
+            setMeta(resData.manifest);
+            if (resData) {
+                setLists(resData.data);
+                return;
+            }
+        }
+    };
 
-  const { data: session } = useSession();
+    useEffect(() => {
+        getData();
+    }, [filter, page]);
 
-  const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setFilter((prev) => ({
-      ...prev,
-      search: e.target.value,
-    }));
-  }, 500);
+    const { data: session } = useSession();
 
-  return (
-    <div className="md:mx-2">
-      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background flex-col space-y-1.5 mb-3">
-        <p className="font-semibold text-lg">Riwayat Transaksi🧾</p>
-        <div className="flex space-x-1">
-          <Input
-            id="invoice"
-            placeholder="Masukan No. Invoice"
-            className="bg-background"
-            onChange={doSearch}
-          />
-          {session ? (
-            <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
-              <DialogTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className={`${
-                    (filter.search || filter.status) && "text-theme-primary-400"
-                  }`}
-                  size="sm"
-                >
-                  <MixerHorizontalIcon />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-[25rem]">
-                <FilterTransaksi
-                  state={filter}
-                  onChange={(filter) => {
-                    setFilter((prev) => ({
-                      ...prev,
-                      filter,
-                    }));
-                    setfilterOpen(false);
-                  }}
+    const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
+        setFilter((prev) => ({
+            ...prev,
+            search: e.target.value,
+        }));
+        setFilter((prev) => ({
+            ...prev,
+            search: e.target.value,
+        }));
+    }, 500);
+
+    return (
+        <div className="md:mx-2">
+            <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background h-full flex-col space-y-1.5 mb-3">
+                <p className="font-semibold text-lg">Riwayat Transaksi🧾</p>
+                <div className="flex space-x-1">
+                    <Input
+                        id="invoice"
+                        placeholder="Masukan No. Invoice"
+                        className="bg-background"
+                        onChange={doSearch}
+                        value={filter.search}
+                    />
+                    {session ? (
+                        <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
+                            <DialogTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    className={`${
+                                        (filter.search || filter.status) &&
+                                        "text-theme-primary-400"
+                                    }`}
+                                    size="sm"
+                                >
+                                    <MixerHorizontalIcon />
+                                </Button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-[25rem]">
+                                <FilterTransaksi
+                                    state={filter}
+                                    onChange={(filter) => {
+                                        setFilter((prev) => ({
+                                            ...prev,
+                                            filter,
+                                        }));
+                                        setfilterOpen(false);
+                                    }}
+                                />
+                            </DialogContent>
+                        </Dialog>
+                    ) : null}
+                </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+                {!loading ? (
+                    lists.map((val, idx) => (
+                        <ItemsCard key={`${idx}`} data={val} />
+                    ))
+                ) : (
+                    <div className="col-span-full">
+                        <Loading />
+                    </div>
+                )}
+            </div>
+            {meta ? (
+                <Pagination
+                    meta={meta}
+                    onChange={(val) => {
+                        setPage(val);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                 />
-              </DialogContent>
-            </Dialog>
-          ) : null}
+            ) : (
+                <></>
+            )}
         </div>
-      </div>
-      <div className="flex flex-col space-y-4">
-        {!loading ? (
-          lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
-        ) : (
-          <Loading />
-        )}
-      </div>
-      {meta ? (
-        <Pagination
-          meta={meta}
-          onChange={(val) => {
-            setPage(val);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        />
-      ) : (
-        <></>
-      )}
-    </div>
-  );
+    );
 }
 
 export default List;
