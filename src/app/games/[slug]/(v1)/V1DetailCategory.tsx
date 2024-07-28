@@ -55,21 +55,9 @@ function V1DetailCategory(props: IUseCategoryData) {
                         </div>
                     </div>
                     <div className="col-span-3 ">
-                        {props.data.category.forms ? (
-                            <Card
-                                ref={props.formRef}
-                                className="w-full my-4 md:mt-2"
-                            >
-                                <CardContent className="mt-3">
-                                    <FormAccount
-                                        forms={props.data.category.forms}
-                                    />
-                                </CardContent>
-                            </Card>
-                        ) : null}
                         <div ref={props.productListRef}>
                             <ProductList
-                                number={props.data.category.forms ? 2 : 1}
+                                number={1}
                                 // category={data.category.name}
                                 nextRef={props.methodRef}
                                 products={props.products}
@@ -77,21 +65,29 @@ function V1DetailCategory(props: IUseCategoryData) {
                             />
                         </div>
                         <div className="my-4" ref={props.methodRef}>
-                            <Payment
-                                number={props.data.category.forms ? 3 : 2}
-                            />
+                            <Payment number={2} />
                         </div>
+                        {props.data.category.forms ? (
+                            <Card ref={props.formRef} className="w-full my-4">
+                                <CardContent className="mt-3">
+                                    <FormAccount
+                                        forms={props.data.category.forms}
+                                    />
+                                </CardContent>
+                            </Card>
+                        ) : null}
                         <Card className="w-full my-4" ref={props.couponRef}>
                             <CardContent>
-                                <div className="flex gap-2 items-center mt-3">
+                                <div className="flex gap-2 items-center mt-3 mb-4">
                                     <div className="bg-theme-primary-100 p-2 w-7 h-7 flex justify-center items-center rounded-full">
                                         <h4 className="font-bold rounded-full text-theme-primary-500">
                                             {props.data.category.forms ? 4 : 3}
                                         </h4>
                                     </div>
-                                    <h4 className="font-medium ml-1">Promo</h4>
+                                    <h4 className="font-medium ml-1">
+                                        Pakai Promo
+                                    </h4>
                                 </div>
-                                <Separator className="my-3" />
                                 <Promo
                                     categoryUuid={props.data.category?.key}
                                 />
