@@ -115,21 +115,21 @@ function CheckoutAction({
         <div className="grid grid-cols-3 w-full ml-2">
           <div>
             <p className="text-muted-foreground text-xs">Total Belanja</p>
-            <h4 className="text-foreground font-semibold">
+            <p className="text-foreground font-semibold text-md">
               {priceMask(data.product?.discounted_price || data.product?.price)}
-            </h4>
+            </p>
           </div>
           <div>
             <p className="text-muted-foreground text-xs">Payment Charge</p>
-            <h4 className="text-foreground font-semibold">
+            <p className="text-foreground font-semibold text-md">
               {priceMask(data.payment?.fee_amount)}
-            </h4>
+            </p>
           </div>
           <div>
             <p className="text-foreground text-xs">Total Bayar</p>
-            <h4 className="text-foreground text-lg text-green-500 font-semibold">
+            <p className="text-foreground text-lg text-green-500 font-semibold">
               {getTotal}
-            </h4>
+            </p>
           </div>
         </div>
         <div className="mb-2 md:mb-0">

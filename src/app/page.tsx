@@ -4,7 +4,7 @@ import CarouselWrapper from "./dashboard/carousel/carousel-wrapper";
 import Stats from "./dashboard/stats";
 import Promo from "./dashboard/promo";
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <div className="bg-background">

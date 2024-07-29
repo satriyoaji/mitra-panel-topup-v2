@@ -1,10 +1,10 @@
 "use client";
 import { useCountdown } from "@/Hooks";
-import { IPaymentInfo } from "@/types/transaction";
+import { IQRPayment } from "@/types/transaction";
 import React from "react";
 import QRCode from "react-qr-code";
 
-function QRPayment({ payment }: { payment: IPaymentInfo }) {
+function QRPayment({ payment }: { payment: IQRPayment }) {
   const { hours, minutes, seconds, isExpired } = useCountdown(
     payment.expired_at ?? ""
   );

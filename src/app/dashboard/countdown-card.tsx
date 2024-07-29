@@ -19,7 +19,7 @@ function CountdownCard({
   if (days > 0)
     return (
       <div className="flex rounded-xl pt-1 pb-0.5 px-2 space-x-1 text-center text-xs items-center justify-center bg-red-500 backdrop-blur text-white font-medium">
-        <p className="p-0">
+        <p className="p-0 text-xs">
           {days > 0
             ? `${days} hari lagi`
             : `${hours}h : ${minutes}m : ${seconds}s`}

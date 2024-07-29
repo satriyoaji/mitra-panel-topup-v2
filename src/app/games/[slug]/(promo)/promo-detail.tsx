@@ -1,5 +1,6 @@
 import CountdownCard from "@/app/dashboard/countdown-card";
 import Loading from "@/app/loading";
+import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -77,11 +78,16 @@ function PromoDetail({ p, onClose }: { p?: IPromo; onClose: () => void }) {
                 <DialogHeader>
                   <DialogTitle className="flex justify-between">
                     {promo.name}
-                    <div className="mr-3">
+                    <div className="mr-3 text-xs">
                       <CountdownCard date={parseISO(promo.time_finish)} />
                     </div>
                   </DialogTitle>
-                  <DialogDescription>{promo.promo_code}</DialogDescription>
+                  <DialogDescription>
+                    <div className="flex items-center">
+                      <p>{promo.promo_code}</p>
+                      <CopyToClipboard text={promo.promo_code} />
+                    </div>
+                  </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-3">
                   <Image

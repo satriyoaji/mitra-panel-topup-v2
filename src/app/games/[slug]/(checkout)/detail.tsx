@@ -20,6 +20,9 @@ import {
 } from "@/types/transaction";
 import { useState } from "react";
 import Swal from "@/components/swal";
+import { useSession } from "next-auth/react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 interface IDetailProp extends ITransaction {
   isOpen: boolean;
@@ -40,6 +43,7 @@ export function Purchase({
   const [alertOpen, setAlertOpen] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const createTransaction = async () => {
     if (!account || !payment || !product || !category) return false;
@@ -97,19 +101,30 @@ export function Purchase({
   return (
     <>
       <Dialog open={isOpen} defaultOpen={false} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-sm w-full">
+        <DialogContent className="max-w-md w-full">
           <DialogHeader>
             <DialogTitle>Detail Pesanan</DialogTitle>
             <DialogDescription>
               Cek pesanan anda terlebih dahulu sebelum melanjutkan pembayaran.
             </DialogDescription>
           </DialogHeader>
+          {!session && (
+            <Alert className="bg-theme-primary-50 text-theme-primary-900">
+              <InfoCircledIcon className="text-white" />
+              <AlertTitle>Penting!</AlertTitle>
+              <AlertDescription className="text-xs">
+                Pastikan anda menyimpan nomor transaksi dan email serta nomor
+                telpon yang anda gunakan dalam proses transaksi.
+              </AlertDescription>
+            </Alert>
+          )}
           <TransactionDetail
             payment={payment}
             category={category}
             form={form}
             product={product}
             promo={promo}
+            account={account}
           />
           <div className="flex justify-between items-center">
             <Button

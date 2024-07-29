@@ -1,10 +1,10 @@
 "use client";
 import { useCountdown } from "@/Hooks";
 import CopyToClipboard from "@/components/copy-to-clipboard";
-import { IPaymentInfo } from "@/types/transaction";
+import { IVAPayment } from "@/types/transaction";
 import React from "react";
 
-function VAPayment({ payment }: { payment: IPaymentInfo }) {
+function VAPayment({ payment }: { payment: IVAPayment }) {
   const { hours, minutes, seconds, isExpired } = useCountdown(
     payment.expired_at ?? ""
   );
