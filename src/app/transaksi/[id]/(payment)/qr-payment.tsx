@@ -35,11 +35,6 @@ function QRPayment({ payment }: { payment: IQRPayment }) {
             />
           </div>
         </div>
-        <div className="flex justify-center items-center mt-2">
-          <p className="text-xs bg-red-400 text-white p-1 mt-1 rounded-lg px-2">
-            {hours} : {minutes} : {seconds}
-          </p>
-        </div>
       </div>
     );
 }

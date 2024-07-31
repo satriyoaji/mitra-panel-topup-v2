@@ -115,26 +115,30 @@ function CheckoutAction({
         <div className="grid grid-cols-3 w-full ml-2">
           <div>
             <p className="text-muted-foreground text-xs">Total Belanja</p>
-            <p className="text-foreground font-semibold text-md">
+            <p className="text-foreground font-medium text-md">
               {priceMask(data.product?.discounted_price || data.product?.price)}
             </p>
           </div>
           <div>
             <p className="text-muted-foreground text-xs">Payment Charge</p>
-            <p className="text-foreground font-semibold text-md">
+            <p className="text-foreground font-medium text-md">
               {priceMask(data.payment?.fee_amount)}
             </p>
           </div>
           <div>
             <p className="text-foreground text-xs">Total Bayar</p>
-            <p className="text-foreground text-lg text-green-500 font-semibold">
+            <p className="text-foreground text-lg text-green-500 font-medium">
               {getTotal}
             </p>
           </div>
         </div>
         <div className="mb-2 md:mb-0">
-          <Button size="sm" className="w-full mt-2 md:mt-0" onClick={checkout}>
-            Checkout
+          <Button
+            size="sm"
+            className="w-full mt-2 md:mt-0 bg-green-500 hover:bg-green-600"
+            onClick={checkout}
+          >
+            Pesan Sekarang
           </Button>
         </div>
       </div>

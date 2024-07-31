@@ -27,18 +27,6 @@ interface productType {
   type: "flash-sale";
 }
 
-const typeList: productType[] = [
-  {
-    title: (
-      <>
-        <LightningBoltIcon />
-        <p>Flash Sale</p>
-      </>
-    ),
-    type: "flash-sale",
-  },
-];
-
 function ProductList(prop: IProductList) {
   const { data, dispatch } = useContext(
     TransactionContext
@@ -83,7 +71,7 @@ function ProductList(prop: IProductList) {
         className="relative max-h-[30rem] overflow-y-auto pt-4 -mx-2 px-2"
         ref={ref}
       >
-        <div className="grid sm:grid-cols-3 grid-cols-2 gap-2 -mt-2">
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-2 -mt-2">
           {(search ? productSearch : prop.products).map((val) => {
             const item = (
               <div className="h-full">
@@ -110,7 +98,7 @@ function ProductList(prop: IProductList) {
                   discountedPrice={val.discounted_price}
                   name={val.name}
                   imageURL={val.image_url}
-                  price={priceMask(val.price)}
+                  price={val.price}
                 />
               </div>
             );

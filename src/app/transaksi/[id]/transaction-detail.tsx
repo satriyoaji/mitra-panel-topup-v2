@@ -14,6 +14,10 @@ import QRPayment from "./(payment)/qr-payment";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import BadgeTransaksi from "../badge-transaksi";
+import LinkPayment from "./(payment)/link-payment";
+import { isFuture, parseISO } from "date-fns";
+import CountdownCard from "@/app/dashboard/countdown-card";
 
 function TransactionHistoryDetail({ id }: { id: string }) {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
@@ -69,20 +73,23 @@ function TransactionHistoryDetail({ id }: { id: string }) {
             </Alert>
           </div>
           <div className="flex flex-row justify-stretch items-center">
-            <div className="flex md:flex-row flex-col items-stretch w-full gap-4 h-full mt-2">
+            <div className="grid md:grid-cols-2 w-full gap-4 h-full mt-2 auto-rows-fr">
               <div className="w-full bg-background h-full p-4 rounded-lg shadow flex-1">
                 <p className="font-medium text-lg text-red-800">
                   Rincian Transaksi
                 </p>
-                <div className="mt-4 space-y-4">
-                  {data.payment_information.expired_at && (
-                    <div className="flex justify-between w-full">
-                      <p className="text-muted-foreground">Order Expired</p>
-                      <p className="font-semibold">
-                        {data.payment_information.expired_at}
-                      </p>
-                    </div>
-                  )}
+                <div className="mt-4 space-y-4 h-full">
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground">Order Expired</p>
+                    {data.payment_information.expired_at &&
+                    isFuture(parseISO(data.payment_information.expired_at)) ? (
+                      <CountdownCard
+                        date={parseISO(data.payment_information.expired_at)}
+                      />
+                    ) : (
+                      <Badge variant="destructive">Expired</Badge>
+                    )}
+                  </div>
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground">Produk</p>
                     <p className="">{data.category_name}</p>
@@ -100,7 +107,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground">Status</p>
                     <div>
-                      <Badge>{data.status_name}</Badge>
+                      <BadgeTransaksi status={data.status} />
                     </div>
                   </div>
                   <div className="flex justify-between w-full">
@@ -117,7 +124,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   <p className="font-medium text-lg text-red-800">
                     Rincian Pembayaran
                   </p>
-                  <div className="mt-4 space-y-4">
+                  <div className="mt-4 space-y-4 h-full">
                     <div className="flex justify-between w-full">
                       <p className="text-muted-foreground">
                         Pilihan Pembayaran
@@ -154,43 +161,14 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   <p className="font-medium text-lg text-red-800">
                     Tujuan Pembayaran
                   </p>
-                  <div className="mt-4 space-y-4">
+                  <div className="mt-4 space-y-4 h-full">
                     {data.payment_information.payment_method ==
-                      "VIRTUAL_ACCOUNT" && (
-                      <>
-                        <div className="flex justify-between w-full">
-                          <p className="text-muted-foreground">Pembayaran</p>
-                          <p className="font-semibold">
-                            {data.payment_information.virtual_account_number}
-                          </p>
-                        </div>
-                        <div className="flex justify-between w-full">
-                          <p className="text-muted-foreground">
-                            Pemiliki Akun Rekening a.n.
-                          </p>
-                          <p className="">
-                            {data.payment_information.virtual_account_name}
-                          </p>
-                        </div>
-                      </>
-                    )}
-                    {data.payment_information.payment_method == "QR_CODE" && (
-                      <>
-                        <div className="flex justify-between w-full">
-                          <p className="text-muted-foreground">Pembayaran</p>
-                          <p className="font-semibold">
-                            {data.payment_information.virtual_account_number}
-                          </p>
-                        </div>
-                        <div className="flex justify-between w-full">
-                          <p className="text-muted-foreground">
-                            Pemiliki Akun Rekening a.n.
-                          </p>
-                          <p className="">
-                            {data.payment_information.virtual_account_name}
-                          </p>
-                        </div>
-                      </>
+                    "VIRTUAL_ACCOUNT" ? (
+                      <VAPayment payment={data.payment_information} />
+                    ) : data.payment_information.payment_method == "EWALLET" ? (
+                      <LinkPayment payment={data.payment_information} />
+                    ) : (
+                      <QRPayment payment={data.payment_information} />
                     )}
                   </div>
                 </div>

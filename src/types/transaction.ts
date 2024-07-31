@@ -60,6 +60,7 @@ export interface ITransactionHistoryDetail {
   price: number;
   paid_price: number;
   status_name: string;
+  status: number;
   history_status: ITransactionHistory[];
   payment_information: IVAPayment | ILinkPayment | IQRPayment;
 }

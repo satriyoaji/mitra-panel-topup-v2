@@ -30,14 +30,14 @@ function PromoCard({
     return (
       <>
         <div
-          className={`rounded-xl relative shadow-sm cursor-pointer text-theme-primary-900 hover:bg-slate-50 ${
+          className={`rounded-xl relative shadow-sm cursor-pointer text-theme-primary-900 overflow-clip hover:bg-slate-50 ${
             promo.id == selected?.id
               ? "border-2 border-theme-primary"
               : "border-2"
           }`}
         >
           {onClose && (
-            <div className="absolute right-2 top-2">
+            <div className="absolute right-0 top-0 p-1.5 bg-theme-primary-200 rounded-bl-xl text-theme-primary-700">
               <Cross1Icon className="w-3 h-3" onClick={onClose} />
             </div>
           )}
@@ -48,7 +48,7 @@ function PromoCard({
               else setSelected();
             }}
           >
-            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-background rounded-s-xl">
+            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-background">
               <p className="font-bold text-xl">
                 {promo.discount_percent > 0
                   ? `${promo.discount_percent}%`
@@ -58,7 +58,7 @@ function PromoCard({
                 <p className="text-xs text-center">Tersisa {promo.stock}</p>
               ) : null}
             </div>
-            <div className="items-center justify-center rounded-br-xl pt-4 w-full rounded-tr-xl bg-gradient-to-br from-theme-primary-50 to-theme-primary-200">
+            <div className="items-center justify-center pt-4 w-full bg-gradient-to-br from-theme-primary-50 to-theme-primary-200">
               <div className="pr-4 pl-6 space-y-2">
                 <div className="flex justify-between items-center">
                   <p className="text-xs py-1 px-2 rounded bg-theme-primary-200 text-theme-primary-900 font-medium w-fit">
@@ -93,7 +93,7 @@ function PromoCard({
                 <div className="pb-4"></div>
               )}
               <div
-                className={`px-3 py-2 rounded-br-xl bg-theme-primary-900 text-theme-primary-50`}
+                className={`px-3 py-2 bg-theme-primary-900 text-theme-primary-50`}
               >
                 <p className="text-xs">
                   Berakhir dalam
