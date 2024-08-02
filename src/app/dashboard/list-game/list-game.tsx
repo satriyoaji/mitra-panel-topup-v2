@@ -1,10 +1,11 @@
 "use client";
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
 import { CubeIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 // import Image from "next/image";
 
 export default function ListGame() {
@@ -15,7 +16,7 @@ export default function ListGame() {
   const [data, setData] = useState<Array<IProductCategory>>([]);
   const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [groups, setGroups] = useState<TProductGroup[]>([]);
 
   const totalPage = useMemo(() => Math.ceil(total / 8), [total]);
@@ -116,34 +117,38 @@ export default function ListGame() {
         /> */}
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 md:gap-4 gap-2 mt-4 place-items-center justify-center px-2">
-          {data.map((val: IProductCategory, idx) => (
-            <Link
-              href={`/games/${val.key}`}
-              key={idx}
-              className="w-full h-full"
-            >
-              <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50 hover:text-theme-primary-500 transition duration-300">
-                <div className="p-4 md:p-5 flex flex-col items-center">
-                  <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
-                    {val.image_url !== "" ? (
-                      <img
-                        alt={val.name}
-                        className="rounded-xl w-full hover:scale-125 transition duration-300"
-                        src={val.image_url}
-                      />
-                    ) : (
-                      <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
-                        <CubeIcon className="text-white m-auto h-20 w-20" />
+          {loading
+            ? [...Array(10)].map((x, i) => (
+                <Skeleton key={i} className="w-full aspect-square" />
+              ))
+            : data.map((val: IProductCategory, idx) => (
+                <Link
+                  href={`/games/${val.key}`}
+                  key={idx}
+                  className="w-full h-full"
+                >
+                  <Card className="w-full h-full min-w-fit rounded-xl hover:bg-slate-50 hover:text-theme-primary-500 transition duration-300">
+                    <div className="p-4 md:p-5 flex flex-col items-center">
+                      <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
+                        {val.image_url !== "" ? (
+                          <img
+                            alt={val.name}
+                            className="rounded-xl w-full hover:scale-125 transition duration-300"
+                            src={val.image_url}
+                          />
+                        ) : (
+                          <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
+                            <CubeIcon className="text-white m-auto h-20 w-20" />
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <p className="md:text-xs text-[70%] text-center mt-3 p-0">
-                    {val.name}
-                  </p>
-                </div>
-              </Card>
-            </Link>
-          ))}
+                      <p className="md:text-xs text-[70%] text-center mt-3 p-0">
+                        {val.name}
+                      </p>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
         </div>
         {loading ? (
           <div className="h-[20vh] flex items-center justify-center">

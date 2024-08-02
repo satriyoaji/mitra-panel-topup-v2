@@ -1,31 +1,36 @@
 "use client";
 
 import { IBanner } from "@/types/utils";
-import { useContext, useEffect, useState } from "react";
-import CarouselV1 from "./v1/carousel";
-import CarouselV2 from "./v2/carousel";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
+import { useEffect, useState } from "react";
+import Carousel from "./carousel";
+import Loading from "./loading";
 
 const CarouselWrapper = () => {
   const [banners, setBanners] = useState<IBanner[]>([]);
-  const { data } = useContext(ThemeContext) as IThemeContext;
+  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
+    setLoading(true);
     var res = await fetch("/api/banners");
 
     var data = await res.json();
     setBanners(data);
+    setLoading(false);
   };
 
   useEffect(() => {
     getData();
   }, []);
 
+  if (loading)
+    return (
+      <div className="bg-background flex justify-center items-center md:py-4">
+        <Loading />
+      </div>
+    );
+
   if (banners && banners.length > 0) {
-    if (data.version == "1") return <CarouselV1 data={banners} />;
-    return <CarouselV2 data={banners} />;
+    return <Carousel data={banners} />;
   }
 };
 
