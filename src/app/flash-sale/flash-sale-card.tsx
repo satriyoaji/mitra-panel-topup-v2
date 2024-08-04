@@ -13,6 +13,9 @@ function FlashSaleCard({
   data: IFlashSaleInProduct;
   selected?: boolean;
 }) {
+  const disc = Math.ceil(
+    ((data.price - data.discounted_price) / data.price) * 100
+  );
   return (
     <Link
       href={`/games/${data.category_key}?item=${data.key}`}
@@ -59,7 +62,7 @@ function FlashSaleCard({
                 <div>
                   <div className="flex items-center gap-1">
                     <p className="px-1 pt-1 pb-0.5 font-semibold text-xs my-0.5 rounded-md bg-amber-300">
-                      10%
+                      {disc}%
                     </p>
                     <p
                       className="line-through text-xs mt-0.5"

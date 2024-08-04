@@ -4,15 +4,13 @@ import { NextAuthProvider } from "./_app";
 import { SetCookie } from "@/infrastructures/cookieStore";
 
 export default function RootTemplateLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <ThemeProvider>
-        <NextAuthProvider>{children}</NextAuthProvider>
-      </ThemeProvider>
-    </html>
-  );
+    return (
+        <ThemeProvider>
+            <NextAuthProvider>{children}</NextAuthProvider>
+        </ThemeProvider>
+    );
 }

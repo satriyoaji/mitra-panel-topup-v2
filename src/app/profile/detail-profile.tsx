@@ -16,16 +16,10 @@ type prop = {
 
 function DetailProfile(props: prop) {
   const { data: session, update } = useSession();
-  const [email, setEmail] = useState<string>();
-  const [name, setName] = useState<string>();
-  const [phone, setPhone] = useState<string>();
+  const [email, setEmail] = useState<string>(session?.profile?.name ?? "");
+  const [name, setName] = useState<string>(session?.profile?.email ?? "");
+  const [phone, setPhone] = useState<string>(session?.profile?.phone ?? "");
   const { toast } = useToast();
-
-  useEffect(() => {
-    setName(props.data?.name ? session?.profile?.name : "");
-    setEmail(props.data?.email ? session?.profile?.email : "");
-    setPhone(props.data?.phone ? session?.profile?.phone : "");
-  }, []);
 
   const handleSubmit = async () => {
     const response = await fetch("/api/profile", {
@@ -71,18 +65,18 @@ function DetailProfile(props: prop) {
         </Avatar>
         {/* <h5 className="font-bold text-xl">{session?.profile?.name}</h5>
         <h6 className="text-xs">{session?.profile?.email}</h6> */}
-        <div className="w-full my-1.5 px-12">
+        <div className="w-full my-1.5">
           <Label htmlFor="invoice">Nama</Label>
           <Input
             id="name"
             name="name"
             type="text"
-            placeholder="Masukan Name"
+            placeholder="Masukan Nama"
             onChange={(e) => setName(e.target.value)}
             value={name}
           />
         </div>
-        <div className="w-full my-1.5 px-12">
+        <div className="w-full my-1.5">
           <Label htmlFor="invoice">Email</Label>
           <Input
             id="email"
@@ -93,7 +87,7 @@ function DetailProfile(props: prop) {
             value={email}
           />
         </div>
-        <div className="w-full my-1.5 px-12">
+        <div className="w-full my-1.5">
           <Label htmlFor="invoice">No. Whatsapp</Label>
           <PhoneInput
             onValueChange={(e) => {

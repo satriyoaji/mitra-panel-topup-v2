@@ -1,8 +1,7 @@
 import { GetCredHeader } from "@/app/api/api-utils";
 import { GetCookie } from "@/infrastructures/cookieStore";
 import React from "react";
-import FlashSaleV1 from "./v1/flash-sale-v1";
-import FlashSaleV2 from "./v2/flash-sale-v2";
+import FlashSale from "./flash-sale";
 
 const getData = async () => {
   const credentialHeader = GetCredHeader();
@@ -32,8 +31,7 @@ async function FlashSaleWrapper() {
   const version = GetCookie("version");
 
   if (data) {
-    if (version === "1") return <FlashSaleV1 data={data} />;
-    else return <FlashSaleV2 data={data} />;
+    return <FlashSale data={data} />;
   }
 }
 

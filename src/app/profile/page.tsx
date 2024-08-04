@@ -68,13 +68,11 @@ function Page() {
   };
 
   return (
-    <div
-      className={`container ${
-        theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
-      }`}
-    >
-      <div className="md:flex gap-4 h-full md:pt-4">
-        <div className="md:border md:shadow min-w-[22rem] h-full rounded-xl p-2 md:p-4">
+    <div className={`flex justify-center w-full`}>
+      <div
+        className={`md:flex space-x-4 h-[92vh] md:pt-4 bg-background w-full max-w-6xl px-0 sm:px-4`}
+      >
+        <div className="md:border md:shadow min-w-[27rem] h-fit rounded-xl bg-background p-2 md:p-4 mx-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <div className="flex">
@@ -118,16 +116,13 @@ function Page() {
               }
             />
           </div>
-          <Separator className="w-full my-2" />
           <div className="mt-6 w-full">
             <SaldoCard balance={dataProfile?.saldo ?? 0} />
           </div>
           <div className="mt-6 mb-4">
             <Dialog>
-              <DialogTrigger className="md:hidden">
-                <p className="flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-theme-primary-50">
-                  <DiscIcon className="mr-3" /> Saldo Point History
-                </p>
+              <DialogTrigger className="md:hidden flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer w-full hover:bg-theme-primary-50">
+                <DiscIcon className="mr-3" /> Saldo Point History
               </DialogTrigger>
               <DialogContent>
                 <h4 className="font-semibold">Saldo Point History</h4>
@@ -149,10 +144,6 @@ function Page() {
             </p>
           </div>
         </div>
-        <Separator
-          orientation="vertical"
-          className="ml-4 hidden md:block h-[88vh]"
-        />
         <div className="w-full h-full hidden md:block">
           <div className="pt-4 px-4">
             <Tabs defaultValue="profile">
