@@ -23,6 +23,7 @@ import Searchbar from "@/app/dashboard/searchbar";
 import HelpButton from "../help-button";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Separator } from "../ui/separator";
 
 export type path = {
     name: string;
@@ -146,8 +147,12 @@ function HeaderV2() {
                         </NavigationMenu>
                     </div>
                     <Searchbar />
+                    <Separator
+                        className="mx-0.5 h-10 md:block hidden"
+                        orientation="vertical"
+                    />
                     {session ? (
-                        <div className="my-1 mx-3 hidden md:block">
+                        <div className="my-1 mx-1 hidden md:block">
                             <Avatar
                                 className="cursor-pointer"
                                 onClick={() => router.push("/profile")}
