@@ -44,24 +44,11 @@ const paths: path[] = [
     },
 ];
 
-function HeaderV2() {
+function Header({ profile }: { profile?: ISiteProfile }) {
     const { data: session } = useSession();
     const router = useRouter();
-    const [profile, setProfile] = useState<ISiteProfile>();
     const [invoice, setInvoice] = useState<string | undefined>("");
     const [open, setOpen] = useState(false);
-
-    const getProfile = async () => {
-        var res = await fetch("/api/site-profile");
-        if (res.ok) {
-            var data = await res.json();
-            setProfile(data.data);
-        }
-    };
-
-    useEffect(() => {
-        getProfile();
-    }, []);
 
     return (
         <header className="w-full flex justify-center z-20 bg-white/90 backdrop-blur-md items-center top-0 sticky p-1">
@@ -183,4 +170,4 @@ function HeaderV2() {
     );
 }
 
-export default HeaderV2;
+export default Header;

@@ -4,22 +4,18 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { Separator } from "./ui/separator";
 import { usePathname } from "next/navigation";
-import { ISosmed } from "@/types/utils";
+import { ISiteProfile, ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
-import { nFormatter } from "@/Helpers";
-import ThemeContext, {
-    IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import {
     ArrowRightIcon,
     ChatBubbleIcon,
     EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
+import Image from "next/image";
 
-function Footer() {
+function Footer({ profile }: { profile?: ISiteProfile }) {
     const path = usePathname();
     const [data, setData] = useState<ISosmed[]>([]);
-    const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
     useEffect(() => {
         (async () => {
@@ -44,15 +40,22 @@ function Footer() {
                 <div className="max-w-6xl px-6">
                     <div className="grid my-4 md:grid-cols-5 sm:grid-cols-2 grid-cols-1 sm:gap-8">
                         <div className="md:col-span-2 mt-8">
-                            <p className="text-xl font-bold">VC Gamers</p>
-                            <p className="text-muted-foreground text-xs mt-1.5 leading-5">
-                                Topumur adalah menyediakan layanan Top up game
-                                dan Reseller Voucher Game termurah dan
-                                terpercaya di Indonesia. Topup lebih dari 100
-                                game online terkemuka dunia di VocaGame mudah
-                                aman tanpa registrasi, pembelian instan langsung
-                                masuk dalam hitungan detik.
-                            </p>
+                            {profile?.logo_url && (
+                                <Image
+                                    src={profile?.logo_url}
+                                    alt="logo"
+                                    width={40}
+                                    height={40}
+                                />
+                            )}
+                            {profile ? (
+                                <p
+                                    className="text-muted-foreground text-xs mt-1.5 leading-5"
+                                    dangerouslySetInnerHTML={{
+                                        __html: profile?.description,
+                                    }}
+                                ></p>
+                            ) : null}
                         </div>
                         <div className={`bg-background flex flex-col mt-8`}>
                             <p className="font-bold text-foreground text-sm">

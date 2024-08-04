@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
         // optionally access and extend (rather than replace) parent metadata
         return {
             manifest: "/api/manifest.json",
-            title: setting.title,
+            title: setting.name,
             description: setting.description,
             keywords: setting.keywords,
             openGraph: {
