@@ -3,7 +3,11 @@
 import { Input } from "@/components/ui/input";
 import { ChangeEvent, useEffect, useState } from "react";
 import ItemsCard from "./items-card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
@@ -76,8 +80,8 @@ function List() {
                         value={filter.search}
                     />
                     {session ? (
-                        <Dialog open={filterOpen} onOpenChange={setfilterOpen}>
-                            <DialogTrigger asChild>
+                        <Popover open={filterOpen} onOpenChange={setfilterOpen}>
+                            <PopoverTrigger asChild>
                                 <Button
                                     variant="ghost"
                                     className={`${
@@ -88,20 +92,23 @@ function List() {
                                 >
                                     <MixerHorizontalIcon />
                                 </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-w-[25rem]">
+                            </PopoverTrigger>
+                            <PopoverContent className="max-w-[25rem]">
+                                <p className="font-semibold">
+                                    Filter Status Transaksi
+                                </p>
                                 <FilterTransaksi
                                     state={filter}
                                     onChange={(filter) => {
                                         setFilter((prev) => ({
                                             ...prev,
-                                            filter,
+                                            status: filter.status,
                                         }));
                                         setfilterOpen(false);
                                     }}
                                 />
-                            </DialogContent>
-                        </Dialog>
+                            </PopoverContent>
+                        </Popover>
                     ) : null}
                 </div>
             </div>

@@ -26,7 +26,7 @@ function DetailCategory(props: Props) {
     if (props.data.category !== null && props.data.category !== undefined)
         return (
             <>
-                <div className="lg:grid lg:grid-cols-5 lg:gap-4 w-full px-3">
+                <div className="lg:grid lg:grid-cols-5 lg:space-x-4 w-full px-3">
                     <div className="col-span-full mt-4">
                         <Breadcrumb className="mb-4">
                             <BreadcrumbList>

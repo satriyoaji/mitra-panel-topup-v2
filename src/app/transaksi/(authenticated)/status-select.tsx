@@ -8,6 +8,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { ETransactionStatus } from "@/types/enums";
 import React, { useCallback, useState } from "react";
 
 function StatusSelect({
@@ -33,9 +34,13 @@ function StatusSelect({
                 <SelectGroup>
                     <SelectLabel>Status Transaksi</SelectLabel>
                     <SelectItem value="*">All</SelectItem>
-                    <SelectItem value="success">Success</SelectItem>
-                    <SelectItem value="on progress">On Progress</SelectItem>
-                    <SelectItem value="failed">Failed</SelectItem>
+                    {Object.keys(ETransactionStatus)
+                        .filter((v) => isNaN(Number(v)))
+                        .map((k, i) => (
+                            <SelectItem value={(i--).toString()}>
+                                {k}
+                            </SelectItem>
+                        ))}
                 </SelectGroup>
             </SelectContent>
         </Select>

@@ -38,26 +38,10 @@ function Footer() {
     return (
         <div
             // style={{ backgroundImage: 'url("/assets/illustration/v1/footer.svg")' }}
-            className="bg-no-repeat bg-right bg-background pt-10"
+            className="bg-no-repeat bg-right bg-background pt-2"
         >
             <div className="w-full flex items-center flex-col mb-8">
                 <div className="max-w-6xl px-6">
-                    <p className="font-semibold text-sm">
-                        Top Up Game Online dan Beli Voucher Game Online Terbaru
-                        dan Murah di Topmur
-                    </p>
-                    <p className="text-muted-foreground text-xs mt-1.5 leading-5">
-                        Top Up game & voucher Topmur.com. Metode pembayaran
-                        lengkap, dijamin aman, garansi uang kembali 10x lipat,
-                        instant proses, terpercaya dan legal 100%. Buat para
-                        buyer, seller, dan sultan-sultan di luar sana pastikan
-                        belanja dan jualan top up game dan voucher mu di
-                        Topmur.com. Tersedia bermacam-macam jenis game populer
-                        seperti Mobile Legends, PUBG Mob... Valorant, Free Fire,
-                        Ragnarok, Dragon Raja, Light Of Thel, Steam Wallet dan
-                        berbagai game lainnya yang tidak kalah seru untuk
-                        dimainkan.
-                    </p>
                     <div className="grid my-4 md:grid-cols-5 sm:grid-cols-2 grid-cols-1 sm:gap-8">
                         <div className="md:col-span-2 mt-8">
                             <p className="text-xl font-bold">VC Gamers</p>

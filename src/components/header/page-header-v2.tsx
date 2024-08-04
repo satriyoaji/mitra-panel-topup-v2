@@ -65,7 +65,7 @@ function HeaderV2() {
 
     return (
         <header className="w-full flex justify-center z-20 bg-white/90 backdrop-blur-md items-center top-0 sticky p-1">
-            <div className="w-full flex max-w-6xl items-center justify-between px-2">
+            <div className="w-full flex container items-center justify-between px-2">
                 <div className="flex md:w-fit w-full justify-start">
                     <Link href="/" className="p-1">
                         {profile?.logo_url && (
