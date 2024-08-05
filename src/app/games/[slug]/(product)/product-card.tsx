@@ -1,9 +1,12 @@
 "use client";
 
 import { priceMask } from "@/Helpers";
+import ThemeContext, {
+  IThemeContext,
+} from "@/infrastructures/context/theme/theme.context";
 import { SketchLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 
 type prop = {
   selected?: boolean;
@@ -18,6 +21,8 @@ type prop = {
 };
 
 function ProductCard(props: prop) {
+  const { data: theme } = useContext(ThemeContext) as IThemeContext;
+
   const discountPercent = useMemo(() => {
     if (props.discountedPrice)
       return Math.ceil(
@@ -28,8 +33,8 @@ function ProductCard(props: prop) {
 
   return (
     <div
-      className={`min-h-[4rem] overflow-clip flex items-center relative h-full bg-white hover:bg-slate-50 rounded-xl cursor-pointer ${
-        props.selected ? "border-2 border-theme-primary-500 p-1.5" : "border"
+      className={`min-h-[4rem] overflow-clip flex items-center relative h-full bg-white hover:bg-zinc-50 rounded-xl cursor-pointer ${
+        props.selected ? `border-2 border-[${theme.primary}]` : "border"
       }`}
       onClick={props.onClick}
     >
@@ -71,7 +76,7 @@ function ProductCard(props: prop) {
           <div className="w-full pl-2.5 ">
             <p
               className={`text-xs font-semibold ${
-                props.selected ? "text-theme-primary-800" : ""
+                props.selected ? `text-[${theme.primary}]` : ""
               }`}
             >
               {props.name}

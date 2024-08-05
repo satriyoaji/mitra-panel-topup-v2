@@ -61,11 +61,7 @@ function Page() {
 
   if (data && data.products.length > 0)
     return (
-      <div
-        className={`container ${
-          theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
-        }`}
-      >
+      <div className={`container nax-w-6xl`}>
         <div className="flex px-2 sticky top-10 py-4 bg-transparent backdrop-blur-lg rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
           <div className="flex items-center justify-between">
             <p className="font-semibold text-lg flex">
@@ -133,9 +129,7 @@ function Page() {
 
   return (
     <div
-      className={`container min-h-full flex items-center justify-center ${
-        theme.version !== "1" ? "max-w-6xl" : "md:mx-2 px-4"
-      }`}
+      className={`container min-h-full flex items-center justify-center md:mx-2 px-4`}
     >
       <h4 className="text-2xl text-muted-foreground font-semibold my-10">
         Tidak ada Flash Sale

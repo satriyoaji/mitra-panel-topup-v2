@@ -1,11 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-import { cn } from "@/lib/utils";
 import { Poppins as FontSans } from "next/font/google";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -13,18 +9,9 @@ export const fontSans = FontSans({
 });
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
-  const { data } = useContext(ThemeContext) as IThemeContext;
-
   return (
-    <body
-      className={cn(
-        "min-h-screen bg-repeat antialiased",
-        data.primary.class,
-        data.secondary.class,
-        data.font.class.className
-      )}
-    >
-      <div className="bg-slate-50">{children}</div>
+    <body className="min-h-screen bg-repeat antialiased">
+      <div className="bg-zinc-50">{children}</div>
     </body>
   );
 }

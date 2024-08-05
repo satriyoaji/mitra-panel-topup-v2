@@ -1,14 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { ArrowUpIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
+import ThemeContext, {
+  IThemeContext,
+} from "@/infrastructures/context/theme/theme.context";
 
 function HelpButton() {
   const [data, setData] = useState<ISosmed[]>([]);
+  const { data: theme } = useContext(ThemeContext) as IThemeContext;
+
+  console.log(theme);
 
   useEffect(() => {
     (async () => {
@@ -39,13 +45,15 @@ function HelpButton() {
           </p>
           {data.map((item) => (
             <div
-              className="flex hover:bg-theme-primary-50 gap-4 px-2 cursor-pointer items-center"
+              className={`flex hover:bg-zinc-50 gap-4 px-2 py-1 cursor-pointer items-center`}
               key={item.key}
             >
-              <div className="w-7 p-0.5 bg-theme-primary-500 rounded-full flex items-center justify-center">
+              <div
+                className={`w-7 p-0.5 bg-[${theme.primary}] rounded-full flex items-center justify-center`}
+              >
                 <Socmed type={item.key} />
               </div>
-              <p className="text-xs text-theme-primary-900">{item.name}</p>
+              <p className={`text-xs text-[${theme.primary}]`}>{item.name}</p>
             </div>
           ))}
         </div>

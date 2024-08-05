@@ -1,5 +1,6 @@
+"use client";
+
 import React, { useContext, useState } from "react";
-import SelectedPayment from "./selected-payment";
 import Image from "next/image";
 import { priceMask } from "@/Helpers";
 import TransactionContext, {
@@ -13,11 +14,15 @@ import {
 } from "@/components/ui/accordion";
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
+import ThemeContext, {
+  IThemeContext,
+} from "@/infrastructures/context/theme/theme.context";
 
 function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
   const { dispatch, data } = useContext(
     TransactionContext
   ) as ITransactionContext;
+  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   return (
     <>
@@ -32,9 +37,9 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                 {group.payment_method.map((item) => (
                   <Card
                     key={item.name}
-                    className={`flex hover:bg-slate-50 rounded-lg justify-between items-center px-3 py-3 cursor-pointer ${
+                    className={`flex hover:bg-zinc-50 rounded-lg justify-between items-center px-3 py-3 cursor-pointer ${
                       data.payment?.payment_channel == item.payment_channel &&
-                      "border-2 border-theme-primary-500"
+                      `border-2 border-[${theme.primary}]`
                     }`}
                     onClick={(e) => {
                       dispatch({
