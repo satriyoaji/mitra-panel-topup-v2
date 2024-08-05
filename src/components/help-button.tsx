@@ -26,7 +26,7 @@ function HelpButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="default" size="sm">
+        <Button variant="outline" size="sm">
           <ChatBubbleIcon className="w-3 h-3" />
           <p className="text-xs ml-1">Bantuan</p>
         </Button>

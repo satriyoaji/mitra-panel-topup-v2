@@ -13,12 +13,22 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const { toast } = useToast();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      return toast({
+        title: "Failed",
+        description:
+          "Konfirmasi password anda tidak sesuai dengan password anda",
+        variant: "destructive",
+      });
+    }
 
     setLoading(true);
     var res = await fetch("/api/register", {
@@ -47,7 +57,7 @@ function Page() {
     <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex space-y-2 justify-center items-center w-full">
-          <div className="w-full md:flex hidden justify-center">
+          {/* <div className="w-full md:flex hidden justify-center">
             <Image
               src={
                 "/assets/illustration/DrawKit Larry Character Illustration (8).svg"
@@ -56,14 +66,14 @@ function Page() {
               width={220}
               height={220}
             />
-          </div>
-          <div className="w-full flex justify-center md:justify-start">
+          </div> */}
+          <div className="w-full flex justify-center">
             <div className="border p-8 bg-background rounded-lg shadow-md w-full max-w-md">
-              <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight">
-                🔐Register
+              <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight text-red-800">
+                Register
               </h1>
               <form
-                className="w-full max-w-md grid gap-2 pt-4"
+                className="w-full max-w-md grid gap-4 pt-4"
                 onSubmit={onSubmit}
               >
                 <div className="grid w-full max-w-sm gap-1.5">
@@ -90,18 +100,6 @@ function Page() {
                   />
                 </div>
                 <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="password" className="text-left">
-                    Password
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="Masukan Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="grid w-full max-w-sm gap-1.5">
                   <Label htmlFor="Whatsapp" className="text-left">
                     No. Whatsapp
                   </Label>
@@ -113,17 +111,42 @@ function Page() {
                     onValueChange={(e) => setPhone(`${e}`)}
                   />
                 </div>
+                <div className="grid w-full max-w-sm gap-1.5">
+                  <Label htmlFor="password" className="text-left">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Minimum 6 digit sandi"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="grid w-full max-w-sm gap-1.5">
+                  <Label htmlFor="password" className="text-left">
+                    Ketik Ulang Sandi
+                  </Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Minimum 6 digit sandi"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
                 <div className="mt-4 space-y-1">
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? "Loading..." : "Register"}
                   </Button>
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center space-x-1 pt-2">
                     <p className="text-xs">Sudah Punya Akun? </p>
-                    <Link href="/auth/login">
-                      <Button variant="link" size="sm" className="w-full">
-                        Login
-                      </Button>
+                    <Link
+                      href="/auth/login"
+                      className="text-xs hover:underline underline-offset-4"
+                    >
+                      Login
                     </Link>
                   </div>
                 </div>
