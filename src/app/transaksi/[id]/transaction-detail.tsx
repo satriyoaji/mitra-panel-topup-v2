@@ -6,7 +6,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
-import { ITransactionHistoryDetail } from "@/types/transaction";
+import {
+  ETransactionStatus,
+  ITransactionHistoryDetail,
+} from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import VAPayment from "./(payment)/va-payment";
@@ -57,7 +60,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
           </div>
           <div className="w-full my-2">
             <Alert className="bg-red-50 text-red-900">
-              <InfoCircledIcon className="text-white" />
+              <InfoCircledIcon />
               <AlertTitle>Penting!</AlertTitle>
               <AlertDescription className="text-xs">
                 Pastikan anda menyimpan nomor transaksi dan email serta nomor
@@ -67,7 +70,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
           </div>
           <div className="flex flex-row justify-stretch items-center">
             <div className="grid md:grid-cols-2 w-full gap-4 h-full mt-2 auto-rows-fr">
-              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
+              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1 row-span-full">
                 <p className="font-medium text-lg text-red-800">
                   Rincian Transaksi
                 </p>
@@ -116,8 +119,8 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   </div>
                 </div>
               </div>
-              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
-                <div>
+              <div className="w-full bg-background h-full pt-4 rounded-lg shadow flex-1 relative overflow-clip">
+                <div className="px-4">
                   <p className="font-medium text-lg text-red-800">
                     Rincian Pembayaran
                   </p>
@@ -157,7 +160,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   </div>
                 </div>
                 <Separator className="my-3 w-full" />
-                <div>
+                <div className="px-4">
                   <p className="font-medium text-lg text-red-800">
                     Tujuan Pembayaran
                   </p>
@@ -172,7 +175,37 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                     )}
                   </div>
                 </div>
+                <div className="w-full bottom-0 mt-6">
+                  {data.status == ETransactionStatus.Refunded ? (
+                    <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                      <InfoCircledIcon />
+                      <p className="text-xs">
+                        Jika transaksi gagal, saldo anda akan dikembalikan dalam
+                        bentuk point
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="bg-blue-50 border flex items-center rounded-b-lg space-x-2 text-blue-800 px-4 py-1.5">
+                      <InfoCircledIcon />
+                      <p className="text-xs">
+                        Saldo anda sudah dikembalikan. Silahkan cek{" "}
+                        <Link href="/profile" className="font-semibold">
+                          Saldo Point
+                        </Link>
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
+              {data.payment_information.guide ? (
+                <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: data.payment_information.guide,
+                    }}
+                  ></div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
