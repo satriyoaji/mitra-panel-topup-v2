@@ -8,7 +8,6 @@ const getInitialState = (): ITheme => {
   return global?.window?.localStorage?.getItem("theme")
     ? JSON.parse(localStorage.getItem("theme") as string)
     : {
-        logo: "/assets/illustration/logo/1.png",
         primary: "#ef4444",
       };
 };

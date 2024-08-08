@@ -33,8 +33,15 @@ function ProductCard(props: prop) {
 
   return (
     <div
+      style={
+        props.selected
+          ? {
+              borderColor: theme.primary,
+            }
+          : {}
+      }
       className={`min-h-[4rem] overflow-clip flex items-center relative h-full bg-white hover:bg-zinc-50 rounded-xl cursor-pointer ${
-        props.selected ? `border-2 border-[${theme.primary}]` : "border"
+        props.selected ? `border-2` : "border"
       }`}
       onClick={props.onClick}
     >

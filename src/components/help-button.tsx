@@ -32,7 +32,11 @@ function HelpButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button
+          variant="outline"
+          size="sm"
+          style={{ color: theme.primary, borderColor: theme.primary }}
+        >
           <ChatBubbleIcon className="w-3 h-3" />
           <p className="text-xs ml-1">Bantuan</p>
         </Button>
@@ -49,11 +53,16 @@ function HelpButton() {
               key={item.key}
             >
               <div
-                className={`w-7 p-0.5 bg-[${theme.primary}] rounded-full flex items-center justify-center`}
+                style={{
+                  background: theme.primary,
+                }}
+                className={`w-7 p-0.5 rounded-full flex items-center justify-center`}
               >
                 <Socmed type={item.key} />
               </div>
-              <p className={`text-xs text-[${theme.primary}]`}>{item.name}</p>
+              <p style={{ color: theme.primary }} className={`text-xs`}>
+                {item.name}
+              </p>
             </div>
           ))}
         </div>

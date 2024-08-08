@@ -20,11 +20,19 @@ function FormWrapper({
       <CardContent>
         <div className="flex gap-2 items-center mt-3 mb-4">
           <div
-            className={`bg-[${theme.primary}] p-2 w-7 h-7 flex justify-center items-center rounded-full`}
+            style={{
+              background: theme.primary,
+            }}
+            className={` p-2 w-7 h-7 flex justify-center items-center rounded-full`}
           >
             <h6 className="font-bold rounded-full text-white">{number}</h6>
           </div>
-          <h6 className={`font-medium ml-1 text-[${theme.primary}]`}>
+          <h6
+            style={{
+              color: theme.primary,
+            }}
+            className={`font-medium ml-1 `}
+          >
             {title}
           </h6>
         </div>
