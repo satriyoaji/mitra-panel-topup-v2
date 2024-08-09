@@ -1,10 +1,7 @@
 import React from "react";
-import { Card, CardContent } from "../../components/ui/card";
 import Link from "next/link";
-import { LightningBoltIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
 import { IFlashSaleInProduct } from "@/types/flash-sale";
-import Image from "next/image";
 
 function FlashSaleCard({
   data,
@@ -22,39 +19,13 @@ function FlashSaleCard({
       className="w-full h-full"
     >
       <div
-        className={`min-h-[6rem] h-full bg-white hover:bg-slate-50 rounded-xl border-t-0 border-r-0 ${
-          selected ? "border-4 border-theme-secondary" : "border"
+        className={`min-h-[6rem] h-full bg-white hover:bg-zinc-50 rounded-xl overflow-clip border-t-0 border-r-0 ${
+          selected ? "border-4" : "border"
         }`}
       >
         <div className="p-0 flex flex-col m-0 h-full">
-          {/* <div className="flex flex-row-reverse">
-                        <div>
-                            <div
-                                style={{ fontSize: "65%" }}
-                                className="text-xs bg-red-500 w-fit flex text-white font-semibold space-x-1 px-2 py-0.5 rounded-bl-lg rounded-tr"
-                            >
-                                <p>Hemat {priceMask(data?.discount_price)}</p>
-                                <LightningBoltIcon />
-                            </div>
-                        </div>
-                    </div> */}
           <div className="pt-3 flex flex-col justify-between h-full items-start">
             <div className="flex space-x-0.5 px-3 ">
-              {/* <div className="overflow-clip rounded w-fit min-w-[2rem]">
-                {data.image_url ? (
-                  <Image
-                    width={30}
-                    height={30}
-                    alt={data.name}
-                    className="rounded hover:scale-125 transition duration-300 hover:rotate-12"
-                    src={data.image_url}
-                  />
-                ) : (
-                  <div className="p-1 aspect-square hover:scale-125 transition duration-300 hover:rotate-12 flex justify-center items-center">
-                    <SketchLogoIcon className="m-auto w-5 h-5" />
-                  </div>
-                )}
-              </div> */}
               <p className="text-xs font-semibold">{data.name}</p>
             </div>
             <div className="w-full px-3 ">
@@ -80,8 +51,8 @@ function FlashSaleCard({
                 </div>
               </div>
             </div>
-            <div className="h-full w-full flex items-end rounded-b-lg mt-2.5">
-              <div className="bg-theme-primary-50 text-theme-primary-300 w-full rounded-b-lg">
+            <div className="h-full w-full flex items-end mt-2.5">
+              <div className="bg-zinc-100 text-zinc-400 w-full">
                 <p className="text-xs text-center p-1">{data.category_key}</p>
               </div>
             </div>

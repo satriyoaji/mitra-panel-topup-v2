@@ -90,7 +90,7 @@ function Searchbar() {
             data.map((i, idx) => (
               <div
                 key={idx}
-                className="px-5 py-2 hover:bg-slate-50 cursor-pointer"
+                className="px-5 py-2 hover:bg-zinc-50 cursor-pointer"
                 onClick={() => {
                   router.push(`/games/${i.key}`);
                   setIsOpen(false);
