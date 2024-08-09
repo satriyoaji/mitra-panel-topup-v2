@@ -44,7 +44,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
         <div className="md:grid grid-cols-1">
           <div>
             <div className="grid gap-4 py-4">
-              <Card className="bg-slate-50  p-4">
+              <Card className="bg-zinc-50  p-4">
                 <div className="text-xs mb-4 flex items-center space-x-4">
                   {/* {val.logo_image !== "" ? (
                                             <img

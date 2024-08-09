@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { ArrowUpIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -26,7 +26,7 @@ function HelpButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="default" size="sm">
+        <Button variant="outline" size="sm">
           <ChatBubbleIcon className="w-3 h-3" />
           <p className="text-xs ml-1">Bantuan</p>
         </Button>
@@ -37,17 +37,21 @@ function HelpButton() {
           <p className="text-xs text-muted-foreground">
             Anda bisa meminta bantuan melalui link dibawah.
           </p>
-          {data.map((item) => (
-            <div
-              className="flex hover:bg-theme-primary-50 gap-4 px-2 cursor-pointer items-center"
-              key={item.key}
-            >
-              <div className="w-7 p-0.5 bg-theme-primary-500 rounded-full flex items-center justify-center">
-                <Socmed type={item.key} />
+          <div className="mt-2 space-y-1.5">
+            {data.map((item) => (
+              <div
+                className={`flex hover:bg-zinc-50 gap-4 px-2 cursor-pointer items-center`}
+                key={item.key}
+              >
+                <div
+                  className={`w-7  p-0.5 rounded-full flex items-center justify-center`}
+                >
+                  <Socmed type={item.key} />
+                </div>
+                <p className={`text-xs text-primary`}>{item.name}</p>
               </div>
-              <p className="text-xs text-theme-primary-900">{item.name}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </PopoverContent>
     </Popover>

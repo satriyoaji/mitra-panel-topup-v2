@@ -40,7 +40,7 @@ function Header({ category }: { category: IProductCategory }) {
                 />
               </div>
             ) : (
-              <div className="border rounded flex items-center justify-center w-16 h-16 bg-slate-200">
+              <div className="border rounded flex items-center justify-center w-16 h-16 bg-zinc-200">
                 <CubeIcon className="w-10 h-10 text-white" />
               </div>
             )}

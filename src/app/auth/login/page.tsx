@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { redirect, useSearchParams } from "next/navigation";
-import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -42,7 +41,7 @@ function Page() {
     <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex space-y-2 justify-center items-center w-full">
-          <div className="w-full md:flex justify-center hidden">
+          {/* <div className="w-full md:flex justify-center hidden">
             <Image
               src={
                 "/assets/illustration/DrawKit Larry Character Illustration (8).svg"
@@ -51,15 +50,15 @@ function Page() {
               width={220}
               height={220}
             />
-          </div>
-          <div className="w-full flex justify-center md:justify-start">
+          </div> */}
+          <div className="w-full flex justify-center">
             <div className="border bg-background p-8 rounded-lg shadow-md w-full max-w-md">
-              <h1 className="pt-4 text-2xl font-semibold text-center tracking-tight">
-                🔐Login
+              <h1 className="pt-4 text-2xl font-semibold text-center tracking-tight text-primary">
+                Login
               </h1>
               <form
                 onSubmit={onSubmit}
-                className="w-full max-w-md grid gap-2 pt-4"
+                className="w-full max-w-md grid gap-4 pt-4"
               >
                 <div className="grid w-full max-w-sm gap-1.5">
                   <Label htmlFor="username" className="text-left">
@@ -69,7 +68,7 @@ function Page() {
                     id="username"
                     name="username"
                     type="email"
-                    placeholder="Masukan Email"
+                    placeholder="✉️ Masukan Email..."
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
@@ -81,7 +80,7 @@ function Page() {
                     id="password"
                     type="password"
                     name="password"
-                    placeholder="Masukan Password"
+                    placeholder="🔐 Masukan Password..."
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -92,15 +91,23 @@ function Page() {
                   </Button>
                   <div className="flex flex-col -space-y-2 items-center justify-center">
                     <Link href="/auth/reset-password">
-                      <Button variant="link" size="sm" className="w-full">
+                      <Button
+                        variant="link"
+                        size="sm"
+                        className="w-full font-normal"
+                      >
                         Lupa Password?
                       </Button>
                     </Link>
-                    <Link href="/auth/register">
-                      <Button variant="link" size="sm" className="w-full">
-                        Belum Punya Akun? Register
-                      </Button>
-                    </Link>
+                    <div className="flex items-center justify-center space-x-1 pt-2">
+                      <p className="text-xs">Belum Punya Akun? </p>
+                      <Link
+                        href="/auth/register"
+                        className="text-xs hover:underline underline-offset-4"
+                      >
+                        Register
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </form>
