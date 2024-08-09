@@ -59,17 +59,17 @@ function TransactionHistoryDetail({ id }: { id: string }) {
             </div>
           </div>
           <div className="w-full my-2">
-            <Alert className="bg-red-50 text-red-900">
-              <InfoCircledIcon />
-              <AlertTitle>Penting!</AlertTitle>
-              <AlertDescription className="text-xs">
-                Pastikan anda menyimpan nomor transaksi dan email serta nomor
-                telpon yang anda gunakan dalam proses transaksi.
-              </AlertDescription>
-            </Alert>
+            <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
+              <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
+                <p className="text-xs font-bold">i</p>
+              </div>
+              <p className="text-xs">
+                Transaksi tanpa login, wajib simpan ID transaksi & No HP.
+              </p>
+            </div>
           </div>
           <div className="flex flex-row justify-stretch items-center">
-            <div className="grid md:grid-cols-2 w-full gap-4 h-full mt-2 auto-rows-fr">
+            <div className="grid md:grid-cols-2 w-full gap-3 h-full mt-1 auto-rows-fr">
               <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1 row-span-full">
                 <p className="font-medium text-lg text-red-800">
                   Rincian Transaksi
@@ -176,7 +176,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                   </div>
                 </div>
                 <div className="w-full bottom-0 mt-6">
-                  {data.status == ETransactionStatus.Refunded ? (
+                  {data.status !== ETransactionStatus.Refunded ? (
                     <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
                       <InfoCircledIcon />
                       <p className="text-xs">

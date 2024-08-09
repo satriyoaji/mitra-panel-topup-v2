@@ -37,19 +37,21 @@ function HelpButton() {
           <p className="text-xs text-muted-foreground">
             Anda bisa meminta bantuan melalui link dibawah.
           </p>
-          {data.map((item) => (
-            <div
-              className={`flex hover:bg-zinc-50 gap-4 px-2 py-1 cursor-pointer items-center`}
-              key={item.key}
-            >
+          <div className="mt-2 space-y-1.5">
+            {data.map((item) => (
               <div
-                className={`w-7 bg-primary p-0.5 rounded-full flex items-center justify-center`}
+                className={`flex hover:bg-zinc-50 gap-4 px-2 cursor-pointer items-center`}
+                key={item.key}
               >
-                <Socmed type={item.key} />
+                <div
+                  className={`w-7  p-0.5 rounded-full flex items-center justify-center`}
+                >
+                  <Socmed type={item.key} />
+                </div>
+                <p className={`text-xs text-primary`}>{item.name}</p>
               </div>
-              <p className={`text-xs text-primary`}>{item.name}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </PopoverContent>
     </Popover>

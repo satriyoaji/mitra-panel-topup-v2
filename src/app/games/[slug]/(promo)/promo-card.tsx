@@ -56,10 +56,10 @@ function PromoCard({
                 <p className="text-xs text-center">Tersisa {promo.stock}</p>
               ) : null}
             </div>
-            <div className="items-center justify-center pt-4 w-full bg-gradient-to-br from-primary/50 to-primary/90">
-              <div className="pr-4 pl-6 space-y-2">
-                <div className="flex justify-between items-center">
-                  <p className="text-xs py-1 px-2 rounded bg-primary-200 text-primary-900 font-medium w-fit">
+            <div className="items-center justify-center w-full bg-primary">
+              <div className="pr-4 pl-6 space-y-2 bg-gradient-to-br from-white/50 to-white/90">
+                <div className="flex pt-3 justify-between items-center">
+                  <p className="text-xs py-1 px-2 bg-primary-200 text-primary-900 font-medium w-fit">
                     {promo.promo_code}
                   </p>
                   {onDetailClicked && (
@@ -79,7 +79,7 @@ function PromoCard({
                 <div className="flex-row justify-between items-center rounded-xl px-2 py-1 bg-background">
                   <p className="text-sm font-medium">{promo.name}</p>
                 </div>
-                <p className="text-xs pl-1">{promo.short_description}</p>
+                <p className="text-xs pl-1 pb-3">{promo.short_description}</p>
               </div>
               {isSecret ? (
                 <div className="bg-primary-400 text-white mt-4 rounded-br">
@@ -87,10 +87,8 @@ function PromoCard({
                     Secret Promo
                   </p>
                 </div>
-              ) : (
-                <div className="pb-4"></div>
-              )}
-              <div className={`px-3 py-2 bg-primary-900 text-primary-50`}>
+              ) : null}
+              <div className={`px-3 py-2 bg-red-100 text-primary-50`}>
                 <p className="text-xs">
                   Berakhir dalam
                   <span className="font-semibold ml-1">

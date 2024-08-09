@@ -39,15 +39,6 @@ export default function TemplateLayout({
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: ` :root {
-                             --primary: ${HexToHSL(
-                               profile?.theme_color ?? "#000"
-                             )};
-                           }`,
-        }}
-      />
       <PWAAlert profile={profile} />
       <Header profile={profile} />
       <div>
