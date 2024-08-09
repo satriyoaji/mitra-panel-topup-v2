@@ -1,6 +1,9 @@
+"use client";
+
 import "./globals.css";
 import ThemeProvider from "@/infrastructures/context/theme/theme.provider";
-import { NextAuthProvider } from "./_app";
+import { SessionProvider } from "next-auth/react";
+import TransactionProvider from "@/infrastructures/context/transaction/transaction.provider";
 
 export default function RootTemplateLayout({
   children,
@@ -9,7 +12,9 @@ export default function RootTemplateLayout({
 }) {
   return (
     <ThemeProvider>
-      <NextAuthProvider>{children}</NextAuthProvider>
+      <SessionProvider>
+        <TransactionProvider>{children}</TransactionProvider>
+      </SessionProvider>
     </ThemeProvider>
   );
 }

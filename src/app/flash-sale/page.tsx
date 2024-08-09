@@ -12,9 +12,6 @@ import { debounce } from "@/Helpers";
 import Image from "next/image";
 import Loading from "../loading";
 import { IFlashSaleInfo } from "@/types/flash-sale";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import CountdownCard from "../dashboard/countdown-card";
 import { parseISO } from "date-fns";
 
@@ -24,7 +21,6 @@ function Page() {
   const [data, setData] = useState<IFlashSaleInfo | undefined>();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   const getFlashSale = async () => {
     let searchParams = new URLSearchParams({

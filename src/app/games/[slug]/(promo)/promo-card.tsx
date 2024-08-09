@@ -30,14 +30,12 @@ function PromoCard({
     return (
       <>
         <div
-          className={`rounded-xl relative shadow-sm cursor-pointer text-theme-primary-900 overflow-clip hover:bg-zinc-50 ${
-            promo.id == selected?.id
-              ? "border-2 border-theme-primary"
-              : "border-2"
+          className={`rounded-xl relative shadow-sm cursor-pointer text-primary-900 overflow-clip hover:bg-zinc-50 ${
+            promo.id == selected?.id ? "border-2 border-primary" : "border-2"
           }`}
         >
           {onClose && (
-            <div className="absolute right-0 top-0 p-1.5 bg-theme-primary-200 rounded-bl-xl text-theme-primary-700">
+            <div className="absolute right-0 top-0 p-1.5 bg-primary-200 rounded-bl-xl text-primary-700">
               <Cross1Icon className="w-3 h-3" onClick={onClose} />
             </div>
           )}
@@ -58,17 +56,17 @@ function PromoCard({
                 <p className="text-xs text-center">Tersisa {promo.stock}</p>
               ) : null}
             </div>
-            <div className="items-center justify-center pt-4 w-full bg-gradient-to-br from-theme-primary-50 to-theme-primary-200">
+            <div className="items-center justify-center pt-4 w-full bg-gradient-to-br from-primary/50 to-primary/90">
               <div className="pr-4 pl-6 space-y-2">
                 <div className="flex justify-between items-center">
-                  <p className="text-xs py-1 px-2 rounded bg-theme-primary-200 text-theme-primary-900 font-medium w-fit">
+                  <p className="text-xs py-1 px-2 rounded bg-primary-200 text-primary-900 font-medium w-fit">
                     {promo.promo_code}
                   </p>
                   {onDetailClicked && (
                     <Button
                       size="sm"
                       variant="link"
-                      className="text-theme-primary-900 text-xs"
+                      className="text-primary-900 text-xs"
                       onClick={(e) => {
                         e.stopPropagation();
                         onDetailClicked(promo);
@@ -84,7 +82,7 @@ function PromoCard({
                 <p className="text-xs pl-1">{promo.short_description}</p>
               </div>
               {isSecret ? (
-                <div className="bg-theme-primary-400 text-white mt-4 rounded-br">
+                <div className="bg-primary-400 text-white mt-4 rounded-br">
                   <p className="text-center text-xs font-semibold">
                     Secret Promo
                   </p>
@@ -92,9 +90,7 @@ function PromoCard({
               ) : (
                 <div className="pb-4"></div>
               )}
-              <div
-                className={`px-3 py-2 bg-theme-primary-900 text-theme-primary-50`}
-              >
+              <div className={`px-3 py-2 bg-primary-900 text-primary-50`}>
                 <p className="text-xs">
                   Berakhir dalam
                   <span className="font-semibold ml-1">

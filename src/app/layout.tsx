@@ -50,11 +50,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <RootTemplateLayout>
-        <ThemeWrapper>
-          <TemplateLayout>{children}</TemplateLayout>
-        </ThemeWrapper>
-      </RootTemplateLayout>
+      <body className="min-h-screen bg-repeat antialiased">
+        <RootTemplateLayout>
+          <div className="bg-zinc-50">
+            <TemplateLayout>{children}</TemplateLayout>
+          </div>
+        </RootTemplateLayout>
+      </body>
     </html>
   );
 }

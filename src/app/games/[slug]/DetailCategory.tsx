@@ -48,10 +48,7 @@ function DetailCategory(props: Props) {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
-            <h4
-              style={{ color: theme.primary }}
-              className="text-lg font-bold ml-4"
-            >
+            <h4 className="text-lg font-bold ml-4 text-primary">
               {props.data.category.name}
             </h4>
           </div>

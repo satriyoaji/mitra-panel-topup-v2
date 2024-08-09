@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useContext } from "react";
 import { Poppins as FontSans } from "next/font/google";
 

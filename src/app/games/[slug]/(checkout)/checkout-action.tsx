@@ -108,7 +108,6 @@ function CheckoutAction({
   };
 
   const getTotal = useCallback(() => {
-    console.log("CALLED");
     let num = 0;
 
     if (data.product)

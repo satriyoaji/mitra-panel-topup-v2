@@ -39,7 +39,7 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                     key={item.name}
                     className={`flex hover:bg-zinc-50 rounded-lg justify-between items-center px-3 py-3 cursor-pointer ${
                       data.payment?.payment_channel == item.payment_channel &&
-                      `border-2 border-[${theme.primary}]`
+                      `border-2 border-primary`
                     }`}
                     onClick={(e) => {
                       dispatch({

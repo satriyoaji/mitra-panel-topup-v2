@@ -45,8 +45,8 @@ function CarouselV2({ data }: { data: IBanner[] }) {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="ml-16 bg-background border-theme-primary-500 text-theme-primary-500 hover:text-theme-primary-600" />
-          <CarouselNext className="mr-16 bg-background border-theme-primary-500 text-theme-primary-500 hover:text-theme-primary-600" />
+          <CarouselPrevious className="ml-16 bg-background border-primary text-primary " />
+          <CarouselNext className="mr-16 bg-background border-primary text-primary " />
         </Carousel>
       </div>
     </div>

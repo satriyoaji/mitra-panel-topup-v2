@@ -122,7 +122,7 @@ function Page() {
           <div className="mt-6 mb-4">
             <Dialog>
               <DialogTrigger
-                className={`md:hidden flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer w-full hover:bg-[${theme.primary}]`}
+                className={`md:hidden flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer w-full hover:bg-primary`}
               >
                 <DiscIcon className="mr-3" /> Saldo Point History
               </DialogTrigger>
@@ -134,13 +134,13 @@ function Page() {
             </Dialog>
             <Link
               href="/transaksi"
-              className={`flex px-3 py-2 space-x-3 items-center text-sm hover:bg-[${theme.primary}]`}
+              className={`flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50`}
             >
               <ReaderIcon className="mr-3" /> Daftar Transaksi
             </Link>
             <p
               onClick={() => signOut()}
-              className={`flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-[${theme.primary}]`}
+              className={`flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-slate-50`}
             >
               <ExitIcon className="mr-3" /> Logout
             </p>

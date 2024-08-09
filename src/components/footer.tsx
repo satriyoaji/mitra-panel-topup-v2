@@ -92,12 +92,8 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                 {data?.map((item, idx) => (
                   <Link
                     key={`${idx}`}
-                    className={`mr-2 mb-2 rounded-full`}
+                    className={`mr-2 mb-2 rounded-full bg-primary text-primary`}
                     href={item.value}
-                    style={{
-                      background: `${theme.primary}`,
-                      color: `${theme.primary}`,
-                    }}
                   >
                     <div className="p-0.5">
                       <div className="w-6 h-6">
@@ -111,7 +107,7 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
           </div>
         </div>
       </div>
-      <div className={`w-full p-3`} style={{ background: theme.primary }}>
+      <div className={`w-full p-3 bg-primary`}>
         <p className="text-white text-xs px-2">
           {`Copyright © ${new Date().getFullYear()}`}{" "}
           <span className="font-semibold">Panel VC Gamers</span>

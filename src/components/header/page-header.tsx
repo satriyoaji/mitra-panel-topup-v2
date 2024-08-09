@@ -1,22 +1,18 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import Image from "next/image";
 import { ISiteProfile } from "@/types/utils";
 import Searchbar from "@/app/dashboard/searchbar";
@@ -49,16 +45,6 @@ function Header({ profile }: { profile?: ISiteProfile }) {
   const router = useRouter();
   const [invoice, setInvoice] = useState<string | undefined>("");
   const [open, setOpen] = useState(false);
-  const { dispatch } = useContext(ThemeContext) as IThemeContext;
-
-  useEffect(() => {
-    if (profile?.theme_color) {
-      dispatch({
-        action: "SET_PRIMARY_COLOR",
-        payload: profile.theme_color,
-      });
-    }
-  }, []);
 
   return (
     <header className="w-full flex justify-center z-20 bg-white/90 backdrop-blur-md items-center top-0 sticky p-1">

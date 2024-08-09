@@ -20,7 +20,7 @@ function FlashSaleCard({
     >
       <div
         className={`min-h-[6rem] h-full bg-white hover:bg-zinc-50 rounded-xl overflow-clip border-t-0 border-r-0 ${
-          selected ? "border-4 border-theme-primary" : "border"
+          selected ? "border-4" : "border"
         }`}
       >
         <div className="p-0 flex flex-col m-0 h-full">

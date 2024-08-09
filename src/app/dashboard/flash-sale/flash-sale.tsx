@@ -58,7 +58,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
                             backgroundImage: 'url("/assets/thunder.svg")',
                           }}
                         >
-                          <div className="bg-theme-primary-300/95 flex items-center justify-center rounded-lg w-full">
+                          <div className="bg-white/10 flex items-center justify-center rounded-lg w-full">
                             <p className="text-sm text-white font-medium">
                               See More
                             </p>

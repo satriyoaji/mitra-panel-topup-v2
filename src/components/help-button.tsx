@@ -6,15 +6,9 @@ import { ArrowUpIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function HelpButton() {
   const [data, setData] = useState<ISosmed[]>([]);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
-
-  console.log(theme);
 
   useEffect(() => {
     (async () => {
@@ -32,11 +26,7 @@ function HelpButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          style={{ color: theme.primary, borderColor: theme.primary }}
-        >
+        <Button variant="outline" size="sm">
           <ChatBubbleIcon className="w-3 h-3" />
           <p className="text-xs ml-1">Bantuan</p>
         </Button>
@@ -53,16 +43,11 @@ function HelpButton() {
               key={item.key}
             >
               <div
-                style={{
-                  background: theme.primary,
-                }}
-                className={`w-7 p-0.5 rounded-full flex items-center justify-center`}
+                className={`w-7 bg-primary p-0.5 rounded-full flex items-center justify-center`}
               >
                 <Socmed type={item.key} />
               </div>
-              <p style={{ color: theme.primary }} className={`text-xs`}>
-                {item.name}
-              </p>
+              <p className={`text-xs text-primary`}>{item.name}</p>
             </div>
           ))}
         </div>

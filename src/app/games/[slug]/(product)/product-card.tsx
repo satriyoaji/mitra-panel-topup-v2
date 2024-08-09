@@ -21,8 +21,6 @@ type prop = {
 };
 
 function ProductCard(props: prop) {
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
-
   const discountPercent = useMemo(() => {
     if (props.discountedPrice)
       return Math.ceil(
@@ -33,15 +31,8 @@ function ProductCard(props: prop) {
 
   return (
     <div
-      style={
-        props.selected
-          ? {
-              borderColor: theme.primary,
-            }
-          : {}
-      }
       className={`min-h-[4rem] overflow-clip flex items-center relative h-full bg-white hover:bg-zinc-50 rounded-xl cursor-pointer ${
-        props.selected ? `border-2` : "border"
+        props.selected ? `border-2 border-primary` : "border"
       }`}
       onClick={props.onClick}
     >
@@ -83,7 +74,7 @@ function ProductCard(props: prop) {
           <div className="w-full pl-2.5 ">
             <p
               className={`text-xs font-semibold ${
-                props.selected ? `text-[${theme.primary}]` : ""
+                props.selected ? `text-primary` : ""
               }`}
             >
               {props.name}
