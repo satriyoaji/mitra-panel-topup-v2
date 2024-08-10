@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
   var credentialHeader = GetCredHeader();
 
   // fetch data
-  const res = await fetch(`${process.env.API}/site-profile`, {
+  const res = await fetch(`${process.env.NEXT_API_URL}/v2/panel/site-profile`, {
     headers: {
       "Content-Type": "application/json",
       "X-Sign": credentialHeader.sign,
