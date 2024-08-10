@@ -1,5 +1,4 @@
 import RootTemplateLayout from "./root-layout";
-import ThemeWrapper from "./theme-wrapper";
 import TemplateLayout from "./template-layout";
 import { Metadata } from "next";
 import { GetCredHeader } from "./api/api-utils";
@@ -21,11 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   if (res.ok) {
     var data = await res.json();
     var setting: ISiteProfile = data.data;
-    // optionally access and extend (rather than replace) parent metadata
-    // const dev = process.env.NODE_ENV !== "production";
-    // const server = dev
-    //   ? "http://localhost:3000"
-    //   : "https://your_deployment.server.com";
+
     return {
       manifest: "/api/manifest.json",
       title: setting.name,

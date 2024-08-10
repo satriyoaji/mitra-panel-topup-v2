@@ -71,6 +71,7 @@ function DetailProfile(props: prop) {
             id="name"
             name="name"
             type="text"
+            autoFocus={false}
             placeholder="Masukan Nama"
             onChange={(e) => setName(e.target.value)}
             value={name}
@@ -82,6 +83,7 @@ function DetailProfile(props: prop) {
             id="email"
             name="email"
             type="email"
+            autoFocus={false}
             placeholder="Masukan Email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
@@ -93,6 +95,7 @@ function DetailProfile(props: prop) {
             onValueChange={(e) => {
               setPhone(`${e}`);
             }}
+            autoFocus={false}
             value={phone}
             placeholder="Masukan No. Whatsapp"
           />

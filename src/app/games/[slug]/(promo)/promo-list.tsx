@@ -136,6 +136,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
               <Input
                 placeholder="Punya Kode Promo? Masukan di sini"
                 value={hiddenPromoCode}
+                autoFocus={true}
                 onChange={(e) => setHiddenPromoCode(e.target.value)}
               />
               <Button disabled={loading} size="sm" onClick={getHiddenPromo}>
