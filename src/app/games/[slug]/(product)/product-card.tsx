@@ -31,7 +31,7 @@ function ProductCard(props: prop) {
 
   return (
     <div
-      className={`min-h-[4rem] overflow-clip flex items-center relative h-full bg-white hover:bg-zinc-50 rounded-xl cursor-pointer ${
+      className={`min-h-[4rem] overflow-clip flex items-center py-1 pr-1 relative h-full bg-white hover:bg-zinc-50 rounded-xl cursor-pointer ${
         props.selected ? `border-2 border-primary` : "border"
       }`}
       onClick={props.onClick}
@@ -81,7 +81,7 @@ function ProductCard(props: prop) {
             </p>
             <div className="flex justify-between items-end">
               {props.discountedPrice && props.discountedPrice > 0 ? (
-                <div className="flex items-center gap-1">
+                <div className="md:flex items-center gap-1">
                   <p
                     className="line-through font-normal text-muted-foreground text-xs mt-0.5"
                     style={{ fontSize: "70%" }}

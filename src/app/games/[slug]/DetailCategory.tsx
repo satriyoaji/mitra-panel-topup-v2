@@ -48,7 +48,7 @@ function DetailCategory(props: Props) {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
-            <h4 className="text-lg font-bold ml-4 text-primary">
+            <h4 className="text-lg font-bold ml-4 text-primary p-0">
               {props.data.category.name}
             </h4>
           </div>
@@ -58,7 +58,7 @@ function DetailCategory(props: Props) {
             </div>
           </div>
           <div className="col-span-3 ">
-            <div ref={props.productListRef}>
+            <div ref={props.productListRef} className="mt-4 md:mt-0">
               <FormWrapper number={1} title="Produk">
                 <ProductList
                   // category={data.category.name}

@@ -22,12 +22,12 @@ export async function generateMetadata(): Promise<Metadata> {
     var data = await res.json();
     var setting: ISiteProfile = data.data;
     // optionally access and extend (rather than replace) parent metadata
-    const dev = process.env.NODE_ENV !== "production";
-    const server = dev
-      ? "http://localhost:3000"
-      : "https://your_deployment.server.com";
+    // const dev = process.env.NODE_ENV !== "production";
+    // const server = dev
+    //   ? "http://localhost:3000"
+    //   : "https://your_deployment.server.com";
     return {
-      manifest: server + "/api/manifest.json",
+      manifest: "/api/manifest.json",
       title: setting.name,
       description: setting.description,
       keywords: setting.keywords,

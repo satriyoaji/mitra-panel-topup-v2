@@ -3,8 +3,9 @@ import { GetAuthHeader } from "../../api-utils";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url as string);
+  let qParams = url.searchParams;
 
-  var re = await fetch(`${process.env.API}/category?` + url.searchParams, {
+  var re = await fetch(`${process.env.API}/category?` + qParams, {
     next: {
       revalidate: 30,
     },
