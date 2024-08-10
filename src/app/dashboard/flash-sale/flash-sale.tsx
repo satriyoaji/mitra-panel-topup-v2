@@ -8,6 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
@@ -15,7 +16,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
       <div className="relative flex justify-center md:p-4 my-4 md:my-0">
-        <div className="max-w-6xl p-2 md:p-0 w-full bg-primary rounded-xl overflow-clip">
+        <div className="max-w-6xl p-0 w-full bg-primary rounded-xl overflow-clip">
           <div className="bg-gradient-to-br from-white/90 to-white/30 backdrop-blur pb-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center py-1 pr-1 rounded-tl-lg rounded-br-lg mt-2">
@@ -40,7 +41,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
             </div>
             <div className="flex items-center relative py-1">
               <Carousel className="py-1 rounded-x w-full">
-                <CarouselContent className="mx-1">
+                <CarouselContent className="mx-0.5">
                   {data?.products?.slice(0, 8).map((item, idx) => (
                     <CarouselItem
                       className="h-full w-full min-w-[9.5rem] max-w-[11.5rem]"
@@ -68,6 +69,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
                     </Link>
                   )}
                 </CarouselContent>
+                <CarouselPrevious className="ml-14 bg-background" />
                 <CarouselNext className="mr-14 bg-background" />
               </Carousel>
             </div>

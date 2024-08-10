@@ -127,7 +127,7 @@ export default function ListGame() {
                   key={idx}
                   className="w-full h-full"
                 >
-                  <Card className="w-full h-full min-w-fit rounded-xl hover:bg-zinc-50 hover:shadow-xl hover:text-primary transition duration-300">
+                  <Card className="w-full h-full min-w-fit rounded-xl hover:bg-zinc-50 hover:shadow-md hover:text-primary transition duration-300">
                     <div className="p-4 md:p-5 flex flex-col items-center">
                       <div className="overflow-clip rounded-xl w-full bg-background aspect-square flex justify-center items-center">
                         {val.image_url !== "" ? (

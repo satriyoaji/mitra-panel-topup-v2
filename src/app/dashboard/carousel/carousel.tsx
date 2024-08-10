@@ -40,7 +40,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                   alt={item.name}
                   sizes="100%"
                   style={{ aspectRatio: 27 / 9 }}
-                  className={`object-cover h-full w-auto duration-500 bg-zinc-200`}
+                  className={`object-cover h-full w-auto rounded-lg duration-500 bg-zinc-200`}
                 />
               </CarouselItem>
             ))}

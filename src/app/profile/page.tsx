@@ -70,9 +70,9 @@ function Page() {
   return (
     <div className={`flex justify-center w-full`}>
       <div
-        className={`md:flex space-x-4 h-[92vh] md:pt-4 bg-background w-full max-w-6xl px-0 sm:px-4`}
+        className={`space-x-4 h-[92vh] md:pt-4 bg-background w-full max-w-6xl px-2 sm:px-6 grid grid-cols-1 sm:grid-cols-3`}
       >
-        <div className="md:border md:shadow min-w-[27rem] h-fit rounded-xl bg-background p-2 md:p-4 mx-4">
+        <div className="md:border md:shadow w-full h-fit rounded-xl bg-background p-2 md:p-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <div className="flex">
@@ -122,7 +122,7 @@ function Page() {
           <div className="mt-6 mb-4">
             <Dialog>
               <DialogTrigger
-                className={`md:hidden flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer w-full hover:bg-primary`}
+                className={`md:hidden flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer w-full hover:bg-slate-50`}
               >
                 <DiscIcon className="mr-3" /> Saldo Point History
               </DialogTrigger>
@@ -146,25 +146,28 @@ function Page() {
             </p>
           </div>
         </div>
-        <div className="w-full h-full hidden md:block">
+        <div className="w-full h-full hidden md:block col-span-2">
           <div className="pt-4 px-4">
             <Tabs defaultValue="profile">
               <div className="flex w-full mb-5">
                 <div className="w-full">
                   <TabsContent value="profile">
-                    <div className="flex py-1 justify-start gap-4 items-center">
-                      <h5 className="font-semibold">Detail Profile</h5>
+                    <div className="flex justify-start">
+                      <h5 className="font-semibold p-0">Detail Profile</h5>
                       <Pencil1Icon
                         onClick={() => setProfileOpen(true)}
                         className="cursor-pointer"
                       />
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <p className="text-xs text-muted-foreground">
                       Pastikan profil anda adalah data terbaru
                     </p>
                   </TabsContent>
                   <TabsContent value="saldo">
-                    <h5 className="font-semibold">History Saldo Point</h5>
+                    <h5 className="font-semibold p-0">History Saldo Point</h5>
+                    <p className="text-xs text-muted-foreground">
+                      Pastikan profil anda adalah data terbaru
+                    </p>
                   </TabsContent>
                 </div>
                 <TabsList className="flex w-fit">
