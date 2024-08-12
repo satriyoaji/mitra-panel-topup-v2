@@ -78,7 +78,7 @@ function Searchbar() {
           </kbd> */}
         </button>
       </div>
-      <div className="md:hidden text-white p-2 mr-2">
+      <div className="md:hidden text-primary p-2 mr-2">
         <MagnifyingGlassIcon
           className="cursor-pointer"
           onClick={() => setIsOpen(true)}

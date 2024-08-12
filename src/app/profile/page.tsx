@@ -1,31 +1,16 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import {
-  DiscIcon,
-  ExitIcon,
-  Pencil1Icon,
-  PersonIcon,
-  ReaderIcon,
-} from "@radix-ui/react-icons";
+import { DiscIcon, ExitIcon, Pencil1Icon } from "@radix-ui/react-icons";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import DetailProfile from "./detail-profile";
-import SaldoPointHistory from "./saldopoint-history";
-import Profile from "./(tabs)/profile";
 import Tier from "@/components/tier";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SaldoCard from "./saldo-card";
 import { IProfile } from "@/Type";
 import TransactionContext, {
   ITransactionContext,
 } from "@/infrastructures/context/transaction/transaction.context";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function Page() {
   const { data: session } = useSession();
@@ -35,7 +20,6 @@ function Page() {
   const [loading, setLoading] = useState(false);
   const [dataProfile, setDataProfile] = useState<IProfile | null>(null);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   useEffect(() => {
     getData();
@@ -102,10 +86,12 @@ function Page() {
                     ? dataProfile?.name
                     : session?.profile?.name}
                 </h5>
-                <Pencil1Icon
-                  onClick={() => setProfileOpen(true)}
-                  className="cursor-pointer ml-1 mt-1 md:hidden"
-                />
+                <Link href="/profile/edit">
+                  <Pencil1Icon
+                    onClick={() => setProfileOpen(true)}
+                    className="cursor-pointer ml-1 mt-1 md:hidden"
+                  />
+                </Link>
               </div>
             </div>
             <Tier
@@ -120,23 +106,11 @@ function Page() {
             <SaldoCard balance={dataProfile?.saldo ?? 0} />
           </div>
           <div className="mt-6 mb-4">
-            <Dialog>
-              <DialogTrigger
-                className={`md:hidden flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer w-full hover:bg-slate-50`}
-              >
-                <DiscIcon className="mr-3" /> Saldo Point History
-              </DialogTrigger>
-              <DialogContent>
-                <h4 className="font-semibold">Saldo Point History</h4>
-                <SaldoCard balance={dataProfile?.saldo ?? 0} />
-                <SaldoPointHistory />
-              </DialogContent>
-            </Dialog>
             <Link
-              href="/transaksi"
+              href="/saldo"
               className={`flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50`}
             >
-              <ReaderIcon className="mr-3" /> Daftar Transaksi
+              <DiscIcon className="mr-3" /> Saldo Point History
             </Link>
             <p
               onClick={() => signOut()}
@@ -144,53 +118,6 @@ function Page() {
             >
               <ExitIcon className="mr-3" /> Logout
             </p>
-          </div>
-        </div>
-        <div className="w-full h-full hidden md:block col-span-2">
-          <div className="pt-4 px-4">
-            <Tabs defaultValue="profile">
-              <div className="flex w-full mb-5">
-                <div className="w-full">
-                  <TabsContent value="profile">
-                    <div className="flex justify-start">
-                      <h5 className="font-semibold p-0">Detail Profile</h5>
-                      <Pencil1Icon
-                        onClick={() => setProfileOpen(true)}
-                        className="cursor-pointer"
-                      />
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      Pastikan profil anda adalah data terbaru
-                    </p>
-                  </TabsContent>
-                  <TabsContent value="saldo">
-                    <h5 className="font-semibold p-0">History Saldo Point</h5>
-                    <p className="text-xs text-muted-foreground">
-                      Pastikan profil anda adalah data terbaru
-                    </p>
-                  </TabsContent>
-                </div>
-                <TabsList className="flex w-fit">
-                  <TabsTrigger value="profile">Profile</TabsTrigger>
-                  <TabsTrigger value="saldo">Saldo Points</TabsTrigger>
-                </TabsList>
-              </div>
-              <TabsContent value="profile">
-                <Profile data={dataProfile} />
-              </TabsContent>
-              <TabsContent value="saldo">
-                <SaldoPointHistory />
-              </TabsContent>
-            </Tabs>
-
-            <Dialog onOpenChange={setProfileOpen} open={profileOpen}>
-              <DialogContent className="sm:max-w-md">
-                <DetailProfile
-                  data={dataProfile}
-                  onSuccess={() => toggleModalProfile}
-                />
-              </DialogContent>
-            </Dialog>
           </div>
         </div>
       </div>

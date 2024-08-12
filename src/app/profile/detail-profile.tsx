@@ -24,10 +24,6 @@ function DetailProfile(props: prop) {
   const handleSubmit = async () => {
     const response = await fetch("/api/profile", {
       method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${session?.token}`,
-      // },
       body: JSON.stringify({
         name,
         email,

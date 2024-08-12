@@ -2,7 +2,6 @@
 
 import { InfoCircledIcon, SketchLogoIcon } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Loading from "@/app/loading";
@@ -14,19 +13,20 @@ import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import VAPayment from "./(payment)/va-payment";
 import QRPayment from "./(payment)/qr-payment";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import BadgeTransaksi from "../badge-transaksi";
 import LinkPayment from "./(payment)/link-payment";
 import { isFuture, parseISO } from "date-fns";
 import CountdownCard from "@/app/dashboard/countdown-card";
+import { useSession } from "next-auth/react";
 
 function TransactionHistoryDetail({ id }: { id: string }) {
   const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
     undefined
   );
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     (async () => {
@@ -58,20 +58,22 @@ function TransactionHistoryDetail({ id }: { id: string }) {
               </div>
             </div>
           </div>
-          <div className="w-full my-2">
-            <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
-              <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
-                <p className="text-xs font-bold">i</p>
+          {!session ? (
+            <div className="w-full mt-2">
+              <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
+                <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
+                  <p className="text-xs font-bold">i</p>
+                </div>
+                <p className="text-xs">
+                  Transaksi tanpa login, wajib simpan ID transaksi & No HP.
+                </p>
               </div>
-              <p className="text-xs">
-                Transaksi tanpa login, wajib simpan ID transaksi & No HP.
-              </p>
             </div>
-          </div>
-          <div className="flex flex-row justify-stretch items-center">
+          ) : null}
+          <div className="flex flex-row justify-stretch items-center mt-2">
             <div className="grid md:grid-cols-2 w-full gap-3 h-full mt-1 auto-rows-fr">
               <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1 row-span-full">
-                <p className="font-medium text-lg text-red-800">
+                <p className="font-medium text-lg text-primary">
                   Rincian Transaksi
                 </p>
                 <div className="mt-4 space-y-4 h-full">
@@ -124,7 +126,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                 <>
                   <div className="w-full bg-background h-full pt-4 rounded-lg shadow flex-1 relative overflow-clip">
                     <div className="px-4">
-                      <p className="font-medium text-lg text-red-800">
+                      <p className="font-medium text-lg text-primary">
                         Rincian Pembayaran
                       </p>
                       <div className="mt-4 space-y-4 h-full">
@@ -164,7 +166,7 @@ function TransactionHistoryDetail({ id }: { id: string }) {
                     </div>
                     <Separator className="my-3 w-full" />
                     <div className="px-4">
-                      <p className="font-medium text-lg text-red-800">
+                      <p className="font-medium text-lg text-primary">
                         Tujuan Pembayaran
                       </p>
                       <div className="mt-4 space-y-4 h-full">

@@ -2,14 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { paths } from "./navlist";
-import { useContext } from "react";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function BottomNav() {
   const path = usePathname();
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   return (
     <div className="block md:hidden fixed bottom-0 h-12 z-10 w-full border-t-2 shadow-md bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/90">

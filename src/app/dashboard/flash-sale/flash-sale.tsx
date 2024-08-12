@@ -16,7 +16,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
       <div className="relative flex justify-center md:p-4 my-4 md:my-0">
-        <div className="max-w-6xl p-0 w-full bg-primary rounded-xl overflow-clip">
+        <div className="max-w-6xl p-0 w-full bg-primary md:rounded-xl overflow-clip">
           <div className="bg-gradient-to-br from-white/90 to-white/30 backdrop-blur pb-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center py-1 pr-1 rounded-tl-lg rounded-br-lg mt-2">
@@ -40,7 +40,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
               </div>
             </div>
             <div className="flex items-center relative py-1">
-              <Carousel className="py-1 rounded-x w-full">
+              <Carousel className="py-1 w-full">
                 <CarouselContent className="mx-0.5">
                   {data?.products?.slice(0, 8).map((item, idx) => (
                     <CarouselItem

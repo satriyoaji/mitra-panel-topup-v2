@@ -1,7 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import React, { useContext } from "react";
 
 function FormWrapper({
@@ -13,8 +10,6 @@ function FormWrapper({
   number: number;
   title: string;
 }) {
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
-
   return (
     <Card className="w-full my-2">
       <CardContent>

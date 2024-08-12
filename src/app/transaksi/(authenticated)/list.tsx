@@ -17,9 +17,6 @@ import { debounce } from "@/Helpers";
 import Loading from "../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function List() {
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
@@ -31,7 +28,6 @@ function List() {
   const [loading, setLoading] = useState(false);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
   const [page, setPage] = useState(1);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   const getData = async () => {
     let searchParams = new URLSearchParams({

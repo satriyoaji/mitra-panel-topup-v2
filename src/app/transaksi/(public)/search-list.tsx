@@ -110,7 +110,10 @@ function SearchList() {
       </div>
       {transction && (
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent
+            className="sm:max-w-[425px]"
+            onOpenAutoFocus={(e) => e.preventDefault()}
+          >
             <DialogHeader>
               <DialogTitle>{transction?.transaction_code}</DialogTitle>
               <DialogDescription>Detail transaksi</DialogDescription>

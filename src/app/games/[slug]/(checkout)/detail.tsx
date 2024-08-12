@@ -1,6 +1,5 @@
 "use client";
 
-import { getTotalPrice, priceMask } from "@/Helpers";
 import TransactionDetail from "@/components/transaction-detail";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import {
@@ -45,9 +43,13 @@ export function Purchase({
   const { toast } = useToast();
   const router = useRouter();
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
 
   const createTransaction = async () => {
-    if (!account || !payment || !product || !category) return false;
+    setLoading(true);
+    if (!account || !payment || !product || !category) {
+      return setLoading(false);
+    }
 
     var payload: ITransactionCreate = {
       category_key: category?.key,
@@ -86,11 +88,13 @@ export function Purchase({
       });
 
       var data = await res.json();
+      setLoading(false);
       router.push(`/transaksi/${data.data.transaction_code}`);
       return;
     }
 
     setSuccess(false);
+    setLoading(false);
     return toast({
       title: "Failed",
       description: "Checkout Failed",
@@ -127,15 +131,23 @@ export function Purchase({
             promo={promo}
             account={account}
           />
+          <Alert className="bg-amber-50 text-amber-900">
+            <InfoCircledIcon className="text-white" />
+            <AlertDescription className="text-xs">
+              Jika transaksi gagal, saldo anda akan dikembalikan dalam bentuk
+              saldo point
+            </AlertDescription>
+          </Alert>
           <div className="flex justify-between items-center">
             <Button
               size="sm"
               type="submit"
+              disabled={loading}
               className="w-full bg-green-500 hover:bg-green-600 space-x-2"
               onClick={createTransaction}
             >
               <ShoppingCartIcon className="text-white h-4 w-4" />
-              <div>Bayar</div>
+              {!loading ? <div>Bayar</div> : <div>Loading...</div>}
             </Button>
           </div>
         </DialogContent>

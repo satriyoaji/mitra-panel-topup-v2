@@ -41,7 +41,7 @@ export default async function middleware(
 
   if (
     req.nextUrl.pathname.includes("/profile") ||
-    req.nextUrl.pathname.includes("/redeem-coupon")
+    req.nextUrl.pathname.includes("/saldo")
   ) {
     const authMiddleware = withAuth({
       pages: {

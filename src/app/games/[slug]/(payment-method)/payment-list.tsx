@@ -14,15 +14,11 @@ import {
 } from "@/components/ui/accordion";
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
   const { dispatch, data } = useContext(
     TransactionContext
   ) as ITransactionContext;
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   return (
     <>

@@ -126,7 +126,10 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
         </div>
       )}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
+        <DialogContent
+          autoFocus={false}
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
           <DialogHeader>
             <DialogTitle>Promo</DialogTitle>
             <DialogDescription>Pilih promo paling cuan.</DialogDescription>
@@ -136,7 +139,7 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
               <Input
                 placeholder="Punya Kode Promo? Masukan di sini"
                 value={hiddenPromoCode}
-                autoFocus={true}
+                autoFocus={false}
                 onChange={(e) => setHiddenPromoCode(e.target.value)}
               />
               <Button disabled={loading} size="sm" onClick={getHiddenPromo}>

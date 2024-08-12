@@ -1,9 +1,6 @@
 "use client";
 
 import { priceMask } from "@/Helpers";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import { SketchLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React, { useCallback, useContext, useMemo } from "react";
@@ -27,7 +24,7 @@ function ProductCard(props: prop) {
         ((props.price - props.discountedPrice) / props.price) * 100
       );
     return null;
-  }, [props.discount, props.discountedPrice, props.price]);
+  }, [props.discountedPrice, props.price]);
 
   return (
     <div
