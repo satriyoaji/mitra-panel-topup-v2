@@ -35,6 +35,44 @@ function Page() {
     }
   }, [status]);
 
+  const submitPassword = async () => {
+    if (newPassword.length < 6) {
+      return toast({
+        title: "Error",
+        description: "Password minimal 6 digit",
+        variant: "destructive",
+      });
+    }
+
+    if (newPassword != newConfirmPassword) {
+      return toast({
+        title: "Error",
+        description: "Konfirmasi password harus sesuai dengan password baru",
+        variant: "destructive",
+      });
+    }
+
+    const response = await fetch("/api/auth/reset", {
+      method: "POST",
+      body: JSON.stringify({
+        password,
+        newPassword,
+      }),
+    });
+
+    if (!response.ok) {
+      const res = await response.json();
+      toast({
+        title: "Failed",
+        description: res.remark,
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async () => {
     const response = await fetch("/api/profile", {
       method: "POST",
@@ -54,11 +92,14 @@ function Page() {
       });
     }
 
-    return toast({
-      title: "Success",
-      description: "Update profile success",
-      variant: "success",
-    });
+    var res = await submitPassword();
+
+    if (res)
+      return toast({
+        title: "Success",
+        description: "Update profile success",
+        variant: "success",
+      });
   };
 
   return (
@@ -157,7 +198,10 @@ function Page() {
               </div>
             </div>
             <div className="flex justify-end">
-              <Button className="mt-2 inline-flex justify-end items-end">
+              <Button
+                onClick={handleSubmit}
+                className="mt-2 inline-flex justify-end items-end"
+              >
                 Simpan
               </Button>
             </div>
