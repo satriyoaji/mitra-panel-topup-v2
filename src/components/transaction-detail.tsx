@@ -97,7 +97,7 @@ function TransactionDetail({
                         height={50}
                       />
                     ) : (
-                      <p>payment?.name</p>
+                      <p>{payment?.name}</p>
                     )}
                   </div>
                 </TableCell>
