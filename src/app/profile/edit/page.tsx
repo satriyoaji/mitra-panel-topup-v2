@@ -37,21 +37,21 @@ function Page() {
                   <TabsContent value="profile" className="p-0 m-0 mt-1">
                     <h6 className="text-primary">Informasi Akun</h6>
                   </TabsContent>
-                  <TabsContent value="password" className="p-0 m-0 mt-1">
+                  <TabsContent value="reset" className="p-0 m-0 mt-1">
                     <h6 className="text-primary">Ubah Keamanan Akun</h6>
                   </TabsContent>
                 </div>
                 <div>
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="profile">Profile</TabsTrigger>
-                    <TabsTrigger value="password">Keamanan</TabsTrigger>
+                    <TabsTrigger value="reset">Keamanan</TabsTrigger>
                   </TabsList>
                 </div>
               </div>
               <TabsContent value="profile">
                 <Profile />
               </TabsContent>
-              <TabsContent value="password">
+              <TabsContent value="reset">
                 <Password />
               </TabsContent>
             </div>
