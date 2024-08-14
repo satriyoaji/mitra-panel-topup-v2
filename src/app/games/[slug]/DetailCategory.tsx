@@ -18,16 +18,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import FormWrapper from "./form-wrapper";
 import { Session } from "next-auth";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 interface Props extends IUseCategoryData {
   session: Session | null;
 }
 
 function DetailCategory(props: Props) {
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
   if (props.data.category !== null && props.data.category !== undefined)
     return (
       <>

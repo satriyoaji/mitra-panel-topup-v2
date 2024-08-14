@@ -57,7 +57,7 @@ function PromoCard({
               ) : null}
             </div>
             <div className="items-center justify-center w-full bg-primary">
-              <div className="pr-4 pl-6 space-y-2 bg-gradient-to-br from-white/50 to-white/90">
+              <div className="pr-4 pl-6 space-y-2 bg-gradient-to-br from-white/70 to-white/90">
                 <div className="flex pt-3 justify-between items-center">
                   <p className="text-xs py-1 px-2 bg-primary-200 text-primary-900 font-medium w-fit">
                     {promo.promo_code}

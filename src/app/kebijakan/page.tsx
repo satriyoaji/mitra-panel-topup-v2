@@ -13,7 +13,7 @@ import { ISiteProfile } from "@/types/utils";
 const getData = async () => {
   const credentialHeader = GetCredHeader();
 
-  const res = await fetch(`${process.env.API}/site-profile`, {
+  const res = await fetch(`${process.env.NEXT_API_URL}/v2/panel/site-profile`, {
     headers: {
       "Content-Type": "application/json",
       "X-Sign": credentialHeader.sign,
@@ -49,7 +49,7 @@ async function Page() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="max-w-5xl w-full space-y-4">
+        <div className="max-w-4xl w-full space-y-4">
           <div className="bg-background rounded-lg p-4 w-full">
             <h3 className="font-semibold text-primary">Kebijkan Privasi</h3>
           </div>

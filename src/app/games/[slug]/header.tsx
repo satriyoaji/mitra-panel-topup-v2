@@ -1,7 +1,6 @@
 import { IProductCategory } from "@/Type";
 import { Card, CardContent } from "@/components/ui/card";
 import { CubeIcon } from "@radix-ui/react-icons";
-import Image from "next/image";
 import React from "react";
 import Description from "./collapsible-description";
 
@@ -30,7 +29,7 @@ function Header({ category }: { category: IProductCategory }) {
           </div>
         )}
         <div className="px-3 pt-3">
-          <div className="flex z-10 gap-4 items-start">
+          <div className="flex z-10 gap-4">
             {category?.image_url ? (
               <div className="rounded flex items-center justify-center w-16 h-16 bg-white">
                 <img

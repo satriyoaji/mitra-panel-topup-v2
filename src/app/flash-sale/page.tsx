@@ -57,7 +57,7 @@ function Page() {
 
   if (data && data.products.length > 0)
     return (
-      <div className={`container nax-w-6xl`}>
+      <div className={`container max-w-6xl`}>
         <div className="flex px-2 sticky top-10 py-4 bg-transparent backdrop-blur-lg rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
           <div className="flex items-center justify-between">
             <p className="font-semibold text-lg flex">

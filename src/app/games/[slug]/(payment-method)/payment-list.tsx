@@ -14,15 +14,11 @@ import {
 } from "@/components/ui/accordion";
 import { IPaymentGroup } from "@/types/transaction";
 import { Card } from "@/components/ui/card";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 
 function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
   const { dispatch, data } = useContext(
     TransactionContext
   ) as ITransactionContext;
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   return (
     <>
@@ -49,9 +45,16 @@ function PaymentList({ paymentGroup }: { paymentGroup: IPaymentGroup[] }) {
                     }}
                   >
                     <div>
-                      <p className="text-xs mt-2 md:mt-0">{item.name}</p>
+                      <p className="text-xs md:mt-0">{item.name}</p>
                       {item.fee_amount > 0 && (
-                        <p className="text-xs font-medium text-muted-foreground">
+                        <p
+                          className={`text-xs mt-0.5 ${
+                            data.payment?.payment_channel ==
+                            item.payment_channel
+                              ? "text-primary"
+                              : "text-muted-foreground"
+                          }`}
+                        >
                           {!data.product && "+"}
                           {data.product
                             ? data.product.discounted_price

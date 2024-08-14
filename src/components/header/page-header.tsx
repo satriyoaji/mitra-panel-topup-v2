@@ -20,6 +20,7 @@ import HelpButton from "../help-button";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
+import ProfileDialog from "./profile-dialog";
 
 export type path = {
   name: string;
@@ -91,7 +92,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
                       >
                         Cek Pesanan
                       </PopoverTrigger>
-                      <PopoverContent className="w-full">
+                      <PopoverContent className="w-full rounded-2xl">
                         <div className="flex p-2 gap-2">
                           <Input
                             className="w-full min-w-[20rem]"
@@ -124,18 +125,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
           />
           {session ? (
             <div className="my-1 mx-1 hidden md:block">
-              <Avatar
-                className="cursor-pointer"
-                onClick={() => router.push("/profile")}
-              >
-                <AvatarImage
-                  src={session?.profile?.name as string}
-                  alt={session?.profile?.name as string}
-                />
-                <AvatarFallback>
-                  {session?.profile?.name?.at(0) ?? ""}
-                </AvatarFallback>
-              </Avatar>
+              <ProfileDialog />
             </div>
           ) : (
             <Link href="/auth/login" className="m-2 hidden md:block">

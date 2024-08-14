@@ -18,10 +18,6 @@ export type TPaginationMeta = {
   total: number;
 };
 
-export interface ITheme {
-  primary: string;
-}
-
 export interface IBanner {
   id: number;
   name: string;

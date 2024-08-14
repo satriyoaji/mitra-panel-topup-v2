@@ -1,14 +1,10 @@
 "use client";
 
 import "./globals.css";
-import ThemeProvider from "@/infrastructures/context/theme/theme.provider";
 import { SessionProvider } from "next-auth/react";
 import TransactionProvider from "@/infrastructures/context/transaction/transaction.provider";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ISiteProfile } from "@/types/utils";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
 import { HexToHSL } from "@/Helpers";
 import Loading from "./loading";
 
@@ -47,11 +43,9 @@ export default function RootTemplateLayout({
                            }`,
         }}
       />
-      <ThemeProvider>
-        <SessionProvider>
-          <TransactionProvider>{children}</TransactionProvider>
-        </SessionProvider>
-      </ThemeProvider>
+      <SessionProvider>
+        <TransactionProvider>{children}</TransactionProvider>
+      </SessionProvider>
     </>
   );
 }

@@ -17,9 +17,7 @@ import { debounce } from "@/Helpers";
 import Loading from "../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
-import ThemeContext, {
-  IThemeContext,
-} from "@/infrastructures/context/theme/theme.context";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 function List() {
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
@@ -31,7 +29,6 @@ function List() {
   const [loading, setLoading] = useState(false);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
   const [page, setPage] = useState(1);
-  const { data: theme } = useContext(ThemeContext) as IThemeContext;
 
   const getData = async () => {
     let searchParams = new URLSearchParams({
@@ -115,7 +112,16 @@ function List() {
       </div>
       <div className="grid md:grid-cols-2 gap-4">
         {!loading ? (
-          lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
+          lists.length > 0 ? (
+            lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
+          ) : (
+            <div className="w-full flex flex-col items-center justify-center col-span-full">
+              <ShoppingCartIcon className="h-[30vh] text-black/10" />
+              <h3 className="font-bold text-black/10 p-0">
+                Transaksi Masih Kosong
+              </h3>
+            </div>
+          )
         ) : (
           <div className="col-span-full">
             <Loading />

@@ -33,6 +33,25 @@ function CheckoutAction({
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
   const checkout = () => {
+    if (!data.payment)
+      return toast({
+        title: "Failed",
+        description: "Metode pembayaran belum dipilih",
+        variant: "destructive",
+        action: (
+          <ToastAction
+            onClick={() =>
+              paymentRef.current?.scrollIntoView({
+                behavior: "smooth",
+              })
+            }
+            altText="Go To Form"
+          >
+            Lengkapi Data
+          </ToastAction>
+        ),
+      });
+
     if (
       data.category?.forms &&
       data.form &&
@@ -47,25 +66,6 @@ function CheckoutAction({
           <ToastAction
             onClick={() =>
               formRef.current?.scrollIntoView({
-                behavior: "smooth",
-              })
-            }
-            altText="Go To Form"
-          >
-            Lengkapi Data
-          </ToastAction>
-        ),
-      });
-
-    if (!data.payment)
-      return toast({
-        title: "Failed",
-        description: "Metode pembayaran belum dipilih",
-        variant: "destructive",
-        action: (
-          <ToastAction
-            onClick={() =>
-              paymentRef.current?.scrollIntoView({
                 behavior: "smooth",
               })
             }

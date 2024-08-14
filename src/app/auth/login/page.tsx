@@ -38,7 +38,7 @@ function Page() {
   };
 
   return (
-    <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
+    <div className="relative min-h-[50vh] flex items-center justify-center w-full px-0 py-28">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex space-y-2 justify-center items-center w-full">
           {/* <div className="w-full md:flex justify-center hidden">

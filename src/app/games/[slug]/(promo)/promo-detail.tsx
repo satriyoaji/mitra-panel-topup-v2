@@ -54,7 +54,7 @@ function PromoDetail({
   if (p)
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent>
+        <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
           {loading ? (
             <p className="text-center w-full">Loading...</p>
           ) : (

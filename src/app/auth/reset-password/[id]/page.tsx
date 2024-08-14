@@ -6,22 +6,21 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-async function FormResetPassword({ params }: { params: { id: string } }) {
+function FormResetPassword({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    console.log("ID: ", params.id)
+    console.log("ID: ", params.id);
   }, []);
 
   const onSubmitReset = async (e: React.FormEvent) => {
     e.preventDefault();
-
   };
 
   return (
-    <div className="relative h-[86vh] flex items-center justify-center w-full px-0">
+    <div className="relative min-h-[50vh] flex items-center justify-center w-full px-0 py-28">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6">
         <div className="flex space-y-2 justify-center items-center w-full">
           <div className="w-full md:flex hidden justify-center">
