@@ -46,7 +46,10 @@ function ProfileDialog() {
                 Riwayat Saldo
               </p>
             </div>
-            <p className="font-medium">{session?.profile.saldo} Points</p>
+            <p className="font-medium">
+              {new Intl.NumberFormat().format(session?.profile.saldo ?? 0)}{" "}
+              Points
+            </p>
           </div>
           <div className="space-y-2 px-3">
             <div className="space-y-0.5">

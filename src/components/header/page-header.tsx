@@ -92,7 +92,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
                       >
                         Cek Pesanan
                       </PopoverTrigger>
-                      <PopoverContent className="w-full">
+                      <PopoverContent className="w-full rounded-2xl">
                         <div className="flex p-2 gap-2">
                           <Input
                             className="w-full min-w-[20rem]"

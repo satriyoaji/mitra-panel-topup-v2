@@ -34,8 +34,8 @@ function ProductCard(props: prop) {
       onClick={props.onClick}
     >
       {props.discountedPrice ? (
-        <div className="absolute right-0 top-0 py-0.5 px-1 bg-amber-300 rounded-bl-xl">
-          <p className="font-semibold text-xs">{discountPercent}%</p>
+        <div className="absolute right-0 top-0 py-0.5 px-1 bg-amber-300 rounded-bl-lg">
+          <p className="font-bold text-xs">{discountPercent}%</p>
         </div>
       ) : null}
       <div className="p-0 flex flex-col m-0">
@@ -87,7 +87,7 @@ function ProductCard(props: prop) {
                   </p>
                   <p
                     className="text-green-500 text-xs font-medium"
-                    style={{ fontSize: "80%" }}
+                    style={{ fontSize: "75%" }}
                   >
                     {priceMask(props.discountedPrice)}
                   </p>
