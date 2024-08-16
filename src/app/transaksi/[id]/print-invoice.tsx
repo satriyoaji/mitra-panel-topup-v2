@@ -1,99 +1,75 @@
-"use client";
-
-import { InfoCircledIcon, SketchLogoIcon } from "@radix-ui/react-icons";
+import { Badge } from "@/components/ui/badge";
+import { PrinterIcon } from "@heroicons/react/24/outline";
+import React, { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import Image from "next/image";
 import { priceMask } from "@/Helpers";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import Loading from "@/app/loading";
-import { ITransactionHistoryDetail } from "@/types/transaction";
-import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import VAPayment from "./(payment)/va-payment";
-import QRPayment from "./(payment)/qr-payment";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
-import BadgeTransaksi from "../badge-transaksi";
 import LinkPayment from "./(payment)/link-payment";
-import { isFuture, parseISO } from "date-fns";
-import CountdownCard from "@/app/dashboard/countdown-card";
-import { useSession } from "next-auth/react";
-import PrintInvoice from "./print-invoice";
+import QRPayment from "./(payment)/qr-payment";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { ITransactionHistoryDetail } from "@/types/transaction";
 import { ISiteProfile } from "@/types/utils";
-import { ETransactionStatus } from "@/types/enums";
 
-function TransactionHistoryDetail({
-  id,
-  profile,
-}: {
-  id: string;
+interface Props extends ITransactionHistoryDetail {
   profile?: ISiteProfile;
-}) {
-  const [data, setData] = useState<ITransactionHistoryDetail | undefined>(
-    undefined
-  );
-  const [loading, setLoading] = useState(false);
-  const { data: session } = useSession();
+}
 
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      var re = await fetch(`/api/transaction/${id}`);
+function PrintInvoice(data: Props) {
+  const componentRef = useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
-      var res = await re.json();
-      setLoading(false);
-      setData(res.data);
-    })();
-  }, [id]);
-
-  if (loading) return <Loading />;
-
-  if (data)
-    return (
-      <div className="pt-4 px-2 flex w-full justify-center">
-        <div className="max-w-5xl w-full">
-          <div className="flex justify-between items-center">
-            <div className="sm:flex items-center space-x-2">
+  return (
+    <>
+      <PrinterIcon
+        className="cursor-pointer w-4 h-4 text-muted-foreground"
+        onClick={handlePrint}
+      />
+      <div className="hidden">
+        <div ref={componentRef} className="p-8">
+          <div className="flex justify-between items-center mb-4">
+            {data.profile?.logo_url && (
+              <Image
+                src={data.profile?.logo_url}
+                alt="logo"
+                width={40}
+                height={40}
+              />
+            )}
+            <div className="text-right space-x-2">
               <p className="font-medium ml-2 text-xl">Detail Transaksi</p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <p className="text-xs text-muted-foreground">
-                    {data.transaction_code}
-                  </p>
-                  <CopyToClipboard text={data.transaction_code} />
-                </div>
-              </div>
+              <p className="text-xs text-muted-foreground">
+                {data.transaction_code}
+              </p>
             </div>
-            <PrintInvoice {...data} profile={profile} />
           </div>
-          {!session ? (
-            <div className="w-full mt-2">
-              <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
-                <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
-                  <p className="text-xs font-bold">i</p>
-                </div>
-                <p className="text-xs">
-                  Transaksi tanpa login, wajib simpan ID transaksi & No HP.
-                </p>
+          <div className="w-full mt-2">
+            <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
+              <div className="flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
+                <p className="text-xs font-bold">i</p>
               </div>
+              <p className="text-xs">
+                Transaksi tanpa login, wajib simpan ID transaksi & No HP.
+              </p>
             </div>
-          ) : null}
+          </div>
           <div className="flex flex-row justify-stretch items-center mt-2">
-            <div className="grid md:grid-cols-2 w-full gap-3 h-full mt-1 grid-rows-2">
-              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1 row-span-full">
+            <div className="grid w-full gap-3 h-full mt-1 grid-rows-2">
+              <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg border flex-1 row-span-full">
                 <p className="font-medium text-lg text-primary">
                   Rincian Transaksi
                 </p>
                 <div className="mt-4 space-y-4 h-full">
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">
-                      Order Expired
+                      Order Expired at
                     </p>
                     {data.payment_information &&
-                    data.payment_information.expired_at &&
-                    isFuture(parseISO(data.payment_information.expired_at)) ? (
-                      <CountdownCard
-                        date={parseISO(data.payment_information.expired_at)}
-                      />
+                    data.payment_information.expired_at ? (
+                      data.payment_information.expired_at
                     ) : (
                       <Badge variant="destructive">Expired</Badge>
                     )}
@@ -113,12 +89,6 @@ function TransactionHistoryDetail({
                     </div>
                   </div>
                   <div className="flex justify-between w-full">
-                    <p className="text-muted-foreground text-sm">Status</p>
-                    <div>
-                      <BadgeTransaksi status={data.status} />
-                    </div>
-                  </div>
-                  <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">
                       Informasi Kontak
                     </p>
@@ -131,7 +101,7 @@ function TransactionHistoryDetail({
               </div>
               {data.payment_information ? (
                 <>
-                  <div className="w-full bg-background h-full pt-4 rounded-lg shadow flex-1 relative overflow-clip">
+                  <div className="w-full bg-background h-full pt-4 rounded-lg border flex-1 relative overflow-clip">
                     <div className="px-4">
                       <p className="font-medium text-lg text-primary">
                         Rincian Pembayaran
@@ -179,7 +149,10 @@ function TransactionHistoryDetail({
                       <div className="mt-4 space-y-4 h-full">
                         {data.payment_information.payment_method ==
                         "VIRTUAL_ACCOUNT" ? (
-                          <VAPayment payment={data.payment_information} />
+                          <VAPayment
+                            payment={data.payment_information}
+                            printable={true}
+                          />
                         ) : data.payment_information.payment_method ==
                           "EWALLET" ? (
                           <LinkPayment payment={data.payment_information} />
@@ -189,30 +162,18 @@ function TransactionHistoryDetail({
                       </div>
                     </div>
                     <div className="w-full bottom-0 mt-6">
-                      {data.status !== ETransactionStatus.Refunded ? (
-                        <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
-                          <InfoCircledIcon />
-                          <p className="text-xs">
-                            Jika transaksi gagal, saldo anda akan dikembalikan
-                            dalam bentuk point
-                          </p>
-                        </div>
-                      ) : (
-                        <div className="bg-blue-50 border flex items-center rounded-b-lg space-x-2 text-blue-800 px-4 py-1.5">
-                          <InfoCircledIcon />
-                          <p className="text-xs">
-                            Saldo anda sudah dikembalikan. Silahkan cek{" "}
-                            <Link href="/profile" className="font-semibold">
-                              Saldo Point
-                            </Link>
-                          </p>
-                        </div>
-                      )}
+                      <div className="bg-amber-50 border flex items-center rounded-b-lg space-x-2 text-amber-800 px-4 py-1.5">
+                        <InfoCircledIcon />
+                        <p className="text-xs">
+                          Jika transaksi gagal, saldo anda akan dikembalikan
+                          dalam bentuk point
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <>
                     {data.payment_information.guide ? (
-                      <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg shadow flex-1 text-muted-foreground">
+                      <div className="w-full bg-background h-full px-4 pt-4 pb-6 rounded-lg border flex-1 text-muted-foreground">
                         <div
                           dangerouslySetInnerHTML={{
                             __html: data.payment_information.guide,
@@ -227,7 +188,8 @@ function TransactionHistoryDetail({
           </div>
         </div>
       </div>
-    );
+    </>
+  );
 }
 
-export default TransactionHistoryDetail;
+export default PrintInvoice;
