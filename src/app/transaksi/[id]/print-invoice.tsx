@@ -24,10 +24,13 @@ function PrintInvoice(data: Props) {
 
   return (
     <>
-      <PrinterIcon
-        className="cursor-pointer w-4 h-4 text-muted-foreground"
+      <div
+        className="text-muted-foreground flex space-x-1 cursor-pointer"
         onClick={handlePrint}
-      />
+      >
+        <PrinterIcon className="w-4 h-4 text-muted-foreground" />
+        <p className="p-0 text-xs">Cetak</p>
+      </div>
       <div className="hidden">
         <div ref={componentRef} className="p-8">
           <div className="flex justify-between items-center mb-4">

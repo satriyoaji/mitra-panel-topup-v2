@@ -39,7 +39,7 @@ function SaldoPointHistory() {
             className="cursor-pointer"
             key={i.toString()}
           >
-            <Card className="py-3 px-4 flex flex-col hover:bg-slate-50">
+            <Card className="py-3 px-4 flex flex-col hover:bg-zinc-50">
               <div className="flex justify-between items-center">
                 <p className="text-xs">{item.transaction_code}</p>
                 <p className="text-xs text-muted-foreground mt-1.5">

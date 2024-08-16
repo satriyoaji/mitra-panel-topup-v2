@@ -35,7 +35,7 @@ const paths: path[] = [
     isSession: false,
   },
   {
-    name: "Cek Pesanan",
+    name: "Riwayat Pesanan",
     path: "/transaksi",
     isSession: true,
   },
