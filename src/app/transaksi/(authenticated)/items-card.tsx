@@ -7,6 +7,7 @@ import { SketchLogoIcon } from "@radix-ui/react-icons";
 import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import BadgeTransaksi from "../badge-transaksi";
+import CountdownCard from "@/app/dashboard/countdown-card";
 
 export interface TItemsCard {
   data: ITransactionHistoryList;
@@ -17,7 +18,7 @@ function ItemsCard(props: TItemsCard) {
 
   return (
     <Link href={`/transaksi/${props.data.transaction_code}`}>
-      <Card className="flex hover:bg-slate-50">
+      <Card className="flex hover:bg-zinc-50">
         <div className="flex justify-between w-full my-2 mx-4">
           <div className="w-full">
             <div className="flex justify-between items-center">
@@ -25,47 +26,26 @@ function ItemsCard(props: TItemsCard) {
                 <p className="text-muted-foreground text-xs">
                   {props.data.transaction_code}
                 </p>
-                <Separator className="h-4" orientation="vertical" />
-                <p className="text-xs text-muted-foreground hidden md:block">
-                  {date}
-                </p>
-              </div>
-              <div>
                 <BadgeTransaksi status={props.data.status} />
               </div>
-            </div>
-            <Separator className="my-2" />
-            <div className="flex justify-between pt-1">
-              <div className="flex space-x-4 h-full ml-2">
-                <div className="mt-1">
-                  <SketchLogoIcon />
-                </div>
-                {/* <img
-                alt="Remy Sharp"
-                className="rounded-sm border bg-card text-card-foreground shadow w-12 object-cover"
-                src={""}
-              /> */}
-                <div>
-                  <div className="flex flex-col">
-                    <p className="text-xs font-medium">
-                      {props.data.category_name}
-                    </p>
-                    <p className="text-sm">{props.data.product_name}</p>
-                    <p className="text-xs text-muted-foreground md:hidden mt-1.5">
-                      {date}
-                    </p>
-                  </div>
-                </div>
+              <div>
+                <p className="text-xs text-muted-foreground">{date}</p>
               </div>
-              <div className="flex items-center space-x-4">
-                <div>
-                  <p className="text-xs text-muted-foreground mb-1 text-right">
-                    Total
-                  </p>
-                  <p className="text-sm font-medium text-right">
-                    {priceMask(props.data.price)}
-                  </p>
-                </div>
+            </div>
+            <div className="flex justify-between pt-1">
+              <p className="font-medium">
+                {props.data.category_name} - {props.data.product_name}
+              </p>
+            </div>
+            <div className="flex justify-between items-end mt-1.5">
+              <p className="text-sm font-medium text-right">
+                {priceMask(props.data.price)}
+              </p>
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-right">
+                  {props.data.payment_channel}
+                </p>
+                <CountdownCard date={parseISO(props.data.date)} theme="light" />
               </div>
             </div>
           </div>

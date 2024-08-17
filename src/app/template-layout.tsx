@@ -32,7 +32,7 @@ export default function TemplateLayout({
       <PWAAlert profile={profile} />
       <Header profile={profile} />
       <div>
-        <div className={`min-h-[92vh] bg-zinc-50`}>{children}</div>
+        <div className={`min-h-[92vh] bg-zinc-50 scroll-mt-16`}>{children}</div>
         <BottomNav />
       </div>
       <Footer profile={profile} />

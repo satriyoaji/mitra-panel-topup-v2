@@ -108,13 +108,13 @@ function Page() {
           <div className="mt-6 mb-4">
             <Link
               href="/saldo"
-              className={`flex px-3 py-2 space-x-3 items-center text-sm hover:bg-slate-50`}
+              className={`flex px-3 py-2 space-x-3 items-center text-sm hover:bg-zinc-50`}
             >
               <DiscIcon className="mr-3" /> Saldo Point History
             </Link>
             <p
               onClick={() => signOut()}
-              className={`flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-slate-50`}
+              className={`flex px-3 space-x-3 py-2 items-center text-sm cursor-pointer hover:bg-zinc-50`}
             >
               <ExitIcon className="mr-3" /> Logout
             </p>

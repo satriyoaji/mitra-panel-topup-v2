@@ -62,23 +62,18 @@ function List() {
       ...prev,
       search: e.target.value,
     }));
-    setFilter((prev) => ({
-      ...prev,
-      search: e.target.value,
-    }));
   }, 500);
 
   return (
     <div className="md:mx-2">
-      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background h-full flex-col space-y-1.5 mb-3">
-        <p className="font-semibold text-lg">Riwayat Transaksi🧾</p>
-        <div className="flex space-x-1">
+      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background h-full flex-col z-20">
+        <h3 className="font-semibold text-primary">Riwayat Pesanan🧾</h3>
+        <div className="flex space-x-1 mt-3">
           <Input
             id="invoice"
-            placeholder="Masukan No. Invoice"
+            placeholder="Masukan No. Invoice atau No. Handphone"
             className="bg-background"
             onChange={doSearch}
-            value={filter.search}
           />
           {session ? (
             <Popover open={filterOpen} onOpenChange={setfilterOpen}>
@@ -128,7 +123,7 @@ function List() {
           </div>
         )}
       </div>
-      {meta ? (
+      {meta && lists.length > 0 ? (
         <Pagination
           meta={meta}
           onChange={(val) => {

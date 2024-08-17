@@ -28,7 +28,7 @@ function ProductCard(props: prop) {
 
   return (
     <div
-      className={`min-h-[4rem] overflow-clip flex items-center py-1 pr-1 relative h-full bg-white hover:bg-zinc-50 rounded-xl cursor-pointer ${
+      className={`min-h-[4rem] overflow-clip flex items-center py-1 pr-1 relative h-full bg-white hover:bg-slate-50 rounded-xl cursor-pointer ${
         props.selected ? `border-2 border-primary` : "border"
       }`}
       onClick={props.onClick}
