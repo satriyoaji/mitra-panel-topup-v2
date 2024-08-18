@@ -8,6 +8,7 @@ import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import BadgeTransaksi from "../badge-transaksi";
 import CountdownCard from "@/app/dashboard/countdown-card";
+import Image from "next/image";
 
 export interface TItemsCard {
   data: ITransactionHistoryList;
@@ -41,10 +42,19 @@ function ItemsCard(props: TItemsCard) {
               <p className="text-sm font-medium text-right">
                 {priceMask(props.data.price)}
               </p>
-              <div className="space-y-2">
-                <p className="text-sm font-medium text-right">
-                  {props.data.payment_channel}
-                </p>
+              <div className="space-y-2 flex flex-col justify-end items-end">
+                {props.data.payment_logo ? (
+                  <Image
+                    alt={props.data.payment_channel}
+                    src={props.data.payment_logo}
+                    height={50}
+                    width={50}
+                  />
+                ) : (
+                  <p className="text-sm font-medium text-right">
+                    {props.data.payment_channel}
+                  </p>
+                )}
                 <CountdownCard date={parseISO(props.data.date)} theme="light" />
               </div>
             </div>

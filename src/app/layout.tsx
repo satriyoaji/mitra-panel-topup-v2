@@ -1,5 +1,4 @@
 import RootTemplateLayout from "./root-layout";
-import TemplateLayout from "./template-layout";
 import { Metadata } from "next";
 import { GetCredHeader } from "./api/api-utils";
 import { ISiteProfile } from "@/types/utils";
@@ -46,11 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-repeat antialiased">
-        <RootTemplateLayout>
-          <div className="bg-zinc-50">
-            <TemplateLayout>{children}</TemplateLayout>
-          </div>
-        </RootTemplateLayout>
+        <RootTemplateLayout>{children}</RootTemplateLayout>
       </body>
     </html>
   );

@@ -8,6 +8,7 @@ import {
 import { IBanner } from "@/types/utils";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 
 function CarouselV2({ data }: { data: IBanner[] }) {
   return (
@@ -34,11 +35,12 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                 key={index.toString()}
                 className="flex justify-center md:rounded-lg overflow-clip"
               >
-                <img
+                <Image
                   key={index}
                   src={item.image_url}
                   alt={item.name}
-                  sizes="100%"
+                  height={1000}
+                  width={3000}
                   style={{ aspectRatio: 27 / 9 }}
                   className={`object-cover h-full w-auto md:rounded-lg duration-500 bg-zinc-200`}
                 />

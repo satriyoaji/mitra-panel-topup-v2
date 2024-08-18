@@ -54,106 +54,87 @@ function Page() {
   };
 
   return (
-    <div className="relative min-h-[50vh] flex items-center justify-center w-full px-0 py-28">
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6">
-        <div className="flex space-y-2 justify-center items-center w-full">
-          {/* <div className="w-full md:flex hidden justify-center">
-            <Image
-              src={
-                "/assets/illustration/DrawKit Larry Character Illustration (8).svg"
-              }
-              alt="dw"
-              width={220}
-              height={220}
+    <div className="relative h-[86vh] flex md:items-center justify-center w-full px-0">
+      <div className="md:border p-8 md:rounded-lg md:shadow-md w-full max-w-md">
+        <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight text-primary">
+          Register
+        </h1>
+        <form className="w-full max-w-md grid gap-4 pt-4" onSubmit={onSubmit}>
+          <div className="grid w-full max-w-sm gap-1.5">
+            <Label htmlFor="nama" className="text-left">
+              Nama
+            </Label>
+            <Input
+              id="nama"
+              placeholder="Masukan nama"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
             />
-          </div> */}
-          <div className="w-full flex justify-center">
-            <div className="border p-8 bg-background rounded-lg shadow-md w-full max-w-md">
-              <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight text-primary">
-                Register
-              </h1>
-              <form
-                className="w-full max-w-md grid gap-4 pt-4"
-                onSubmit={onSubmit}
-              >
-                <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="nama" className="text-left">
-                    Nama
-                  </Label>
-                  <Input
-                    id="nama"
-                    placeholder="Masukan nama"
-                    name="name"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="email" className="text-left">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Masukan Email"
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="Whatsapp" className="text-left">
-                    No. Whatsapp
-                  </Label>
-                  <PhoneInput
-                    id="Whatsapp"
-                    type="tel"
-                    name="phone"
-                    placeholder="Masukan No. Whatsapp"
-                    onValueChange={(e) => setPhone(`${e}`)}
-                  />
-                </div>
-                <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="password" className="text-left">
-                    Password
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="Minimum 6 digit sandi"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="grid w-full max-w-sm gap-1.5">
-                  <Label htmlFor="password" className="text-left">
-                    Ketik Ulang Sandi
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="Minimum 6 digit sandi"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
+          </div>
+          <div className="grid w-full max-w-sm gap-1.5">
+            <Label htmlFor="email" className="text-left">
+              Email
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Masukan Email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="grid w-full max-w-sm gap-1.5">
+            <Label htmlFor="Whatsapp" className="text-left">
+              No. Whatsapp
+            </Label>
+            <PhoneInput
+              id="Whatsapp"
+              type="tel"
+              name="phone"
+              placeholder="Masukan No. Whatsapp"
+              onValueChange={(e) => setPhone(`${e}`)}
+            />
+          </div>
+          <div className="grid w-full max-w-sm gap-1.5">
+            <Label htmlFor="password" className="text-left">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Minimum 8 digit sandi"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="grid w-full max-w-sm gap-1.5">
+            <Label htmlFor="password" className="text-left">
+              Ketik Ulang Sandi
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Minimum 8 digit sandi"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-                <div className="mt-4 space-y-1">
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Loading..." : "Register"}
-                  </Button>
-                  <div className="flex items-center justify-center space-x-1 pt-2">
-                    <p className="text-xs">Sudah Punya Akun? </p>
-                    <Link
-                      href="/auth/login"
-                      className="text-xs hover:underline underline-offset-4"
-                    >
-                      Login
-                    </Link>
-                  </div>
-                </div>
-              </form>
+          <div className="mt-4 space-y-1">
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Loading..." : "Register"}
+            </Button>
+            <div className="flex items-center justify-center space-x-1 pt-2">
+              <p className="text-xs">Sudah Punya Akun? </p>
+              <Link
+                href="/auth/login"
+                className="text-xs hover:underline underline-offset-4"
+              >
+                Login
+              </Link>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
