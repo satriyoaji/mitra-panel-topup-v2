@@ -7,6 +7,11 @@ import { useEffect, useState } from "react";
 import { ISiteProfile } from "@/types/utils";
 import { HexToHSL } from "@/Helpers";
 import Loading from "./loading";
+import PWAAlert from "@/components/header/pwa-alert";
+import Header from "@/components/header/page-header";
+import BottomNav from "@/components/bottom-nav";
+import Footer from "@/components/footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootTemplateLayout({
   children,
@@ -44,7 +49,20 @@ export default function RootTemplateLayout({
         }}
       />
       <SessionProvider>
-        <TransactionProvider>{children}</TransactionProvider>
+        <TransactionProvider>
+          <div className="bg-zinc-50">
+            <PWAAlert profile={profile} />
+            <Header profile={profile} />
+            <div>
+              <div className={`min-h-[92vh] bg-zinc-50 scroll-mt-16`}>
+                {children}
+              </div>
+              <BottomNav />
+            </div>
+            <Footer profile={profile} />
+            <Toaster />
+          </div>
+        </TransactionProvider>
       </SessionProvider>
     </>
   );

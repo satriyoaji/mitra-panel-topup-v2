@@ -33,9 +33,6 @@ function ProductList(prop: IProductList) {
   ) as ITransactionContext;
   const [search, setSearch] = useState("");
   const [productSearch, setProductSearch] = useState<TProductItem[]>([]);
-  const [oldScrollY, setOldScrollY] = useState<number>(0);
-  const [isScroll, setIsScroll] = useState<boolean>(false);
-  const [direction, setDirection] = useState<"up" | "down">("down");
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -47,18 +44,6 @@ function ProductList(prop: IProductList) {
     const data = prop.products.filter((item) => item.name.includes(search));
     setProductSearch(data);
   }, [search]);
-
-  const onScroll = (e: any) => {
-    setIsScroll(true);
-    const window = e.target;
-
-    if (oldScrollY > window.scrollTop) {
-      setDirection("up");
-    } else if (oldScrollY < window.scrollTop) {
-      setDirection("down");
-    }
-    setOldScrollY(window.scrollTop);
-  };
 
   return (
     <>

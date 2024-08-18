@@ -211,7 +211,7 @@ function TransactionHistoryDetail({
                 </div>
                 <>
                   {data.payment_information.guide ? (
-                    <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1 text-muted-foreground col-span-2">
+                    <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1 text-muted-foreground col-span-full">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: data.payment_information.guide,
