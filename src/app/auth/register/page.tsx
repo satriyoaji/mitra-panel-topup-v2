@@ -103,7 +103,7 @@ function Page() {
               id="password"
               type="password"
               name="password"
-              placeholder="Minimum 6 digit sandi"
+              placeholder="Minimum 8 digit sandi"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -115,7 +115,7 @@ function Page() {
               id="password"
               type="password"
               name="password"
-              placeholder="Minimum 6 digit sandi"
+              placeholder="Minimum 8 digit sandi"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
