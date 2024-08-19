@@ -66,12 +66,14 @@ function List() {
 
   return (
     <div className="md:mx-2">
-      <div className="flex -mx-2 px-2 sticky top-12 py-4 bg-background h-full flex-col z-20">
-        <h3 className="font-semibold text-primary">Riwayat Pesanan🧾</h3>
+      <div className="flex -mx-2 px-4 sticky top-12 py-4 bg-background rounded-xl h-full flex-col z-20">
+        <h3 className="font-semibold text-primary p-0 mt-2">
+          Riwayat Pesananku
+        </h3>
         <div className="flex space-x-1 mt-3">
           <Input
             id="invoice"
-            placeholder="Masukan No. Invoice atau No. Handphone"
+            placeholder="Cari Transaksi #TMXXXX atau Produk"
             className="bg-background"
             onChange={doSearch}
           />
@@ -105,16 +107,14 @@ function List() {
           ) : null}
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4 mt-4">
         {!loading ? (
           lists.length > 0 ? (
             lists.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
           ) : (
             <div className="w-full flex flex-col items-center justify-center col-span-full">
               <ShoppingCartIcon className="h-[30vh] text-black/10" />
-              <h3 className="font-bold text-black/10 p-0">
-                Transaksi Masih Kosong
-              </h3>
+              <h3 className="font-bold text-black/10 p-0">Belum Ada Data</h3>
             </div>
           )
         ) : (

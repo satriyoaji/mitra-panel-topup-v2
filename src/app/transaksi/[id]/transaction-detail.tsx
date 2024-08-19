@@ -51,10 +51,8 @@ function TransactionHistoryDetail({
     return (
       <>
         <div className="flex justify-between items-center">
-          <div className="sm:flex items-center space-x-2">
-            <p className="font-medium ml-2 text-xl text-primary">
-              Detail Transaksi
-            </p>
+          <div className="sm:flex items-center gap-2">
+            <p className="font-medium text-xl text-primary">Detail Transaksi</p>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <p className="text-xs text-muted-foreground">
@@ -212,7 +210,13 @@ function TransactionHistoryDetail({
                 <>
                   {data.payment_information.guide ? (
                     <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1 text-muted-foreground col-span-full">
+                      <div className="flex justify-between items-center">
+                        <p className="font-medium text-lg text-primary">
+                          Cara Pembayaran
+                        </p>
+                      </div>
                       <div
+                        className="mt-4"
                         dangerouslySetInnerHTML={{
                           __html: data.payment_information.guide,
                         }}

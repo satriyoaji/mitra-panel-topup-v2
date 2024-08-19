@@ -54,7 +54,7 @@ function Page() {
   return (
     <div className={`flex justify-center w-full`}>
       <div
-        className={`space-x-4 h-[92vh] md:pt-4 bg-background w-full max-w-6xl px-2 sm:px-6 grid grid-cols-1 sm:grid-cols-3`}
+        className={`space-x-4 h-[92vh] md:pt-4 bg-background w-full container px-2 sm:px-6 grid grid-cols-1 sm:grid-cols-3`}
       >
         <div className="md:border md:shadow w-full h-fit rounded-xl bg-background p-2 md:p-4">
           <div className="flex justify-between items-center">

@@ -34,12 +34,12 @@ function Page() {
         variant: "destructive",
       });
 
-    window.location.replace(searchParams.get("callback") || "/");
+    window.location.replace(searchParams.get("callback") ?? "/");
   };
 
   return (
-    <div className="relative h-[86vh] flex md:items-center justify-center w-full px-0">
-      <div className="md:border p-8 md:rounded-lg md:shadow-md w-full max-w-md">
+    <div className="relative h-full md:pt-12 flex md:items-center justify-center w-full px-0 bg-background md:bg-transparent">
+      <div className="md:border p-8 md:rounded-xl md:shadow-md w-full max-w-md md:bg-background">
         <h1 className="pt-4 text-2xl font-semibold text-center tracking-tight text-primary">
           Login
         </h1>
@@ -49,6 +49,7 @@ function Page() {
               Email
             </Label>
             <Input
+              className="bg-background"
               id="username"
               name="username"
               type="email"
@@ -61,6 +62,7 @@ function Page() {
               Password
             </Label>
             <Input
+              className="bg-background"
               id="password"
               type="password"
               name="password"
@@ -83,7 +85,7 @@ function Page() {
                 <p className="text-xs">Belum Punya Akun? </p>
                 <Link
                   href="/auth/register"
-                  className="text-xs hover:underline underline-offset-4"
+                  className="text-xs hover:underline text-primary underline-offset-4"
                 >
                   Register
                 </Link>

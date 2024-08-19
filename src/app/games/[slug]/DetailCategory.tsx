@@ -27,27 +27,27 @@ function DetailCategory(props: Props) {
   if (props.data.category !== null && props.data.category !== undefined)
     return (
       <>
-        <div className="lg:grid lg:grid-cols-5 lg:space-x-4 w-full px-3">
-          <div className="col-span-full mt-4">
-            <Breadcrumb className="mb-4">
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/games">Game</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{props.data.category.name}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <h4 className="text-lg font-bold ml-4 text-primary p-0">
-              {props.data.category.name}
-            </h4>
-          </div>
+        <div className="mt-4">
+          <Breadcrumb className="mb-4">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/games">Game</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{props.data.category.name}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <h4 className="text-lg font-bold ml-2 text-primary p-0">
+            {props.data.category.name}
+          </h4>
+        </div>
+        <div className="lg:grid lg:grid-cols-5 lg:gap-4 w-full">
           <div className="col-span-2 my-0.5">
             <div className="md:sticky md:top-16">
               <Header category={props.data.category} />

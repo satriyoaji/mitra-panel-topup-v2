@@ -37,7 +37,7 @@ function StatusSelect({
           {Object.keys(ETransactionStatus)
             .filter((v) => isNaN(Number(v)))
             .map((k, i) => (
-              <SelectItem key={`${i}`} value={(i--).toString()}>
+              <SelectItem key={`${i}`} value={(++i).toString()}>
                 {k}
               </SelectItem>
             ))}

@@ -21,6 +21,7 @@ import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
 import ProfileDialog from "./profile-dialog";
+import { EnterIcon } from "@radix-ui/react-icons";
 
 export type path = {
   name: string;
@@ -35,7 +36,7 @@ const paths: path[] = [
     isSession: false,
   },
   {
-    name: "Riwayat Pesanan",
+    name: "Riwayat Pesananku",
     path: "/transaksi",
     isSession: true,
   },
@@ -48,7 +49,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="w-full flex justify-center z-20 bg-white/90 backdrop-blur-md items-center top-0 sticky p-1">
+    <header className="w-full flex justify-center z-20 bg-white items-center top-0 sticky p-1">
       <div className="w-full flex container items-center justify-between px-2">
         <div className="flex md:w-fit w-full justify-start">
           <Link href="/" className="p-1">
@@ -62,7 +63,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
             )}
           </Link>
         </div>
-        <div className="flex w-full justify-end items-center gap-2">
+        <div className="flex-row-reverse flex w-full justify-start md:flex-row md:justify-end items-center gap-2">
           <div className="hidden md:flex pl-8">
             <NavigationMenu>
               <NavigationMenuList className="w-fit">
@@ -129,7 +130,10 @@ function Header({ profile }: { profile?: ISiteProfile }) {
             </div>
           ) : (
             <Link href="/auth/login" className="m-2 hidden md:block">
-              <Button size="sm">Login</Button>
+              <Button size="sm" className="flex space-x-1">
+                <EnterIcon />
+                <div className="text-xs">Login</div>
+              </Button>{" "}
             </Link>
           )}
           <div>

@@ -22,15 +22,14 @@ function ProfileDialog() {
     <>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger>
-          <Avatar className="cursor-pointer" onClick={() => setOpen(true)}>
-            <AvatarImage
-              src={session?.profile?.name as string}
-              alt={session?.profile?.name as string}
-            />
-            <AvatarFallback>
-              {session?.profile?.name?.at(0) ?? ""}
-            </AvatarFallback>
-          </Avatar>
+          <Button
+            onClick={() => setOpen(true)}
+            size="sm"
+            className="flex space-x-1"
+          >
+            <PersonIcon />
+            <div className="text-xs">Profil</div>
+          </Button>
         </PopoverTrigger>
         <PopoverContent className="w-80 space-y-6 p-5">
           <div className="px-4 py-3 w-full rounded-xl space-y-1 bg-slate-100">
