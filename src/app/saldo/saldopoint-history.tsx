@@ -32,14 +32,14 @@ function SaldoPointHistory() {
 
   return (
     <>
-      <div className="gap-2 grid md:grid-cols-2 text-sm overflow-y-auto">
+      <div className="gap-3 grid text-sm overflow-y-auto">
         {balances.map((item, i) => (
           <Link
             href={`/transaksi/${item.transaction_code}`}
             className="cursor-pointer"
             key={i.toString()}
           >
-            <Card className="py-3 px-4 flex flex-col hover:bg-zinc-50">
+            <Card className="py-3 px-4 flex flex-col hover:bg-slate-50">
               <div className="flex justify-between items-center">
                 <p className="text-xs">{item.transaction_code}</p>
                 <p className="text-xs text-muted-foreground mt-1.5">
@@ -48,13 +48,13 @@ function SaldoPointHistory() {
               </div>
               <div className="flex justify-between items-center mt-1">
                 {item.amount < 0 ? (
-                  <p className="font-medium text-slate-400">
-                    - Rp {nPlainFormatter(Math.abs(item.amount))}
+                  <p className="font-medium text-red-500">
+                    -Rp {nPlainFormatter(Math.abs(item.amount))}
                   </p>
                 ) : (
                   <div className="flex items-center gap-4">
                     <p className="font-medium">
-                      + Rp {nPlainFormatter(item.amount)}
+                      +Rp {nPlainFormatter(item.amount)}
                     </p>
                     <p className="text-green-500 font-medium">Refund</p>
                   </div>

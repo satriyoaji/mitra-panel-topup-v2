@@ -21,6 +21,11 @@ const nextConfig = {
                 hostname: "cdn-panel.vcg.my.id",
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname: "s3-alpha-sig.figma.com",
+                port: "",
+            },
         ],
     },
 };

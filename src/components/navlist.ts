@@ -21,18 +21,13 @@ export const paths: path[] = [
     name: "Home",
   },
   {
-    path: "/games",
-    icon: SketchLogoIcon,
-    name: "Price List",
-  },
-  {
     path: "/transaksi",
     icon: ReaderIcon,
-    name: "Transaksi",
+    name: "Cek Pesanan",
   },
   {
     path: "/profile",
     icon: PersonIcon,
-    name: "Profile",
+    name: "Profil",
   },
 ];

@@ -20,8 +20,8 @@ function FormResetPassword({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div className="relative h-[86vh] flex md:items-center justify-center w-full px-0">
-      <div className="md:border p-8 md:rounded-lg md:shadow-md w-full max-w-md">
+    <div className="relative h-full md:pt-12 flex md:items-center justify-center w-full px-0 bg-background md:bg-transparent">
+      <div className="md:border p-8 md:rounded-xl md:shadow-md w-full max-w-md md:bg-background">
         <h1 className="pt-4 text-2xl text-center font-semibold tracking-tight">
           🔐Reset Password
         </h1>
@@ -34,6 +34,7 @@ function FormResetPassword({ params }: { params: { id: string } }) {
               New Password
             </Label>
             <Input
+              className="bg-background"
               id="password"
               type="password"
               placeholder="Masukan New Password"
@@ -46,6 +47,7 @@ function FormResetPassword({ params }: { params: { id: string } }) {
               Confirmation Password
             </Label>
             <Input
+              className="bg-background"
               id="confirmPassword"
               type="password"
               placeholder="Masukan New Password"
