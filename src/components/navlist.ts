@@ -1,9 +1,4 @@
-import {
-  HomeIcon,
-  PersonIcon,
-  ReaderIcon,
-  SketchLogoIcon,
-} from "@radix-ui/react-icons";
+import { HomeIcon, PersonIcon, ReaderIcon } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
 export type path = {

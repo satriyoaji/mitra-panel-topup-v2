@@ -1,9 +1,6 @@
 import { priceMask } from "@/Helpers";
 import { ITransactionHistoryList } from "@/Type";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { SketchLogoIcon } from "@radix-ui/react-icons";
 import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import BadgeTransaksi from "../badge-transaksi";

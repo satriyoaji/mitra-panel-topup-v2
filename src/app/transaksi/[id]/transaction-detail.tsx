@@ -1,6 +1,6 @@
 "use client";
 
-import { InfoCircledIcon, SketchLogoIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
