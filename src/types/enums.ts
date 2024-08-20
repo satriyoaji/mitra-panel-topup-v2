@@ -5,5 +5,5 @@ export enum ETransactionStatus {
   "Delivered" = 4,
   "Failed" = 5,
   "Refunded" = 6,
-  "Aborted" = 7,
+  "Expired" = 7,
 }

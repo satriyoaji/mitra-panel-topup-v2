@@ -56,7 +56,7 @@ function SearchList() {
 
   return (
     <>
-      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 px-2 bg-background py-4 z-10">
+      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 p-4 rounded-3xl bg-background z-10">
         <Input
           className="w-full bg-background"
           placeholder="Masukkan nomor handphone atau invoice"

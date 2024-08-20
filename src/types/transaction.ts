@@ -38,8 +38,7 @@ export interface IVAPayment extends IBasePaymentInformation {
 }
 export interface ILinkPayment extends IBasePaymentInformation {
   payment_method: "EWALLET";
-  web_url: string;
-  mobile_url: string;
+  deeplink_url: string;
 }
 export interface IQRPayment extends IBasePaymentInformation {
   payment_method: "QR_CODE";
@@ -59,6 +58,9 @@ export interface ITransactionHistoryDetail {
   customer_data: string;
   price: number;
   paid_price: number;
+  discount: number;
+  admin_fee: number;
+  grand_total: number;
   status_name: string;
   status: number;
   history_status: ITransactionHistory[];

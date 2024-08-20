@@ -36,7 +36,6 @@ export default function ListGame() {
         })
     );
 
-    setLoading(false);
     if (res.ok) {
       var result = await res.json();
 
@@ -49,6 +48,7 @@ export default function ListGame() {
 
       setTotal(result.manifest.total);
     }
+    setLoading(false);
   };
 
   const getGroup = async () => {
@@ -92,10 +92,10 @@ export default function ListGame() {
     <div className="bg-zinc-50 pb-4 flex justify-center rounded-t-xl">
       <div className="w-full max-w-7xl px-2">
         <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-zinc-50 backdrop-blur-md">
-          <div className="flex md:block items-center justify-between mt-4">
-            <h5 className="mr-8 font-semibold px-0 py-0 hidden md:block mb-1">
+          <div className="flex md:block items-center justify-between mt-4 ">
+            {/* <h5 className="mr-8 font-semibold px-0 py-0 hidden md:block mb-1">
               Kategori
-            </h5>
+            </h5> */}
             <div
               className="no-scrollbar z-10 md:mb-0"
               style={{
@@ -108,7 +108,7 @@ export default function ListGame() {
               {groups.map((val, idx) => (
                 <Badge
                   className={`mx-1 cursor-pointer inline-block whitespace-nowrap`}
-                  variant={val.id == group.id ? "default" : "secondary"}
+                  variant={val.id == group.id ? "default" : "outline"}
                   key={`${idx}`}
                   onClick={() => {
                     setData([]);
@@ -120,18 +120,18 @@ export default function ListGame() {
               ))}
             </div>
           </div>
-          <div className="hidden md:flex items-center border rounded-full px-3 mx-3 w-full max-w-[20rem] bg-background">
+          {/* <div className="hidden md:flex items-center border rounded-full px-3 mx-3 w-full max-w-[20rem] bg-background">
             <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50 text-primary" />
             <input
               onChange={doSearch}
               placeholder="Cari Produk"
               className="flex w-full rounded-md bg-transparent py-1.5 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
             />
-          </div>
+          </div> */}
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 mt-2 place-items-center justify-center px-2">
           {loading ? (
-            [...Array(10)].map((x, i) => (
+            [...Array(3)].map((x, i) => (
               <Skeleton key={i} className="w-full aspect-square" />
             ))
           ) : data.length > 0 ? (

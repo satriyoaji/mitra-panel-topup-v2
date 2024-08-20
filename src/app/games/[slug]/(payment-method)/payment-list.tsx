@@ -85,7 +85,7 @@ function PaymentList({
                           height={50}
                         />
                       ) : (
-                        <p className="text-xl text-left">💳</p>
+                        <p className="text-xl text-left">🪙</p>
                       )}
                     </div>
                   </Card>

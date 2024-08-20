@@ -1,4 +1,4 @@
-import type { NextAuthOptions, RequestInternal } from "next-auth";
+import type { NextAuthOptions, RequestInternal, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { GetCredHeader } from "../../api-utils";
 
@@ -39,7 +39,12 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, session, trigger }) => {
+      if (trigger === "update" && session) {
+        // If so, the data passed to `update(data)` represents the session prop
+        token = { ...user, ...(session as Session) };
+      }
+
       if (user) {
         token.token = user.token;
         token.profile = user.profile;

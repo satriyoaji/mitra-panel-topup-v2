@@ -12,7 +12,7 @@ export interface TItemsCard {
 }
 
 function ItemsCard(props: TItemsCard) {
-  var date = format(parseISO(props.data.date), "dd MMM yyyy, hh:mm:ss");
+  var date = format(parseISO(props.data.date), "dd MMM yyyy, hh:mm");
 
   return (
     <Link href={`/transaksi/${props.data.transaction_code}`}>
@@ -27,7 +27,9 @@ function ItemsCard(props: TItemsCard) {
                 <BadgeTransaksi status={props.data.status} />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">{date}</p>
+                <p className="text-xs text-muted-foreground text-right">
+                  {date}
+                </p>
               </div>
             </div>
             <div className="flex justify-between pt-1">
@@ -40,10 +42,12 @@ function ItemsCard(props: TItemsCard) {
                 {priceMask(props.data.price)}
               </p>
               <div className="space-y-2 flex justify-end items-end space-x-2">
-                <CountdownCard
-                  date={parseISO(props.data.expired_at)}
-                  theme="light"
-                />
+                {props.data.expired_at ? (
+                  <CountdownCard
+                    date={parseISO(props.data.expired_at)}
+                    theme="light"
+                  />
+                ) : null}
                 {props.data.payment_logo ? (
                   <Image
                     alt={props.data.payment_channel}
@@ -53,7 +57,7 @@ function ItemsCard(props: TItemsCard) {
                   />
                 ) : (
                   <p className="text-sm font-medium text-right p-0">
-                    {props.data.payment_channel}
+                    🪙 {props.data.payment_channel}
                   </p>
                 )}
               </div>

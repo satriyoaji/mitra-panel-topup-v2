@@ -18,8 +18,12 @@ import Loading from "../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 function List() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
   const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
   const [filter, setFilter] = useState<TFilter>({
@@ -28,7 +32,7 @@ function List() {
   });
   const [loading, setLoading] = useState(false);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(searchParams.get("page") ?? 1);
 
   const getData = async () => {
     let searchParams = new URLSearchParams({
@@ -39,19 +43,24 @@ function List() {
 
     setLoading(true);
     var res = await fetch(`/api/transaction?` + searchParams);
-    setLoading(false);
 
     if (res.ok) {
       const resData = await res.json();
       setMeta(resData.manifest);
       if (resData) {
         setLists(resData.data);
+        setLoading(false);
         return;
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set("search", filter.search ?? "");
+    params.set("page", `${page}`);
+    router.push(`${pathname}?${params.toString()}`);
     getData();
   }, [filter, page]);
 
@@ -62,7 +71,7 @@ function List() {
       ...prev,
       search: e.target.value,
     }));
-  }, 500);
+  }, 1500);
 
   return (
     <div className="md:mx-2">
@@ -73,7 +82,7 @@ function List() {
         <div className="flex space-x-1 mt-3">
           <Input
             id="invoice"
-            placeholder="Cari Transaksi #TMXXXX atau Produk"
+            placeholder="Cari Transaksi #TMXXXX atau No. Handphone"
             className="bg-background"
             onChange={doSearch}
           />
