@@ -26,7 +26,7 @@ function Description({ description }: { description: string }) {
   }, [overflowActive]);
 
   return (
-    <div>
+    <div className="w-full">
       <p
         ref={overflowingText}
         className={`text-xs text-muted-foreground leading-5 ${

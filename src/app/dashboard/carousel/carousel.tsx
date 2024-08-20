@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CarouselContent,
   CarouselItem,
@@ -9,13 +11,15 @@ import { IBanner } from "@/types/utils";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function CarouselV2({ data }: { data: IBanner[] }) {
+  const router = useRouter();
   return (
     <div>
       <div className="bg-background flex justify-center items-center md:py-4">
         <Carousel
-          className="h-full w-full max-w-[1400px] shadow md:rounded-lg"
+          className="h-full w-full max-w-7xl shadow md:rounded-lg"
           opts={{
             align: "center",
             loop: true,
@@ -33,7 +37,14 @@ function CarouselV2({ data }: { data: IBanner[] }) {
             {data.map((item, index) => (
               <CarouselItem
                 key={index.toString()}
-                className="flex justify-center md:rounded-lg overflow-clip"
+                onClick={() =>
+                  item.is_clickable || item.is_hyperlink
+                    ? router.push(item.hyperlink_url)
+                    : null
+                }
+                className={`flex justify-center md:rounded-lg overflow-clip ${
+                  item.is_clickable || item.is_hyperlink ? "cursor-pointer" : ""
+                }`}
               >
                 <Image
                   key={index}

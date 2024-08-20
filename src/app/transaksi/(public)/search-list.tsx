@@ -9,14 +9,6 @@ import ItemsCard from "../(authenticated)/items-card";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import TransactionHistoryDetail from "./transaction-detail";
 
 function SearchList() {
   const searchParams = useSearchParams();
@@ -27,10 +19,6 @@ function SearchList() {
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
   const [page, setPage] = useState(searchParams.get("page") ?? 1);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
-  const [transction, setTransaction] = useState<
-    ITransactionHistoryList | undefined
-  >();
-  const [open, setOpen] = useState(false);
 
   const get = async () => {
     if (!search) setList([]);
@@ -82,14 +70,7 @@ function SearchList() {
           <>
             <div className="grid md:grid-cols-2 gap-4">
               {list.map((val, idx) => (
-                <ItemsCard
-                  key={`${idx}`}
-                  data={val}
-                  // onEditClick={() => {
-                  //   setTransaction(val);
-                  //   setOpen(true);
-                  // }}
-                />
+                <ItemsCard key={`${idx}`} data={val} />
               ))}
             </div>
             {meta && meta.total > 0 ? (
@@ -108,20 +89,6 @@ function SearchList() {
           <Loading />
         )}
       </div>
-      {transction && (
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent
-            className="sm:max-w-[425px]"
-            onOpenAutoFocus={(e) => e.preventDefault()}
-          >
-            <DialogHeader>
-              <DialogTitle>{transction?.transaction_code}</DialogTitle>
-              <DialogDescription>Detail transaksi</DialogDescription>
-            </DialogHeader>
-            <TransactionHistoryDetail id={transction?.transaction_code} />
-          </DialogContent>
-        </Dialog>
-      )}
     </>
   );
 }

@@ -127,7 +127,7 @@ function CheckoutAction({
             </p>
           </div>
           <div>
-            <p className="text-muted-foreground text-xs">Payment Charge</p>
+            <p className="text-muted-foreground text-xs">Biaya Payment</p>
             <p className="text-foreground font-medium text-md">
               {priceMask(data.payment?.fee_amount)}
             </p>

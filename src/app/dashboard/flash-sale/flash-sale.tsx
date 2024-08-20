@@ -16,7 +16,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
   if (data)
     return (
       <div className="relative flex justify-center md:p-4 my-4 md:my-0">
-        <div className="container p-0 w-full bg-slate-200 md:rounded-xl overflow-clip">
+        <div className="max-w-7xl p-0 w-full bg-slate-200 md:rounded-xl overflow-clip">
           <div className="bg-gradient-to-br from-white/30 to-white/90 backdrop-blur pb-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center py-1 pr-1 rounded-tl-lg rounded-br-lg mt-2">

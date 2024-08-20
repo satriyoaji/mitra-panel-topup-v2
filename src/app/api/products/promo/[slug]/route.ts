@@ -19,8 +19,6 @@ export async function GET(
       revalidate: 60,
     },
   });
-
   var result = await re.json();
-
-  return NextResponse.json(result, { status: 200 });
+  return NextResponse.json(result, { status: re.status });
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { priceMask } from "@/Helpers";
-import { SketchLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React, { useCallback, useContext, useMemo } from "react";
 

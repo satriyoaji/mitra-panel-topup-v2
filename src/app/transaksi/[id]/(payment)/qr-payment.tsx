@@ -1,5 +1,4 @@
 "use client";
-import { useCountdown } from "@/Hooks";
 import { IQRPayment } from "@/types/transaction";
 import React from "react";
 import QRCode from "react-qr-code";

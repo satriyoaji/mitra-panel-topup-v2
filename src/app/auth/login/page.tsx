@@ -26,15 +26,23 @@ function Page() {
       redirect: false,
     });
 
-    setLoading(false);
-    if (!res?.ok)
+    if (!res?.ok) {
+      setLoading(false);
       return toast({
         title: "Failed",
         description: "Login gagal, periksa kembali data anda",
         variant: "destructive",
       });
+    }
 
-    window.location.replace(searchParams.get("callback") ?? "/");
+    toast({
+      title: "Success",
+      description: "Sukses login",
+      variant: "success",
+    });
+    setTimeout(() => {
+      window.location.replace(searchParams.get("callback") ?? "/");
+    }, 1500);
   };
 
   return (
