@@ -7,17 +7,17 @@ import Description from "./collapsible-description";
 function Header({ category }: { category: IProductCategory }) {
   return (
     <Card className="w-full mt-2 h-full min-w-fit">
-      <CardContent className="p-0 pb-3">
+      <CardContent className="p-4">
         {category.banner_url && (
           <div
-            className="w-full rounded-lg px-4 pt-4 max-h-24"
+            className="w-fit rounded-lg h-auto overflow-clip border pb-4"
             style={{ aspectRatio: 27 / 9 }}
           >
             <img
               alt={category.name}
-              src={category?.image_url ?? "/assets/hero-games.svg"}
+              src={category?.banner_url ?? "/assets/hero-games.svg"}
               style={{ aspectRatio: 27 / 9 }}
-              className={`object-cover w-full rounded-xl`}
+              className={`object-cover w-full h-auto rounded-xl`}
             />
             {/* <Image
             fill
@@ -28,10 +28,10 @@ function Header({ category }: { category: IProductCategory }) {
             /> */}
           </div>
         )}
-        <div className="px-3 pt-3">
+        <div>
           <div className="flex z-10 gap-4">
             {category?.image_url ? (
-              <div className="rounded flex items-center justify-center w-16 h-16 bg-white">
+              <div className="rounded-lg border flex items-center justify-center overflow-clip w-16 h-16 bg-white">
                 <img
                   alt={category.name}
                   className="h-auto w-14 rounded"

@@ -4,7 +4,7 @@ import React from "react";
 function Loading() {
   return (
     <Skeleton
-      className="h-auto w-full container shadow rounded-lg"
+      className="h-auto w-full max-w-7xl shadow rounded-lg"
       style={{ aspectRatio: 27 / 9 }}
     />
   );

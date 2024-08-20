@@ -90,8 +90,7 @@ export default function ListGame() {
 
   return (
     <div className="bg-zinc-50 pb-4 flex justify-center rounded-t-xl">
-      <div className="w-full container px-2">
-        {" "}
+      <div className="w-full max-w-7xl px-2">
         <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-zinc-50 backdrop-blur-md">
           <div className="flex md:block items-center justify-between mt-4">
             <h5 className="mr-8 font-semibold px-0 py-0 hidden md:block mb-1">
@@ -131,40 +130,48 @@ export default function ListGame() {
           </div>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 mt-2 place-items-center justify-center px-2">
-          {loading
-            ? [...Array(10)].map((x, i) => (
-                <Skeleton key={i} className="w-full aspect-square" />
-              ))
-            : data.map((val: IProductCategory, idx) => (
-                <Link
-                  href={`/games/${val.key}`}
-                  key={idx}
-                  className="w-full h-full"
-                >
-                  <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
-                    <div className="p-4 md:p-5 flex flex-col items-center">
-                      <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
-                        {val.image_url !== "" ? (
-                          <Image
-                            height={1000}
-                            width={1000}
-                            alt={val.name}
-                            className="rounded-xl w-full hover:scale-125 transition duration-300"
-                            src={val.image_url}
-                          />
-                        ) : (
-                          <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
-                            <CubeIcon className="text-white m-auto h-20 w-20" />
-                          </div>
-                        )}
-                      </div>
-                      <p className="md:text-xs text-[70%] text-center mt-2 p-0">
-                        {val.name}
-                      </p>
+          {loading ? (
+            [...Array(10)].map((x, i) => (
+              <Skeleton key={i} className="w-full aspect-square" />
+            ))
+          ) : data.length > 0 ? (
+            data.map((val: IProductCategory, idx) => (
+              <Link
+                href={`/games/${val.key}`}
+                key={idx}
+                className="w-full h-full"
+              >
+                <Card className="w-full h-full min-w-fit rounded-xl hover:shadow-md hover:text-primary transition duration-300">
+                  <div className="p-4 md:p-5 flex flex-col items-center">
+                    <div className="overflow-clip h-20 md:h-28 w-auto rounded-xl bg-background aspect-square flex justify-center items-center">
+                      {val.image_url !== "" ? (
+                        <Image
+                          height={1000}
+                          width={1000}
+                          alt={val.name}
+                          className="rounded-xl w-full hover:scale-125 transition duration-300"
+                          src={val.image_url}
+                        />
+                      ) : (
+                        <div className="w-full aspect-square hover:scale-125 flex justify-center items-center transition z-0 duration-300 hover:rotate-12">
+                          <CubeIcon className="text-white m-auto h-20 w-20" />
+                        </div>
+                      )}
                     </div>
-                  </Card>
-                </Link>
-              ))}
+                    <p className="md:text-xs text-[70%] text-center mt-2 p-0">
+                      {val.name}
+                    </p>
+                  </div>
+                </Card>
+              </Link>
+            ))
+          ) : (
+            <div className="col-span-full h-60 flex items-center justify-center">
+              <h4 className="text-slate-300 font-semibold">
+                Data Tidak Ditemukan
+              </h4>
+            </div>
+          )}
         </div>
         {/* {pageIndex < totalPage ? (
         <div className="flex items-center justify-center my-2 mt-6">

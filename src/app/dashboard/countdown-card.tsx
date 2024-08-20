@@ -20,6 +20,8 @@ function CountdownCard({
     if (isExpired && onExpired) onExpired();
   }, [seconds]);
 
+  if (isExpired) return null;
+
   if (days > 0)
     return (
       <div

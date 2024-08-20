@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
+import { priceMask } from "@/Helpers";
 
 function ProfileDialog() {
   const { data: session } = useSession();
@@ -46,8 +47,7 @@ function ProfileDialog() {
               </p>
             </div>
             <p className="font-medium">
-              {new Intl.NumberFormat().format(session?.profile.saldo ?? 0)}{" "}
-              Points
+              {priceMask(session?.profile.saldo ?? 0)}
             </p>
           </div>
           <div className="space-y-2 px-3">

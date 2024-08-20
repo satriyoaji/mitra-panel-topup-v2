@@ -41,8 +41,8 @@ function Page() {
       }),
     });
 
-    setLoading(false);
     if (!res.ok) {
+      setLoading(false);
       return toast({
         title: "Failed",
         description: "Registrasi Akun Gagal",
@@ -50,7 +50,14 @@ function Page() {
       });
     }
 
-    window.location.replace("/auth/login");
+    toast({
+      title: "Success",
+      description: "Sukses Register Akun",
+      variant: "success",
+    });
+    setTimeout(() => {
+      window.location.replace("/auth/login");
+    }, 1500);
   };
 
   return (

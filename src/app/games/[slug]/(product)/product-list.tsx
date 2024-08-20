@@ -47,11 +47,11 @@ function ProductList(prop: IProductList) {
 
   return (
     <>
-      <Input
+      {/* <Input
         placeholder="Cari Produk..."
         onChange={doSearch}
         className="mb-4 w-full"
-      />
+      /> */}
       <div
         className="relative max-h-[30rem] overflow-y-auto pt-4 -mx-2 px-2"
         ref={ref}

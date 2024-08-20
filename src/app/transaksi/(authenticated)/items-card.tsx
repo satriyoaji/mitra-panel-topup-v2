@@ -42,7 +42,11 @@ function ItemsCard(props: TItemsCard) {
               <p className="text-sm font-medium text-right">
                 {priceMask(props.data.price)}
               </p>
-              <div className="space-y-2 flex flex-col justify-end items-end">
+              <div className="space-y-2 flex justify-end items-end space-x-2">
+                <CountdownCard
+                  date={parseISO(props.data.expired_at)}
+                  theme="light"
+                />
                 {props.data.payment_logo ? (
                   <Image
                     alt={props.data.payment_channel}
@@ -51,11 +55,10 @@ function ItemsCard(props: TItemsCard) {
                     width={50}
                   />
                 ) : (
-                  <p className="text-sm font-medium text-right">
+                  <p className="text-sm font-medium text-right p-0">
                     {props.data.payment_channel}
                   </p>
                 )}
-                <CountdownCard date={parseISO(props.data.date)} theme="light" />
               </div>
             </div>
           </div>

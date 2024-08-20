@@ -11,7 +11,7 @@ export default function Home() {
         <FlashSaleWrapper />
         <ListGame />
       </div>
-      <Promo />
+      {/* <Promo /> */}
     </>
   );
 }

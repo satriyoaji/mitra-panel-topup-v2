@@ -50,7 +50,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
 
   return (
     <header className="w-full flex justify-center z-20 bg-white items-center top-0 sticky p-1">
-      <div className="w-full flex container items-center justify-between px-2">
+      <div className="w-full flex max-w-7xl items-center justify-between px-2 md:px-0">
         <div className="flex md:w-fit w-full justify-start">
           <Link href="/" className="p-1">
             {profile?.logo_url && (

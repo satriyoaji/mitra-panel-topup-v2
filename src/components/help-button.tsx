@@ -26,16 +26,10 @@ function HelpButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <>
-          <Button className="hidden md:flex" variant="outline" size="sm">
-            <ChatBubbleIcon className="w-3.5 h-3" />
-            <p className="text-xs ml-1">Bantuan</p>
-          </Button>
-          <Button variant="default" size="sm" className="block md:hidden">
-            <ChatBubbleIcon className="w-3.5 h-3" />
-            <p className="text-xs ml-1 hidden md:block">Bantuan</p>
-          </Button>
-        </>
+        <Button variant="outline" size="sm">
+          <ChatBubbleIcon className="w-3.5 h-3" />
+          <p className="text-xs ml-1">Bantuan</p>
+        </Button>
       </PopoverTrigger>
       <PopoverContent>
         <div className="space-y-2">

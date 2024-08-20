@@ -66,7 +66,13 @@ function DetailCategory(props: Props) {
             </div>
             <div className="my-4" ref={props.methodRef}>
               <FormWrapper number={2} title="Pilih Pembayaran">
-                <Payment />
+                <Payment
+                  nextRef={
+                    props.data.category.forms
+                      ? props.formRef
+                      : props.confirmationRef
+                  }
+                />
               </FormWrapper>
             </div>
             {props.data.category.forms ? (

@@ -2,11 +2,10 @@
 
 import React, { useMemo } from "react";
 import { Card } from "./ui/card";
-import { PlusIcon, SketchLogoIcon } from "@radix-ui/react-icons";
+import { SketchLogoIcon } from "@radix-ui/react-icons";
 import { Table, TableBody, TableCell, TableFooter, TableRow } from "./ui/table";
-import { Separator } from "./ui/separator";
 import Image from "next/image";
-import { getTotalPrice, nPlainFormatter, priceMask } from "@/Helpers";
+import { getTotalPrice, priceMask } from "@/Helpers";
 import { useSession } from "next-auth/react";
 import { ITransaction } from "@/types/transaction";
 
@@ -136,7 +135,9 @@ function TransactionDetail({
               ) : null}
               {payment && payment.fee_amount ? (
                 <TableRow>
-                  <TableCell>Admin Fee</TableCell>
+                  <TableCell>
+                    Biaya Payment ({payment.payment_channel})
+                  </TableCell>
                   <TableCell className="text-right">
                     {`+ ${priceMask(payment.fee_amount)}`}
                   </TableCell>
