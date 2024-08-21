@@ -1,7 +1,6 @@
-import { TProduct, TProductItem } from "@/Type";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PromoCard from "./promo-card";
 import { useToast } from "@/components/ui/use-toast";
 import {
@@ -11,7 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { ChevronRightIcon } from "@radix-ui/react-icons";
+import { ChevronRightIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { IPromo, IPromoDetail } from "@/types/transaction";
 import { isBefore, parseISO } from "date-fns";
 import TransactionContext, {
@@ -142,8 +141,16 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
                 autoFocus={false}
                 onChange={(e) => setHiddenPromoCode(e.target.value)}
               />
-              <Button disabled={loading} size="sm" onClick={getHiddenPromo}>
-                {loading ? "Loading..." : "Get Promo"}
+              <Button
+                disabled={loading}
+                className="space-x-1"
+                size="sm"
+                onClick={getHiddenPromo}
+              >
+                <MagnifyingGlassIcon />
+                <p className="hidden md:block">
+                  {loading ? "Loading..." : "Get Promo"}
+                </p>
               </Button>
             </div>
             <div className="space-y-3 max-h-[56vh] overflow-y-auto">

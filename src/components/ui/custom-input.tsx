@@ -45,7 +45,7 @@ const PhoneInputIndo = React.forwardRef<HTMLInputElement, NumberInputProps>(
           <p>+62</p>
         </div>
         <PatternFormat
-          className="w-full file:border-0 focus-visible:outline-none px-3 py-1 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full file:border-0 focus-visible:outline-none px-3 h-full disabled:cursor-not-allowed disabled:opacity-50"
           format="### ### ### ###"
           type="tel"
           value={(value as string).replace(/\D/g, "").slice(-12)}

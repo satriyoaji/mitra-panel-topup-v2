@@ -1,6 +1,6 @@
 "use client";
 
-import React, { RefObject, useContext, useState } from "react";
+import React, { RefObject, useContext } from "react";
 import Image from "next/image";
 import { priceMask } from "@/Helpers";
 import TransactionContext, {

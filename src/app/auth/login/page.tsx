@@ -39,6 +39,7 @@ function Page() {
     toast({
       title: "Berhasil Login",
       description: "Anda berhasil login.",
+      variant: "success",
     });
     router.push(searchParams.get("callback") ?? "/");
   };

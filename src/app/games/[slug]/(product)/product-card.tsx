@@ -1,8 +1,7 @@
 "use client";
 
 import { priceMask } from "@/Helpers";
-import Image from "next/image";
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 
 type prop = {
   selected?: boolean;

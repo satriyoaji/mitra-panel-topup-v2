@@ -19,7 +19,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
     <div>
       <div className="bg-background flex justify-center items-center md:py-4">
         <Carousel
-          className="h-full w-full max-w-7xl shadow md:rounded-xl group"
+          className="h-full w-full max-w-7xl shadow md:rounded-xl"
           opts={{
             align: "center",
             loop: true,
@@ -31,17 +31,17 @@ function CarouselV2({ data }: { data: IBanner[] }) {
           ]}
         >
           <CarouselContent
-            style={{ aspectRatio: 16 / 5 }}
+            style={{ aspectRatio: 3 / 1 }}
             className="md:rounded-lg"
           >
             {data.map((item, index) => (
               <CarouselItem
                 key={index.toString()}
-                onClick={() =>
+                onClick={(e) => {
                   item.is_clickable || item.is_hyperlink
                     ? router.push(item.hyperlink_url)
-                    : null
-                }
+                    : null;
+                }}
                 className={`flex justify-center md:rounded-lg overflow-clip ${
                   item.is_clickable || item.is_hyperlink ? "cursor-pointer" : ""
                 }`}
@@ -52,14 +52,14 @@ function CarouselV2({ data }: { data: IBanner[] }) {
                   alt={item.name}
                   height={2000}
                   width={6000}
-                  style={{ aspectRatio: 16 / 5 }}
+                  style={{ aspectRatio: 3 / 1 }}
                   className={`object-cover h-auto w-auto md:rounded-lg duration-500 bg-zinc-200`}
                 />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="ml-16 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
-          <CarouselNext className="mr-16 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
+          <CarouselPrevious className="ml-16 bg-background border-primary text-primary " />
+          <CarouselNext className="mr-16 bg-background border-primary text-primary " />
         </Carousel>
       </div>
     </div>

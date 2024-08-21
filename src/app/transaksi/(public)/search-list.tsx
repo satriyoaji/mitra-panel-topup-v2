@@ -9,6 +9,7 @@ import ItemsCard from "../(authenticated)/items-card";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 function SearchList() {
   const searchParams = useSearchParams();
@@ -63,7 +64,10 @@ function SearchList() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button onClick={getData}>Cari</Button>
+        <Button onClick={getData} className="space-x-1">
+          <MagnifyingGlassIcon />
+          <p className="hidden md:block">Cari</p>
+        </Button>
       </div>
       <div className="flex flex-col space-y-4 mt-4">
         {!loading ? (
