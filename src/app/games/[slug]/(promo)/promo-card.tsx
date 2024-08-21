@@ -46,7 +46,7 @@ function PromoCard({
               else setSelected();
             }}
           >
-            <div className="flex flex-col items-center justify-center p-4 w-[12rem] bg-background">
+            <div className="flex flex-col items-center justify-center p-4 w-[10rem] bg-background">
               <p className="font-bold text-xl">
                 {promo.discount_percent > 0
                   ? `${promo.discount_percent}%`

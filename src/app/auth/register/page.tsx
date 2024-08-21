@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
-import { PhoneInput } from "@/components/ui/custom-input";
+import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
+import { useRouter } from "next/navigation";
 
 function Page() {
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ function Page() {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const { toast } = useToast();
+  const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +38,7 @@ function Page() {
       body: JSON.stringify({
         email,
         password,
-        phone,
+        phone: "62" + phone,
         name,
       }),
     });
@@ -55,9 +57,7 @@ function Page() {
       description: "Sukses Register Akun",
       variant: "success",
     });
-    setTimeout(() => {
-      window.location.replace("/auth/login");
-    }, 1500);
+    router.push("/");
   };
 
   return (
@@ -96,12 +96,12 @@ function Page() {
             <Label htmlFor="Whatsapp" className="text-left">
               No. Whatsapp
             </Label>
-            <PhoneInput
+            <PhoneInputIndo
               className="bg-background"
               id="Whatsapp"
               type="tel"
               name="phone"
-              placeholder="Masukan No. Whatsapp"
+              placeholder="Contoh: 81XXXXXXXXX"
               onValueChange={(e) => setPhone(`${e}`)}
             />
           </div>

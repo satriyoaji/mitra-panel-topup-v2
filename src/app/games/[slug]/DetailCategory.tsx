@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React from "react";
 import Header from "./header";
 import ProductList from "./(product)/product-list";
 import Payment from "./(payment-method)/payment";
@@ -43,7 +43,7 @@ function DetailCategory(props: Props) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h4 className="text-lg font-bold ml-2 text-primary p-0">
+          <h4 className="text-lg font-bold ml-2 text-primary p-0 hidden md:block">
             {props.data.category.name}
           </h4>
         </div>

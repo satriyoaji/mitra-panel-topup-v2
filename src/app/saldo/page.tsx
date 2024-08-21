@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { useSession } from "next-auth/react";
 import { priceMask } from "@/Helpers";
+import InfoTooltip from "@/components/info-tooltip";
 
 function Page() {
   const { data: session } = useSession();
@@ -31,7 +32,12 @@ function Page() {
         </Breadcrumb>
         <div className="max-w-4xl w-full space-y-4">
           <div className="bg-background rounded-lg p-4 w-full sticky top-12">
-            <h3 className="font-semibold primary">Saldoku</h3>
+            <div className="flex items-center space-x-2">
+              <h3 className="font-semibold primary">Saldo Point</h3>
+              <InfoTooltip>
+                <p className="text-xs">Ini Merupakan Saldo Refund</p>
+              </InfoTooltip>
+            </div>
             <h6 className="text-primary font-medium">
               {priceMask(session?.profile.saldo ?? 0)}
             </h6>

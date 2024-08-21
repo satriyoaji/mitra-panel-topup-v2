@@ -27,22 +27,22 @@ function Description({ description }: { description: string }) {
 
   return (
     <div className="w-full">
-      <p
+      <div
         ref={overflowingText}
         className={`text-xs text-muted-foreground leading-5 ${
           !show ? "overflow-ellipsis line-clamp-3" : null
         } `}
         dangerouslySetInnerHTML={{ __html: description }}
-      ></p>
+      ></div>
       {overflowActive ? (
-        <div className="flex items-center justify-center mt-3">
+        <div className="flex items-center md:justify-center mt-3">
           {description && (
             <Button
               size="sm"
               variant="link"
               onClick={() => setShow((el) => !el)}
             >
-              {show ? "Hide" : "Show More"}
+              {show ? "Hide" : "Baca Selengkapnya"}
             </Button>
           )}
         </div>

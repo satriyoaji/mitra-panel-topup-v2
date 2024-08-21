@@ -2,7 +2,6 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import {
@@ -10,7 +9,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import Image from "next/image";
@@ -21,22 +19,32 @@ import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
 import ProfileDialog from "./profile-dialog";
-import { EnterIcon } from "@radix-ui/react-icons";
+import { EnterIcon, HomeIcon, ReaderIcon } from "@radix-ui/react-icons";
 
 export type path = {
-  name: string;
+  name: React.ReactNode;
   path: string;
   isSession: boolean;
 };
 
 const paths: path[] = [
   {
-    name: "Home",
+    name: (
+      <>
+        <HomeIcon />
+        <span>Home</span>
+      </>
+    ),
     path: "/",
     isSession: false,
   },
   {
-    name: "Riwayat Pesananku",
+    name: (
+      <>
+        <ReaderIcon />
+        <span>Riwayat Pesananku</span>
+      </>
+    ),
     path: "/transaksi",
     isSession: true,
   },
@@ -50,7 +58,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
 
   return (
     <header className="w-full flex justify-center z-20 bg-white items-center top-0 sticky p-1">
-      <div className="w-full flex max-w-7xl items-center justify-between px-2 md:px-0">
+      <div className="w-full flex max-w-7xl items-center justify-between">
         <div className="flex md:w-fit w-full justify-start">
           <Link href="/" className="p-1">
             {profile?.logo_url && (
@@ -76,7 +84,7 @@ function Header({ profile }: { profile?: ISiteProfile }) {
                       >
                         <Link href={i.path} legacyBehavior passHref>
                           <NavigationMenuLink
-                            className={`${navigationMenuTriggerStyle()}`}
+                            className={`${navigationMenuTriggerStyle()} flex space-x-1`}
                           >
                             {i.name}
                           </NavigationMenuLink>
@@ -88,10 +96,11 @@ function Header({ profile }: { profile?: ISiteProfile }) {
                   <NavigationMenuItem className="bg-transparent">
                     <Popover open={open} onOpenChange={setOpen}>
                       <PopoverTrigger
-                        className={navigationMenuTriggerStyle()}
+                        className={`${navigationMenuTriggerStyle()} flex space-x-1`}
                         onClick={() => setOpen(true)}
                       >
-                        Cek Pesanan
+                        <ReaderIcon />
+                        <span>Cek Pesanan</span>
                       </PopoverTrigger>
                       <PopoverContent className="w-full rounded-2xl">
                         <div className="flex p-2 gap-2">

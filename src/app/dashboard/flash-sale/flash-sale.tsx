@@ -41,10 +41,10 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
             </div>
             <div className="flex items-center relative py-1">
               <Carousel className="py-1 w-full">
-                <CarouselContent className="mx-0.5">
+                <CarouselContent className="mx-0">
                   {data?.products?.slice(0, 8).map((item, idx) => (
                     <CarouselItem
-                      className="h-full w-full min-w-[9.5rem] max-w-[11.5rem]"
+                      className="h-full w-full min-w-[9.5rem] max-w-[11rem] md:max-w-[13rem]"
                       key={`${idx}`}
                     >
                       <CardProduct data={item} />

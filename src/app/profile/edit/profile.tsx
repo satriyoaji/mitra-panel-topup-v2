@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { PhoneInput } from "@/components/ui/custom-input";
+import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
 function Profile() {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const [email, setEmail] = useState<string>(session?.profile?.name ?? "");
   const [name, setName] = useState<string>(session?.profile?.email ?? "");
   const [phone, setPhone] = useState<string>(session?.profile?.phone ?? "");
@@ -23,17 +23,33 @@ function Profile() {
     }
   }, [status]);
 
+  const reloadSession = () => {
+    const event = new Event("visibilitychange");
+    document.dispatchEvent(event);
+  };
+
   const handleSubmit = async () => {
+    const body = {
+      name,
+      email,
+      phone: `62${phone}`,
+    };
     const response = await fetch("/api/profile", {
       method: "POST",
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-      }),
+      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
+      if (session) {
+        await update({
+          ...session,
+          profile: {
+            ...session.profile,
+            body,
+          },
+        });
+        reloadSession();
+      }
       const res = await response.json();
       return toast({
         title: "Failed",
@@ -78,13 +94,13 @@ function Profile() {
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="invoice">No. Whatsapp</Label>
-          <PhoneInput
+          <PhoneInputIndo
             onValueChange={(e) => {
               setPhone(`${e}`);
             }}
             autoFocus={false}
             value={phone}
-            placeholder="Masukan No. Whatsapp"
+            placeholder="Contoh: 81XXXXXXXXX"
           />
         </div>
       </div>

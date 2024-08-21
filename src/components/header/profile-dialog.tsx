@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
+import InfoTooltip from "../info-tooltip";
 
 function ProfileDialog() {
   const { data: session } = useSession();
@@ -35,7 +36,14 @@ function ProfileDialog() {
         <PopoverContent className="w-80 space-y-6 p-5">
           <div className="px-4 py-3 w-full rounded-xl space-y-1 bg-slate-100">
             <div className="flex justify-between items-end">
-              <p className="text-xs text-muted-foreground">Saldo Points</p>
+              <div className="flex space-x-1 text-xs items-center">
+                <p className="text-xs text-muted-foreground p-0">
+                  Saldo Points
+                </p>
+                <InfoTooltip className="w-3 h-3 text-muted-foreground">
+                  <p className="text-xs">Ini Merupakan Saldo Refund</p>
+                </InfoTooltip>
+              </div>
               <p
                 onClick={() => {
                   setOpen(false);

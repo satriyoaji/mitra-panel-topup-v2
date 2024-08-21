@@ -57,7 +57,7 @@ export function Purchase({
       payment_method: payment.payment_method,
       payment_channel: payment.payment_channel,
       email: account?.email,
-      phone: account?.noWhatsapp,
+      phone: "62" + account?.noWhatsapp,
     };
 
     if (promo) payload.promo_code = promo.promo_code;

@@ -29,7 +29,7 @@ function Page() {
         <div className="max-w-4xl w-full space-y-4">
           <Tabs defaultValue="profile" className="w-full">
             <div className="bg-background rounded-lg pt-4 px-6 pb-8 w-full sticky top-12">
-              <div className="justify-between flex items-center">
+              <div className="justify-between flex">
                 <div>
                   <h3 className="font-semibold text-primary p-0">
                     Edit Profile

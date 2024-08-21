@@ -9,6 +9,7 @@ import ItemsCard from "../(authenticated)/items-card";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 function SearchList() {
   const searchParams = useSearchParams();
@@ -56,14 +57,17 @@ function SearchList() {
 
   return (
     <>
-      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 px-2 bg-background py-4 z-10">
+      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 p-4 rounded-3xl bg-background z-10">
         <Input
           className="w-full bg-background"
           placeholder="Masukkan nomor handphone atau invoice"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button onClick={getData}>Cari</Button>
+        <Button onClick={getData} className="space-x-1">
+          <MagnifyingGlassIcon />
+          <p className="hidden md:block">Cari</p>
+        </Button>
       </div>
       <div className="flex flex-col space-y-4 mt-4">
         {!loading ? (

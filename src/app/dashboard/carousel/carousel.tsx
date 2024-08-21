@@ -19,7 +19,7 @@ function CarouselV2({ data }: { data: IBanner[] }) {
     <div>
       <div className="bg-background flex justify-center items-center md:py-4">
         <Carousel
-          className="h-full w-full max-w-7xl shadow md:rounded-lg"
+          className="h-full w-full max-w-7xl shadow md:rounded-xl"
           opts={{
             align: "center",
             loop: true,
@@ -37,11 +37,11 @@ function CarouselV2({ data }: { data: IBanner[] }) {
             {data.map((item, index) => (
               <CarouselItem
                 key={index.toString()}
-                onClick={() =>
+                onClick={(e) => {
                   item.is_clickable || item.is_hyperlink
                     ? router.push(item.hyperlink_url)
-                    : null
-                }
+                    : null;
+                }}
                 className={`flex justify-center md:rounded-lg overflow-clip ${
                   item.is_clickable || item.is_hyperlink ? "cursor-pointer" : ""
                 }`}

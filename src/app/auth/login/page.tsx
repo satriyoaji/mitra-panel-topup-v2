@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ function Page() {
   const [password, setPassword] = useState("");
   const searchParams = useSearchParams();
   const { toast } = useToast();
+  const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,13 +37,11 @@ function Page() {
     }
 
     toast({
-      title: "Success",
-      description: "Sukses login",
+      title: "Berhasil Login",
+      description: "Anda berhasil login.",
       variant: "success",
     });
-    setTimeout(() => {
-      window.location.replace(searchParams.get("callback") ?? "/");
-    }, 1500);
+    router.push(searchParams.get("callback") ?? "/");
   };
 
   return (

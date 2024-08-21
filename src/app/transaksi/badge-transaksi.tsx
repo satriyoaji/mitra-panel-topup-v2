@@ -6,19 +6,19 @@ function BadgeTransaksi({ status }: { status: number }) {
   return (
     <>
       {status === ETransactionStatus.Pending ? (
-        <Badge variant="warning">Pending</Badge>
+        <Badge variant="destructive">Unpaid</Badge>
       ) : status === ETransactionStatus.Paid ? (
         <Badge variant="success">Paid</Badge>
       ) : status === ETransactionStatus["On Process"] ? (
-        <Badge variant="warning">On Process</Badge>
+        <Badge variant="blue">On Process</Badge>
       ) : status === ETransactionStatus.Delivered ? (
         <Badge variant="success">Delivered</Badge>
       ) : status === ETransactionStatus.Failed ? (
         <Badge variant="destructive">Failed</Badge>
       ) : status === ETransactionStatus.Refunded ? (
-        <Badge variant="black">Refunded</Badge>
-      ) : status === ETransactionStatus.Aborted ? (
-        <Badge variant="destructive">Aborted</Badge>
+        <Badge variant="purple">Refunded</Badge>
+      ) : status === ETransactionStatus.Expired ? (
+        <Badge variant="destructive">Expired</Badge>
       ) : (
         <></>
       )}
