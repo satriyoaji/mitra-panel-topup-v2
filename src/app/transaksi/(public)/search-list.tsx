@@ -10,6 +10,7 @@ import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 function SearchList() {
   const searchParams = useSearchParams();
@@ -75,9 +76,16 @@ function SearchList() {
         {!loading ? (
           <>
             <div className="grid md:grid-cols-2 gap-4">
-              {list.map((val, idx) => (
-                <ItemsCard key={`${idx}`} data={val} />
-              ))}
+              {list.length > 0 ? (
+                list.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
+              ) : (
+                <div className="w-full flex flex-col items-center justify-center col-span-full">
+                  <ShoppingCartIcon className="h-[30vh] text-black/10" />
+                  <h3 className="font-bold text-black/10 p-0">
+                    Belum Ada Data
+                  </h3>
+                </div>
+              )}
             </div>
             {meta && meta.total > 0 ? (
               <Pagination
