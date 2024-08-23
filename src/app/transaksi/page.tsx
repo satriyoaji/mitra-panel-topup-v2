@@ -1,5 +1,5 @@
-"use client";
-
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
 import AuthPage from "./(authenticated)/auth-page";
 import PublicPage from "./(public)/public-page";
 import {
@@ -10,10 +10,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { useSession } from "next-auth/react";
+import {} from "next-auth/react";
 
-function Page() {
-  const { data: session } = useSession();
+async function Page() {
+  const session = await getServerSession(options);
 
   return (
     <div className="pt-4 px-2 flex w-full justify-center">

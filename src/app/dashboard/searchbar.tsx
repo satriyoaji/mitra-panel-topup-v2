@@ -77,7 +77,7 @@ function Searchbar() {
           <div className="text-xs">Cari Game</div>
         </Button>
       </div>
-      <div className="md:hidden text-primary p-2 mr-2">
+      <div className="md:hidden text-primary">
         <Button
           size="sm"
           onClick={() => setIsOpen(true)}

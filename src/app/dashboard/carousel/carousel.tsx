@@ -6,20 +6,22 @@ import {
   CarouselNext,
   CarouselPrevious,
   Carousel,
+  CarouselApi,
 } from "@/components/ui/carousel";
 import { IBanner } from "@/types/utils";
-import React from "react";
+import React, { useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 function CarouselV2({ data }: { data: IBanner[] }) {
   const router = useRouter();
+
   return (
     <div>
       <div className="bg-background flex justify-center items-center md:py-4">
         <Carousel
-          className="h-full w-full max-w-7xl shadow md:rounded-xl"
+          className="h-full w-full max-w-7xl shadow md:rounded-xl group"
           opts={{
             align: "center",
             loop: true,
@@ -37,11 +39,11 @@ function CarouselV2({ data }: { data: IBanner[] }) {
             {data.map((item, index) => (
               <CarouselItem
                 key={index.toString()}
-                onClick={(e) => {
+                onClick={() =>
                   item.is_clickable || item.is_hyperlink
                     ? router.push(item.hyperlink_url)
-                    : null;
-                }}
+                    : null
+                }
                 className={`flex justify-center md:rounded-lg overflow-clip ${
                   item.is_clickable || item.is_hyperlink ? "cursor-pointer" : ""
                 }`}
@@ -58,8 +60,8 @@ function CarouselV2({ data }: { data: IBanner[] }) {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="ml-16 bg-background border-primary text-primary " />
-          <CarouselNext className="mr-16 bg-background border-primary text-primary " />
+          <CarouselPrevious className="ml-16 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
+          <CarouselNext className="mr-16 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
         </Carousel>
       </div>
     </div>

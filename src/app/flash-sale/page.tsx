@@ -64,7 +64,7 @@ function Page() {
   }, 500);
 
   return (
-    <div className="pt-4 px-2 flex w-full justify-center">
+    <div className="py-4 px-2 flex w-full justify-center">
       <div className="max-w-7xl w-full flex flex-col justify-center items-center">
         <Breadcrumb className="mb-4 inline-flex justify-start w-full">
           <BreadcrumbList>
@@ -110,7 +110,7 @@ function Page() {
                 ) : (
                   <>
                     {data && data.products?.length > 0 ? (
-                      <div className="grid sm:grid-cols-4 xl:grid-cols-6 grid-cols-2 gap-2 mx-2">
+                      <div className="grid sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 grid-cols-2 gap-4 mx-2">
                         {data.products.map((item, idx) => (
                           <div className="w-full h-full" key={`${idx}`}>
                             <FlashSaleCard data={item} />

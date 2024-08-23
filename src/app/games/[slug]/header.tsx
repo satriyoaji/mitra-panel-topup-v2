@@ -34,15 +34,15 @@ function Header({ category }: { category: IProductCategory }) {
           <div className="md:flex z-10 md:space-x-4">
             <div
               className={`rounded flex justify-center w-max items-end md:items-start ${
-                category.banner_url ? "-mt-12" : ""
+                category.banner_url ? "-mt-6" : ""
               } md:mt-0 md:ml-0`}
             >
-              <div className="relative w-16 h-16">
+              <div className="relative w-12 md:w-16 aspect-square border rounded-lg overflow-clip flex justify-center items-center bg-white">
                 <Image
                   width={300}
                   height={300}
                   alt={category.name}
-                  className="h-16 w-16 aspect-square rounded-lg border absolute"
+                  className="h-auto w-16  absolute"
                   src={
                     category.image_url ??
                     "https://s3-alpha-sig.figma.com/img/933a/09a5/c2747dd0ee221420e9c6686f29720965?Expires=1725235200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K3KMtkf5K~~yfNXa2ea9tssgpbLWFv1iMb8SsvtvV3ge91j3ZZW4AmC0xllLpF4amUV-ynFUhLL-V67bEY1ZVqHfVomDFdxW920v8ewfTclN1ZVIp1u2LgV1AmDbyh~SvyFud9HrNh1H5tP-9Rnm-RKir5IS8mJaSDzNi20CeDaossF7AONxvkwNQnZCunulKYElAo133CzmYW~VeNY4WiGIAdMo-pHrAPdXLKSJ9k56scwyeUVy6gVXPe6ePXg3UnqsojH6T43JeQL2qB0O-vU~Fgmbf60Ybt-lz-DzJe21vr2RXgC8Hmb0M8n53D5~gIndUD7CSa~Cjcakv5Cduw__"

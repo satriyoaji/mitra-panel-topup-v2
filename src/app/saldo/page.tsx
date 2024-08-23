@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import SaldoPointHistory from "./saldopoint-history";
 import {
@@ -12,9 +11,11 @@ import {
 import { useSession } from "next-auth/react";
 import { priceMask } from "@/Helpers";
 import InfoTooltip from "@/components/info-tooltip";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
 
-function Page() {
-  const { data: session } = useSession();
+async function Page() {
+  const session = await getServerSession(options);
 
   return (
     <div className="flex justify-center w-full px-2">

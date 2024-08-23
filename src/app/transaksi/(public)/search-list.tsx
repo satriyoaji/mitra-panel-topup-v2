@@ -48,7 +48,9 @@ function SearchList() {
     params.set("search", search);
     params.set("page", `${page}`);
     router.push(`${pathname}?${params.toString()}`);
-    get();
+    router.refresh();
+
+    // get();
   };
 
   useEffect(() => {
