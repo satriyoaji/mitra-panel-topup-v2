@@ -6,6 +6,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
+import { Badge } from "../ui/badge";
 
 function Profile({
   onEditClick,
@@ -20,13 +21,18 @@ function Profile({
   return (
     <div className="space-y-6">
       <div className="space-y-2 px-3">
-        <div className="space-y-0.5">
-          <p className="text-xs text-muted-foreground">Name</p>
-          {status === "loading" ? (
-            <Skeleton className="h-5 w-full rounded" />
-          ) : (
-            <p className="text-sm">{session?.profile.name}</p>
-          )}
+        <div className="flex justify-between items-start">
+          <div className="space-y-0.5">
+            <p className="text-xs text-muted-foreground">Name</p>
+            {status === "loading" ? (
+              <Skeleton className="h-5 w-full rounded" />
+            ) : (
+              <>
+                <p className="text-sm">{session?.profile.name}</p>
+              </>
+            )}
+          </div>
+          <Badge>{session?.profile.tier_name}</Badge>
         </div>
         <div className="space-y-0.5">
           <p className="text-xs text-muted-foreground">Email</p>
