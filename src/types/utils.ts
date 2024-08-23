@@ -42,4 +42,5 @@ export interface ISiteProfile {
   terms_condition: string;
   privacy_policy: string;
   theme_color: string;
+  manifest: any;
 }

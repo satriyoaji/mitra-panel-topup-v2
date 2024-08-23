@@ -13,14 +13,26 @@ function LinkPayment({ payment }: { payment: ILinkPayment }) {
         <p className="text-muted-foreground w-full">
           Klik tombol untuk link pembayaran
         </p>
-        {payment.deeplink_url ? (
+        <div className="block md:hidden">
           <Button
             className="w-full bg-green-500 text-white mt-2"
-            onClick={() => router.push(payment.deeplink_url)}
+            size="sm"
+            onClick={() =>
+              router.push(payment.deeplink_url || payment.mobile_url)
+            }
           >
             Bayar Sekarang
           </Button>
-        ) : null}
+        </div>
+        <div className="hidden md:block">
+          <Button
+            className="w-full bg-green-500 text-white mt-2"
+            size="sm"
+            onClick={() => router.push(payment.deeplink_url || payment.web_url)}
+          >
+            Bayar Sekarang
+          </Button>
+        </div>
       </div>
     </>
   );
