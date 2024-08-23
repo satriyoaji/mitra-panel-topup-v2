@@ -56,12 +56,18 @@ function FlashSaleCard({
                   </p>
                 </div>
               </div>
-              <Progress value={32} className="mt-2" />
+              <Progress
+                value={
+                  (100 * data.flash_sale_info.remaining) /
+                  data.flash_sale_info.total
+                }
+                className="mt-2"
+              />
               <p
                 className="text-xs mt-0.5 text-muted-foreground"
                 style={{ fontSize: "65%" }}
               >
-                Tersisa 54 Lagi
+                Tersisa {data.flash_sale_info.remaining} Lagi
               </p>
             </div>
             <div className="h-full w-full flex items-end mt-2.5">
@@ -70,7 +76,7 @@ function FlashSaleCard({
                   className="text-xs text-center md:py-0.5"
                   style={{ fontSize: "75%" }}
                 >
-                  {data.category_key}
+                  {data.category_name}
                 </p>
               </div>
             </div>

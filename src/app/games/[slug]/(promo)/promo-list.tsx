@@ -68,20 +68,25 @@ function Promo({ categoryUuid }: { categoryUuid: string }) {
 
   const getHiddenPromo = async () => {
     setLoading(true);
-    var res = await fetch(`/api/products/promo/${hiddenPromoCode}?by-code=1`);
+    let qParams = new URLSearchParams();
+    qParams.append("category_key", categoryUuid);
+    qParams.append("by-code", "1");
+    var res = await fetch(`/api/products/promo/${hiddenPromoCode}?${qParams}`);
     if (res.ok) {
       var result = await res.json();
 
+      var set = new Set(promos.map((i) => i.id));
+      var isExist = set.has(result.data.id);
+
       if (
         result.data &&
+        !isExist &&
         !isBefore(parseISO(result.data.time_finish), new Date())
       ) {
-        {
-          setHiddenPromo(result.data);
-          setSelectedPromo(result.data.id);
-          setLoading(false);
-          return;
-        }
+        setHiddenPromo(result.data);
+        setSelectedPromo(result.data.id);
+        setLoading(false);
+        return;
       }
     }
 

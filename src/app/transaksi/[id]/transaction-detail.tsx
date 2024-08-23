@@ -3,7 +3,7 @@
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { priceMask } from "@/Helpers";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Loading from "@/app/loading";
 import { ITransactionHistoryDetail } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
@@ -45,9 +45,18 @@ function TransactionHistoryDetail({
     })();
   }, [id]);
 
+  const isPaymentNotExpired = useMemo(() => {
+    if (!data) return false;
+    return (
+      data.payment_information &&
+      data.payment_information.expired_at &&
+      isFuture(parseISO(data.payment_information.expired_at))
+    );
+  }, [data]);
+
   if (loading) return <Loading />;
 
-  if (data)
+  if (data) {
     return (
       <>
         <div className="flex justify-between items-center mx-2">
@@ -89,18 +98,16 @@ function TransactionHistoryDetail({
                     <BadgeTransaksi status={data.status} />
                   </div>
                 </div>
-                <div className="flex justify-between w-full">
-                  <p className="text-muted-foreground text-sm">Order Expired</p>
-                  {data.payment_information &&
-                  data.payment_information.expired_at &&
-                  isFuture(parseISO(data.payment_information.expired_at)) ? (
+                {isPaymentNotExpired ? (
+                  <div className="flex justify-between w-full">
+                    <p className="text-muted-foreground text-sm">
+                      Order Expired
+                    </p>
                     <CountdownCard
                       date={parseISO(data.payment_information.expired_at)}
                     />
-                  ) : (
-                    <Badge variant="destructive">Expired</Badge>
-                  )}
-                </div>
+                  </div>
+                ) : null}
                 <div className="flex justify-between w-full">
                   <p className="text-muted-foreground text-sm">Tanggal</p>
                   <p>{format(parseISO(data.date), "dd MMM yyyy hh:mm")}</p>
@@ -204,7 +211,7 @@ function TransactionHistoryDetail({
                       </div>
                     </div>
                   </div>
-                  {data.payment_information.payment_channel ? (
+                  {isPaymentNotExpired ? (
                     <>
                       <Separator className="my-3 w-full" />
                       <div className="px-4 pb-24">
@@ -270,7 +277,7 @@ function TransactionHistoryDetail({
         </div>
       </>
     );
-  else
+  } else
     return (
       <div className="flex justify-center items-center h-[50vh]">
         <h3 className="font-bold text-slate-300 text-center">

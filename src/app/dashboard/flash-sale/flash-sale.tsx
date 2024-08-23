@@ -54,12 +54,9 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
                     <Link href="/flash-sale" className="cursor-pointer">
                       <CarouselItem className="h-full w-full min-w-[9.5rem] max-w-[11.5rem]">
                         <div
-                          className={`min-h-[6rem] bg-cover h-full hover:bg-zinc-50 rounded-lg border-0 flex`}
-                          style={{
-                            backgroundImage: 'url("/assets/thunder.svg")',
-                          }}
+                          className={`min-h-[6rem] bg-cover h-full bg-primary rounded-lg border-0 flex`}
                         >
-                          <div className="bg-white/10 flex items-center justify-center rounded-lg w-full">
+                          <div className="flex items-center justify-center rounded-lg w-full">
                             <p className="text-sm text-white font-medium">
                               See More
                             </p>

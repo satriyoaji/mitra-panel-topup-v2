@@ -54,39 +54,40 @@ function TransactionDetail({
                 <p className="font-semibold">{product.name}</p>
               </div>
             </div>
-            {form && category.forms ? (
-              <div className="mt-6">
-                <p className="text-xs font-semibold">Informasi</p>
-                <Table className="border-y bg-background rounded mt-1">
-                  <TableBody className="text-xs">
-                    {Object.keys(form).map((key) => (
-                      <TableRow key={key}>
-                        <TableCell>
-                          {category.forms
-                            ?.find((i) => i.key == key)
-                            ?.alias.replace(/_/g, " ")}
-                        </TableCell>
-                        <TableCell className="text-right space-y-1">
-                          {form[key]}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                    <TableRow>
-                      <TableCell>Email</TableCell>
-                      <TableCell className="text-right space-y-1">
-                        {account?.email ?? session?.profile.email}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>No. Whatsapp</TableCell>
-                      <TableCell className="text-right space-y-1">
-                        {account?.noWhatsapp ?? session?.profile.phone}
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            ) : null}
+            <div className="mt-6">
+              <p className="text-xs font-semibold">Informasi</p>
+              <Table className="border-y bg-background rounded mt-1">
+                <TableBody className="text-xs">
+                  {form && category.forms
+                    ? Object.keys(form).map((key) => (
+                        <TableRow key={key}>
+                          <TableCell>
+                            {category.forms
+                              ?.find((i) => i.key == key)
+                              ?.alias.replace(/_/g, " ")}
+                          </TableCell>
+                          <TableCell className="text-right space-y-1">
+                            {form[key]}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    : null}
+                  <TableRow>
+                    <TableCell>Email</TableCell>
+                    <TableCell className="text-right space-y-1">
+                      {account?.email ?? session?.profile.email}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>No. Whatsapp</TableCell>
+                    <TableCell className="text-right space-y-1">
+                      {session ? null : "62"}
+                      {account?.noWhatsapp ?? session?.profile.phone}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </Card>
           <Table>
             <TableBody className="text-xs">

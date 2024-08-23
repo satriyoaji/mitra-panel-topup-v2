@@ -31,7 +31,7 @@ export const paths: path[] = [
     name: "Cek Pesanan",
   },
   {
-    path: "/Saldo",
+    path: "/saldo",
     icon: WalletIcon,
     name: "Saldo Point",
     isAuth: true,

@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import {
   NavigationMenu,
@@ -51,6 +51,7 @@ const paths: path[] = [
 ];
 
 function Header({ profile }: { profile?: ISiteProfile }) {
+  const path = usePathname();
   const { data: session } = useSession();
   const router = useRouter();
   const [invoice, setInvoice] = useState<string | undefined>("");
