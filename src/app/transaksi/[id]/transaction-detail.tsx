@@ -99,9 +99,8 @@ function TransactionHistoryDetail({
                     <BadgeTransaksi status={data.status} />
                   </div>
                 </div>
-                {isPaymentNotExpired ||
-                (data.status !== ETransactionStatus.Paid &&
-                  data.status !== ETransactionStatus.Delivered) ? (
+                {isPaymentNotExpired &&
+                data.status === ETransactionStatus.Unpaid ? (
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">
                       Order Expired

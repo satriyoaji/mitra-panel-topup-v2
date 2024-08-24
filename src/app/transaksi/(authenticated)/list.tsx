@@ -22,8 +22,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 function List() {
   const searchParams = useSearchParams();
+  const path = usePathname();
   const router = useRouter();
-  const pathname = usePathname();
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
   const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
   const [filter, setFilter] = useState<TFilter>({
@@ -33,6 +33,8 @@ function List() {
   const [loading, setLoading] = useState(false);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
   const [page, setPage] = useState(searchParams.get("page") ?? 1);
+
+  console.log(searchParams);
 
   const getData = async () => {
     let searchParams = new URLSearchParams({
@@ -56,12 +58,19 @@ function List() {
     setLoading(false);
   };
 
+  useEffect(() => {}, [searchParams]);
+
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set("search", filter.search ?? "");
-    params.set("page", `${page}`);
-    router.push(`${pathname}?${params.toString()}`);
-    getData();
+    // setMeta((prev) => ({
+    //   limit: prev?.limit ?? 10,
+    //   total: prev?.total ?? 0,
+    //   page: parseInt(searchParams.get("page") ?? "1"),
+    // }));
+    // const params = new URLSearchParams(searchParams);
+    // params.set("search", filter.search ?? "");
+    // params.set("page", `${page}`);
+    // router.push(`?${params.toString()}`);
+    (async () => getData())();
   }, [filter, page]);
 
   const { data: session } = useSession();
@@ -82,6 +91,7 @@ function List() {
         <div className="flex space-x-1 mt-3">
           <Input
             id="invoice"
+            value={filter.search}
             placeholder="Cari Transaksi #TMXXXX atau No. Handphone"
             className="bg-background"
             onChange={doSearch}
@@ -108,6 +118,7 @@ function List() {
                       ...prev,
                       status: filter.status,
                     }));
+                    setPage(1);
                     setfilterOpen(false);
                   }}
                 />

@@ -6,6 +6,7 @@ import { ArrowUpIcon, ChatBubbleIcon } from "@radix-ui/react-icons";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
+import Link from "next/link";
 
 function HelpButton() {
   const [data, setData] = useState<ISosmed[]>([]);
@@ -39,7 +40,8 @@ function HelpButton() {
           </p>
           <div className="mt-2 space-y-1.5">
             {data.map((item) => (
-              <div
+              <Link
+                href={`${item.value}`}
                 className={`flex hover:bg-zinc-50 gap-4 px-2 cursor-pointer items-center`}
                 key={item.key}
               >
@@ -49,7 +51,7 @@ function HelpButton() {
                   <Socmed type={item.key} />
                 </div>
                 <p className={`text-xs text-primary`}>{item.name}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -22,15 +22,11 @@ function ProfileDialog() {
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger>
-          <Button
-            onClick={() => setOpen(true)}
-            size="sm"
-            className="flex space-x-1"
-          >
+        <PopoverTrigger asChild>
+          <div className="cursor-pointer flex space-x-1 bg-primary text-white rounded-full h-8 px-3 text-xs items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
             <PersonIcon />
             <div className="text-xs">Profil</div>
-          </Button>
+          </div>
         </PopoverTrigger>
         <PopoverContent className="w-80 p-5">
           <div className="px-4 py-3 w-full rounded-xl space-y-1 bg-slate-100">
