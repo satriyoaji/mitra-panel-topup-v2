@@ -39,6 +39,8 @@ export interface IVAPayment extends IBasePaymentInformation {
 export interface ILinkPayment extends IBasePaymentInformation {
   payment_method: "EWALLET";
   deeplink_url: string;
+  mobile_url: string;
+  web_url: string;
 }
 export interface IQRPayment extends IBasePaymentInformation {
   payment_method: "QR_CODE";

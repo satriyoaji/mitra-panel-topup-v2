@@ -1,5 +1,5 @@
 export enum ETransactionStatus {
-  "Pending" = 1,
+  "Unpaid" = 1,
   "Paid" = 2,
   "On Process" = 3,
   "Delivered" = 4,

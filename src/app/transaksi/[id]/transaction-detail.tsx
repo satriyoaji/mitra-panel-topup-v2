@@ -5,7 +5,7 @@ import { priceMask } from "@/Helpers";
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
 import Loading from "@/app/loading";
-import { ITransactionHistoryDetail } from "@/types/transaction";
+import { ILinkPayment, ITransactionHistoryDetail } from "@/types/transaction";
 import CopyToClipboard from "@/components/copy-to-clipboard";
 import { Separator } from "@/components/ui/separator";
 import VAPayment from "./(payment)/va-payment";
@@ -50,6 +50,7 @@ function TransactionHistoryDetail({
     return (
       data.payment_information &&
       data.payment_information.expired_at &&
+      data.payment_information.payment_channel &&
       isFuture(parseISO(data.payment_information.expired_at))
     );
   }, [data]);
@@ -98,7 +99,8 @@ function TransactionHistoryDetail({
                     <BadgeTransaksi status={data.status} />
                   </div>
                 </div>
-                {isPaymentNotExpired ? (
+                {isPaymentNotExpired &&
+                data.status === ETransactionStatus.Unpaid ? (
                   <div className="flex justify-between w-full">
                     <p className="text-muted-foreground text-sm">
                       Order Expired
@@ -206,31 +208,35 @@ function TransactionHistoryDetail({
                           Total Pembayaran
                         </p>
                         <p className="font-semibold text-green-600">
-                          {priceMask(data.payment_information.payment_amount)}
+                          {priceMask(data.grand_total)}
                         </p>
                       </div>
                     </div>
                   </div>
                   {isPaymentNotExpired ? (
-                    <>
-                      <Separator className="my-3 w-full" />
-                      <div className="px-4 pb-24">
-                        <p className="font-medium text-lg text-primary">
-                          Tujuan Pembayaran
-                        </p>
-                        <div className="mt-4 space-y-4 h-full">
-                          {data.payment_information.payment_method ==
-                          "VIRTUAL_ACCOUNT" ? (
-                            <VAPayment payment={data.payment_information} />
-                          ) : data.payment_information.payment_method ==
-                            "EWALLET" ? (
-                            <LinkPayment payment={data.payment_information} />
-                          ) : (
-                            <QRPayment payment={data.payment_information} />
-                          )}
+                    (data.payment_information as ILinkPayment).deeplink_url ||
+                    (data.payment_information as ILinkPayment).mobile_url ||
+                    (data.payment_information as ILinkPayment).web_url ? (
+                      <>
+                        <Separator className="my-3 w-full" />
+                        <div className="px-4 pb-24">
+                          <p className="font-medium text-lg text-primary">
+                            Tujuan Pembayaran
+                          </p>
+                          <div className="mt-4 space-y-4 h-full">
+                            {data.payment_information.payment_method ==
+                            "VIRTUAL_ACCOUNT" ? (
+                              <VAPayment payment={data.payment_information} />
+                            ) : data.payment_information.payment_method ==
+                              "EWALLET" ? (
+                              <LinkPayment payment={data.payment_information} />
+                            ) : (
+                              <QRPayment payment={data.payment_information} />
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </>
+                      </>
+                    ) : null
                   ) : null}
                   <div className="w-full bottom-0 absolute">
                     {data.status !== ETransactionStatus.Refunded ? (

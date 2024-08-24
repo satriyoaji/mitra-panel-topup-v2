@@ -5,7 +5,7 @@ import React from "react";
 function BadgeTransaksi({ status }: { status: number }) {
   return (
     <>
-      {status === ETransactionStatus.Pending ? (
+      {status === ETransactionStatus.Unpaid ? (
         <Badge variant="destructive">Unpaid</Badge>
       ) : status === ETransactionStatus.Paid ? (
         <Badge variant="success">Paid</Badge>
