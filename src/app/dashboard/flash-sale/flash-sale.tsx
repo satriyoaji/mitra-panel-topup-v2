@@ -7,10 +7,9 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
 
 function FlashSale({ data }: { data: IFlashSaleInfo }) {
   if (data)
@@ -40,7 +39,18 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
               </div>
             </div>
             <div className="flex items-center relative py-1">
-              <Carousel className="py-1 w-full">
+              <Carousel
+                className="py-1 w-full"
+                opts={{
+                  align: "center",
+                  dragFree: true,
+                }}
+                plugins={[
+                  Autoplay({
+                    delay: 7500,
+                  }),
+                ]}
+              >
                 <CarouselContent className="mx-0">
                   {data?.products?.slice(0, 8).map((item, idx) => (
                     <CarouselItem
@@ -66,8 +76,6 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
                     </Link>
                   )}
                 </CarouselContent>
-                <CarouselPrevious className="ml-14 bg-background" />
-                <CarouselNext className="mr-14 bg-background" />
               </Carousel>
             </div>
           </div>
