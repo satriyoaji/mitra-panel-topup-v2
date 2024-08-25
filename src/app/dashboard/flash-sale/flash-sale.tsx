@@ -1,3 +1,5 @@
+"use client";
+
 import CardProduct from "../../flash-sale/flash-sale-card";
 import { IFlashSaleInfo } from "@/types/flash-sale";
 import Link from "next/link";
