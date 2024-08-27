@@ -29,29 +29,18 @@ function Page() {
         <div className="max-w-4xl w-full space-y-4">
           <Tabs defaultValue="profile" className="w-full">
             <div className="bg-background rounded-lg pt-4 px-6 pb-8 w-full sticky top-12">
-              <div className="justify-between flex">
-                <div>
-                  <h3 className="font-semibold text-primary p-0">
-                    Edit Profile
-                  </h3>
-                  <TabsContent value="profile" className="p-0 m-0 mt-1">
-                    <h6 className="text-primary">Informasi Akun</h6>
-                  </TabsContent>
-                  <TabsContent value="reset" className="p-0 m-0 mt-1">
-                    <h6 className="text-primary">Ubah Keamanan Akun</h6>
-                  </TabsContent>
-                </div>
-                <div>
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="profile">Profile</TabsTrigger>
-                    <TabsTrigger value="reset">Keamanan</TabsTrigger>
-                  </TabsList>
-                </div>
-              </div>
+              <TabsList className="grid w-full grid-cols-2 mb-4">
+                <TabsTrigger value="profile">Profile</TabsTrigger>
+                <TabsTrigger value="reset">Keamanan</TabsTrigger>
+              </TabsList>
               <TabsContent value="profile">
+                <h3 className="font-semibold text-primary p-0">Edit Profile</h3>
+                <h6 className="text-primary p-0">Informasi Akun</h6>
                 <Profile />
               </TabsContent>
               <TabsContent value="reset">
+                <h3 className="font-semibold text-primary p-0">Edit Profile</h3>
+                <h6 className="text-primary p-0">Ubah Keamanan Akun</h6>
                 <Password />
               </TabsContent>
             </div>

@@ -50,43 +50,54 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                   />
                 )}
                 {profile ? (
-                  <p
-                    className="text-muted-foreground text-xs mt-1.5 leading-5"
-                    dangerouslySetInnerHTML={{
-                      __html: profile?.description,
-                    }}
-                  ></p>
+                  <>
+                    <h1 className="text-lg font-medium mt-2">
+                      {profile.name} - {profile.title}
+                    </h1>
+                    <p
+                      className="text-muted-foreground text-xs leading-5"
+                      dangerouslySetInnerHTML={{
+                        __html: profile?.description,
+                      }}
+                    ></p>
+                  </>
                 ) : null}
               </div>
               <div className={`bg-background flex flex-col mt-8`}>
                 <p className="font-bold text-foreground text-sm">
                   Menu Lainnya
                 </p>
-                <div className="space-y-1 mt-2 text-sm">
+                <div className="space-y-2.5 mt-3 text-sm">
                   <Link
                     href="/kebijakan"
                     className="flex items-center space-x-2"
                   >
-                    <ArrowRightIcon /> <p>Kebijakan Privasi</p>
+                    <ArrowRightIcon />{" "}
+                    <p className="text-xs">Kebijakan Privasi</p>
                   </Link>
                   <Link
                     href="/syarat-ketentuan"
                     className="flex items-center space-x-2"
                   >
-                    <ArrowRightIcon /> <p>Syarat Ketentuan</p>
+                    <ArrowRightIcon />{" "}
+                    <p className="text-xs">Syarat Ketentuan</p>
                   </Link>
                 </div>
               </div>
               <div className={`bg-background flex flex-col mt-8`}>
                 <p className="font-bold text-foreground text-sm">Kontak</p>
-                <div className="space-y-1 mt-2 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <EnvelopeClosedIcon />
-                    <p>cs@topmur.com</p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <ChatBubbleIcon /> <p>Hubungi CS</p>
-                  </div>
+                <div className="space-y-2.5 mt-3 text-sm">
+                  {data
+                    ?.filter((i) => i.type === "contact")
+                    .map((item, idx) => (
+                      <div
+                        key={idx.toString()}
+                        className="flex items-center text-xs space-x-2"
+                      >
+                        <Socmed black={true} type={item.key} />
+                        <p className="text-xs">{item.value}</p>
+                      </div>
+                    ))}
                 </div>
               </div>
               <div
@@ -96,19 +107,21 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
                   Ikuti kami di
                 </p>
                 <div className="flex flex-wrap mt-2">
-                  {data?.map((item, idx) => (
-                    <Link
-                      key={`${idx}`}
-                      className={`mr-2 mb-2 rounded-full`}
-                      href={item.value}
-                    >
-                      <div className="p-0.5">
-                        <div className="w-6 h-6">
-                          <Socmed type={item.key} />
+                  {data
+                    ?.filter((i) => i.type === "social")
+                    .map((item, idx) => (
+                      <Link
+                        key={`${idx}`}
+                        className={`mr-2 mb-2 rounded-full`}
+                        href={item.value}
+                      >
+                        <div className="p-0.5">
+                          <div className="w-6 h-6">
+                            <Socmed type={item.key} />
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>
