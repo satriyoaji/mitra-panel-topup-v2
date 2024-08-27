@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
+import { headers } from "next/headers";
 
 export default function robots(): MetadataRoute.Robots {
+  var url = headers().get("host") ?? "/";
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
       disallow: ["/transaksi/", "/profile/", "/saldo/"],
     },
-    sitemap: "/sitemap.xml",
+    sitemap: url + "/sitemap.xml",
   };
 }

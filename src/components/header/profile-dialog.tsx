@@ -6,11 +6,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "../ui/button";
-import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
+import { PersonIcon } from "@radix-ui/react-icons";
 import Profile from "./profile";
-import { signOut, useSession } from "next-auth/react";
-import { priceMask } from "@/Helpers";
+import { useSession } from "next-auth/react";
+import { thousandMask } from "@/Helpers";
 import InfoTooltip from "../info-tooltip";
 import { useRouter } from "next/navigation";
 
@@ -50,7 +49,7 @@ function ProfileDialog() {
               </p>
             </div>
             <p className="font-medium">
-              {priceMask(session?.profile.saldo ?? 0)}
+              {thousandMask(session?.profile.saldo ?? 0)}
             </p>
           </div>
           <div className="mt-4">
