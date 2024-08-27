@@ -7,7 +7,6 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
       disallow: ["/transaksi/", "/profile/", "/saldo/"],
     },
     sitemap: url + "/sitemap.xml",
