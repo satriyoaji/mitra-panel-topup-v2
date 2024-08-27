@@ -1,16 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
-import { Separator } from "./ui/separator";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ISiteProfile, ISosmed } from "@/types/utils";
 import Socmed from "./socmed-icon";
-import {
-  ArrowRightIcon,
-  ChatBubbleIcon,
-  EnvelopeClosedIcon,
-} from "@radix-ui/react-icons";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 
 function Footer({ profile }: { profile?: ISiteProfile }) {

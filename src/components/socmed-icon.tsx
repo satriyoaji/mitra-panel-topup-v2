@@ -4,7 +4,6 @@ import {
   DiscordLogoIcon,
   EnvelopeClosedIcon,
   InstagramLogoIcon,
-  TwitterLogoIcon,
 } from "@radix-ui/react-icons";
 
 function Socmed({ type, black }: { type: string; black?: boolean }) {
