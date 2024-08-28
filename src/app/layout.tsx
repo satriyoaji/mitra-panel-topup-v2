@@ -26,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   if (res.ok) {
     var data = await res.json();
     var setting: ISiteProfile = data.data;
+    var description = setting.description;
 
     var games: IProductCategory | undefined = undefined;
     var url = headers().get("x-url") ?? "";
@@ -44,17 +45,22 @@ export async function generateMetadata(): Promise<Metadata> {
       if (re.ok) {
         var result = await re.json();
         games = result.data;
+        if (games) description = games?.description;
       }
     }
 
     var path = url.split(baseUrl).pop()?.split("/") ?? "";
-    console.log(path[1]);
     var pathTitle = "";
     if (path.length > 0) {
       var pathName = path[1];
       if (pathName)
         pathTitle = pathName.charAt(0).toUpperCase() + pathName.slice(1);
     }
+
+    description = description
+      .replace(/<[^>]*>/g, " ")
+      .replace(/&#?[a-z0-9]+;/g, "");
+
     return {
       manifest: "/api/manifest.json",
       title: {
@@ -63,10 +69,10 @@ export async function generateMetadata(): Promise<Metadata> {
           ? `${setting.name} | ${games.name}`
           : `${setting.name} ${pathTitle ? ` | ${pathTitle}` : ""}`,
       },
-      description: games?.description || setting.description,
+      description,
       keywords: setting.keywords,
       openGraph: {
-        images: [setting.logo_url],
+        images: [games?.image_url || setting.logo_url],
         title: `${setting.name} - ${games?.name || setting.title}`,
         url,
         type: "website",
