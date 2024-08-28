@@ -28,7 +28,7 @@ function PaymentList({
 
   return (
     <>
-      <Accordion type="multiple" value={paymentGroup.map((i) => i.name)}>
+      <Accordion type="multiple" defaultValue={paymentGroup.map((i) => i.name)}>
         {paymentGroup.map((group, idx) => (
           <AccordionItem key={idx.toString()} value={group.name}>
             <AccordionTrigger>

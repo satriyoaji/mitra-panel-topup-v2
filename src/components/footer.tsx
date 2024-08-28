@@ -124,7 +124,7 @@ function Footer({ profile }: { profile?: ISiteProfile }) {
         </div>
       </div>
       <div
-        className={`w-full p-3 bg-primary flex justify-between items-center`}
+        className={`w-full p-3 bg-primary hidden md:flex justify-between items-center`}
       >
         <p className="text-white text-xs px-2">
           {`Copyright © ${new Date().getFullYear()}. All Right Reserved`}

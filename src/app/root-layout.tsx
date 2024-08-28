@@ -12,6 +12,7 @@ import Header from "@/components/header/page-header";
 import BottomNav from "@/components/bottom-nav";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
+import BackHeader from "@/components/header/back-header";
 
 export default function RootTemplateLayout({
   children,

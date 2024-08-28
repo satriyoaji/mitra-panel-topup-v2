@@ -64,17 +64,6 @@ function Profile({
           <PersonIcon />
           <div>Profile</div>
         </Button>
-        <Button
-          size="sm"
-          className="space-x-2 w-full"
-          onClick={async () => {
-            if (onLogoutClick) onLogoutClick();
-            await signOut();
-          }}
-        >
-          <ExitIcon />
-          <div>Logout</div>
-        </Button>
       </div>
     </div>
   );

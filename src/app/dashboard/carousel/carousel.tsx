@@ -60,8 +60,8 @@ function CarouselV2({ data }: { data: IBanner[] }) {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="ml-16 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
-          <CarouselNext className="mr-16 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
+          <CarouselPrevious className="ml-14 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
+          <CarouselNext className="mr-14 bg-background border-primary text-primary duration-300 transition-opacity opacity-1 md:opacity-0 group-hover:opacity-100" />
         </Carousel>
       </div>
     </div>

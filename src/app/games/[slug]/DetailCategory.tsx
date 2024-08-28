@@ -27,8 +27,8 @@ function DetailCategory(props: Props) {
   if (props.data.category !== null && props.data.category !== undefined)
     return (
       <>
-        <div className="mt-4">
-          <Breadcrumb className="mb-4">
+        <div className="md:mt-4">
+          <Breadcrumb className="hidden md:block mb-4">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink href="/">Home</BreadcrumbLink>

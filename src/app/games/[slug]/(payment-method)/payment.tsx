@@ -22,7 +22,8 @@ function Payment({ nextRef }: { nextRef: RefObject<HTMLDivElement> }) {
     getBank();
   }, []);
 
-  return <PaymentList nextRef={nextRef} paymentGroup={paymentGroups} />;
+  if (paymentGroups.length > 0)
+    return <PaymentList nextRef={nextRef} paymentGroup={paymentGroups} />;
 }
 
 export default Payment;
