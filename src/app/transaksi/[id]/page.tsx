@@ -39,7 +39,7 @@ async function DetailPage({ params }: { params: { id: string } }) {
   return (
     <div className="pt-4 px-2 flex w-full justify-center">
       <div className="max-w-7xl w-full flex flex-col justify-center items-center">
-        <Breadcrumb className="mb-4 inline-flex justify-start w-full">
+        <Breadcrumb className="mb-4 hidden md:inline-flex justify-start w-full">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>

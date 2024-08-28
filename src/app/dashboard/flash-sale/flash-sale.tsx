@@ -33,7 +33,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
                   {data.name}
                 </p>{" "}
                 <div className="flex gap-1 ml-2 items-center">
-                  <p className="text-xs font-medium text-muted-foreground">
+                  <p className="text-xs font-medium text-muted-foreground hidden sm:block">
                     Berakhir dalam
                   </p>
                   <CountdownCard date={parseISO(data.expired_at)} />

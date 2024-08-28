@@ -62,8 +62,8 @@ function Page() {
 
   return (
     <div className="flex justify-center w-full px-2">
-      <div className="max-w-7xl w-full my-4 flex flex-col justify-center items-center">
-        <Breadcrumb className="mb-4 inline-flex justify-start w-full">
+      <div className="max-w-7xl w-full md:mt-4 mb-4 flex flex-col justify-center items-center">
+        <Breadcrumb className="mb-4 hidden md:inline-flex justify-start w-full">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
