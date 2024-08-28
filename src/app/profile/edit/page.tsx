@@ -15,7 +15,7 @@ import BackHeader from "@/components/header/back-header";
 function Page() {
   return (
     <>
-      <BackHeader title="Daftar" />
+      <BackHeader title="Edit Profil" />
       <div className="flex justify-center w-full px-2">
         <div className="max-w-7xl w-full md:mt-4 mb-4 flex flex-col justify-center items-center">
           <Breadcrumb className="mb-4 hidden md:inline-flex justify-start w-full">
@@ -37,14 +37,14 @@ function Page() {
                   <TabsTrigger value="reset">Keamanan</TabsTrigger>
                 </TabsList>
                 <TabsContent value="profile">
-                  <h3 className="font-semibold text-primary p-0">
+                  <h3 className="font-semibold text-primary p-0 hidden md:block">
                     Edit Profile
                   </h3>
                   <h6 className="text-primary p-0">Informasi Akun</h6>
                   <Profile />
                 </TabsContent>
                 <TabsContent value="reset">
-                  <h3 className="font-semibold text-primary p-0">
+                  <h3 className="font-semibold text-primary p-0 hidden md:block">
                     Edit Profile
                   </h3>
                   <h6 className="text-primary p-0">Ubah Keamanan Akun</h6>
