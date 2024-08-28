@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { GetCredHeader } from "../api/api-utils";
 import { ISiteProfile } from "@/types/utils";
+import BackHeader from "@/components/header/back-header";
 
 const getData = async () => {
   const credentialHeader = GetCredHeader();
@@ -36,36 +37,39 @@ const getData = async () => {
 async function Page() {
   var data: ISiteProfile | undefined = await getData();
   return (
-    <div className="flex justify-center w-full px-2">
-      <div className="max-w-7xl w-full md:mt-4 mb-4 flex flex-col justify-center items-center">
-        <Breadcrumb className="mb-4 hidden md:inline-flex justify-start w-full">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Kebijakan dan Privasi</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        <div className="max-w-4xl w-full space-y-4">
-          <div className="bg-background rounded-lg p-4 w-full">
-            <p className="text-2xl font-semibold text-primary">
-              Kebijakan Privasi
-            </p>
+    <>
+      <BackHeader title="Kebijakan Privasi" />
+      <div className="flex justify-center w-full px-2">
+        <div className="max-w-7xl w-full md:mt-4 mb-4 flex flex-col justify-center items-center">
+          <Breadcrumb className="mb-4 hidden md:inline-flex justify-start w-full">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Kebijakan dan Privasi</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <div className="max-w-4xl w-full space-y-4">
+            <div className="bg-background rounded-lg p-4 w-full">
+              <p className="text-2xl font-semibold text-primary">
+                Kebijakan Privasi
+              </p>
+            </div>
+            {data ? (
+              <div
+                className="px-4"
+                dangerouslySetInnerHTML={{
+                  __html: data?.privacy_policy,
+                }}
+              ></div>
+            ) : null}
           </div>
-          {data ? (
-            <div
-              className="px-4"
-              dangerouslySetInnerHTML={{
-                __html: data?.privacy_policy,
-              }}
-            ></div>
-          ) : null}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

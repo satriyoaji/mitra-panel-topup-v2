@@ -18,6 +18,15 @@ export type path = {
   isSession: boolean;
 };
 
+const ignorePath = [
+  "/games/",
+  "/transaksi/",
+  "/auth/register",
+  "/profile/edit",
+  "/kebijakan",
+  "/syarat-ketentuan",
+];
+
 function MobileHeader({ profile }: { profile?: ISiteProfile }) {
   const path = usePathname();
   const { data: session } = useSession();
@@ -32,48 +41,65 @@ function MobileHeader({ profile }: { profile?: ISiteProfile }) {
     return false;
   }, [path]);
 
-  return (
-    <div className="w-full flex md:hidden max-w-7xl items-center justify-between">
-      <div className="flex md:w-fit w-full justify-start">
-        <Link href="/" className="p-1">
-          {profile?.logo_url && (
-            <Image src={profile?.logo_url} alt="logo" width={29} height={29} />
-          )}
-        </Link>
-      </div>
-      {ishome ? (
-        <div className="flex-row-reverse flex w-full justify-start md:flex-row md:justify-end items-center gap-2">
-          <Searchbar />
-          <Separator
-            className="mx-0.5 h-10 md:block hidden"
-            orientation="vertical"
-          />
-          {session ? (
-            <div className="my-1 mx-1 hidden md:block">
-              <ProfileDialog />
-            </div>
-          ) : (
-            <Link href="/auth/login" className="m-2 hidden md:block">
-              <Button size="sm" className="flex space-x-1">
-                <EnterIcon />
-                <div className="text-xs">Login</div>
-              </Button>{" "}
-            </Link>
-          )}
-          <div>
-            <HelpButton />
-          </div>
-        </div>
-      ) : null}
-      {isprofile ? (
-        <div>
-          <Button size="sm" onClick={async () => await signOut()}>
-            <ExitIcon className="text-white" />
-          </Button>
-        </div>
-      ) : null}
-    </div>
+  const isInlist = useMemo(() => {
+    return ignorePath.some((i) => path.includes(i));
+  }, [path]);
+  console.log(
+    path,
+    ignorePath.some((i) => i.includes(path)),
+    path !== "/"
   );
+
+  if (!isInlist)
+    return (
+      <header className="w-full flex md:hidden justify-center z-20 bg-white items-center top-0 sticky p-1 border-b h-[50px]">
+        <div className="w-full flex max-w-7xl items-center justify-between">
+          <div className="flex md:w-fit w-full justify-start">
+            <Link href="/" className="p-1">
+              {profile?.logo_url && (
+                <Image
+                  src={profile?.logo_url}
+                  alt="logo"
+                  width={29}
+                  height={29}
+                />
+              )}
+            </Link>
+          </div>
+          {ishome ? (
+            <div className="flex-row-reverse flex w-full justify-start md:flex-row md:justify-end items-center gap-2">
+              <Searchbar />
+              <Separator
+                className="mx-0.5 h-10 md:block hidden"
+                orientation="vertical"
+              />
+              {session ? (
+                <div className="my-1 mx-1 hidden md:block">
+                  <ProfileDialog />
+                </div>
+              ) : (
+                <Link href="/auth/login" className="m-2 hidden md:block">
+                  <Button size="sm" className="flex space-x-1">
+                    <EnterIcon />
+                    <div className="text-xs">Login</div>
+                  </Button>{" "}
+                </Link>
+              )}
+              <div>
+                <HelpButton />
+              </div>
+            </div>
+          ) : null}
+          {isprofile ? (
+            <div>
+              <Button size="sm" onClick={async () => await signOut()}>
+                <ExitIcon className="text-white" />
+              </Button>
+            </div>
+          ) : null}
+        </div>
+      </header>
+    );
 }
 
 export default MobileHeader;

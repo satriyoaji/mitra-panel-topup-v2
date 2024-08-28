@@ -6,12 +6,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { PersonIcon } from "@radix-ui/react-icons";
+import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
 import Profile from "./profile";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { thousandMask } from "@/Helpers";
 import InfoTooltip from "../info-tooltip";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 function ProfileDialog() {
   const [open, setOpen] = useState(false);
@@ -57,6 +58,17 @@ function ProfileDialog() {
               onEditClick={() => setOpen(false)}
               onLogoutClick={() => setOpen(false)}
             />
+            <Button
+              size="sm"
+              className="space-x-2 w-full mt-2"
+              onClick={async () => {
+                setOpen(false);
+                await signOut();
+              }}
+            >
+              <ExitIcon />
+              <div>Logout</div>
+            </Button>
           </div>
         </PopoverContent>
       </Popover>

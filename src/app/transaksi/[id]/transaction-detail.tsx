@@ -62,7 +62,9 @@ function TransactionHistoryDetail({
       <>
         <div className="flex justify-between items-center mx-2">
           <div className="sm:flex items-center gap-2">
-            <p className="font-medium text-xl text-primary">Detail Transaksi</p>
+            <p className="font-medium text-xl text-primary hidden md:block">
+              Detail Transaksi
+            </p>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <p className="text-xs text-muted-foreground">
