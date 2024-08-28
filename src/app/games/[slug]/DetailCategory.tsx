@@ -43,9 +43,9 @@ function DetailCategory(props: Props) {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h4 className="text-lg font-bold ml-2 text-primary p-0 hidden md:block">
+          <h1 className="text-lg font-bold ml-2 text-primary p-0 hidden md:block">
             {props.data.category.name}
-          </h4>
+          </h1>
         </div>
         <div className="lg:grid lg:grid-cols-5 lg:gap-4 w-full">
           <div className="col-span-2 my-0.5">

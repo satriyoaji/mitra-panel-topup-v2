@@ -6,6 +6,9 @@ export async function GET(req: NextRequest) {
     `${process.env.NEXT_API_URL}/v2/panel/site-social-media`,
     {
       headers: GetAuthHeader(req),
+      next: {
+        revalidate: 7200,
+      },
     }
   );
 

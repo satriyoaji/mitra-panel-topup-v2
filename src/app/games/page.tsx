@@ -76,7 +76,7 @@ function Page() {
         </Breadcrumb>
         <div className="max-w-5xl w-full bg-background md:px-4 rounded-xl">
           <div className="flex px-2 sticky top-12 py-4 bg-background rounded-b-xl flex-col space-y-1.5 mb-3 z-10">
-            <h3 className="font-semibold text-primary">Produk</h3>
+            <h1 className="font-semibold text-primary text-2xl">Produk</h1>
             <Filter onChange={setCategory} />
           </div>
           <div className="min-h-[68vh] bg-background">

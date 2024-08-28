@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     {
       headers: GetAuthHeader(req),
       next: {
-        revalidate: 30,
+        revalidate: 5,
       },
     }
   );
