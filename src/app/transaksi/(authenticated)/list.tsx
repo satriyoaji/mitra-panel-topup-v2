@@ -18,12 +18,10 @@ import Loading from "../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 function List() {
   const searchParams = useSearchParams();
-  const path = usePathname();
-  const router = useRouter();
   const [filterOpen, setfilterOpen] = useState<boolean>(false);
   const [lists, setLists] = useState<ITransactionHistoryList[]>([]);
   const [filter, setFilter] = useState<TFilter>({
@@ -85,9 +83,9 @@ function List() {
   return (
     <div className="md:mx-2">
       <div className="flex -mx-2 px-4 sticky top-12 py-4 bg-background rounded-xl h-full flex-col z-20">
-        <h3 className="font-semibold text-primary p-0 mt-2">
+        <p className="text-2xl font-semibold text-primary p-0 mt-2">
           Riwayat Pesananku
-        </h3>
+        </p>
         <div className="flex space-x-1 mt-3">
           <Input
             id="invoice"

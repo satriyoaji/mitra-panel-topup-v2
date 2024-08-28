@@ -17,9 +17,9 @@ function FormWrapper({
           <div
             className={` p-2 w-7 h-7 flex justify-center items-center rounded-full bg-primary`}
           >
-            <h6 className="font-bold rounded-full text-white">{number}</h6>
+            <p className="font-bold rounded-full text-white">{number}</p>
           </div>
-          <h6 className={`font-medium ml-1 text-primary`}>{title}</h6>
+          <p className={`font-medium ml-1 text-primary`}>{title}</p>
         </div>
         <div>{children}</div>
       </CardContent>

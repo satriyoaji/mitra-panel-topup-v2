@@ -61,13 +61,13 @@ function Header({ profile }: { profile?: ISiteProfile }) {
     <header className="w-full flex justify-center z-20 bg-white items-center top-0 sticky p-1">
       <div className="w-full flex max-w-7xl items-center justify-between">
         <div className="flex md:w-fit w-full justify-start">
-          <Link href="/" className="p-1">
+          <Link href="/" className="p-1 aspect-square">
             {profile?.logo_url && (
               <Image
                 src={profile?.logo_url}
                 alt="logo"
-                width={40}
-                height={40}
+                width={30}
+                height={30}
               />
             )}
           </Link>

@@ -51,7 +51,9 @@ async function Page() {
         </Breadcrumb>
         <div className="max-w-4xl w-full space-y-4">
           <div className="bg-background rounded-lg p-4 w-full">
-            <h3 className="font-semibold text-primary">Kebijakan Privasi</h3>
+            <p className="text-2xl font-semibold text-primary">
+              Kebijakan Privasi
+            </p>
           </div>
           {data ? (
             <div

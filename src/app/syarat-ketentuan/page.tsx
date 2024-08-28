@@ -51,7 +51,9 @@ async function Page() {
         </Breadcrumb>
         <div className="max-w-5xl w-full space-y-4">
           <div className="bg-background rounded-lg p-4 w-full">
-            <h3 className="font-semibold primary">Syarat dan Ketentuan</h3>
+            <p className="font-semibold text-primary text-2xl">
+              Syarat dan Ketentuan
+            </p>
           </div>
           {data ? (
             <div
