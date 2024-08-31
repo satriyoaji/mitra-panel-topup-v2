@@ -83,7 +83,7 @@ function List() {
   return (
     <div className="md:mx-2">
       <div className="flex -mx-2 px-4 sticky top-12 py-4 bg-background rounded-xl h-full flex-col z-10">
-        <p className="text-2xl font-semibold text-primary p-0 mt-2">
+        <p className="text-2xl hidden md:block font-semibold text-primary p-0 mt-2">
           Riwayat Pesananku
         </p>
         <div className="flex space-x-1 mt-3">

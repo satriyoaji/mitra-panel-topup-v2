@@ -51,7 +51,7 @@ function SearchList() {
     router.push(`${pathname}?${params.toString()}`);
     router.refresh();
 
-    // get();
+    get();
   };
 
   useEffect(() => {
@@ -60,7 +60,7 @@ function SearchList() {
 
   return (
     <>
-      <div className="flex items-center w-full mt-2 gap-2 sticky top-12 p-4 rounded-3xl bg-background z-10">
+      <div className="flex items-center w-full mt-2 gap-2 sticky top-11 p-4 rounded-3xl bg-background z-10">
         <Input
           className="w-full bg-background"
           placeholder="Masukkan nomor handphone atau invoice"
@@ -75,7 +75,7 @@ function SearchList() {
       <div className="flex flex-col space-y-4 mt-4">
         {!loading ? (
           <>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-4 px-2 md:px-0">
               {list.length > 0 ? (
                 list.map((val, idx) => <ItemsCard key={`${idx}`} data={val} />)
               ) : (
