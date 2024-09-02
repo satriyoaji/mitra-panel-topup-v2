@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import ItemsCard from "./items-card";
 import {
   Popover,
@@ -18,7 +18,7 @@ import Loading from "../../loading";
 import Pagination from "@/components/pagination";
 import { TPaginationMeta } from "@/types/utils";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function List() {
   const searchParams = useSearchParams();
@@ -31,6 +31,7 @@ function List() {
   const [loading, setLoading] = useState(false);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
   const [page, setPage] = useState(searchParams.get("page") ?? 1);
+  const router = useRouter();
 
   console.log(searchParams);
 
@@ -59,15 +60,10 @@ function List() {
   useEffect(() => {}, [searchParams]);
 
   useEffect(() => {
-    // setMeta((prev) => ({
-    //   limit: prev?.limit ?? 10,
-    //   total: prev?.total ?? 0,
-    //   page: parseInt(searchParams.get("page") ?? "1"),
-    // }));
-    // const params = new URLSearchParams(searchParams);
-    // params.set("search", filter.search ?? "");
-    // params.set("page", `${page}`);
-    // router.push(`?${params.toString()}`);
+    const params = new URLSearchParams(searchParams);
+    params.set("search", filter.search ?? "");
+    router.push(`?${params.toString()}`);
+
     (async () => getData())();
   }, [filter, page]);
 

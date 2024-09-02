@@ -10,7 +10,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import {} from "next-auth/react";
 
 async function Page() {
   const session = await getServerSession(options);

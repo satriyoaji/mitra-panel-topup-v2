@@ -1,6 +1,3 @@
-import { NextFont } from "next/dist/compiled/@next/font";
-import { StaticImageData } from "next/image";
-
 export interface LooseObject {
   [key: string]: any;
 }
@@ -13,7 +10,6 @@ export interface TTier {
 }
 
 export interface IProfile {
-  // id: string;
   name: string;
   email: string;
   phone: string;
@@ -52,10 +48,6 @@ export type TProductForm =
 
 export interface IProductCategory {
   uuid: string;
-  // code: string;
-  // alias: string;
-  // status: number;
-  // logo_image: string;
   banner_url: string;
   description: string;
   forms?: TProductForm[];

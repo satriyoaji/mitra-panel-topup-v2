@@ -1,15 +1,12 @@
 "use client";
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IProductCategory, TProductGroup } from "@/Type";
-import { CubeIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { CubeIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { debounce } from "@/Helpers";
-// import Image from "next/image";
 
 export default function ListGame() {
   const [group, setGroup] = useState<TProductGroup>({
@@ -18,21 +15,15 @@ export default function ListGame() {
   });
   const [data, setData] = useState<IProductCategory[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
-  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [groups, setGroups] = useState<TProductGroup[]>([]);
-  const [search, setSearch] = useState("");
-
-  const totalPage = useMemo(() => Math.ceil(total / 8), [total]);
 
   const getData = async (more: boolean) => {
     setLoading(true);
     var res = await fetch(
       `/api/products/categories/?` +
         new URLSearchParams({
-          page: `${pageIndex}`,
           label_id: `${group?.id ?? ""}`,
-          search,
         })
     );
 
@@ -45,8 +36,6 @@ export default function ListGame() {
       } else {
         if (!more) setData([]);
       }
-
-      setTotal(result.manifest.total);
     }
     setLoading(false);
   };
@@ -74,28 +63,17 @@ export default function ListGame() {
   useEffect(() => {
     setPageIndex(1);
     getData(false);
-  }, [group, search]);
+  }, [group]);
 
   useEffect(() => {
     if (pageIndex > 0) getData(true);
   }, [pageIndex]);
-
-  const showMore = () => {
-    setPageIndex((last) => last + 1);
-  };
-
-  const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  }, 500);
 
   return (
     <div className="bg-zinc-50 pb-4 flex justify-center rounded-t-xl">
       <div className="w-full max-w-7xl px-2">
         <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-zinc-50 backdrop-blur-md">
           <div className="flex md:block items-center justify-between mt-4 ">
-            {/* <h5 className="mr-8 font-semibold px-0 py-0 hidden md:block mb-1">
-              Kategori
-            </h5> */}
             <div
               className="no-scrollbar z-10 md:mb-0"
               style={{
@@ -120,14 +98,6 @@ export default function ListGame() {
               ))}
             </div>
           </div>
-          {/* <div className="hidden md:flex items-center border rounded-full px-3 mx-3 w-full max-w-[20rem] bg-background">
-            <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50 text-primary" />
-            <input
-              onChange={doSearch}
-              placeholder="Cari Produk"
-              className="flex w-full rounded-md bg-transparent py-1.5 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
-            />
-          </div> */}
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 md:gap-4 gap-2 mt-2 place-items-center justify-center px-2">
           {loading ? (
@@ -173,13 +143,6 @@ export default function ListGame() {
             </div>
           )}
         </div>
-        {/* {pageIndex < totalPage ? (
-        <div className="flex items-center justify-center my-2 mt-6">
-          <Button size="sm" onClick={showMore}>
-            Show More
-          </Button>
-        </div>
-      ) : null} */}
       </div>
     </div>
   );

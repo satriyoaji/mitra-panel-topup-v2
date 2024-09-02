@@ -1,6 +1,6 @@
 "use client";
 import { useCountdown } from "@/Hooks";
-import { ClockIcon, TimerIcon } from "@radix-ui/react-icons";
+import { TimerIcon } from "@radix-ui/react-icons";
 import React, { useEffect } from "react";
 
 type theme = "light" | "red";

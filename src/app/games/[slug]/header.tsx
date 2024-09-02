@@ -21,13 +21,6 @@ function Header({ category }: { category: IProductCategory }) {
               style={{ aspectRatio: 3 / 1 }}
               className={`object-cover w-full md:rounded-xl rounded-t-xl border`}
             />
-            {/* <Image
-            fill
-            alt={category.name}
-            src={"/assets/hero-games.svg"}
-            style={{ aspectRatio: 64 / 9 }}
-            className={`relative object-cover w-full rounded-t-xl`}
-            /> */}
           </div>
         )}
         <div className="py-3 px-6">

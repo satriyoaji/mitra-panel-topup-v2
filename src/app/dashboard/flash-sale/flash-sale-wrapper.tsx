@@ -1,5 +1,4 @@
 import { GetCredHeader } from "@/app/api/api-utils";
-import { GetCookie } from "@/infrastructures/cookieStore";
 import React from "react";
 import FlashSale from "./flash-sale";
 

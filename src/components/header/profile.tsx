@@ -1,20 +1,14 @@
 "use client";
 
-import { ExitIcon, PersonIcon } from "@radix-ui/react-icons";
-import { signOut, useSession } from "next-auth/react";
+import { PersonIcon } from "@radix-ui/react-icons";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
 
-function Profile({
-  onEditClick,
-  onLogoutClick,
-}: {
-  onEditClick?: () => void;
-  onLogoutClick?: () => void;
-}) {
+function Profile({ onEditClick }: { onEditClick?: () => void }) {
   const { data: session, status } = useSession();
   const router = useRouter();
 
