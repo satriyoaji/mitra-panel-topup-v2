@@ -58,7 +58,7 @@ function DesktopHeader({ profile }: { profile?: ISiteProfile }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="w-full md:flex hidden justify-center z-20 bg-white items-center top-0 sticky p-1 border-b">
+    <header className="w-full md:flex hidden justify-center z-50 bg-white items-center top-0 sticky p-1">
       <div className="w-full flex max-w-7xl items-center justify-between">
         <div className="flex md:w-fit w-full justify-start">
           <Link href="/" className="p-1">
