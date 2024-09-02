@@ -16,7 +16,7 @@ export default function ListGame() {
     id: "",
     name: "All",
   });
-  const [data, setData] = useState<Array<IProductCategory>>([]);
+  const [data, setData] = useState<IProductCategory[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -134,7 +134,7 @@ export default function ListGame() {
             [...Array(3)].map((x, i) => (
               <Skeleton key={i} className="w-full aspect-square" />
             ))
-          ) : data.length > 0 ? (
+          ) : data && data.length > 0 ? (
             data.map((val: IProductCategory, idx) => (
               <Link
                 href={`/games/${val.key}`}
