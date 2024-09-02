@@ -1,13 +1,7 @@
 "use client";
 import React from "react";
 import Header from "./header";
-import ProductList from "./(product)/product-list";
-import Payment from "./(payment-method)/payment";
-import Promo from "./(promo)/promo-list";
-import FormConfirmation from "./(account-confirmation)/form-confirmation";
-import CheckoutAction from "./(checkout)/checkout-action";
 import { IUseCategoryData } from "./useCategory";
-import FormAccount from "./(form-id)/form-account";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,10 +12,33 @@ import {
 } from "@/components/ui/breadcrumb";
 import FormWrapper from "./form-wrapper";
 import { Session } from "next-auth";
+import dynamic from "next/dynamic";
 
 interface Props extends IUseCategoryData {
   session: Session | null;
 }
+
+const ProductList = dynamic(() => import("./(product)/product-list"), {
+  ssr: false,
+});
+const Payment = dynamic(() => import("./(payment-method)/payment"), {
+  ssr: false,
+});
+const Promo = dynamic(() => import("./(promo)/promo-list"), {
+  ssr: false,
+});
+const FormConfirmation = dynamic(
+  () => import("./(account-confirmation)/form-confirmation"),
+  {
+    ssr: false,
+  }
+);
+const CheckoutAction = dynamic(() => import("./(checkout)/checkout-action"), {
+  ssr: false,
+});
+const FormAccount = dynamic(() => import("./(form-id)/form-account"), {
+  ssr: false,
+});
 
 function DetailCategory(props: Props) {
   if (props.data.category !== null && props.data.category !== undefined)
@@ -57,10 +74,8 @@ function DetailCategory(props: Props) {
             <div ref={props.productListRef} className="mt-4 md:mt-0">
               <FormWrapper number={1} title="Produk">
                 <ProductList
-                  // category={data.category.name}
                   nextRef={props.methodRef}
                   products={props.products}
-                  // productSelected={data.product}
                 />
               </FormWrapper>
             </div>

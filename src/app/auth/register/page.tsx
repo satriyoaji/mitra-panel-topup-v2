@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
-import { PhoneInput, PhoneInputIndo } from "@/components/ui/custom-input";
+import { PhoneInputIndo } from "@/components/ui/custom-input";
 import { useRouter } from "next/navigation";
 import BackHeader from "@/components/header/back-header";
 

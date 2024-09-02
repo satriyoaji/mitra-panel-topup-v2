@@ -47,7 +47,6 @@ function SearchList() {
   const getData = () => {
     const params = new URLSearchParams(searchParams);
     params.set("search", search);
-    params.set("page", `${page}`);
     router.push(`${pathname}?${params.toString()}`);
     router.refresh();
 

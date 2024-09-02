@@ -1,12 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import React, {
-  ChangeEvent,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import FlashSaleCard from "./flash-sale-card";
 import { debounce } from "@/Helpers";
 import Image from "next/image";
@@ -24,8 +18,6 @@ import {
 } from "@/components/ui/breadcrumb";
 
 function Page() {
-  const [total, setTotal] = useState(0);
-  const [pageIndex, setPageIndex] = useState(1);
   const [data, setData] = useState<IFlashSaleInfo | undefined>();
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -33,7 +25,6 @@ function Page() {
   const getFlashSale = async () => {
     let searchParams = new URLSearchParams({
       page_num: "1",
-      page_size: "12",
       product_search: search,
     });
 
@@ -49,7 +40,6 @@ function Page() {
         return;
       }
       setData(undefined);
-      setTotal(0);
     }
   };
 
@@ -57,7 +47,7 @@ function Page() {
     (async () => {
       await getFlashSale();
     })();
-  }, [search, pageIndex]);
+  }, [search]);
 
   const doSearch = debounce((e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);

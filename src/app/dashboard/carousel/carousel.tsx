@@ -9,7 +9,7 @@ import {
   CarouselApi,
 } from "@/components/ui/carousel";
 import { IBanner } from "@/types/utils";
-import React, { useState } from "react";
+import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

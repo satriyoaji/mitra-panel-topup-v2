@@ -54,10 +54,7 @@ function ProfileDialog() {
             </p>
           </div>
           <div className="mt-4">
-            <Profile
-              onEditClick={() => setOpen(false)}
-              onLogoutClick={() => setOpen(false)}
-            />
+            <Profile onEditClick={() => setOpen(false)} />
             <Button
               size="sm"
               className="space-x-2 w-full mt-2"

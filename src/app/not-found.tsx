@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
 
 function NotFound() {
   return (

@@ -1,9 +1,5 @@
 "use client";
-import {
-  CheckCircledIcon,
-  ClipboardCopyIcon,
-  CopyIcon,
-} from "@radix-ui/react-icons";
+import { CheckCircledIcon, CopyIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useState } from "react";
 import { useToast } from "./ui/use-toast";
 
