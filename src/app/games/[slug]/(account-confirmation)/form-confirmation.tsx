@@ -40,7 +40,7 @@ function FormConfirmation() {
           <Label htmlFor="whatsapp">No. Whatsapp *</Label>
           <PhoneInputIndo
             id="whatsapp"
-            placeholder="Masukan No. Whatasapp"
+            placeholder="Contoh: 81XXXXXXXXXX"
             maxLength={13}
             value={data.account?.noWhatsapp}
             disabled={!!session}
@@ -49,7 +49,7 @@ function FormConfirmation() {
                 action: "SET_ACCOUNT",
                 payload: {
                   email: data.account?.email ?? "",
-                  noWhatsapp: ` ${e}`,
+                  noWhatsapp: `${e}`,
                 },
               });
             }}

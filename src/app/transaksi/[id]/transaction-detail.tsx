@@ -54,7 +54,21 @@ function TransactionHistoryDetail({
     );
   }, [data]);
 
+  const isHavePaymentDetail = () => {
+    if (!data) return false;
+    return (
+      isPaymentNotExpired &&
+      data.payment_information.payment_method == "EWALLET" &&
+      ((data.payment_information as ILinkPayment).deeplink_url ||
+        (data.payment_information as ILinkPayment).mobile_url ||
+        (data.payment_information as ILinkPayment).web_url)
+    );
+  };
+
   if (loading) return <Loading />;
+
+  console.log(isPaymentNotExpired);
+  console.log(isHavePaymentDetail());
 
   if (data) {
     return (
@@ -76,7 +90,7 @@ function TransactionHistoryDetail({
           <PrintInvoice {...data} profile={profile} />
         </div>
         {!session ? (
-          <div className="w-full mt-2 sticky top-14 z-20">
+          <div className="w-full mt-2 sticky top-12 z-20">
             <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
               <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
                 <p className="text-xs font-bold">i</p>
@@ -214,30 +228,26 @@ function TransactionHistoryDetail({
                       </div>
                     </div>
                   </div>
-                  {isPaymentNotExpired ? (
-                    (data.payment_information as ILinkPayment).deeplink_url ||
-                    (data.payment_information as ILinkPayment).mobile_url ||
-                    (data.payment_information as ILinkPayment).web_url ? (
-                      <>
-                        <Separator className="my-3 w-full" />
-                        <div className="px-4 pb-24">
-                          <p className="font-medium text-lg text-primary">
-                            Tujuan Pembayaran
-                          </p>
-                          <div className="mt-4 space-y-4 h-full">
-                            {data.payment_information.payment_method ==
-                            "VIRTUAL_ACCOUNT" ? (
-                              <VAPayment payment={data.payment_information} />
-                            ) : data.payment_information.payment_method ==
-                              "EWALLET" ? (
-                              <LinkPayment payment={data.payment_information} />
-                            ) : (
-                              <QRPayment payment={data.payment_information} />
-                            )}
-                          </div>
+                  {isPaymentNotExpired || isHavePaymentDetail() ? (
+                    <>
+                      <Separator className="my-3 w-full" />
+                      <div className="px-4 pb-24">
+                        <p className="font-medium text-lg text-primary">
+                          Tujuan Pembayaran
+                        </p>
+                        <div className="mt-4 space-y-4 h-full">
+                          {data.payment_information.payment_method ==
+                          "VIRTUAL_ACCOUNT" ? (
+                            <VAPayment payment={data.payment_information} />
+                          ) : data.payment_information.payment_method ==
+                            "EWALLET" ? (
+                            <LinkPayment payment={data.payment_information} />
+                          ) : (
+                            <QRPayment payment={data.payment_information} />
+                          )}
                         </div>
-                      </>
-                    ) : null
+                      </div>
+                    </>
                   ) : null}
                   <div className="w-full bottom-0 absolute">
                     {data.status !== ETransactionStatus.Refunded ? (
