@@ -44,7 +44,7 @@ function FlashSale({ data }: { data: IFlashSaleInfo }) {
               <Carousel
                 className="py-1 w-full"
                 opts={{
-                  align: "center",
+                  align: "start",
                   dragFree: true,
                 }}
                 plugins={[
