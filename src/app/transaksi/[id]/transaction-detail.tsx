@@ -67,9 +67,6 @@ function TransactionHistoryDetail({
 
   if (loading) return <Loading />;
 
-  console.log(isPaymentNotExpired);
-  console.log(isHavePaymentDetail());
-
   if (data) {
     return (
       <>
@@ -90,7 +87,7 @@ function TransactionHistoryDetail({
           <PrintInvoice {...data} profile={profile} />
         </div>
         {!session ? (
-          <div className="w-full mt-2 sticky top-12 z-20">
+          <div className="w-full mt-2 sticky top-12 md:top-14 z-20">
             <div className="bg-red-50 text-red-900 flex justify-center items-center gap-2 p-1.5">
               <div className="animate-pulse flex justify-center items-center bg-red-500 h-4 w-4 rounded-full text-white">
                 <p className="text-xs font-bold">i</p>
@@ -186,7 +183,7 @@ function TransactionHistoryDetail({
             </div>
             {data.payment_information ? (
               <>
-                <div className="w-full bg-background h-full pt-3 min-h-[16rem] rounded-lg shadow flex-1 relative overflow-clip">
+                <div className="w-full bg-background h-full pb-24 pt-3 min-h-[16rem] rounded-lg shadow flex-1 relative overflow-clip">
                   <div className="px-4">
                     <p className="font-medium text-lg text-primary">
                       Rincian Pembayaran
@@ -228,10 +225,26 @@ function TransactionHistoryDetail({
                       </div>
                     </div>
                   </div>
-                  {isPaymentNotExpired || isHavePaymentDetail() ? (
+                  {data.order_description ? (
                     <>
                       <Separator className="my-3 w-full" />
-                      <div className="px-4 pb-24">
+                      <div className="px-4">
+                        <p className="font-medium text-lg text-primary">
+                          Catatan
+                        </p>
+                        <div
+                          className="mt-4 text-sm text-muted-foreground"
+                          dangerouslySetInnerHTML={{
+                            __html: data.order_description,
+                          }}
+                        ></div>
+                      </div>
+                    </>
+                  ) : null}
+                  {isPaymentNotExpired ? (
+                    <>
+                      <Separator className="my-3 w-full" />
+                      <div className="px-4">
                         <p className="font-medium text-lg text-primary">
                           Tujuan Pembayaran
                         </p>
