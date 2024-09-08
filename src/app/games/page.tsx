@@ -105,7 +105,7 @@ function Page() {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full w-full">
-                    <Image
+                    {/* <Image
                       src={
                         "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
                       }
@@ -113,7 +113,7 @@ function Page() {
                       alt="dw"
                       width={400}
                       height={400}
-                    />
+                    /> */}
                   </div>
                 )}
               </>
