@@ -21,7 +21,7 @@ function ItemsCard(props: TItemsCard) {
           <div className="w-full">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-3">
-                <p className="text-muted-foreground text-xs">
+                <p className="text-muted-foreground text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[7rem] md:max-w-full">
                   {props.data.transaction_code}
                 </p>
                 <BadgeTransaksi status={props.data.status} />
