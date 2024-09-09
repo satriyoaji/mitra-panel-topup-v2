@@ -54,18 +54,19 @@ async function Page() {
           </Breadcrumb>
           <div className="max-w-5xl w-full space-y-4">
             <div className="bg-background rounded-lg p-4 w-full">
-              <p className="font-semibold text-primary text-2xl">
-                Syarat dan Ketentuan
-              </p>
+              <div className="w-full space-y-4">
+                <div className="bg-background rounded-lg w-full hidden md:block">
+                  <h3 className="font-semibold text-primary">Syarat dan Ketentuan</h3>
+                </div>
+                {data ? (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: data?.terms_condition,
+                    }}
+                  ></div>
+                ) : null}
+              </div>
             </div>
-            {data ? (
-              <div
-                className="px-4"
-                dangerouslySetInnerHTML={{
-                  __html: data?.terms_condition,
-                }}
-              ></div>
-            ) : null}
           </div>
         </div>
       </div>
