@@ -31,16 +31,18 @@ async function Page() {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="max-w-4xl w-full space-y-4">
-          <div className="bg-background rounded-lg p-4 w-full flex md:flex-col items-center md:items-start justify-between sticky top-12">
-            <div className="flex items-center space-x-2">
-              <h3 className="font-semibold primary p-0">Saldo Point</h3>
-              <InfoTooltip>
-                <p className="text-xs">Ini Merupakan Saldo Refund</p>
-              </InfoTooltip>
+          <div className="bg-background rounded-xl p-4 md:p-0">
+            <div className="bg-zinc-50 md:bg-transparent rounded-xl p-4 w-full flex md:flex-col items-center md:items-start justify-between sticky top-12">
+              <div className="flex items-center space-x-2">
+                <h3 className="font-semibold primary p-0">Saldo Point</h3>
+                <InfoTooltip>
+                  <p className="text-xs">Ini Merupakan Saldo Refund</p>
+                </InfoTooltip>
+              </div>
+              <h6 className="text-primary font-medium md:mt-2">
+                {thousandMask(session?.profile.saldo ?? 0)}
+              </h6>
             </div>
-            <h6 className="text-primary font-medium md:mt-2">
-              {thousandMask(session?.profile.saldo ?? 0)}
-            </h6>
           </div>
           <SaldoPointHistory />
         </div>

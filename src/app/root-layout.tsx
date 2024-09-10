@@ -54,7 +54,9 @@ export default function RootTemplateLayout({
             <PWAAlert profile={profile} />
             <Header profile={profile} />
             <div>
-              <div className={`min-h-[92vh] bg-zinc-50 scroll-mt-16`}>
+              <div
+                className={`min-h-[92vh] pb-12 md:pb-4 bg-[#F0F8F6] scroll-mt-16`}
+              >
                 {children}
               </div>
               <BottomNav />

@@ -70,9 +70,9 @@ export default function ListGame() {
   }, [pageIndex]);
 
   return (
-    <div className="bg-zinc-50 pb-4 flex justify-center rounded-t-xl">
+    <div className="bg-[#F0F8F6] pb-4 flex justify-center rounded-t-xl">
       <div className="w-full max-w-7xl px-2">
-        <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-zinc-50 backdrop-blur-md">
+        <div className="md:flex md:items-end md:justify-between sticky z-10 top-12 py-2 rounded-t-lg bg-[#F0F8F6] backdrop-blur-md">
           <div className="flex md:block items-center justify-between mt-4 ">
             <div
               className="no-scrollbar z-10 my-0.5"
