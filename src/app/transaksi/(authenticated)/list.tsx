@@ -31,9 +31,6 @@ function List() {
   const [loading, setLoading] = useState(false);
   const [meta, setMeta] = useState<TPaginationMeta | undefined>();
   const [page, setPage] = useState(searchParams.get("page") ?? 1);
-  const router = useRouter();
-
-  console.log(searchParams);
 
   const getData = async () => {
     let searchParams = new URLSearchParams({
@@ -57,14 +54,8 @@ function List() {
     setLoading(false);
   };
 
-  useEffect(() => {}, [searchParams]);
-
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set("search", filter.search ?? "");
-    router.push(`?${params.toString()}`);
-
-    (async () => getData())();
+    getData();
   }, [filter, page]);
 
   const { data: session } = useSession();
@@ -85,7 +76,6 @@ function List() {
         <div className="flex space-x-1 mt-3">
           <Input
             id="invoice"
-            value={filter.search}
             placeholder="Cari Transaksi #TMXXXX atau No. Handphone"
             className="bg-background"
             onChange={doSearch}
