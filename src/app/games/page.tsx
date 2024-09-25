@@ -79,7 +79,7 @@ function Page() {
             <h1 className="font-semibold text-primary text-2xl">Produk</h1>
             <Filter onChange={setCategory} />
           </div>
-          <div className="min-h-[68vh] bg-background">
+          <div className="min-h-[68vh] bg-background pb-8">
             {loading ? (
               <Loading />
             ) : (
