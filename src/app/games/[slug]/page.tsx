@@ -18,7 +18,7 @@ function Page({ params }: { params: { slug: string } }) {
       <>
         <BackHeader title="Pembelian" />
         <div className="flex justify-center w-full">
-          <div className="max-w-7xl w-full mb-12 sm:mb-0 px-2">
+          <div className="max-w-7xl w-full mb-0 px-2">
             <DetailCategory session={session} {...data} />
           </div>
         </div>
