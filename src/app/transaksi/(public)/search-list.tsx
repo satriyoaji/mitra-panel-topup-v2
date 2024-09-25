@@ -45,10 +45,10 @@ function SearchList() {
   };
 
   const getData = () => {
-    const params = new URLSearchParams(searchParams);
-    params.set("search", search);
-    router.push(`${pathname}?${params.toString()}`);
-    router.refresh();
+    // const params = new URLSearchParams(searchParams);
+    // params.set("search", search);
+    // router.push(`${pathname}?${params.toString()}`);
+    // router.refresh();
 
     get();
   };
