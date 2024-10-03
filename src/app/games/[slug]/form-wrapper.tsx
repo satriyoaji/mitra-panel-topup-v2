@@ -19,7 +19,9 @@ function FormWrapper({
           >
             <p className="font-bold rounded-full text-white">{number}</p>
           </div>
-          <p className={`font-medium ml-1 text-primary`}>{title}</p>
+          <h2 className={`font-medium ml-1 text-primary text-base p-0 m-0`}>
+            {title}
+          </h2>
         </div>
         <div>{children}</div>
       </CardContent>

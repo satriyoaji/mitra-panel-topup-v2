@@ -1,12 +1,11 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
-import { TProductItem } from "@/Type";
+import { IProductCategory, TProductItem } from "@/Type";
 import ProductCard from "./[slug]/(product)/product-card";
 import Image from "next/image";
 import Loading from "../loading";
 import { useRouter } from "next/navigation";
 import Filter from "./filter";
-import Pagination from "@/components/pagination";
 import { TValue } from "@/components/ui/combobox";
 import {
   Breadcrumb,
@@ -70,7 +69,7 @@ function Page() {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Game</BreadcrumbPage>
+              <BreadcrumbPage>Daftar Produk</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -104,29 +103,11 @@ function Page() {
                     ))}
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center justify-center h-full w-full">
-                    {/* <Image
-                      src={
-                        "/assets/illustration/DrawKit Larry Character Illustration (10).svg"
-                      }
-                      className="opacity-50"
-                      alt="dw"
-                      width={400}
-                      height={400}
-                    /> */}
-                  </div>
+                  <div className="flex flex-col items-center justify-center h-full w-full"></div>
                 )}
               </>
             )}
           </div>
-          {/* <Pagination
-            onChange={setPageIndex}
-            meta={{
-              limit: 12,
-              page: pageIndex,
-              total,
-            }}
-          /> */}
         </div>
       </div>
     </div>

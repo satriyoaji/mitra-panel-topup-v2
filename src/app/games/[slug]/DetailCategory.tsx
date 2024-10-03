@@ -13,6 +13,7 @@ import {
 import FormWrapper from "./form-wrapper";
 import { Session } from "next-auth";
 import dynamic from "next/dynamic";
+import InternalLink from "./internal-link";
 
 interface Props extends IUseCategoryData {
   session: Session | null;
@@ -52,7 +53,7 @@ function DetailCategory(props: Props) {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/games">Game</BreadcrumbLink>
+                <BreadcrumbLink href="/games">Daftar Produk</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
@@ -68,6 +69,9 @@ function DetailCategory(props: Props) {
           <div className="col-span-2 my-0.5">
             <div className="md:sticky md:top-16">
               <Header category={props.data.category} />
+              <div className="hidden md:block mt-4">
+                <InternalLink />
+              </div>
             </div>
           </div>
           <div className="col-span-3 ">

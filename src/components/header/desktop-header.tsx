@@ -65,7 +65,7 @@ function DesktopHeader({ profile }: { profile?: ISiteProfile }) {
             {profile?.logo_url && (
               <Image
                 src={profile?.logo_url}
-                alt="logo"
+                alt={profile.name}
                 width={30}
                 height={30}
               />

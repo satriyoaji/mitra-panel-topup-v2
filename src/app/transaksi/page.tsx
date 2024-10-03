@@ -10,6 +10,64 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Metadata } from "next";
+import { GetCredHeader } from "../api/api-utils";
+import { headers } from "next/headers";
+import { ISiteProfile } from "@/types/utils";
+
+export async function generateMetadata(): Promise<Metadata> {
+  var credentialHeader = GetCredHeader();
+  var baseUrl = headers().get("host") ?? "/";
+  var header = {
+    "Content-Type": "application/json",
+    "X-Sign": credentialHeader.sign,
+    "X-User-Id": credentialHeader.mitraid,
+    "X-Timestamp": credentialHeader.timestamp.toString(),
+  };
+
+  // fetch data
+  const res = await fetch(`${process.env.NEXT_API_URL}/v2/panel/site-profile`, {
+    headers: header,
+    next: {
+      revalidate: 120,
+    },
+  });
+
+  if (res.ok) {
+    var data = await res.json();
+    var setting: ISiteProfile = data.data;
+    var description = setting.description;
+
+    var url = headers().get("x-url") ?? "";
+    var title = `Daftar Pesanan | ${setting.name}`;
+    description = `Temukan semua daftar pesanan kamu di ${setting.name}.`;
+
+    return {
+      manifest: "/api/manifest.json",
+      title,
+      description,
+      keywords: setting.keywords,
+      openGraph: {
+        images: [setting.logo_url],
+        title,
+        url,
+        type: "website",
+      },
+      icons: {
+        icon: setting.logo_url,
+      },
+      alternates: {
+        canonical: url,
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+    };
+  }
+
+  return {};
+}
 
 async function Page() {
   const session = await getServerSession(options);
@@ -28,6 +86,7 @@ async function Page() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+        <h1 className="hidden">Cek Pesananku</h1>
         <div className="max-w-5xl w-full">
           {session ? <AuthPage /> : <PublicPage />}
         </div>

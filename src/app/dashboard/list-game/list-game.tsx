@@ -129,9 +129,9 @@ export default function ListGame() {
                           </div>
                         )}
                       </div>
-                      <p className="md:text-xs text-[70%] text-center mt-2 p-0">
+                      <h2 className="text-xs text-[70%] text-center mt-2 p-0">
                         {val.name}
-                      </p>
+                      </h2>
                     </div>
                   </Card>
                 </Link>

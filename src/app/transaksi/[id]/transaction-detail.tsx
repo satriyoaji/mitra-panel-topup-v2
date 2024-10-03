@@ -72,9 +72,9 @@ function TransactionHistoryDetail({
       <>
         <div className="flex justify-between items-center mx-2">
           <div className="sm:flex items-center gap-2">
-            <p className="font-medium text-xl text-primary hidden md:block">
+            <h1 className="font-medium text-xl text-primary hidden md:block">
               Detail Transaksi
-            </p>
+            </h1>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <p className="text-xs text-muted-foreground">
@@ -101,9 +101,9 @@ function TransactionHistoryDetail({
         <div className="flex flex-row justify-stretch items-center mt-2">
           <div className="grid md:grid-cols-2 w-full gap-3 h-full mt-1">
             <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1">
-              <p className="font-medium text-lg text-primary">
+              <h2 className="font-medium text-lg text-primary">
                 Rincian Transaksi
-              </p>
+              </h2>
               <div className="mt-4 space-y-4 h-full">
                 <div className="flex justify-between w-full">
                   <p className="text-muted-foreground text-sm">Status</p>
@@ -185,9 +185,9 @@ function TransactionHistoryDetail({
               <>
                 <div className="w-full bg-background h-full pb-24 pt-3 min-h-[16rem] rounded-lg shadow flex-1 relative overflow-clip">
                   <div className="px-4">
-                    <p className="font-medium text-lg text-primary">
+                    <h2 className="font-medium text-lg text-primary">
                       Rincian Pembayaran
-                    </p>
+                    </h2>
                     <div className="mt-4 space-y-4 h-full">
                       <div className="flex justify-between w-full">
                         <p className="text-muted-foreground text-sm">
@@ -229,9 +229,9 @@ function TransactionHistoryDetail({
                     <>
                       <Separator className="my-3 w-full" />
                       <div className="px-4">
-                        <p className="font-medium text-lg text-primary">
+                        <h2 className="font-medium text-lg text-primary">
                           Catatan
-                        </p>
+                        </h2>
                         <div
                           className="mt-4 text-sm text-muted-foreground"
                           dangerouslySetInnerHTML={{
@@ -245,9 +245,9 @@ function TransactionHistoryDetail({
                     <>
                       <Separator className="my-3 w-full" />
                       <div className="px-4">
-                        <p className="font-medium text-lg text-primary">
+                        <h2 className="font-medium text-lg text-primary">
                           Tujuan Pembayaran
-                        </p>
+                        </h2>
                         <div className="mt-4 space-y-4 h-full">
                           {data.payment_information.payment_method ==
                           "VIRTUAL_ACCOUNT" ? (
@@ -281,9 +281,9 @@ function TransactionHistoryDetail({
                   {data.payment_information.guide ? (
                     <div className="w-full bg-background h-full px-4 pt-3 pb-6 rounded-lg shadow flex-1 text-muted-foreground col-span-full">
                       <div className="flex justify-between items-center">
-                        <p className="font-medium text-lg text-primary">
+                        <h2 className="font-medium text-lg text-primary">
                           Cara Pembayaran
-                        </p>
+                        </h2>
                       </div>
                       <div
                         className="mt-4"

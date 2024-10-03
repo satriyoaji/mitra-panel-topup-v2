@@ -11,6 +11,41 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import BackHeader from "@/components/header/back-header";
+import { Metadata } from "next";
+import { headers } from "next/headers";
+
+export async function generateMetadata(): Promise<Metadata> {
+  var logo_url = headers().get("x-logo") ?? "";
+  var keywords = headers().get("x-keywords") ?? "";
+  var name = headers().get("x-name") ?? "";
+
+  var url = headers().get("x-url") ?? "";
+  var title = `Detail Pesanan | ${name}`;
+  var description = `Lihat detail pesanan kamu di ${name}.`;
+
+  return {
+    manifest: "/api/manifest.json",
+    title,
+    description,
+    keywords: keywords,
+    openGraph: {
+      images: [logo_url],
+      title,
+      url,
+      type: "website",
+    },
+    icons: {
+      icon: logo_url,
+    },
+    alternates: {
+      canonical: url,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 const getData = async () => {
   const credentialHeader = GetCredHeader();

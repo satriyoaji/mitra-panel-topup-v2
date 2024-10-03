@@ -1,6 +1,3 @@
-import FlashSaleWrapper from "@/app/dashboard/flash-sale/flash-sale-wrapper";
-import ListGame from "@/app/dashboard/list-game/list-game";
-import CarouselWrapper from "./dashboard/carousel/carousel-wrapper";
 import { Metadata } from "next";
 import { headers } from "next/headers";
 
@@ -13,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     manifest: "/api/manifest.json",
     title: `Beli Voucher & Top Up Game Murah di ${name}`,
-    description: `${name} tempat top up game termurah & beli voucher game terlengkap. Cuma di ${name} top up ML, HoK, FF, PUBG & lainnya jadi makin mudah dan cepat`,
+    description: `Temukan semua kebutuhan digital kamu di ${name}, mulai dari beli voucher/top up game, pulsa, platform streaming, dan lainnya!`,
     keywords: keywords,
     openGraph: {
       images: [logo_url],
@@ -34,15 +31,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Home() {
-  return (
-    <>
-      <div className="bg-background">
-        <h1 className="hidden">Beli Voucher & Top Up Game Murah</h1>
-        <CarouselWrapper />
-        <FlashSaleWrapper />
-        <ListGame />
-      </div>
-    </>
-  );
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
 }

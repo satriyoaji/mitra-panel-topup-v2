@@ -118,7 +118,9 @@ function List() {
           ) : (
             <div className="w-full flex flex-col items-center justify-center col-span-full">
               <ShoppingCartIcon className="h-[30vh] text-black/10" />
-              <h3 className="font-bold text-black/10 p-0">Belum Ada Data</h3>
+              <p className="font-bold text-3xl text-black/10 p-0">
+                Belum Ada Data
+              </p>
             </div>
           )
         ) : (
