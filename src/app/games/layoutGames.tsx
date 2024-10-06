@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { headers } from "next/headers";
+import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
   var url = headers().get("x-url") ?? "";
@@ -32,5 +33,38 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  var name = headers().get("x-name") ?? "";
+  var url = headers().get("host") ?? "";
+
+  return (
+    <>
+      <Script
+        id=""
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                item: { "@id": url, name: "Home" },
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                item: {
+                  "@id": url + "/games",
+                  name: "Daftar Produk",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      <h1 className="hidden">Produk {name}</h1>
+      {children}
+    </>
+  );
 }
