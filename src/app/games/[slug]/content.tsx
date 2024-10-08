@@ -29,7 +29,7 @@ function Content({
         <BackHeader title="Pembelian" />
         <div className="flex justify-center w-full">
           <div className="max-w-7xl w-full mb-0 px-2">
-            <DetailCategory session={session} {...data} />
+            <DetailCategory appName={appName} session={session} {...data} />
           </div>
         </div>
       </>
