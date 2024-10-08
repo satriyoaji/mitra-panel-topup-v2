@@ -62,7 +62,7 @@ function Ldjson({ appName, url }: { appName: string; url: string }) {
                   position: 2,
                   item: {
                     "@id": url + "/games/" + data.category?.key,
-                    name: "Daftar Produk",
+                    name: data.category?.name,
                   },
                 },
               ],

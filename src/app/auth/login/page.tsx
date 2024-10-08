@@ -47,9 +47,9 @@ function Page() {
   return (
     <div className="relative h-full md:pt-12 flex md:items-center justify-center w-full px-0 bg-background md:bg-transparent">
       <div className="md:border p-8 md:rounded-xl md:shadow-md w-full max-w-md md:bg-background">
-        <h1 className="pt-4 text-2xl font-semibold text-center tracking-tight text-primary">
+        <p className="pt-4 text-2xl font-semibold text-center tracking-tight text-primary">
           Login
-        </h1>
+        </p>
         <form onSubmit={onSubmit} className="w-full max-w-md grid gap-4 pt-4">
           <div className="grid w-full max-w-sm gap-1.5">
             <Label htmlFor="username" className="text-left">
