@@ -38,16 +38,15 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   const date = new Date();
+  const month = format(new Date(date), "MMMM", {
+    locale: id,
+  });
   const description = `Daftar harga voucher/top up ${
     games?.name
-  } murah ${format(new Date(date), "MMMM", {
-    locale: id,
-  })} ${date.getFullYear()} di ${name}. Transaksi cepat, aman, dan banyak pilihan metode pembayaran.`;
-  const title = `Beli/Top Up ${games?.name} Termurah ${format(
-    new Date(date),
-    "MMMM",
-    { locale: id }
-  )} ${date.getFullYear()} | ${name}`;
+  } murah ${month} ${date.getFullYear()} di ${name}. Transaksi cepat, aman, dan banyak pilihan metode pembayaran.`;
+  const title = `Beli/Top Up ${
+    games?.name
+  } Termurah ${month} ${date.getFullYear()} | ${name}`;
 
   return {
     manifest: "/api/manifest.json",
