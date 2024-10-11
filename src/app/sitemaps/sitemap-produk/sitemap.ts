@@ -5,9 +5,9 @@ import { headers } from "next/headers";
 
 export const revalidate = 86400;
 
-export default async function robots(): Promise<MetadataRoute.Sitemap> {
+export default async function generateSitemaps(): Promise<MetadataRoute.Sitemap> {
   var url = headers().get("host") ?? "";
-  url = "http://www." + url;
+  url = "https://www." + url;
 
   var credentialHeader = GetCredHeader();
   var header = {
