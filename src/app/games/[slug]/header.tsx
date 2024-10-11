@@ -42,7 +42,7 @@ function Header({
                   width={300}
                   height={300}
                   alt={`${category.name} ${name}`}
-                  title={category.name}
+                  title={`${category.name} ${name}`}
                   className="h-auto w-12 md:w-16 absolute"
                   src={
                     category.image_url ??

@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { headers } from "next/headers";
 
-export default function robots(): MetadataRoute.Sitemap {
+export default function generateSitemaps(): MetadataRoute.Sitemap {
   var url = headers().get("host") ?? "";
-  url = "http://www." + url;
+  url = "https://www." + url;
   return [
     {
       url: url + "/games",
