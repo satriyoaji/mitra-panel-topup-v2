@@ -2,26 +2,32 @@ import type { MetadataRoute } from "next";
 import { headers } from "next/headers";
 
 export default function robots(): MetadataRoute.Sitemap {
-  var url = headers().get("host") ?? "/";
-  url = "https://" + url;
+  var url = headers().get("host") ?? "";
+  url = "http://www." + url;
   return [
     {
-      url,
+      url: url + "/games",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: url + "/auth/login",
       lastModified: new Date(),
       changeFrequency: "yearly",
-      priority: 1,
+      priority: 0.8,
+    },
+    {
+      url: url + "/auth/register",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.8,
     },
     {
       url: url + "/flash-sale",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: url + "/games",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
     },
     {
       url: url + "/kebijakan",

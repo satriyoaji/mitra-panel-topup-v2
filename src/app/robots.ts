@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 
 export default function robots(): MetadataRoute.Robots {
   var url = headers().get("host") ?? "/";
-  url = "https://" + url;
+  url = "http://" + url;
 
   return {
     rules: {
