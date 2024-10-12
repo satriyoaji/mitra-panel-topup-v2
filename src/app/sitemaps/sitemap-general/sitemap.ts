@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   var url = headers().get("host") ?? "";
-  url = "https://www." + url;
+  url = "https://" + url;
   return [
     {
       url: url + "/games",

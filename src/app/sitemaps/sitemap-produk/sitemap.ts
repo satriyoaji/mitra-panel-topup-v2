@@ -7,7 +7,7 @@ export const revalidate = 43200;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   var url = headers().get("host") ?? "";
-  url = "https://www." + url;
+  url = "https://" + url;
 
   var credentialHeader = GetCredHeader();
   var header = {
