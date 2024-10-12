@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { headers } from "next/headers";
 
-export default function generateSitemaps(): MetadataRoute.Sitemap {
+export default function sitemap(): MetadataRoute.Sitemap {
   var url = headers().get("host") ?? "";
   url = "https://www." + url;
   return [
