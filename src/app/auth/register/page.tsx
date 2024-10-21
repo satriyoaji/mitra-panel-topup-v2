@@ -45,9 +45,10 @@ function Page() {
 
     if (!res.ok) {
       setLoading(false);
+      const body = await res.json();
       return toast({
         title: "Failed",
-        description: "Registrasi Akun Gagal",
+        description: body.data,
         variant: "destructive",
       });
     }
